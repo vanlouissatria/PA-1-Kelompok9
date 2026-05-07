@@ -92,16 +92,38 @@
         transform: scale(1.1);
     }
     
+    /* Debug panel style */
+    .debug-panel {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 20px auto;
+        max-width: 900px;
+        text-align: left;
+        font-family: monospace;
+        font-size: 13px;
+        color: #333;
+        overflow-x: auto;
+    }
+    .debug-panel strong {
+        color: #003366;
+    }
+    .debug-panel .error {
+        color: red;
+        font-weight: bold;
+    }
+    
     @media (max-width: 768px) { 
         .modal-box { grid-template-columns: 1fr; }
         .music-control { bottom: 15px; right: 15px; width: 42px; height: 42px; font-size: 1rem; }
+        .debug-panel { font-size: 10px; padding: 10px; }
     }
 </style>
 
 <!-- Audio Background -->
 <audio id="bgMusic" loop preload="auto">
     <source src="{{ asset('audio/GONDANG.mp4') }}" type="audio/mpeg">
-    Your browser does not support the audio element.
 </audio>
 
 <!-- Music Control Button -->
@@ -112,27 +134,45 @@
 <div class="gallery-wrapper">
     <h1 style="font-family: serif; font-size: 3.5rem;">Explore...</h1>
 
-    <div class="stack-area">
-        @foreach($galeriByKategori as $kategori => $items)
-            @foreach($items as $item)
-                @php
-                    // DETEKSI SUMBER GAMBAR
-                    if (strlen($item->gambar) > 500) {
-                        $src = 'data:image/jpeg;base64,' . base64_encode($item->gambar);
-                    } else {
-                        $src = asset('storage/' . $item->gambar);
-                    }
-                @endphp
-                
-                <div class="card-item" onclick="openPhoto('{{ $src }}', '{{ $item->judul }}', '{{ addslashes($item->deskripsi) }}', '{{ strtoupper($kategori) }}')">
-                    <img src="{{ $src }}" onerror="this.src='https://via.placeholder.com/300x500?text=Upload+Ulang+Foto'">
-                </div>
-                
+    <!-- ==================== DEBUG PANEL ==================== -->
+    <div class="debug-panel">
+        <strong>🔍 Debug Informasi Database</strong><br>
+        Jumlah kategori yang diterima dari controller: {{ count($galeriByKategori) }}<br>
+        @if(count($galeriByKategori) > 0)
+            @foreach($galeriByKategori as $kategori => $items)
+                - <strong>Kategori:</strong> {{ $kategori }} (jumlah foto: {{ $items->count() }})<br>
+                @foreach($items as $item)
+                    &nbsp;&nbsp;📷 ID: {{ $item->id }} | 
+                    Judul: {{ $item->judul }} | 
+                    Status: {{ $item->status ? 'AKTIF' : 'TIDAK AKTIF' }} | 
+                    Deskripsi: {{ Str::limit($item->deskripsi, 50) }}<br>
+                    &nbsp;&nbsp;🔗 URL Gambar: <a href="{{ route('galeri.gambar', $item->id) }}" target="_blank">{{ route('galeri.gambar', $item->id) }}</a><br>
+                @endforeach
             @endforeach
-        @endforeach
+        @else
+            <span class="error">❌ TIDAK ADA DATA GALERI DENGAN STATUS AKTIF!</span><br>
+            <span>Pastikan Anda sudah <strong>upload foto melalui admin</strong> dan status galeri di database adalah <strong>1 (aktif)</strong>.</span>
+        @endif
+    </div>
+
+    <div class="stack-area">
+        @forelse($galeriByKategori as $kategori => $items)
+            @foreach($items as $item)
+                <div class="card-item" 
+                     onclick="openPhoto('{{ route('galeri.gambar', $item->id) }}', '{{ addslashes($item->judul) }}', '{{ addslashes($item->deskripsi) }}', '{{ strtoupper($kategori) }}')">
+                    <img src="{{ route('galeri.gambar', $item->id) }}" 
+                         alt="{{ $item->judul }}"
+                         loading="lazy"
+                         onerror="this.src='https://via.placeholder.com/300x500?text=Gambar+Error'">
+                </div>
+            @endforeach
+        @empty
+            <div class="alert alert-info">Belum ada galeri. Silakan upload melalui admin.</div>
+        @endforelse
     </div>
 </div>
 
+<!-- Modal -->
 <div id="pModal" class="modal-overlay" onclick="closePhoto()">
     <div class="close-btn">&times;</div>
     <div class="modal-box" onclick="event.stopPropagation()">
@@ -146,55 +186,8 @@
 </div>
 
 <script>
-    // ========== AUDIO CONTROL ==========
-    const audio = document.getElementById('bgMusic');
-    const musicControl = document.getElementById('musicControl');
-    const musicIcon = document.getElementById('musicIcon');
-    let isPlaying = false;
-    
-    // Fungsi untuk memutar audio
-    function playAudio() {
-        audio.play().then(() => {
-            isPlaying = true;
-            musicIcon.className = 'fas fa-music';
-        }).catch(error => {
-            console.log('Audio play error:', error);
-            isPlaying = false;
-            musicIcon.className = 'fas fa-volume-mute';
-        });
-    }
-    
-    // Fungsi pause audio
-    function pauseAudio() {
-        audio.pause();
-        isPlaying = false;
-        musicIcon.className = 'fas fa-volume-mute';
-    }
-    
-    // ========== MEMASANG EVENT LISTENER UNTUK AUTO PLAY ==========
-    let audioStarted = false;
-    
-    function startAudioOnFirstInteraction() {
-        if (!audioStarted) {
-            playAudio();
-            audioStarted = true;
-            document.removeEventListener('click', startAudioOnFirstInteraction);
-            document.removeEventListener('touchstart', startAudioOnFirstInteraction);
-        }
-    }
-    
-    // Pasang listener untuk memulai audio pada interaksi pertama user
-    document.addEventListener('click', startAudioOnFirstInteraction);
-    document.addEventListener('touchstart', startAudioOnFirstInteraction);
-    
-    // ========== MODAL FUNCTIONS (MUSIK HIDUP SAAT BUKA MODAL) ==========
+    // ========== MODAL FUNCTIONS ==========
     function openPhoto(src, title, desc, tag) {
-        // HIDUPKAN MUSIK saat modal DIBUKA
-        if (!audioStarted) {
-            audioStarted = true;
-        }
-        playAudio();
-        
         document.getElementById('mImg').src = src;
         document.getElementById('mTitle').innerText = title;
         document.getElementById('mTag').innerText = tag;
@@ -206,44 +199,63 @@
     function closePhoto() {
         document.getElementById('pModal').style.display = 'none';
         document.body.style.overflow = 'auto';
-        
-        // MATIKAN MUSIK saat modal DITUTUP
-        pauseAudio();
+    }
+
+    // ========== AUDIO CONTROL ==========
+    const audio = document.getElementById('bgMusic');
+    const musicControl = document.getElementById('musicControl');
+    const musicIcon = document.getElementById('musicIcon');
+    let isPlaying = false;
+    
+    function playAudio() {
+        audio.play().then(() => {
+            isPlaying = true;
+            musicIcon.className = 'fas fa-music';
+        }).catch(error => {
+            console.log('Audio play error:', error);
+            isPlaying = false;
+            musicIcon.className = 'fas fa-volume-mute';
+        });
     }
     
-    // Tombol kontrol musik manual
+    function pauseAudio() {
+        audio.pause();
+        isPlaying = false;
+        musicIcon.className = 'fas fa-volume-mute';
+    }
+    
+    let audioStarted = false;
+    function startAudioOnFirstInteraction() {
+        if (!audioStarted) {
+            playAudio();
+            audioStarted = true;
+            document.removeEventListener('click', startAudioOnFirstInteraction);
+            document.removeEventListener('touchstart', startAudioOnFirstInteraction);
+        }
+    }
+    
+    document.addEventListener('click', startAudioOnFirstInteraction);
+    document.addEventListener('touchstart', startAudioOnFirstInteraction);
+    
     musicControl.addEventListener('click', function(e) {
         e.stopPropagation();
         if (isPlaying) {
             pauseAudio();
         } else {
-            if (!audioStarted) {
-                audioStarted = true;
-            }
+            if (!audioStarted) audioStarted = true;
             playAudio();
         }
     });
     
-    // ========== KEYBOARD CONTROL ==========
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closePhoto();
-        }
-        // Spasi untuk play/pause musik
+        if (e.key === 'Escape') closePhoto();
         if (e.key === ' ' || e.key === 'Space') {
             e.preventDefault();
-            if (isPlaying) {
-                pauseAudio();
-            } else {
-                if (!audioStarted) {
-                    audioStarted = true;
-                }
-                playAudio();
-            }
+            if (isPlaying) pauseAudio();
+            else { if (!audioStarted) audioStarted = true; playAudio(); }
         }
     });
     
-    // Pastikan audio siap
     audio.load();
 </script>
 @endsection
