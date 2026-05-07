@@ -14,7 +14,7 @@
 
     <!-- CSS -->
     <!-- GANTI KE CSS YANG SUDAH TERBUKTI BERHASIL -->
-    <link rel="stylesheet" href="{{ asset('css/batu-bahisan.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sihotang.css') }}">
 </head>
 
 <body>

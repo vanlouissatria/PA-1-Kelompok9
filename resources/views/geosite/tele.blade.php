@@ -6,7 +6,7 @@
     <title>Menara PandangTele - Geosite Danau Toba</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/batu-bahisan.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tele.css') }}">
 </head>
 <body>
 <!-- NAVBAR -->
