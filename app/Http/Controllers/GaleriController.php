@@ -24,34 +24,43 @@ class GaleriController extends Controller
     }
 
     /**
-     * Menampilkan gambar dari database (binary) via route
-     * Ini adalah METHOD PALING PENTING untuk menampilkan foto yang tersimpan di database
+     * Menampilkan gambar dari database (mendukung format base64 maupun binary)
      */
     public function showImage($id)
     {
         // Cari data galeri berdasarkan ID
         $galeri = Galeri::findOrFail($id);
 
-        // Ambil data biner dari kolom 'gambar'
+        // Ambil data gambar dari kolom 'gambar'
         $imageData = $galeri->gambar;
 
-        // Jika data kosong, tampilkan error 404
         if (empty($imageData)) {
             abort(404, 'Gambar tidak ditemukan');
         }
 
-        // Deteksi tipe MIME secara otomatis (jpg, png, gif, dll)
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mimeType = finfo_buffer($finfo, $imageData);
-        finfo_close($finfo);
-
-        // Fallback jika deteksi gagal
-        if (!$mimeType) {
-            $mimeType = 'image/jpeg';
+        // Cek apakah data disimpan dalam format base64 (diawali dengan "data:image")
+        if (is_string($imageData) && strpos($imageData, 'data:image') === 0) {
+            // Format: data:image/jpeg;base64,xxxxx...
+            list($header, $encoded) = explode(',', $imageData, 2);
+            // Ekstrak MIME type dari header (misal: image/jpeg)
+            preg_match('/data:([^;]+)/', $header, $matches);
+            $mimeType = $matches[1] ?? 'image/jpeg';
+            // Decode base64 menjadi binary
+            $binaryData = base64_decode($encoded);
+        } else {
+            // Data sudah dalam bentuk binary
+            $binaryData = $imageData;
+            // Deteksi MIME type menggunakan fileinfo
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mimeType = finfo_buffer($finfo, $binaryData);
+            finfo_close($finfo);
+            if (!$mimeType) {
+                $mimeType = 'image/jpeg';
+            }
         }
 
         // Kembalikan response gambar dengan header yang benar
-        return response($imageData)
+        return response($binaryData)
             ->header('Content-Type', $mimeType)
             ->header('Cache-Control', 'public, max-age=86400');
     }
