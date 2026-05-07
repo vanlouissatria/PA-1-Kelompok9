@@ -7,28 +7,34 @@
 
 <style>
     .gallery-wrapper { padding: 80px 20px; text-align: center; max-width: 1400px; margin: 0 auto; }
-    .stack-area { display: flex; flex-wrap: wrap; justify-content: center; gap: 60px 0; padding: 40px 20px; }
+    .stack-area { 
+        display: flex; 
+        flex-wrap: wrap; 
+        justify-content: center; 
+        gap: 30px; 
+        padding: 40px 20px; 
+    }
     .card-item {
         position: relative;
-        width: 180px; 
-        height: 300px;
-        margin-left: -80px; 
+        width: 220px; 
+        height: 320px;
         border-radius: 20px;
         overflow: hidden; 
         background: #333;
-        box-shadow: -10px 0 30px rgba(0,0,0,0.15);
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
         cursor: pointer; 
-        z-index: 1; 
         border: 2px solid rgba(255,255,255,0.1);
     }
-    .card-item:nth-child(8n+1) { margin-left: 0; }
-    .card-item img { width: 100%; height: 100%; object-fit: cover; }
+    .card-item img { 
+        width: 100%; 
+        height: 100%; 
+        object-fit: cover; 
+    }
     .card-item:hover {
-        z-index: 100 !important; 
-        transform: translateY(-25px) scale(1.15) rotate(2deg);
-        box-shadow: 0 25px 50px rgba(0,0,0,0.4); 
-        margin-right: 40px;
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 30px rgba(0,0,0,0.3);
+        border-color: #c6a43b;
     }
     .modal-overlay { 
         position: fixed; 
@@ -89,6 +95,7 @@
     @media (max-width: 768px) { 
         .modal-box { grid-template-columns: 1fr; }
         .music-control { bottom: 15px; right: 15px; width: 42px; height: 42px; font-size: 1rem; }
+        .card-item { width: 160px; height: 240px; }
     }
 </style>
 
