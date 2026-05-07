@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 <style>
-    /* UI PREMIUM STACKING */
     .gallery-wrapper { padding: 80px 20px; text-align: center; max-width: 1400px; margin: 0 auto; }
     .stack-area { display: flex; flex-wrap: wrap; justify-content: center; gap: 60px 0; padding: 40px 20px; }
     .card-item {
@@ -31,8 +30,6 @@
         box-shadow: 0 25px 50px rgba(0,0,0,0.4); 
         margin-right: 40px;
     }
-
-    /* MODAL STYLE */
     .modal-overlay { 
         position: fixed; 
         inset: 0; 
@@ -65,8 +62,6 @@
         z-index: 10000;
     }
     .close-btn:hover { color: #c6a43b; transform: rotate(90deg); }
-    
-    /* Music Control Button */
     .music-control {
         position: fixed;
         bottom: 25px;
@@ -91,69 +86,22 @@
         color: #003366;
         transform: scale(1.1);
     }
-    
-    /* Debug panel style */
-    .debug-panel {
-        background: #f8f9fa;
-        border: 1px solid #dee2e6;
-        border-radius: 8px;
-        padding: 15px;
-        margin: 20px auto;
-        max-width: 900px;
-        text-align: left;
-        font-family: monospace;
-        font-size: 13px;
-        color: #333;
-        overflow-x: auto;
-    }
-    .debug-panel strong {
-        color: #003366;
-    }
-    .debug-panel .error {
-        color: red;
-        font-weight: bold;
-    }
-    
     @media (max-width: 768px) { 
         .modal-box { grid-template-columns: 1fr; }
         .music-control { bottom: 15px; right: 15px; width: 42px; height: 42px; font-size: 1rem; }
-        .debug-panel { font-size: 10px; padding: 10px; }
     }
 </style>
 
-<!-- Audio Background -->
 <audio id="bgMusic" loop preload="auto">
     <source src="{{ asset('audio/GONDANG.mp4') }}" type="audio/mpeg">
 </audio>
 
-<!-- Music Control Button -->
 <div class="music-control" id="musicControl">
     <i class="fas fa-music" id="musicIcon"></i>
 </div>
 
 <div class="gallery-wrapper">
     <h1 style="font-family: serif; font-size: 3.5rem;">Explore...</h1>
-
-    <!-- ==================== DEBUG PANEL ==================== -->
-    <div class="debug-panel">
-        <strong>🔍 Debug Informasi Database</strong><br>
-        Jumlah kategori yang diterima dari controller: {{ count($galeriByKategori) }}<br>
-        @if(count($galeriByKategori) > 0)
-            @foreach($galeriByKategori as $kategori => $items)
-                - <strong>Kategori:</strong> {{ $kategori }} (jumlah foto: {{ $items->count() }})<br>
-                @foreach($items as $item)
-                    &nbsp;&nbsp;📷 ID: {{ $item->id }} | 
-                    Judul: {{ $item->judul }} | 
-                    Status: {{ $item->status ? 'AKTIF' : 'TIDAK AKTIF' }} | 
-                    Deskripsi: {{ Str::limit($item->deskripsi, 50) }}<br>
-                    &nbsp;&nbsp;🔗 URL Gambar: <a href="{{ route('galeri.gambar', $item->id) }}" target="_blank">{{ route('galeri.gambar', $item->id) }}</a><br>
-                @endforeach
-            @endforeach
-        @else
-            <span class="error">❌ TIDAK ADA DATA GALERI DENGAN STATUS AKTIF!</span><br>
-            <span>Pastikan Anda sudah <strong>upload foto melalui admin</strong> dan status galeri di database adalah <strong>1 (aktif)</strong>.</span>
-        @endif
-    </div>
 
     <div class="stack-area">
         @forelse($galeriByKategori as $kategori => $items)
@@ -163,7 +111,7 @@
                     <img src="{{ route('galeri.gambar', $item->id) }}" 
                          alt="{{ $item->judul }}"
                          loading="lazy"
-                         onerror="this.src='https://via.placeholder.com/300x500?text=Gambar+Error'">
+                         onerror="this.src='https://via.placeholder.com/300x500?text=Error'">
                 </div>
             @endforeach
         @empty
@@ -172,7 +120,6 @@
     </div>
 </div>
 
-<!-- Modal -->
 <div id="pModal" class="modal-overlay" onclick="closePhoto()">
     <div class="close-btn">&times;</div>
     <div class="modal-box" onclick="event.stopPropagation()">
@@ -186,7 +133,6 @@
 </div>
 
 <script>
-    // ========== MODAL FUNCTIONS ==========
     function openPhoto(src, title, desc, tag) {
         document.getElementById('mImg').src = src;
         document.getElementById('mTitle').innerText = title;
@@ -195,35 +141,29 @@
         document.getElementById('pModal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
-    
     function closePhoto() {
         document.getElementById('pModal').style.display = 'none';
         document.body.style.overflow = 'auto';
     }
 
-    // ========== AUDIO CONTROL ==========
     const audio = document.getElementById('bgMusic');
     const musicControl = document.getElementById('musicControl');
     const musicIcon = document.getElementById('musicIcon');
     let isPlaying = false;
-    
     function playAudio() {
         audio.play().then(() => {
             isPlaying = true;
             musicIcon.className = 'fas fa-music';
-        }).catch(error => {
-            console.log('Audio play error:', error);
+        }).catch(() => {
             isPlaying = false;
             musicIcon.className = 'fas fa-volume-mute';
         });
     }
-    
     function pauseAudio() {
         audio.pause();
         isPlaying = false;
         musicIcon.className = 'fas fa-volume-mute';
     }
-    
     let audioStarted = false;
     function startAudioOnFirstInteraction() {
         if (!audioStarted) {
@@ -233,20 +173,13 @@
             document.removeEventListener('touchstart', startAudioOnFirstInteraction);
         }
     }
-    
     document.addEventListener('click', startAudioOnFirstInteraction);
     document.addEventListener('touchstart', startAudioOnFirstInteraction);
-    
     musicControl.addEventListener('click', function(e) {
         e.stopPropagation();
-        if (isPlaying) {
-            pauseAudio();
-        } else {
-            if (!audioStarted) audioStarted = true;
-            playAudio();
-        }
+        if (isPlaying) pauseAudio();
+        else { if (!audioStarted) audioStarted = true; playAudio(); }
     });
-    
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') closePhoto();
         if (e.key === ' ' || e.key === 'Space') {
@@ -255,7 +188,6 @@
             else { if (!audioStarted) audioStarted = true; playAudio(); }
         }
     });
-    
     audio.load();
 </script>
 @endsection
