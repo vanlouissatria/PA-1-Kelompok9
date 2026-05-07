@@ -150,11 +150,12 @@
         animation: shimmer 3s infinite;
     }
     
-    .slide-1 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/meat/slide1.jpg'); }
-    .slide-2 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/meat/slide2.jpg'); }
-    .slide-3 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/meat/slide3.jpg'); }
-    .slide-4 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/meat/slide4.jpg'); }
-    .slide-5 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/meat/slide5.jpg'); }
+    .slide-1 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/efrata/efrata.jpg'); }
+    .slide-2 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/efrata/efrata2.jpg'); }
+    .slide-3 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/tele/tele.jpg'); }
+    .slide-4 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/efrata/efrata3.jpg'); }
+    .slide-5 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/efrata/toba.jpg'); }
+    .slide-6 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/efrata/tobaa.jpg'); }
     
     .hero-content {
         position: absolute;
@@ -1086,7 +1087,7 @@
     <div class="hero-content">
         <div>
             <div class="hero-subtitle">Global Geopark</div>
-            <h1 class="hero-title">BALIGE · MEAT · BATU BAHISAN<br>LIANG SIPEGE</h1>
+            <h1 class="hero-title">TELE · EFRATA · SIHOTANG</h1>
             <div class="hero-divider"></div>
             <a href="#destinasi" class="hero-btn">Jelajahi Sekarang ya</a>
         </div>
@@ -1148,45 +1149,45 @@
         </div>
         <div class="destinasi-list">
             
-            <!-- MEAT -->
+            <!-- TELE -->
             <div class="destinasi-item" data-aos="fade-up" data-aos-duration="1000">
                 <div class="destinasi-image">
-                    <img src="/image/meat/meat-detail.jpg" alt="Meat">
+                    <img src="/image/tele/tele.jpg" alt="Tele">
                 </div>
                 <div class="destinasi-content">
                     <div class="destinasi-number">01 — GEOSITE</div>
-                    <h3>Meat</h3>
-                    <div class="destinasi-location">Desa Tampahan, Kecamatan Tampahan, Kabupaten Toba</div>
-                    <p class="destinasi-desc">Desa Meat adalah salah satu desa wisata yang terletak di Kecamatan Balige, Kabupaten Toba, di tepi Danau Toba.</p>
-                    <a href="{{ url('/geosite/meat') }}" class="destinasi-link">Jelajahi Lebih Lanjut →</a>
+                    <h3>Tele</h3>
+                    <div class="destinasi-location">Desa Turpuk Limbong, Kecamatan Harian, Kabupaten Samosir, Sumatera Utara</div>
+                    <p class="destinasi-desc">Menara Pandang Tele terletak di Tele, Kecamatan Harian, Kabupaten Samosir, Sumatera Utara. Meskipun masih berada di daratan Sumatera, namun Tele sudah masuk ke dalam Kabupaten Samosir. Tele sendiri merupakan kawasan tertinggi di sekitar Danau Toba.</p>
+                    <a href="{{ url('/geosite/tele') }}" class="destinasi-link">Jelajahi Lebih Lanjut →</a>
                 </div>
             </div>
             
-            <!-- BATU BAHISAN -->
+            <!-- EFRATA-->
             <div class="destinasi-item reverse" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                 <div class="destinasi-image">
-                    <img src="/image/meat/batu-detail.jpg" alt="Batu Bahisan">
+                    <img src="/image/efrata/efrata.jpg" alt="Efrata">
                 </div>
                 <div class="destinasi-content">
                     <div class="destinasi-number">02 — GEOSITE</div>
-                    <h3>Batu Bahisan</h3>
-                    <div class="destinasi-location">Desa Aek Bolon Jae, Balige</div>
-                    <p class="destinasi-desc">Batu Basiha merupakan salah satu situs batu bersejarah di kawasan Balige yang memiliki nilai budaya dan legenda dalam masyarakat Batak Toba.</p>
-                    <a href="{{ url('/geosite/batu-bahisan') }}" class="destinasi-link">Jelajahi Lebih Lanjut →</a>
+                    <h3>Efrata</h3>
+                    <div class="destinasi-location">Desa Sosor Dolok, Kecamatan Harian, Kabupaten Samosir, Provinsi Sumatera Utara.</div>
+                    <p class="destinasi-desc">Air Terjun Efrata adalah obyek wisata alam yang terletak di Sosor Dolok, Kecamatan Harian, Samosir. Tempat ini dibuka untuk khalayak dari pagi sampai sore. Meskipun banyak difavoritkan oleh orang yang berkunjung, biaya masuknya serba murah meriah.</p>
+                    <a href="{{ url('/geosite/efrata') }}" class="destinasi-link">Jelajahi Lebih Lanjut →</a>
                 </div>
             </div>
             
-            <!-- LIANG SIPEGE -->
+            <!-- SIHOTANG-->
             <div class="destinasi-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                 <div class="destinasi-image">
-                    <img src="/image/meat/liang-detail.jpg" alt="Liang Sipege">
+                    <img src="/image/sihotang/sihotang.jpg" alt="Sihotang">
                 </div>
                 <div class="destinasi-content">
                     <div class="destinasi-number">03 — GEOSITE</div>
-                    <h3>Liang Sipege</h3>
-                    <div class="destinasi-location">Hutagaol Peatalun, Balige</div>
-                    <p class="destinasi-desc">Gua Liang Sipege adalah destinasi wisata alam yang terletak di Desa Simarmar Pea Talun Hutagaol, Kecamatan Balige, Kabupaten Toba.</p>
-                    <a href="{{ url('/geosite/liang-sipege') }}" class="destinasi-link">Jelajahi Lebih Lanjut →</a>
+                    <h3>Sihotang</h3>
+                    <div class="destinasi-location">Sihotang, kecamatan Harian Kabupaten Samosir, Sumatera utara</div>
+                    <p class="destinasi-desc">Desa Sihotang terletak di kecamatan Harian Kabupaten Samosir, Sumatera utara. Sesuai dengan namanaya Rura Sihotang berada di kaki gunung Uruk Taduhan, setengah desanya di kelilingi pengunungan yang tinggi dan indah yg di tumbuhi pepohonan kecik nan hijau, setengahnya lagi berada di tepian pantai Danau Toba.</p>
+                    <a href="{{ url('/geosite/sihotang') }}" class="destinasi-link">Jelajahi Lebih Lanjut →</a>
                 </div>
             </div>
         </div>
@@ -1199,7 +1200,7 @@
         <div class="section-title" data-aos="fade-up" data-aos-duration="800">
             <h2>Lokasi 3 Geosite</h2>
             <div class="divider"></div>
-            <p>Meat, Batu Bahisan, dan Liang Sipege - Pulau Sibandang</p>
+            <p>Tele, Efrata, Sihotang</p>
         </div>
         
         <div class="maps-container" data-aos="zoom-in" data-aos-duration="1000">
@@ -1213,15 +1214,15 @@
                 <div class="maps-locations">
                     <div class="maps-location-item" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Meat+Village+Pulau+Sibandang', '_blank')">
                         <i class="fas fa-location-dot"></i>
-                        <span>Meat Village</span>
+                        <span>Menara Pandang Tele</span>
                     </div>
                     <div class="maps-location-item" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Batu+Bahisan+Pulau+Sibandang', '_blank')">
                         <i class="fas fa-location-dot"></i>
-                        <span>Batu Bahisan</span>
+                        <span>Air Terjun Efrata</span>
                     </div>
                     <div class="maps-location-item" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Liang+Sipege+Pulau+Sibandang', '_blank')">
                         <i class="fas fa-location-dot"></i>
-                        <span>Liang Sipege</span>
+                        <span>Desa Sihotang</span>
                     </div>
                 </div>
                 <div class="maps-note">
