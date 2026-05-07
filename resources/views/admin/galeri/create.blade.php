@@ -5,6 +5,14 @@
 
 @section('content')
 <style>
+    /* Tema Bank Indonesia */
+    :root {
+        --bi-blue: #002F5F;      /* Biru tua BI */
+        --bi-gold: #D4AF37;      /* Emas BI */
+        --bi-gold-light: #E5C56B;
+        --bi-gray: #F5F7FA;
+    }
+
     .preview-container {
         margin-top: 10px;
         display: none;
@@ -16,14 +24,94 @@
     }
     .required:after {
         content: " *";
-        color: red;
+        color: var(--bi-gold);
+        font-weight: bold;
+    }
+
+    .card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .card-header {
+        background: linear-gradient(135deg, var(--bi-blue) 0%, #003f77 100%);
+        color: white;
+        border-radius: 12px 12px 0 0 !important;
+        padding: 1rem 1.5rem;
+        border-bottom: 3px solid var(--bi-gold);
+    }
+    .card-header h5 {
+        color: white;
+        font-weight: 600;
+    }
+    .card-header h5 i {
+        color: var(--bi-gold) !important;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: var(--bi-blue);
+        margin-bottom: 0.5rem;
+    }
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+        padding: 0.6rem 1rem;
+        transition: all 0.2s;
+    }
+    .form-control:focus, .form-select:focus {
+        border-color: var(--bi-gold);
+        box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+    }
+    .form-check-input:checked {
+        background-color: var(--bi-blue);
+        border-color: var(--bi-blue);
+    }
+    .btn-primary-bi {
+        background: var(--bi-blue);
+        border: none;
+        color: white;
+        padding: 0.6rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+    .btn-primary-bi:hover {
+        background: #001f3f;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .btn-outline-bi {
+        background: white;
+        border: 1px solid var(--bi-blue);
+        color: var(--bi-blue);
+        padding: 0.6rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+    .btn-outline-bi:hover {
+        background: var(--bi-blue);
+        color: white;
+    }
+    hr {
+        background-color: #e9ecef;
+        margin: 1.5rem 0;
+    }
+    .text-muted {
+        color: #6c757d !important;
+        font-size: 0.8rem;
+    }
+    .invalid-feedback {
+        color: #dc3545;
+        font-size: 0.8rem;
     }
 </style>
 
 <div class="card">
     <div class="card-header">
         <h5 class="mb-0">
-            <i class="fas fa-plus-circle me-2" style="color: #c6a43b;"></i>
+            <i class="fas fa-plus-circle me-2"></i>
             Tambah Galeri Baru
         </h5>
     </div>
@@ -43,12 +131,11 @@
                 
                 <div class="col-md-6 mb-3">
                     <label class="form-label required">Kategori</label>
-                    <select name="kategori" class="form-control @error('kategori') is-invalid @enderror" required>
+                    <select name="kategori" class="form-select @error('kategori') is-invalid @enderror" required>
                         <option value="">-- Pilih Kategori --</option>
-                        <option value="Balige" {{ old('kategori') == 'Balige' ? 'selected' : '' }}> Balige</option>
-                        <option value="Meat" {{ old('kategori') == 'Meat' ? 'selected' : '' }}> Meat</option>
-                        <option value="Batu Bahisan" {{ old('kategori') == 'Batu Bahisan' ? 'selected' : '' }}> Batu Bahisan</option>
-                        <option value="Liang Sipege" {{ old('kategori') == 'Liang Sipege' ? 'selected' : '' }}> Liang Sipege</option>
+                        <option value="Tele" {{ old('kategori') == 'Tele' ? 'selected' : '' }}>Tele</option>
+                        <option value="Efrata" {{ old('kategori') == 'Efrata' ? 'selected' : '' }}>Efrata</option>
+                        <option value="Sihotang" {{ old('kategori') == 'Sihotang' ? 'selected' : '' }}>Sihotang</option>
                     </select>
                     <small class="text-muted">Pilih kategori untuk menentukan folder penyimpanan gambar</small>
                     @error('kategori')
@@ -112,10 +199,10 @@
             <hr>
             
             <div class="d-flex gap-2">
-                <button type="submit" class="btn" style="background: #c6a43b; border: none; color: white;">
+                <button type="submit" class="btn btn-primary-bi">
                     <i class="fas fa-save me-2"></i> Simpan
                 </button>
-                <a href="{{ route('admin.galeri.index') }}" class="btn btn-secondary">
+                <a href="{{ route('admin.galeri.index') }}" class="btn btn-outline-bi">
                     <i class="fas fa-arrow-left me-2"></i> Batal
                 </a>
             </div>
