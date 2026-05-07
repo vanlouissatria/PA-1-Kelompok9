@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 
 class GaleriController extends Controller
 {
-    // Halaman galeri publik
+    /**
+     * Halaman galeri publik (stacking cards)
+     */
     public function index()
     {
         // Ambil semua data galeri yang status aktif
@@ -15,36 +17,42 @@ class GaleriController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        // Kelompokkan secara dinamis berdasarkan kolom kategori di DB
+        // Kelompokkan berdasarkan kolom 'kategori' di database
         $galeriByKategori = $allGaleri->groupBy('kategori');
 
         return view('pages.galeri', compact('galeriByKategori'));
     }
 
-    // Fungsi untuk Admin menyimpan foto baru
-    public function store(Request $request)
+    /**
+     * Menampilkan gambar dari database (binary) via route
+     * Ini adalah METHOD PALING PENTING untuk menampilkan foto yang tersimpan di database
+     */
+    public function showImage($id)
     {
-        $request->validate([
-            'judul' => 'required',
-            'kategori' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
+        // Cari data galeri berdasarkan ID
+        $galeri = Galeri::findOrFail($id);
 
-        if ($request->hasFile('gambar')) {
-            $file = $request->file('gambar');
-            // MENGAMBIL ISI BINARY GAMBAR (Agar tersimpan jadi LONGBLOB yang benar)
-            $imageData = file_get_contents($file->getRealPath());
+        // Ambil data biner dari kolom 'gambar'
+        $imageData = $galeri->gambar;
 
-            Galeri::create([
-                'judul' => $request->judul,
-                'kategori' => $request->kategori,
-                'deskripsi' => $request->deskripsi,
-                'gambar' => $imageData, // Simpan biner asli
-                'status' => true,
-                'tanggal_foto' => now(),
-            ]);
+        // Jika data kosong, tampilkan error 404
+        if (empty($imageData)) {
+            abort(404, 'Gambar tidak ditemukan');
         }
 
-        return redirect()->back()->with('success', 'Foto Berhasil Ditambahkan!');
+        // Deteksi tipe MIME secara otomatis (jpg, png, gif, dll)
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_buffer($finfo, $imageData);
+        finfo_close($finfo);
+
+        // Fallback jika deteksi gagal
+        if (!$mimeType) {
+            $mimeType = 'image/jpeg';
+        }
+
+        // Kembalikan response gambar dengan header yang benar
+        return response($imageData)
+            ->header('Content-Type', $mimeType)
+            ->header('Cache-Control', 'public, max-age=86400');
     }
 }

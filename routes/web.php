@@ -32,7 +32,10 @@ Route::get('/informasi', [PublicInformasiController::class, 'index'])->name('inf
 // Galeri Publik
 Route::get('/galeri', [PublicGaleriController::class, 'index'])->name('galeri');
 
-// Detail Galeri
+// ========== TAMBAHAN ROUTE UNTUK MENAMPILKAN GAMBAR BINARY ==========
+Route::get('/galeri/gambar/{id}', [PublicGaleriController::class, 'showImage'])->name('galeri.gambar');
+
+// Detail Galeri (berdasarkan slug)
 Route::get('/galeri/{slug}', function ($slug) {
     $galeri = App\Models\Galeri::where('slug', $slug)->firstOrFail();
     $galeri->increment('views');
