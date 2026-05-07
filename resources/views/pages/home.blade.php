@@ -1212,7 +1212,29 @@
             </iframe>
             <div class="maps-info">
                 <div class="maps-locations">
-                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Meat+Village+Pulau+Sibandang', '_blank')">
+                    <div class="maps-location-item" onclick="window.open('<div class="maps-info">
+                <div class="maps-locations">
+                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Tele+Tower+Samosir', '_blank')">
+                        <i class="fas fa-location-dot"></i>
+                        <span>Tele</span>
+                    </div>
+                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Efrata+Waterfall+Samosir', '_blank')">
+                        <i class="fas fa-location-dot"></i>
+                        <span>Efrata</span>
+                    </div>
+                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Sihotang+Samosir', '_blank')">
+                        <i class="fas fa-location-dot"></i>
+                        <span>Sihotang</span>
+                    </div>
+                </div>
+                <div class="maps-note">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Klik lokasi untuk melihat peta detail</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>', '_blank')">
                         <i class="fas fa-location-dot"></i>
                         <span>Menara Pandang Tele</span>
                     </div>
