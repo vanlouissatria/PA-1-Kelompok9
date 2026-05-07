@@ -15,29 +15,14 @@ class GeositeController extends Controller
         $fasilitas = Fasilitas::where('status', 1)->orderBy('urutan')->get();
         $penginapan = Penginapan::where('status', 1)->orderBy('urutan')->get();
         
-        return view('geosite.meat', compact('umkm', 'fasilitas', 'penginapan'));
+        return view('geosite.tele', compact('umkm', 'fasilitas', 'penginapan'));
     }
     
-    public function batuBahisan()
-    {
-        return view('geosite.batu-bahisan');
-    }
-    
-    public function liangSipege()
-    {
-        return view('geosite.liang-sipege');
-    }
-
-    // ========== METHOD YANG DITAMBAHKAN UNTUK ROUTE GEOSITE ==========
-    
-    /**
-     * Menampilkan halaman Geosite Tele
-     */
     public function tele()
     {
         // Sesuaikan lokasi file blade, misal: resources/views/pages/tele.blade.php
         // atau resources/views/geosite/tele.blade.php
-        return view('pages.tele'); // atau 'geosite.tele' sesuai struktur folder Anda
+        return view('geosite.tele'); // atau 'geosite.tele' sesuai struktur folder Anda
     }
 
     /**
@@ -45,7 +30,7 @@ class GeositeController extends Controller
      */
     public function efrata()
     {
-        return view('pages.efrata');
+        return view('geosite.efrata');
     }
 
     /**
@@ -53,6 +38,6 @@ class GeositeController extends Controller
      */
     public function sihotang()
     {
-        return view('pages.sihotang');
+        return view('geosite.sihotang');
     }
 }
