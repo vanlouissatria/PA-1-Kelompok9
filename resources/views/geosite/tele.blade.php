@@ -3,52 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Batu Bahisan - Geosite Danau Toba</title>
+    <title>Menara PandangTele - Geosite Danau Toba</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/batu-bahisan.css') }}">
 </head>
 <body>
-
 <!-- NAVBAR -->
-<div class="navbar">
+<div class="navbar" id="navbar">
     <div class="nav-container">
         <div class="nav-logo">
-            <img src="[GANTI_LINK_BENDERA]" alt="Bendera" class="flag-img">
+            <img src="{{ asset('image/logo/logobankindonesia.jpg') }}" alt="Logo">
             <div class="logo-divider"></div>
-            <img src="[GANTI_LINK_DEL]" alt="D el" class="del-img">
+            <img src="{{ asset('image/logo/del.jpg') }}" alt="Logo Del">
             <div class="logo-divider"></div>
             <div class="logo-text">
-                <h4>GEOTOBA</h4>
+                <h4>GEO<span>TOBA</span></h4>
                 <p>Geopark Danau Toba</p>
             </div>
         </div>
         <div class="nav-menu">
-            <a href="{{ url('/') }}" class="nav-link home-btn">Home</a>
+            <a href="{{ url('/') }}" class="nav-link">Home</a>
             <a href="#sejarah" class="nav-link">Sejarah</a>
-            <a href="#informasi" class="nav-link">Informasi</a>
-          
+            <a href="#umkm" class="nav-link">UMKM</a>
+            <a href="#penginapan" class="nav-link">Penginapan</a>
+            <a href="#fasilitas" class="nav-link">Fasilitas</a>
+            <a href="#lokasi" class="nav-link">Lokasi</a>
         </div>
-        <div class="hamburger" id="hamburger">
+        <button class="hamburger" id="hamburger">
             <span></span><span></span><span></span>
-        </div>
+        </button>
     </div>
 </div>
 
-<!-- Mobile Menu -->
 <div class="mobile-overlay" id="mobileOverlay">
-    <div class="mobile-close" id="mobileClose">×</div>
-    <a href="{{ url('/') }}" class="mobile-link mobile-home">Home</a>
+    <div class="mobile-close" id="mobileClose">&times;</div>
+    <a href="{{ url('/') }}" class="mobile-link">Home</a>
     <a href="#sejarah" class="mobile-link">Sejarah</a>
-    <a href="#informasi" class="mobile-link">Informasi</a>
-    
+    <a href="#umkm" class="mobile-link">UMKM</a>
+    <a href="#penginapan" class="mobile-link">Penginapan</a>
+    <a href="#fasilitas" class="mobile-link">Fasilitas</a>
+    <a href="#lokasi" class="mobile-link">Lokasi</a>
 </div>
 
 <!-- HERO -->
 <section class="hero">
     <div data-aos="fade-up">
-        <h1 class="hero-title">BATU BASIHA</h1>
-        <p class="hero-subtitle">Desa Aek Bolon Jae · Balige · UNESCO Global Geopark</p>
+        <h1 class="hero-title">Tele</h1>
+        <p class="hero-subtitle">Desa Turpuk Limbong · Samosir · UNESCO Global Geopark</p>
     </div>
 </section>
 
@@ -63,13 +65,12 @@
         <div class="sejarah-intro" style="margin-bottom: 50px; line-height: 1.8; color: #444; font-size: 0.95rem;">
             <p>
         
-                Batu Basiha merupakan salah satu geosite paling istimewa di Kabupaten Toba Samosir (Tobasa), Sumatera Utara, yang berlokasi di Desa Aek Bolon Jae, Kecamatan Balige. Tempat ini bukan hanya sekadar formasi batu biasa, tetapi merupakan manifestasi fisik dari keajaiban geologi dan kearifan lokal masyarakat Batak yang telah dipercayai dan dihormati selama berabad-abad. Batu Basiha telah mendapatkan pengakuan internasional sebagai salah satu dari 16 geosite yang diakui oleh UNESCO pada 7 Juli 2020, menjadikan Danau Toba sebagai UNESCO Global Geopark, sebuah penghargaan bergengsi untuk kawasan dengan nilai geologi dan kebudayaan yang luar biasa.
+                Menara Pandang Tele adalah menara pengamatan setinggi 25 meter yang terletak di Desa Turpuk Limbong, Kecamatan Harian, Kabupaten Samosir, Sumatera Utara, pada ketinggian 1.479 meter di atas permukaan laut.
             </p>
             <p>
-                Nama "Batu Basiha" berasal dari bahasa Batak "Batu Sian Hau" yang berarti "batu dari kayu", mencerminkan bentuk unik formasi batuan ini yang menyerupai batang kayu yang telah membatu. Batu Basiha terbentuk dari proses geologis letusan Gunung Api Toba ratusan ribu tahun lalu, di mana magma yang mengalir dari kaldera Porsea membeku dan mengalami kontraksi teratur, membentuk struktur kekar kolom yang sangat khas. Kolom-kolom vertikal alami berukuran besar ini menciptakan sebuah pemandangan yang menakjubkan dan menjadi bukti nyata aktivitas vulkanik purba di Danau Toba. Batuan andesit yang kaya silika ini telah menjadi sumber pembelajaran bagi para peneliti geologi dari seluruh dunia.
-            </p>
+                Terletak di perbukitan dengan udara sejuk, Menara Pandang Tele menjadi spot wajib bagi pelancong yang ingin menikmati panorama alam dan berburu foto Instagramable. Artikel ini akan mengulas apa itu Menara Pandang Tele, lokasinya, daya tarik wisata dan spot foto, fasilitas serta warung di sekitar, jalur menuju lokasi, serta tips berkunjung saat cuaca cerah untuk pengalaman terbaik.
             <p>
-                Selain nilai geologisnya, Batu Basiha memiliki makna spiritual dan budaya yang sangat penting bagi masyarakat Batak setempat. Menurut cerita turun-temurun, batu ini dipercayai sebagai tempat di mana roh leluhur hadir dalam bentuk harimau untuk memberikan pertanda dan nasihat. Batu Basiha telah lama dimanfaatkan sebagai tempat bermusyawarah dan mengambil keputusan penting bagi masyarakat. Keberadaannya mencerminkan kearifan lokal tentang konservasi lingkungan dan pentingnya musyawarah dalam kehidupan kolektif. Hingga saat ini, Batu Basiha tetap menjadi simbol harmoni antara kekuatan alam, nilai budaya, dan kebijaksanaan leluhur masyarakat Batak.
+                Setelah pemekaran wilayah pada 2003, menara ini menjadi bagian dari Kabupaten Samosir dan kini masuk dalam Kawasan Strategis Pariwisata Nasional (KSPN) Danau Toba. Berjarak 22 km dari Pangururan, ibu kota Kabupaten Samosir, menara ini terletak di Jalan Lintas Tele–Pangururan, satu-satunya akses darat ke Pulau Samosir. Revitalisasi 2024 menambahkan fasilitas seperti skywalk, restoran, dan plaza tarombo, menjadikannya destinasi modern yang tetap mempertahankan pesona alam.
             </p>
         </div>
         

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Meat - Geosite Danau Toba</title>
+    <title>Sihotang - Geosite Danau Toba</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/meat.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sihotang.css') }}">
 </head>
 <body>
 
@@ -13,9 +13,10 @@
 <div class="navbar" id="navbar">
     <div class="nav-container">
         <div class="nav-logo">
-            <img src="{{ asset('image/Logo/logobankindonesia.jpg') }}" alt="Logo">
+            <img src="{{ asset('image/L
+            logo/logobankindonesia.jpg') }}" alt="Logo">
             <div class="logo-divider"></div>
-            <img src="{{ asset('image/Logo/del.jpg') }}" alt="Logo Del">
+            <img src="{{ asset('image/logo/del.jpg') }}" alt="Logo Del">
             <div class="logo-divider"></div>
             <div class="logo-text">
                 <h4>GEO<span>TOBA</span></h4>

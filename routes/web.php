@@ -64,9 +64,9 @@ Route::get('/kontak', function () {
 })->name('kontak');
 
 // ==================== GEOSITE ROUTES ====================
-Route::get('/geosite/meat', [GeositeController::class, 'meat'])->name('geosite.meat');
-Route::get('/geosite/batu-bahisan', [GeositeController::class, 'batuBahisan'])->name('geosite.batu-bahisan');
-Route::get('/geosite/liang-sipege', [GeositeController::class, 'liangSipege'])->name('geosite.liang-sipege');
+Route::get('/geosite/tele', [GeositeController::class, 'tele'])->name('geosite.tele');
+Route::get('/geosite/efrata', [GeositeController::class, 'efrata'])->name('geosite.efrata');
+Route::get('/geosite/sihotang', [GeositeController::class, 'sihotang'])->name('geosite.sihotang');
 
 // ==================== AUTH ROUTES ====================
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

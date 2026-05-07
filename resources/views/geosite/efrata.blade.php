@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Liang Sipege - Geosite Danau Toba</title>
+    <title>Air Terjun Efrata - Geosite Danau Toba</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
@@ -241,44 +241,47 @@
 <body>
 
 <!-- NAVBAR -->
-<div class="navbar">
+<div class="navbar" id="navbar">
     <div class="nav-container">
         <div class="nav-logo">
-            <img src="[GANTI_LINK_BENDERA]" alt="Bendera" class="flag-img">
+            <img src="{{ asset('image/logo/logobankindonesia.jpg') }}" alt="Logo">
             <div class="logo-divider"></div>
-            <img src="[GANTI_LINK_DEL]" alt="D el" class="del-img">
+            <img src="{{ asset('image/logo/del.jpg') }}" alt="Logo Del">
             <div class="logo-divider"></div>
             <div class="logo-text">
-                <h4>GEOTOBA</h4>
+                <h4>GEO<span>TOBA</span></h4>
                 <p>Geopark Danau Toba</p>
             </div>
         </div>
         <div class="nav-menu">
-            <a href="{{ url('/') }}" class="nav-link home-btn">Home</a>
+            <a href="{{ url('/') }}" class="nav-link">Home</a>
             <a href="#sejarah" class="nav-link">Sejarah</a>
-            <a href="#informasi" class="nav-link">Informasi</a>
-            <a href="#galeri" class="nav-link">Galeri</a>
+            <a href="#umkm" class="nav-link">UMKM</a>
+            <a href="#penginapan" class="nav-link">Penginapan</a>
+            <a href="#fasilitas" class="nav-link">Fasilitas</a>
+            <a href="#lokasi" class="nav-link">Lokasi</a>
         </div>
-        <div class="hamburger" id="hamburger">
+        <button class="hamburger" id="hamburger">
             <span></span><span></span><span></span>
-        </div>
+        </button>
     </div>
 </div>
 
-<!-- Mobile Menu -->
 <div class="mobile-overlay" id="mobileOverlay">
-    <div class="mobile-close" id="mobileClose">×</div>
-    <a href="{{ url('/') }}" class="mobile-link mobile-home">Home</a>
+    <div class="mobile-close" id="mobileClose">&times;</div>
+    <a href="{{ url('/') }}" class="mobile-link">Home</a>
     <a href="#sejarah" class="mobile-link">Sejarah</a>
-    <a href="#informasi" class="mobile-link">Informasi</a>
-    <a href="#galeri" class="mobile-link">Galeri</a>
+    <a href="#umkm" class="mobile-link">UMKM</a>
+    <a href="#penginapan" class="mobile-link">Penginapan</a>
+    <a href="#fasilitas" class="mobile-link">Fasilitas</a>
+    <a href="#lokasi" class="mobile-link">Lokasi</a>
 </div>
 
 <!-- HERO -->
 <section class="hero">
     <div data-aos="fade-up">
-        <h1 class="hero-title">LIANG SIPEGE</h1>
-        <p class="hero-subtitle">Gua Bersejarah · Desa Simarmar Pea Talun Hutagaol · Balige</p>
+        <h1 class="hero-title">EFRATA</h1>
+        <p class="hero-subtitle">Air Terjun Efrata · Desa Efrata · Samosir</p>
     </div>
 </section>
 
@@ -292,10 +295,10 @@
         
         <div class="sejarah-intro" style="margin-bottom: 50px; line-height: 1.8; color: #444; font-size: 0.95rem;">
             <p>
-                Liang Sipege merupakan sebuah gua bersejarah yang terletak di Desa Simarmar Pea Talun Hutagaol, Kecamatan Balige, Kabupaten Tobasa, Sumatera Utara. Gua ini bukan sekadar formasi geologis biasa, tetapi merupakan situs spiritual dan budaya yang kaya dengan legenda dan mitos yang telah diwariskan turun-temurun oleh masyarakat setempat. Masyarakat Batak Toba, khususnya keluarga besar marga Panjaitan, menganggap Liang Sipege sebagai tempat yang sangat sakral dan bermakna dalam sejarah leluhur mereka.
+                Air Terjun Efrata terletak di Desa Efrata, Kecamatan Sianjur Mula-Mula, Kabupaten Samosir, Sumatera Utara. Untuk mencapai lokasi air terjun, pengunjung dapat menggunakan kendaraan roda dua atau roda empat dari pusat Kota Medan.
             </p>
             <p>
-                Cerita rakyat menceritakan bahwa Liang Sipege adalah asal-usul marga Panjaitan, bermula dari seorang tokoh legendaris bernama Si Lundu Ni Pahu. Menurut kepercayaan masyarakat, gua ini adalah bekas tempat bertapa dan tempat persembunyian leluhur mereka pada masa lalu. Kehadiran Liang Sipege di tengah landscape Kabupaten Tobasa menjadikannya sebagai salah satu destinasi wisata budaya dan spiritual yang menarik, menggabungkan nilai historis, religius, dan ekologis dalam satu tempat yang menakjubkan.
+                Air Terjun Efrata dikenal dengan keindahan aliran airnya yang jernih dan suasana sekitarnya yang tenang. Tempat ini sering dikunjungi oleh wisatawan yang mencari pengalaman alam yang unik dan menyegarkan, serta bagi para pecinta fotografi yang ingin mengabadikan keindahan alam yang spektakuler.
             </p>
             <p>
                 Selain nilai sejarah dan spiritualnya, Liang Sipege juga memiliki signifikansi ekologis yang penting. Gua ini adalah habitat alami bagi ribuan kelelawar, yang kotorannya (guano) telah menjadi sumber daya alam yang bermanfaat bagi masyarakat setempat. Guano dari Liang Sipege dimanfaatkan sebagai pupuk organik berkualitas tinggi untuk pertanian, kebun, dan tanaman masyarakat lokal, menciptakan hubungan harmonis antara pelestarian alam dan kesejahteraan ekonomi. Hingga saat ini, Liang Sipege tetap menjadi tempat yang dikunjungi oleh para peziarah spiritual, peneliti, dan wisatawan yang tertarik dengan warisan budaya dan keunikan alam Kabupaten Tobasa.
@@ -304,21 +307,21 @@
         
         <div class="sejarah-grid">
             <div class="sejarah-item" data-aos="fade-right">
-                <div class="sejarah-image"><img src="/image/liang/" alt="Sejarah 1"></div>
+                <div class="sejarah-image"><img src="/image/efrata/efrata1.jpg" alt="Sejarah 1"></div>
                 <div class="sejarah-text">
                     <h4 style="color: var(--bi-blue); margin-bottom: 12px; font-family: 'Cormorant Garamond', serif;">Legenda Si Lundu Ni Pahu</h4>
                     <p>Masyarakat setempat meyakini bahwa Liang Sipege adalah bekas tempat bertapa dan tempat persembunyian leluhur mereka. Cerita turun-temurun menceritakan bahwa gua ini merupakan asal-usul leluhur marga Panjaitan. Ibunya diasingkan karena tidak kunjung melahirkan setelah hamil lebih dari sembilan bulan, kondisi yang dianggap aib pada saat itu. Akhirnya, sang leluhur bernama Si Lundu Ni Pahu (yang dibesarkan oleh tanaman pakis) lahir di Liang Sipege dan tumbuh menjadi pemuda yang cerdas dan tangkas.</p>
                 </div>
             </div>
             <div class="sejarah-item reverse" data-aos="fade-left">
-                <div class="sejarah-image"><img src="/image/liang/sejarah2.jpg" alt="Sejarah 2"></div>
+                <div class="sejarah-image"><img src="/image/efarata/efarata3.jpg" alt="Sejarah 2"></div>
                 <div class="sejarah-text">
                     <h4 style="color: var(--bi-blue); margin-bottom: 12px; font-family: 'Cormorant Garamond', serif;">Raja Sijorat Paraliman Panjaitan</h4>
                     <p>Si Lundu Ni Pahu kemudian dikenal sebagai Raja Sijorat Paraliman Panjaitan, seorang tokoh yang dianggap memiliki kekuatan dan keberanian luar biasa. Raja ini terkenal di kalangan penggembala dan sering memenangkan berbagai perlombaan. Salah satu kisah legendanya adalah ketika ia berhasil menangkap kuda liar milik Raja Sisingamangaraja XII yang kabur, dari mana ia mendapat gelar "Raja Si Jorat" yang berarti raja yang mampu menangkap kuda liar.</p>
                 </div>
             </div>
             <div class="sejarah-item" data-aos="fade-right">
-                <div class="sejarah-image"><img src="/image/liang/sejarah3.jpg" alt="Sejarah 3"></div>
+                <div class="sejarah-image"><img src="/image/efrata/efrata2.jpg" alt="Sejarah 3"></div>
                 <div class="sejarah-text">
                     <h4 style="color: var(--bi-blue); margin-bottom: 12px; font-family: 'Cormorant Garamond', serif;">Tempat Spiritual dan Habitat Alami</h4>
                     <p>Hingga hari ini, gua ini dijadikan sebagai tempat mencari kekuatan spiritual oleh para raja dan tokoh adat setempat. Para pengunjung masih selalu menemukan persembahan atau sesajen di altar batu yang sengaja dibuat untuk tujuan itu. Liang Sipege juga terkenal sebagai habitat kelelawar, yang kotorannya (guano) dimanfaatkan oleh penduduk setempat sebagai pupuk organik untuk sawah, kebun, dan tanaman mereka, memberikan manfaat ekonomi yang berkelanjutan bagi masyarakat sekitar.</p>
@@ -358,7 +361,9 @@
                 <div class="sejarah-image"><img src="/image/liang/lokasi.jpg" alt="Lokasi"></div>
                 <div class="sejarah-text">
                     <h4 style="color: var(--bi-blue); margin-bottom: 12px; font-family: 'Cormorant Garamond', serif;">Lokasi & Aksesibilitas</h4>
-                    <p>Liang Sipege terletak di Desa Simarmar Pea Talun Hutagaol, Kecamatan Balige. Dari Simpang Sibulele (Balige, Kabupaten Tobasa), jaraknya sekitar 4 km. Dari desa ke lokasi gua harus ditempuh dengan berjalan kaki, menambah petualangan Anda menjelajahi keindahan alam sekitar.</p>
+                    <p>Air Terjun Efrata terletak di Desa Efrata, Kecamatan Sianjur Mula-Mula, Kabupaten Samosir, Sumatera Utara. Untuk mencapai lokasi air terjun, pengunjung dapat menggunakan kendaraan roda dua atau roda empat dari pusat Kota Medan. Perjalanan menuju lokasi memerlukan waktu sekitar 2 hingga 3 jam, tergantung pada kondisi lalu lintas dan cuaca.
+
+Sesampainya di area parkir, pengunjung perlu melanjutkan perjalanan dengan berjalan kaki sekitar 30 hingga 45 menit melalui jalur trekking yang menanjak dan berbatu. Selama perjalanan menuju air terjun, pengunjung akan disuguhi pemandangan hutan tropis yang hijau dan udara segar. Disarankan untuk mengenakan sepatu trekking yang nyaman dan membawa bekal air minum agar perjalanan lebih menyenangkan.</p>
                 </div>
             </div>
             <div class="sejarah-item reverse" data-aos="fade-left">
