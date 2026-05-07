@@ -346,5 +346,7 @@
     audio.load();
 
 </script>
-
+<pre style="background: #fff; color: #000; padding: 10px;">
+Jumlah kategori: {{ count($galeriByKategori ?? []) }}
+</pre>
 @endsection
