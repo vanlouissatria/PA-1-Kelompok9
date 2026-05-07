@@ -1234,15 +1234,17 @@
             </div>
         </div>
     </div>
-</section>', '_blank')">
+</section>
+                <div>
+                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Tele+Tower+Samosir', '_blank')">
                         <i class="fas fa-location-dot"></i>
                         <span>Menara Pandang Tele</span>
                     </div>
-                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Batu+Bahisan+Pulau+Sibandang', '_blank')">
+                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Efrata+Waterfall+Samosir', '_blank')">
                         <i class="fas fa-location-dot"></i>
                         <span>Air Terjun Efrata</span>
                     </div>
-                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Liang+Sipege+Pulau+Sibandang', '_blank')">
+                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Sihotang+Samosir', '_blank')">
                         <i class="fas fa-location-dot"></i>
                         <span>Desa Sihotang</span>
                     </div>
