@@ -8,10 +8,14 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DestinasiController;
 use App\Http\Controllers\GeositeController;
 
-// --- IMPORT CONTROLLER DENGAN ALIAS UNTUK MENGHINDARI ERROR ---
+// --- IMPORT CONTROLLER PUBLIK ---
+// Pastikan file ini ada di: app/Http/Controllers/InformasiController.php
 use App\Http\Controllers\GaleriController as PublicGaleriController;
 use App\Http\Controllers\InformasiController as PublicInformasiController;
 
+// --- IMPORT CONTROLLER ADMIN ---
+// Pastikan Anda sudah mengganti nama CLASS di dalam file 
+// app/Http/Controllers/Admin/InformasiController.php menjadi AdminInformasiController
 use App\Http\Controllers\Admin\GaleriController as AdminGaleriController;
 use App\Http\Controllers\Admin\BeritaController as AdminBeritaController;
 use App\Http\Controllers\Admin\InformasiController as AdminInformasiController;
@@ -25,7 +29,6 @@ use App\Http\Controllers\Admin\PenginapanController as AdminPenginapanController
 |--------------------------------------------------------------------------
 */
 
-// HOME
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // DESTINASI
@@ -109,7 +112,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         ));
     })->name('admin.dashboard');
 
-    // Menggunakan alias controller yang sudah didefinisikan di atas
+    // Menggunakan alias controller admin
     Route::resource('galeri', AdminGaleriController::class)->names('admin.galeri');
     Route::resource('berita', AdminBeritaController::class)->names('admin.berita');
     Route::resource('informasi', AdminInformasiController::class)->names('admin.informasi');
