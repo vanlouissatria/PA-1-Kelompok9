@@ -14,6 +14,7 @@ class Informasi extends Model
         'slug',
         'konten',
         'gambar',
+        'urutan',
         'status'
     ];
 
@@ -24,11 +25,11 @@ class Informasi extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         static::creating(function ($informasi) {
             $informasi->slug = Str::slug($informasi->judul);
         });
-        
+
         static::updating(function ($informasi) {
             $informasi->slug = Str::slug($informasi->judul);
         });
