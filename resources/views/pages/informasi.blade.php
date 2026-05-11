@@ -1,17 +1,23 @@
-<?php
+@extends('layouts.app') {{-- Atau sesuaikan dengan nama layout Anda --}}
 
-namespace App\Http\Controllers;
-
-use App\Models\Informasi;
-
-class InformasiController extends Controller
-{
-    public function index()
-    {
-        $informasiList = Informasi::where('status', 1)
-            ->orderBy('id', 'asc')
-            ->get();
-
-        return view('pages.informasi', compact('informasiList'));
-    }
-}
+@section('content')
+<div class="container">
+    <h1>Daftar Informasi</h1>
+    <hr>
+    <div class="row">
+        @foreach($informasiList as $info)
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    @if($info->gambar)
+                        <img src="{{ asset('storage/' . $info->gambar) }}" class="card-img-top" alt="{{ $info->judul }}">
+                    @endif
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $info->judul }}</h5>
+                        <p class="card-text">{!! Str::limit($info->konten, 100) !!}</p>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+@endsection
