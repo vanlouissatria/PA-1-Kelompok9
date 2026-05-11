@@ -683,7 +683,7 @@
             <i class="fas fa-chart-pie"></i> Dashboard
         </a>
         
-        <div class="menu-title">Konten</div>
+<div class="menu-title">Konten</div>
         <a href="{{ route('admin.galeri.index') }}" class="{{ request()->routeIs('admin.galeri.*') ? 'active' : '' }}">
             <i class="fas fa-images"></i> Galeri
         </a>
@@ -693,8 +693,11 @@
         <a href="{{ route('admin.informasi.index') }}" class="{{ request()->routeIs('admin.informasi.*') ? 'active' : '' }}">
             <i class="fas fa-info-circle"></i> Informasi
         </a>
-        
-        <div class="menu-title">Desa Meat</div>
+        <a href="{{ route('admin.destinasi.index') }}" class="{{ request()->routeIs('admin.destinasi.*') ? 'active' : '' }}">
+            <i class="fas fa-map-marked-alt"></i> Destinasi
+        </a>
+
+        <div class="menu-title">Tele</div>
         <a href="{{ route('admin.umkm.index') }}" class="{{ request()->routeIs('admin.umkm.*') ? 'active' : '' }}">
             <i class="fas fa-store"></i> UMKM
         </a>

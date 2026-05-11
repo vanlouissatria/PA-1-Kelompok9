@@ -1,11 +1,11 @@
-{{-- resources/views/admin/galeri/create.blade.php --}}
+{{-- resources/views/admin/destinasi/create.blade.php --}}
 @extends('layouts.admin')
 
-@section('title', 'Tambah Galeri')
+@section('title', 'Tambah Destinasi')
 
 @section('content')
 <style>
-    /* Tema Elegan (Blue & Gold) - Samakan dengan Destinasi */
+    /* Tema Elegan (Blue & Gold) */
     :root {
         --bi-blue: #002F5F;      /* Biru tua */
         --bi-gold: #D4AF37;      /* Emas */
@@ -73,8 +73,6 @@
         font-weight: 500;
         transition: all 0.2s;
         cursor: pointer;
-        display: inline-flex;
-        align-items: center;
     }
     .btn-primary-bi:hover {
         background: #001f3f;
@@ -102,49 +100,63 @@
         border: 0;
         height: 1px;
     }
+    .text-muted {
+        color: #6c757d !important;
+        font-size: 0.8rem;
+    }
 </style>
 
 <div class="card">
     <div class="card-header">
         <h5>
-            <i class="fas fa-images me-2"></i>
-            Tambah Galeri Baru
+            <i class="fas fa-map-marked-alt me-2"></i>
+            Tambah Destinasi Baru
         </h5>
     </div>
     <div class="card-body">
-        <form action="{{ route('admin.galeri.store') }}" method="POST" enctype="multipart/form-data" id="formGaleri">
+        <form action="{{ route('admin.destinasi.store') }}" method="POST" enctype="multipart/form-data" id="formDestinasi">
             @csrf
             
             <div class="row">
-                {{-- Judul Foto --}}
+                {{-- Nama Destinasi --}}
                 <div class="col-md-6 mb-3">
-                    <label class="form-label required">Judul Foto / Galeri</label>
-                    <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror" 
-                           value="{{ old('judul') }}" required placeholder="Masukkan judul foto">
-                    @error('judul')
+                    <label class="form-label required">Nama Destinasi</label>
+                    <input type="text" name="nama_destinasi" class="form-control @error('nama_destinasi') is-invalid @enderror" 
+                           value="{{ old('nama_destinasi') }}" required placeholder="Masukkan nama tempat wisata">
+                    @error('nama_destinasi')
                         <div class="invalid-feedback text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 
                 {{-- Kategori --}}
                 <div class="col-md-6 mb-3">
-                    <label class="form-label required">Kategori Galeri</label>
+                    <label class="form-label required">Kategori Destinasi</label>
                     <select name="kategori" class="form-select @error('kategori') is-invalid @enderror" required>
                         <option value="">-- Pilih Kategori --</option>
-                        <option value="alam" {{ old('kategori') == 'alam' ? 'selected' : '' }}>Alam</option>
-                        <option value="budaya" {{ old('kategori') == 'budaya' ? 'selected' : '' }}>Budaya</option>
-                        <option value="fasilitas" {{ old('kategori') == 'fasilitas' ? 'selected' : '' }}>Fasilitas</option>
+                        <option value="alam" {{ old('kategori') == 'alam' ? 'selected' : '' }}>Destinasi Alam</option>
+                        <option value="buatan" {{ old('kategori') == 'buatan' ? 'selected' : '' }}>Destinasi Buatan</option>
+                        <option value="budaya" {{ old('kategori') == 'budaya' ? 'selected' : '' }}>Destinasi Budaya</option>
                     </select>
                     @error('kategori')
                         <div class="invalid-feedback text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-
-                {{-- Deskripsi Galeri --}}
+                
+                {{-- Lokasi --}}
                 <div class="col-md-12 mb-3">
-                    <label class="form-label">Deskripsi Singkat (Opsional)</label>
+                    <label class="form-label required">Lokasi / Alamat</label>
+                    <input type="text" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror" 
+                           value="{{ old('lokasi') }}" required placeholder="Contoh: Desa Tele, Kec. Harian">
+                    @error('lokasi')
+                        <div class="invalid-feedback text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                {{-- Deskripsi --}}
+                <div class="col-md-12 mb-3">
+                    <label class="form-label required">Deskripsi Destinasi</label>
                     <textarea name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" 
-                              rows="4" placeholder="Jelaskan sedikit tentang isi foto ini">{{ old('deskripsi') }}</textarea>
+                              rows="5" required placeholder="Jelaskan keindahan dan fasilitas destinasi ini">{{ old('deskripsi') }}</textarea>
                     @error('deskripsi')
                         <div class="invalid-feedback text-danger">{{ $message }}</div>
                     @enderror
@@ -152,10 +164,10 @@
                 
                 {{-- Upload Gambar --}}
                 <div class="col-md-6 mb-3">
-                    <label class="form-label required">File Gambar</label>
+                    <label class="form-label required">Gambar Destinasi</label>
                     <input type="file" name="gambar" class="form-control @error('gambar') is-invalid @enderror" 
                            accept="image/jpeg,image/png,image/jpg" required id="inputGambar">
-                    <small class="text-muted">Format: JPG, PNG, JPEG. Maksimal 2MB</small>
+                    <small class="text-muted">Format: JPG, PNG. Maksimal 2MB</small>
                     
                     <div class="preview-container" id="previewContainer">
                         <img id="previewImage" class="preview-image" alt="Preview Gambar">
@@ -170,9 +182,9 @@
             
             <div class="d-flex gap-2">
                 <button type="submit" class="btn-primary-bi">
-                    <i class="fas fa-save me-2"></i> Simpan Galeri
+                    <i class="fas fa-save me-2"></i> Simpan Destinasi
                 </button>
-                <a href="{{ route('admin.galeri.index') }}" class="btn-outline-bi">
+                <a href="{{ route('admin.destinasi.index') }}" class="btn-outline-bi">
                     <i class="fas fa-arrow-left me-2"></i> Batal
                 </a>
             </div>
@@ -181,7 +193,7 @@
 </div>
 
 <script>
-    // Preview gambar sebelum upload
+    // Preview gambar sebelum upload (Sama seperti Galeri)
     document.getElementById('inputGambar').addEventListener('change', function(e) {
         const file = e.target.files[0];
         const previewContainer = document.getElementById('previewContainer');

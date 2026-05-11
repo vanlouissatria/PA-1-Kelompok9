@@ -1,257 +1,196 @@
+{{-- resources/views/admin/informasi/create.blade.php --}}
 @extends('layouts.admin')
 
 @section('title', 'Tambah Informasi')
 
 @section('content')
+<style>
+    /* Tema Elegan (Blue & Gold) - Konsisten dengan Destinasi */
+    :root {
+        --bi-blue: #002F5F;      
+        --bi-gold: #D4AF37;      
+        --bi-gold-light: #E5C56B;
+    }
 
-<div class="d-flex align-items-center mb-3">
+    .preview-container {
+        margin-top: 15px;
+        display: none;
+    }
+    .preview-image {
+        max-width: 180px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        border: 2px solid #eee;
+    }
+    .required:after {
+        content: " *";
+        color: var(--bi-gold);
+        font-weight: bold;
+    }
 
-    <a href="{{ route('admin.informasi.index') }}"
-       class="btn btn-sm btn-secondary me-2">
+    .card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .card-header {
+        background: linear-gradient(135deg, var(--bi-blue) 0%, #003f77 100%);
+        color: white;
+        border-radius: 12px 12px 0 0 !important;
+        padding: 1.2rem 1.5rem;
+        border-bottom: 3px solid var(--bi-gold);
+    }
+    .card-header h5 {
+        color: white;
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+    .card-header h5 i {
+        color: var(--bi-gold) !important;
+    }
 
-        <i class="fas fa-arrow-left"></i>
+    .form-label {
+        font-weight: 600;
+        color: var(--bi-blue);
+    }
+    .form-control {
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+        padding: 0.7rem 1rem;
+    }
+    .form-control:focus {
+        border-color: var(--bi-gold);
+        box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.15);
+    }
 
-    </a>
-
-    <h5 class="mb-0">
-        Tambah Informasi
-    </h5>
-
-</div>
+    /* Tombol Custom */
+    .btn-primary-bi {
+        background: var(--bi-blue);
+        border: none;
+        color: white;
+        padding: 0.7rem 2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+    .btn-primary-bi:hover {
+        background: #001f3f;
+        transform: translateY(-2px);
+    }
+    .btn-outline-bi {
+        background: white;
+        border: 1.5px solid var(--bi-blue);
+        color: var(--bi-blue);
+        padding: 0.7rem 2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        transition: 0.3s;
+    }
+    .btn-outline-bi:hover {
+        background: #f8f9fa;
+        color: #001f3f;
+    }
+</style>
 
 <div class="card">
-
-    <div class="card-body">
-
-        {{-- ERROR VALIDATION --}}
+    <div class="card-header">
+        <h5>
+            <i class="fas fa-info-circle me-2"></i>
+            Tambah Informasi Baru
+        </h5>
+    </div>
+    <div class="card-body p-4">
+        
+        {{-- Pesan Error Validation --}}
         @if($errors->any())
-
-            <div class="alert alert-danger">
-
+            <div class="alert alert-danger border-0 shadow-sm mb-4">
                 <ul class="mb-0">
-
                     @foreach($errors->all() as $error)
-
-                        <li>{{ $error }}</li>
-
+                        <li><i class="fas fa-exclamation-triangle me-2"></i>{{ $error }}</li>
                     @endforeach
-
                 </ul>
-
             </div>
-
         @endif
 
-        <form action="{{ route('admin.informasi.store') }}"
-              method="POST"
-              enctype="multipart/form-data">
-
+        <form action="{{ route('admin.informasi.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-
+            
             <div class="row">
-
-                {{-- JUDUL --}}
-                <div class="col-md-12 mb-3">
-
-                    <label class="form-label required">
-                        Judul
-                    </label>
-
-                    <input type="text"
-                           name="judul"
-                           class="form-control @error('judul') is-invalid @enderror"
-                           value="{{ old('judul') }}"
-                           required>
-
-                    @error('judul')
-
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-
-                    @enderror
-
+                {{-- Judul Informasi --}}
+                <div class="col-md-9 mb-4">
+                    <label class="form-label required">Judul Informasi</label>
+                    <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror" 
+                           placeholder="Contoh: Jadwal Operasional Tele-Efrata" value="{{ old('judul') }}" required>
                 </div>
 
-                {{-- URUTAN --}}
-                <div class="col-md-6 mb-3">
-
-                    <label class="form-label required">
-                        Urutan
-                    </label>
-
-                    <input type="number"
-                           name="urutan"
-                           class="form-control @error('urutan') is-invalid @enderror"
-                           value="{{ old('urutan') }}"
-                           required>
-
-                    @error('urutan')
-
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-
-                    @enderror
-
+                {{-- Urutan Tampil --}}
+                <div class="col-md-3 mb-4">
+                    <label class="form-label required">Urutan Tampil</label>
+                    <input type="number" name="urutan" class="form-control @error('urutan') is-invalid @enderror" 
+                           value="{{ old('urutan', 1) }}" required>
                 </div>
 
-                {{-- GAMBAR --}}
-                <div class="col-md-12 mb-3">
-
-                    <label class="form-label">
-                        Gambar
-                    </label>
-
-                    <input type="file"
-                           name="gambar"
-                           class="form-control @error('gambar') is-invalid @enderror"
-                           accept="image/jpeg,image/png,image/jpg"
-                           id="inputGambar">
-
-                    <small class="text-muted">
-                        Format: JPG, PNG. Max: 5MB
-                    </small>
-
-                    {{-- PREVIEW --}}
-                    <div class="preview-container mt-2"
-                         id="previewContainer"
-                         style="display: none;">
-
-                        <label>
-                            Preview Gambar:
-                        </label>
-
-                        <br>
-
-                        <img id="previewImage"
-                             class="preview-image"
-                             style="max-width: 150px; border-radius: 8px; margin-top: 5px;">
-
+                {{-- Upload Gambar --}}
+                <div class="col-md-12 mb-4">
+                    <label class="form-label">Gambar Informasi (Opsional)</label>
+                    <input type="file" name="gambar" class="form-control @error('gambar') is-invalid @enderror" 
+                           accept="image/jpeg,image/png,image/jpg" id="inputGambar">
+                    <small class="text-muted d-block mt-1">Format: JPG, PNG. Maksimal 5MB</small>
+                    
+                    <div class="preview-container" id="previewContainer">
+                        <img id="previewImage" class="preview-image" alt="Preview">
                     </div>
-
-                    @error('gambar')
-
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-
-                    @enderror
-
                 </div>
 
-                {{-- KONTEN --}}
-                <div class="col-12 mb-3">
-
-                    <label class="form-label required">
-                        Konten
-                    </label>
-
-                    <textarea name="konten"
-                              class="form-control @error('konten') is-invalid @enderror"
-                              rows="12"
-                              required>{{ old('konten') }}</textarea>
-
-                    @error('konten')
-
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-
-                    @enderror
-
+                {{-- Isi Konten --}}
+                <div class="col-12 mb-4">
+                    <label class="form-label required">Isi Konten Informasi</label>
+                    <textarea name="konten" class="form-control @error('konten') is-invalid @enderror" 
+                              rows="10" placeholder="Tuliskan informasi detail di sini..." required>{{ old('konten') }}</textarea>
                 </div>
 
-                {{-- STATUS --}}
-                <div class="col-12 mb-3">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input"
-                               type="checkbox"
-                               name="status"
-                               value="1"
-                               id="statusCheck"
-                               {{ old('status') ? 'checked' : 'checked' }}>
-
-                        <label class="form-check-label" for="statusCheck">
-
-                            <i class="fas fa-check-circle text-success me-1"></i>
-
-                            Aktifkan
-
-                        </label>
-
+                {{-- Status Aktif --}}
+                <div class="col-12 mb-4">
+                    <div class="form-check form-switch mt-2">
+                        <input class="form-check-input" type="checkbox" name="status" id="statusSwitch" value="1" {{ old('status') ? 'checked' : 'checked' }}>
+                        <label class="form-check-label fw-bold ms-2" for="statusSwitch" style="color: var(--bi-blue);">Aktifkan Informasi Ini</label>
                     </div>
-
                 </div>
-
             </div>
 
-            <hr>
+            <hr class="my-4">
 
-            {{-- BUTTON --}}
-            <div class="d-flex gap-2">
-
-                <button type="submit"
-                        class="btn btn-primary">
-
-                    <i class="fas fa-save me-2"></i>
-
-                    Simpan
-
+            <div class="d-flex gap-3">
+                <button type="submit" class="btn-primary-bi">
+                    <i class="fas fa-save me-2"></i> Simpan Informasi
                 </button>
-
-                <a href="{{ route('admin.informasi.index') }}"
-                   class="btn btn-secondary">
-
-                    <i class="fas fa-arrow-left me-2"></i>
-
-                    Batal
-
+                <a href="{{ route('admin.informasi.index') }}" class="btn-outline-bi">
+                    <i class="fas fa-times me-2"></i> Batal
                 </a>
-
             </div>
-
         </form>
-
     </div>
-
 </div>
 
-{{-- PREVIEW SCRIPT --}}
 <script>
-
-document.getElementById('inputGambar')
-    .addEventListener('change', function(e) {
-
-    const file = e.target.files[0];
-
-    const previewContainer =
-        document.getElementById('previewContainer');
-
-    const previewImage =
-        document.getElementById('previewImage');
-
-    if (file) {
-
-        const reader = new FileReader();
-
-        reader.onload = function(event) {
-
-            previewImage.src = event.target.result;
-
-            previewContainer.style.display = 'block';
+    // Preview Gambar Otomatis
+    document.getElementById('inputGambar').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const container = document.getElementById('previewContainer');
+        const img = document.getElementById('previewImage');
+        
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                img.src = event.target.result;
+                container.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        } else {
+            container.style.display = 'none';
         }
-
-        reader.readAsDataURL(file);
-
-    } else {
-
-        previewContainer.style.display = 'none';
-    }
-});
-
+    });
 </script>
-
 @endsection

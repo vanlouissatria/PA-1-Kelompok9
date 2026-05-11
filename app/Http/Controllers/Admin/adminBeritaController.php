@@ -7,7 +7,7 @@ use App\Models\Berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class BeritaController extends Controller
+class adminBeritaController extends Controller
 {
     public function index()
     {

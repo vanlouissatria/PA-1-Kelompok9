@@ -9,19 +9,18 @@ use App\Http\Controllers\DestinasiController;
 use App\Http\Controllers\GeositeController;
 
 // --- IMPORT CONTROLLER PUBLIK ---
-// Pastikan file ini ada di: app/Http/Controllers/InformasiController.php
 use App\Http\Controllers\GaleriController as PublicGaleriController;
 use App\Http\Controllers\InformasiController as PublicInformasiController;
 
 // --- IMPORT CONTROLLER ADMIN ---
-// Pastikan Anda sudah mengganti nama CLASS di dalam file 
-// app/Http/Controllers/Admin/InformasiController.php menjadi AdminInformasiController
-use App\Http\Controllers\Admin\GaleriController as AdminGaleriController;
-use App\Http\Controllers\Admin\BeritaController as AdminBeritaController;
-use App\Http\Controllers\Admin\InformasiController as AdminInformasiController;
-use App\Http\Controllers\Admin\UmkmController as AdminUmkmController;
-use App\Http\Controllers\Admin\FasilitasController as AdminFasilitasController;
-use App\Http\Controllers\Admin\PenginapanController as AdminPenginapanController;
+// Menggunakan PascalCase untuk menghindari error case-sensitive di server
+use App\Http\Controllers\Admin\AdminGaleriController;
+use App\Http\Controllers\Admin\AdminBeritaController;
+use App\Http\Controllers\Admin\AdminInformasiController;
+use App\Http\Controllers\Admin\AdminUmkmController;
+use App\Http\Controllers\Admin\AdminFasilitasController;
+use App\Http\Controllers\Admin\AdminPenginapanController;
+use App\Http\Controllers\Admin\AdminDestinasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,14 +111,16 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         ));
     })->name('admin.dashboard');
 
-    // Menggunakan alias controller admin
+    // CRUD Resources menggunakan Controller Admin
     Route::resource('galeri', AdminGaleriController::class)->names('admin.galeri');
     Route::resource('berita', AdminBeritaController::class)->names('admin.berita');
     Route::resource('informasi', AdminInformasiController::class)->names('admin.informasi');
     Route::resource('umkm', AdminUmkmController::class)->names('admin.umkm');
     Route::resource('fasilitas', AdminFasilitasController::class)->names('admin.fasilitas');
     Route::resource('penginapan', AdminPenginapanController::class)->names('admin.penginapan');
+    Route::resource('destinasi', AdminDestinasiController::class)->names('admin.destinasi');
 
+    // Toggle Status Routes
     Route::post('galeri/toggle-status/{id}', [AdminGaleriController::class, 'toggleStatus'])->name('admin.galeri.toggle-status');
     Route::post('berita/toggle-status/{id}', [AdminBeritaController::class, 'toggleStatus'])->name('admin.berita.toggle-status');
     Route::post('informasi/toggle-status/{id}', [AdminInformasiController::class, 'toggleStatus'])->name('admin.informasi.toggle-status');
