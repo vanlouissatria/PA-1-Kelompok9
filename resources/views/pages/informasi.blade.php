@@ -1,19 +1,17 @@
-@extends('layouts.app')
+<?php
 
-@section('content')
-<div class="container">
-    <h1>Informasi</h1>
+namespace App\Http\Controllers;
 
-    @forelse($informasiList as $item)
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5>{{ $item->judul }}</h5>
-                <p>{{ $item->konten }}</p>
-                <small>Urutan: {{ $item->urutan }}</small>
-            </div>
-        </div>
-    @empty
-        <p>Tidak ada informasi.</p>
-    @endforelse
-</div>
-@endsection
+use App\Models\Informasi;
+
+class InformasiController extends Controller
+{
+    public function index()
+    {
+        $informasiList = Informasi::where('status', 1)
+            ->orderBy('id', 'asc')
+            ->get();
+
+        return view('pages.informasi', compact('informasiList'));
+    }
+}
