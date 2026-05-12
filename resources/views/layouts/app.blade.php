@@ -323,6 +323,7 @@
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('galeri') ? 'active' : '' }}" href="{{ url('/galeri') }}">Galeri</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('berita') ? 'active' : '' }}" href="{{ url('/berita') }}">Berita</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('kontak') ? 'active' : '' }}" href="{{ url('/kontak') }}">Kontak</a></li>
+                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('umkm*') ? 'active' : '' }}" href="{{ route('umkm.index') }}"><i class="fas fa-store"></i> UMKM</a></li>
                 </ul>
             </div>
         </div>
@@ -351,6 +352,7 @@
                         <li class="mb-2"><a href="{{ url('/galeri') }}">Galeri</a></li>
                         <li class="mb-2"><a href="{{ url('/berita') }}">Berita</a></li>
                         <li class="mb-2"><a href="{{ url('/kontak') }}">Kontak</a></li>
+                        <li class="mb-2"><a href="{{ route('umkm.index') }}">UMKM</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">

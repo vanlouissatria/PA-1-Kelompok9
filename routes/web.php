@@ -11,6 +11,7 @@ use App\Http\Controllers\GeositeController;
 // --- IMPORT CONTROLLER PUBLIK ---
 use App\Http\Controllers\GaleriController as PublicGaleriController;
 use App\Http\Controllers\InformasiController as PublicInformasiController;
+use App\Http\Controllers\UmkmController as PublicUmkmController;  // PERBAIKI: Hapus typo 'ontroller' dan tambah titik koma
 
 // --- IMPORT CONTROLLER ADMIN ---
 use App\Http\Controllers\Admin\AdminGaleriController;
@@ -61,11 +62,24 @@ Route::get('/berita/{slug}', function ($slug) {
 })->name('berita.detail');
 
 // LAIN-LAIN
-Route::get('/umkm', [HomeController::class, 'umkm'])->name('umkm');
+// HAPUS route /umkm yang ini karena akan duplikasi dengan yang di bawah
+// Route::get('/umkm', [HomeController::class, 'umkm'])->name('umkm');  // <-- HAPUS BARIS INI
 Route::get('/budaya', [HomeController::class, 'budaya'])->name('budaya');
 Route::get('/kontak', function () {
     return view('pages.kontak');
 })->name('kontak');
+
+/*
+|--------------------------------------------------------------------------
+| FRONTEND UMKM ROUTES
+|--------------------------------------------------------------------------
+*/
+// Gunakan PublicUmkmController yang sudah di-import
+Route::controller(PublicUmkmController::class)->group(function () {
+    Route::get('/umkm', 'index')->name('umkm.index');
+    Route::get('/umkm/filter', 'filter')->name('umkm.filter');
+    Route::get('/umkm/{id}', 'show')->name('umkm.show');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -128,3 +142,15 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('berita/toggle-status/{id}', [AdminBeritaController::class, 'toggleStatus'])->name('admin.berita.toggle-status');
     Route::post('informasi/toggle-status/{id}', [AdminInformasiController::class, 'toggleStatus'])->name('admin.informasi.toggle-status');
 });
+
+// ADMIN UMKM ROUTES (Tambahan jika ingin CRUD terpisah)
+// HAPUS bagian ini karena sudah menggunakan AdminUmkmController di atas
+// Route::prefix('admin')->middleware(['auth'])->group(function () {
+//     Route::get('/umkm', [UmkmController::class, 'adminIndex'])->name('admin.umkm.index');
+//     Route::get('/umkm/create', [UmkmController::class, 'create'])->name('admin.umkm.create');
+//     Route::post('/umkm', [UmkmController::class, 'store'])->name('admin.umkm.store');
+//     Route::get('/umkm/{id}/edit', [UmkmController::class, 'edit'])->name('admin.umkm.edit');
+//     Route::put('/umkm/{id}', [UmkmController::class, 'update'])->name('admin.umkm.update');
+//     Route::delete('/umkm/{id}', [UmkmController::class, 'destroy'])->name('admin.umkm.destroy');
+//     Route::patch('/umkm/{id}/toggle-status', [UmkmController::class, 'toggleStatus'])->name('admin.umkm.toggle-status');
+// });

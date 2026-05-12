@@ -3,77 +3,102 @@
 @section('title', 'Edit UMKM')
 
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <h5>Edit UMKM</h5>
-    </div>
-    <div class="card-body">
-        <form action="{{ route('admin.umkm.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Edit UMKM: {{ $umkm->nama_usaha }}</h3>
+        </div>
+        <form action="{{ route('admin.umkm.update', $umkm->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            
-            <div class="mb-3">
-                <label class="form-label">Nama UMKM</label>
-                <input type="text" name="nama" class="form-control" value="{{ $data->nama }}" required>
-            </div>
-            
-            <div class="mb-3">
-                <label class="form-label">Deskripsi</label>
-                <textarea name="deskripsi" class="form-control" rows="4" required>{{ $data->deskripsi }}</textarea>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Lokasi</label>
-                    <input type="text" name="lokasi" class="form-control" value="{{ $data->lokasi }}">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nama Usaha</label>
+                            <input type="text" name="nama_usaha" class="form-control" value="{{ $umkm->nama_usaha }}" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Pemilik</label>
+                            <input type="text" name="pemilik" class="form-control" value="{{ $umkm->pemilik }}" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Kategori</label>
+                            <select name="kategori" class="form-control" required>
+                                <option value="Makanan & Minuman" {{ $umkm->kategori == 'Makanan & Minuman' ? 'selected' : '' }}>Makanan & Minuman</option>
+                                <option value="Fashion" {{ $umkm->kategori == 'Fashion' ? 'selected' : '' }}>Fashion</option>
+                                <option value="Kerajinan" {{ $umkm->kategori == 'Kerajinan' ? 'selected' : '' }}>Kerajinan</option>
+                                <option value="Jasa" {{ $umkm->kategori == 'Jasa' ? 'selected' : '' }}>Jasa</option>
+                                <option value="Elektronik" {{ $umkm->kategori == 'Elektronik' ? 'selected' : '' }}>Elektronik</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>No. Telepon</label>
+                            <input type="text" name="no_telepon" class="form-control" value="{{ $umkm->no_telepon }}" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" class="form-control" value="{{ $umkm->email }}">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Logo</label>
+                            @if($umkm->logo)
+                                <div class="mb-2">
+                                    <img src="{{ Storage::url($umkm->logo) }}" width="100">
+                                </div>
+                            @endif
+                            <input type="file" name="logo" class="form-control-file" accept="image/*">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Foto Utama</label>
+                            @if($umkm->foto_utama)
+                                <div class="mb-2">
+                                    <img src="{{ Storage::url($umkm->foto_utama) }}" width="200">
+                                </div>
+                            @endif
+                            <input type="file" name="foto_utama" class="form-control-file" accept="image/*">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Website</label>
+                            <input type="url" name="website" class="form-control" value="{{ $umkm->website }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Latitude</label>
+                            <input type="text" name="latitude" class="form-control" value="{{ $umkm->latitude }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Longitude</label>
+                            <input type="text" name="longitude" class="form-control" value="{{ $umkm->longitude }}">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Kontak</label>
-                    <input type="text" name="kontak" class="form-control" value="{{ $data->kontak }}">
+                
+                <div class="form-group">
+                    <label>Alamat</label>
+                    <textarea name="alamat" class="form-control" rows="3" required>{{ $umkm->alamat }}</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Deskripsi</label>
+                    <textarea name="deskripsi" class="form-control" rows="5" required>{{ $umkm->deskripsi }}</textarea>
                 </div>
             </div>
-            
-            <div class="mb-3">
-                <label class="form-label">Urutan</label>
-                <input type="number" name="urutan" class="form-control" value="{{ $data->urutan }}" required>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="{{ route('admin.umkm.index') }}" class="btn btn-default">Batal</a>
             </div>
-            
-            <div class="mb-3">
-                <label class="form-label">Gambar Saat Ini</label><br>
-                @if($data->gambar)
-                    <img src="{{ $data->gambar }}" width="100" class="mb-2">
-                @else
-                    <span class="text-muted">Tidak ada gambar</span>
-                @endif
-                <input type="file" name="gambar" class="form-control mt-2" accept="image/*" id="inputGambar">
-                <div class="mt-2" id="previewContainer" style="display: none;">
-                    <img id="previewImage" style="max-width: 150px; border-radius: 8px;">
-                </div>
-            </div>
-            
-            <div class="mb-3">
-                <input type="checkbox" name="status" value="1" {{ $data->status ? 'checked' : '' }}> Aktifkan
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Update</button>
-            <a href="{{ route('admin.umkm.index') }}" class="btn btn-secondary">Batal</a>
         </form>
     </div>
 </div>
-
-<script>
-    document.getElementById('inputGambar')?.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        const preview = document.getElementById('previewContainer');
-        const previewImg = document.getElementById('previewImage');
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                previewImg.src = e.target.result;
-                preview.style.display = 'block';
-            }
-            reader.readAsDataURL(file);
-        }
-    });
-</script>
 @endsection
