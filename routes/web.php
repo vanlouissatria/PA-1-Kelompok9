@@ -13,7 +13,6 @@ use App\Http\Controllers\GaleriController as PublicGaleriController;
 use App\Http\Controllers\InformasiController as PublicInformasiController;
 
 // --- IMPORT CONTROLLER ADMIN ---
-// Menggunakan PascalCase untuk menghindari error case-sensitive di server
 use App\Http\Controllers\Admin\AdminGaleriController;
 use App\Http\Controllers\Admin\AdminBeritaController;
 use App\Http\Controllers\Admin\AdminInformasiController;
@@ -39,9 +38,10 @@ Route::get('/destinasi/budaya', [DestinasiController::class, 'budaya'])->name('d
 // INFORMASI
 Route::get('/informasi', [PublicInformasiController::class, 'index'])->name('informasi');
 
-// GALERI
+// GALERI (PENTING: Pastikan showImage bisa diakses publik)
 Route::get('/galeri', [PublicGaleriController::class, 'index'])->name('galeri');
 Route::get('/galeri/gambar/{id}', [PublicGaleriController::class, 'showImage'])->name('galeri.gambar');
+
 Route::get('/galeri/{slug}', function ($slug) {
     $galeri = \App\Models\Galeri::where('slug', $slug)->firstOrFail();
     $galeri->increment('views');
@@ -85,6 +85,7 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Route Lupa Password
 Route::get('/forgot-password', [AuthController::class, 'showForgotForm'])->name('password.request');
 Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
 Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
@@ -98,20 +99,22 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('
 Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::get('/', function () {
-        $totalGaleri = DB::table('galeris')->count();
+        // Menggunakan nama tabel tunggal sesuai dengan struktur database Anda
+        $totalGaleri = DB::table('galeri')->count(); 
         $totalBerita = DB::table('berita')->count();
         $totalInformasi = DB::table('informasi')->count();
         $totalUmkm = DB::table('umkm')->count();
         $totalFasilitas = DB::table('fasilitas')->count();
         $totalPenginapan = DB::table('penginapan')->count();
-        $totalViews = 0;
+        $totalViews = 0; // Anda bisa menjumlahkan views dari tabel berita/galeri jika perlu
+        
         return view('admin.dashboard', compact(
             'totalGaleri', 'totalBerita', 'totalInformasi',
             'totalUmkm', 'totalFasilitas', 'totalPenginapan', 'totalViews'
         ));
     })->name('admin.dashboard');
 
-    // CRUD Resources menggunakan Controller Admin
+    // CRUD Resources
     Route::resource('galeri', AdminGaleriController::class)->names('admin.galeri');
     Route::resource('berita', AdminBeritaController::class)->names('admin.berita');
     Route::resource('informasi', AdminInformasiController::class)->names('admin.informasi');
@@ -120,7 +123,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('penginapan', AdminPenginapanController::class)->names('admin.penginapan');
     Route::resource('destinasi', AdminDestinasiController::class)->names('admin.destinasi');
 
-    // Toggle Status Routes
+    // Toggle Status
     Route::post('galeri/toggle-status/{id}', [AdminGaleriController::class, 'toggleStatus'])->name('admin.galeri.toggle-status');
     Route::post('berita/toggle-status/{id}', [AdminBeritaController::class, 'toggleStatus'])->name('admin.berita.toggle-status');
     Route::post('informasi/toggle-status/{id}', [AdminInformasiController::class, 'toggleStatus'])->name('admin.informasi.toggle-status');
