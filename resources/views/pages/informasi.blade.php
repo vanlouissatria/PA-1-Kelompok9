@@ -5,7 +5,7 @@
     /* 1. Header dengan Background Cerah & Jelas */
     .informasi-header {
         background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), 
-                    url('{{ asset('image/efrata/1.jpeg') }}'); 
+                    url('{{ asset('image/efrata/tobaa.jpg') }}'); 
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
