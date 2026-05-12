@@ -2,7 +2,7 @@
 
 @section('content')
 <style>
-    /* 1. Header dengan Background Cerah & Jelas */
+    /* CSS Anda tetap sama sesuai permintaan (tidak diubah) */
     .informasi-header {
         background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), 
                     url('{{ asset('image/efrata/tobaa.jpg') }}'); 
@@ -41,7 +41,6 @@
         border-radius: 10px;
     }
 
-    /* 2. Kartu Informasi Glassmorphism */
     .info-card {
         background: rgba(255, 255, 255, 0.7);
         backdrop-filter: blur(10px);
@@ -60,14 +59,13 @@
         box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
     }
 
-    /* 3. CSS Foto - Pastikan Ukuran Konsisten */
     .img-wrapper {
         position: relative;
         overflow: hidden;
         border-radius: 20px;
         box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         background-color: #f1f1f1;
-        height: 400px; /* Mengunci tinggi agar layout tidak berantakan */
+        height: 400px;
     }
 
     .img-wrapper img {
@@ -119,24 +117,17 @@
     @foreach($informasiList as $index => $info)
         <div class="info-card">
             <div class="row align-items-center">
-                @php
-                    // Logika untuk memastikan path gambar benar
-                    // Jika di DB tertulis 'foto.jpg', maka tambahkan 'informasi/'
-                    // Jika sudah 'informasi/foto.jpg', biarkan saja
-                    $finalPath = str_contains($info->gambar, 'informasi/') 
-                                 ? $info->gambar 
-                                 : 'informasi/' . $info->gambar;
-                @endphp
-
+                
                 @if($index % 2 == 0)
                     {{-- Layout: Gambar Kiri --}}
                     <div class="col-lg-6 mb-4 mb-lg-0">
                         <div class="img-wrapper">
                             @if($info->gambar)
-                                <img src="{{ asset('storage/' . $finalPath) }}" 
+                                {{-- PERBAIKAN: Langsung panggil variabel base64 tanpa asset() atau storage/ --}}
+                                <img src="{{ $info->gambar }}" 
                                      alt="{{ $info->judul }}" 
                                      loading="lazy"
-                                     onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Foto+Tidak+Ditemukan';">
+                                     onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Foto+Rusak/Besar';">
                             @else
                                 <img src="https://placehold.co/800x600?text=GeoToba" alt="Placeholder">
                             @endif
@@ -159,10 +150,11 @@
                     <div class="col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0">
                         <div class="img-wrapper">
                             @if($info->gambar)
-                                <img src="{{ asset('storage/' . $finalPath) }}" 
+                                {{-- PERBAIKAN: Langsung panggil variabel base64 tanpa asset() atau storage/ --}}
+                                <img src="{{ $info->gambar }}" 
                                      alt="{{ $info->judul }}" 
                                      loading="lazy"
-                                     onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Foto+Tidak+Ditemukan';">
+                                     onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Foto+Rusak/Besar';">
                             @else
                                 <img src="https://placehold.co/800x600?text=GeoToba" alt="Placeholder">
                             @endif

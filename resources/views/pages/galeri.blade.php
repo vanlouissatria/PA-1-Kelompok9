@@ -1,275 +1,436 @@
 @extends('layouts.app')
 
-@section('title', 'GeoToba - Galeri')
+@section('title', 'Galeri - GeoToba')
 
 @section('content')
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-    /* 1. Header Baru: Modern, Lurus, dan Bersih */
-    .gallery-header {
-        background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.8)), 
-                    url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=1600'); 
-        background-size: cover;
-        background-position: center;
-        padding: 80px 0;
-        margin-bottom: 50px;
+    /* Hero Section */
+    .gallery-hero {
+        background: linear-gradient(135deg, #003366 0%, #1a4a7a 100%);
+        padding: 80px 0 50px;
+        margin-top: 70px;
         text-align: center;
-        color: white;
-    }
-
-    .gallery-header h1 {
-        font-family: 'Playfair Display', serif;
-        font-size: 3.5rem;
-        font-weight: 700;
-        margin-bottom: 15px;
-        color: #fff;
-    }
-
-    .gallery-header p {
-        font-family: 'Poppins', sans-serif;
-        font-size: 1.2rem;
-        font-weight: 300;
-        letter-spacing: 1px;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-
-    /* 2. Grid Galeri (Memperbaiki tata letak 3 kolom) */
-    .gallery-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: 30px;
-        margin-bottom: 80px;
-    }
-
-    /* 3. Efek Glassmorphism pada Kartu */
-    .gallery-card {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 24px;
-        overflow: hidden;
-        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-        cursor: pointer;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .gallery-card:hover {
-        transform: translateY(-12px);
-        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
-        background: rgba(255, 255, 255, 0.9);
-    }
-
-    /* 4. Kontainer Gambar dalam Kartu */
-    .img-container {
         position: relative;
         overflow: hidden;
-        margin: 15px;
-        border-radius: 20px;
-        background: #eee; /* Fallback jika gambar loading */
     }
 
-    .gallery-img {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.6s ease;
-    }
-
-    .gallery-card:hover .gallery-img {
-        transform: scale(1.1);
-    }
-
-    /* 5. Badge Kategori (Memperbaiki posisi teks seperti "fasilitas") */
-    .gallery-category {
+    .gallery-hero::before {
+        content: '';
         position: absolute;
-        top: 15px;
-        left: 15px;
-        background: #C6A43B; /* Warna emas Geotoba */
-        color: #000;
-        padding: 6px 15px;
-        border-radius: 10px;
-        font-size: 0.75rem;
-        font-weight: 800;
-        text-transform: uppercase;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+        animation: slowRotate 20s linear infinite;
+    }
+
+    @keyframes slowRotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .gallery-hero-content {
+        position: relative;
         z-index: 2;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    /* 6. Body Kartu (Teks di bawah gambar) */
-    .gallery-body {
-        padding: 5px 25px 25px;
-    }
-
-    .gallery-title {
-        font-size: 1.5rem;
+    .gallery-hero h1 {
+        font-size: 2.8rem;
         font-weight: 700;
-        color: #003366;
-        margin-bottom: 5px;
-        text-transform: lowercase; /* Sesuai foto user: "tele", "efrata" */
+        font-family: 'Playfair Display', serif;
+        color: white;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
     }
 
-    .gallery-desc {
-        font-size: 0.95rem;
-        color: #555;
-        line-height: 1.6;
+    .gallery-hero p {
+        font-size: 0.85rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.8);
     }
 
-    /* 7. Lightbox Styles (Animasi saat diklik) */
-    .lightbox {
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.95);
-        display: none;
+    .gallery-section {
+        padding: 60px 0 100px;
+        background: linear-gradient(135deg, #f8fafc 0%, #eef2f8 100%);
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* Stack Container */
+    .stack-container {
+        display: flex;
+        flex-wrap: wrap;
         justify-content: center;
-        align-items: center;
-        z-index: 9999;
+        gap: 0;
+        padding: 20px 0;
+        position: relative;
+    }
+
+    /* Slip Card */
+    .slip-card {
+        position: relative;
+        width: 280px;
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.02);
+        margin-left: -60px;
+        display: block;
+    }
+
+    .slip-card:first-child {
+        margin-left: 0;
+    }
+
+    .slip-card:hover {
+        transform: translateY(-20px) scale(1.02);
+        z-index: 100;
+        box-shadow: 0 25px 40px -10px rgba(0,0,0,0.25);
+    }
+
+    .slip-card:hover ~ .slip-card {
+        transform: translateX(20px);
+    }
+
+    .slip-image {
+        position: relative;
+        width: 100%;
+        height: 320px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+    }
+
+    .slip-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .slip-card:hover .slip-image img {
+        transform: scale(1.05);
+    }
+
+    .slip-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        padding: 30px 16px 16px;
         opacity: 0;
         transition: opacity 0.3s ease;
-        padding: 20px;
     }
 
-    .lightbox.active {
-        display: flex;
+    .slip-card:hover .slip-overlay {
         opacity: 1;
     }
 
-    .lightbox-content {
-        max-width: 900px;
-        width: 100%;
-        text-align: center;
-        color: #fff;
-        font-family: 'Poppins', sans-serif;
-        transform: scale(0.8);
+    .slip-category {
+        display: inline-block;
+        background: #c6a43b;
+        color: #003366;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 0.6rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .slip-title-overlay {
+        color: white;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-top: 8px;
+        line-height: 1.3;
+    }
+
+    .slip-info {
+        padding: 16px;
+        background: white;
+        position: relative;
+        border-top: 1px solid #f0f0f0;
+    }
+
+    .slip-line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #c6a43b, #e8c45a, #c6a43b);
+        transform: scaleX(0);
         transition: transform 0.3s ease;
     }
 
-    .lightbox.active .lightbox-content {
-        transform: scale(1);
+    .slip-card:hover .slip-line {
+        transform: scaleX(1);
     }
 
-    .lightbox-img {
-        max-height: 70vh;
-        max-width: 100%;
-        border-radius: 20px;
-        margin-bottom: 25px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    .slip-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 6px;
+        line-height: 1.4;
     }
 
-    .lightbox-info h3 {
-        color: #C6A43B;
-        font-weight: 700;
-        margin-bottom: 10px;
-        font-size: 2rem;
+    .slip-location {
+        font-size: 0.7rem;
+        color: #94a3b8;
+        display: flex;
+        align-items: center;
+        gap: 5px;
     }
 
-    .close-lightbox {
+    .slip-location i {
+        font-size: 0.65rem;
+        color: #c6a43b;
+    }
+
+    .slip-number {
         position: absolute;
-        top: 20px;
-        right: 30px;
-        font-size: 50px;
-        color: #fff;
-        cursor: pointer;
+        bottom: 12px;
+        right: 16px;
+        font-size: 0.6rem;
+        color: #cbd5e1;
+        font-family: monospace;
+        letter-spacing: 1px;
+    }
+
+    /* Modal */
+    .modal-overlay { 
+        position: fixed; 
+        inset: 0; 
+        background: rgba(0,0,0,0.96); 
+        z-index: 9999; 
+        display: none; 
+        align-items: center; 
+        justify-content: center; 
+        backdrop-filter: blur(12px);
+    }
+    .modal-box { 
+        background: #1a1a1a; 
+        width: 90%; 
+        max-width: 1000px; 
+        display: grid; 
+        grid-template-columns: 1.2fr 1fr; 
+        border-radius: 20px; 
+        overflow: hidden; 
+        animation: modalFadeIn 0.4s ease;
+    }
+    @keyframes modalFadeIn {
+        from { opacity: 0; transform: scale(0.96); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    .modal-img-part { 
+        background: #0a0a0a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    .modal-img-part img { 
+        width: 100%; 
+        max-height: 70vh; 
+        object-fit: contain; 
+    }
+    .modal-text-part { 
+        padding: 35px; 
+        color: white; 
+        text-align: left;
+        background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+    }
+    .close-btn { 
+        position: absolute; 
+        top: 20px; 
+        right: 20px; 
+        color: white; 
+        font-size: 1.5rem; 
+        cursor: pointer; 
+        transition: all 0.3s ease;
         z-index: 10000;
+        width: 40px;
+        height: 40px;
+        background: rgba(0,0,0,0.5);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(5px);
+    }
+    .close-btn:hover { 
+        background: #c6a43b; 
+        color: #003366; 
+        transform: rotate(90deg);
+    }
+    .modal-text-part small {
+        color: #c6a43b;
+        letter-spacing: 2px;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+    }
+    .modal-text-part h2 {
+        font-size: 1.5rem;
+        margin: 12px 0;
+        font-family: 'Playfair Display', serif;
+    }
+    .modal-text-part p {
+        color: #bbb;
+        line-height: 1.7;
+        font-size: 0.85rem;
+    }
+
+    .empty-gallery {
+        text-align: center;
+        padding: 80px;
+        background: white;
+        border-radius: 16px;
+    }
+    .empty-gallery i {
+        font-size: 3rem;
+        color: #cbd5e1;
+        margin-bottom: 15px;
+    }
+
+    @media (max-width: 1200px) {
+        .slip-card { width: 240px; }
+        .slip-image { height: 280px; }
+    }
+
+    @media (max-width: 992px) {
+        .stack-container {
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .slip-card {
+            margin-left: 0 !important;
+            width: 260px;
+        }
+        .slip-card:hover ~ .slip-card { transform: none; }
+        .slip-card:hover { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 768px) { 
+        .modal-box { 
+            grid-template-columns: 1fr; 
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .gallery-hero h1 { font-size: 2rem; }
+        .stack-container { gap: 16px; }
+        .slip-card { width: calc(50% - 8px); }
+        .slip-image { height: 260px; }
+    }
+
+    @media (max-width: 560px) {
+        .slip-card { width: 100%; }
+        .slip-image { height: 280px; }
     }
 </style>
 
-{{-- HTML MARKUP --}}
-<div class="gallery-header">
+<!-- HERO SECTION -->
+<div class="gallery-hero">
+    <div class="gallery-hero-content">
+        <h1>GALERI</h1>
+        <p>Koleksi Foto Terbaik</p>
+    </div>
+</div>
+
+<!-- STACKED SLIP CARDS SECTION -->
+<section class="gallery-section">
     <div class="container">
-        <h1>🌟 Galeri Foto GeoToba</h1>
-        <p>Jejak visual keindahan Geosite Tele, Efrata & Sihotang</p>
-    </div>
-</div>
-
-<div class="container">
-    <div class="gallery-grid">
-        @forelse($galeris as $item)
-            {{-- PENTING: data-attribute untuk menangkap info Lightbox --}}
-            <div class="gallery-card" 
-                 data-img="{{ route('galeri.gambar', $item->id) }}" 
-                 data-title="{{ addslashes($item->judul) }}" 
-                 data-desc="{{ addslashes($item->deskripsi) }}">
+        <div class="stack-container">
+            @php $counter = 1; @endphp
+            @forelse($galeri ?? [] as $item)
+                @php
+                    $src = asset('image/default.jpg');
+                    if (!empty($item->gambar)) {
+                        if (str_starts_with($item->gambar, 'data:image')) {
+                            $src = $item->gambar;
+                        } elseif (filter_var($item->gambar, FILTER_VALIDATE_URL)) {
+                            $src = $item->gambar;
+                        } else {
+                            $src = asset('storage/' . $item->gambar);
+                        }
+                    }
+                @endphp
                 
-                <div class="img-container">
-                    <span class="gallery-category">{{ $item->kategori }}</span>
-                    {{-- Handle Base64 lewat Route --}}
-                    <img class="gallery-img" src="{{ route('galeri.gambar', $item->id) }}" alt="{{ $item->judul }}" loading="lazy">
+                <div class="slip-card" onclick="openPhoto('{{ $src }}', '{{ addslashes($item->judul) }}', '{{ addslashes($item->deskripsi ?? 'Tidak ada deskripsi') }}', '{{ strtoupper($item->kategori ?? 'GALERI') }}')">
+                    <div class="slip-image">
+                        <img src="{{ $src }}" alt="{{ $item->judul }}" loading="lazy" 
+                             onerror="this.src='{{ asset('image/default.jpg') }}'">
+                        <div class="slip-overlay">
+                            <span class="slip-category">{{ strtoupper($item->kategori ?? 'GALERI') }}</span>
+                            <div class="slip-title-overlay">{{ Str::limit($item->judul, 35) }}</div>
+                        </div>
+                    </div>
+                    <div class="slip-info">
+                        <div class="slip-line"></div>
+                        <div class="slip-title">{{ Str::limit($item->judul, 30) }}</div>
+                        <div class="slip-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ $item->lokasi ?? 'Danau Toba' }}</span>
+                        </div>
+                        <div class="slip-number">#{{ str_pad($counter, 3, '0', STR_PAD_LEFT) }}</div>
+                    </div>
                 </div>
-
-                <div class="gallery-body">
-                    <h3 class="gallery-title">{{ strtolower($item->judul) }}</h3>
-                    <p class="gallery-desc">{{ Str::limit($item->deskripsi, 120) }}</p>
+                @php $counter++; @endphp
+            @empty
+                <div class="empty-gallery">
+                    <i class="fas fa-images"></i>
+                    <p>Belum ada foto galeri</p>
                 </div>
-            </div>
-        @empty
-            <div class="col-12 text-center py-5">
-                <div class="alert alert-light shadow-sm">Belum ada galeri yang tersedia.</div>
-            </div>
-        @endforelse
+            @endforelse
+        </div>
     </div>
-</div>
+</section>
 
-{{-- Lightbox Markup --}}
-<div id="lightbox" class="lightbox">
-    <span class="close-lightbox">&times;</span>
-    <div class="lightbox-content">
-        <img class="lightbox-img" id="lightbox-img" src="">
-        <div class="lightbox-info">
-            <h3 id="lightbox-title"></h3>
-            <p id="lightbox-desc"></p>
+<!-- MODAL -->
+<div id="pModal" class="modal-overlay" onclick="closePhoto()">
+    <div class="close-btn" onclick="closePhoto()">&times;</div>
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-img-part"><img src="" id="mImg"></div>
+        <div class="modal-text-part">
+            <small id="mTag"></small>
+            <h2 id="mTitle"></h2>
+            <p id="mDesc"></p>
         </div>
     </div>
 </div>
 
-{{-- JAVASCRIPT (Animasi Klik) --}}
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const cards = document.querySelectorAll('.gallery-card');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxTitle = document.getElementById('lightbox-title');
-        const lightboxDesc = document.getElementById('lightbox-desc');
-        const closeBtn = document.querySelector('.close-lightbox');
-
-        cards.forEach(card => {
-            card.addEventListener('click', function() {
-                // Ambil data dari atribut kartu
-                const imgSource = this.getAttribute('data-img');
-                const titleText = this.getAttribute('data-title');
-                const descText = this.getAttribute('data-desc');
-
-                // Isi konten Lightbox
-                lightboxImg.src = imgSource;
-                lightboxTitle.innerText = titleText.toUpperCase();
-                lightboxDesc.innerText = descText || 'Tidak ada deskripsi.';
-
-                // Tampilkan Lightbox
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Kunci scroll layar
-            });
-        });
-
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = ''; // Aktifkan kembali scroll
+    function openPhoto(src, title, desc, tag) {
+        document.getElementById('mImg').src = src;
+        document.getElementById('mTitle').innerText = title;
+        document.getElementById('mTag').innerText = tag;
+        document.getElementById('mDesc').innerHTML = desc || 'Tidak ada deskripsi.';
+        document.getElementById('pModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closePhoto() {
+        document.getElementById('pModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closePhoto();
         }
-
-        closeBtn.addEventListener('click', closeLightbox);
-        
-        // Klik di luar gambar untuk menutup
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
-        });
-
-        // Menutup dengan tombol ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
-        });
     });
 </script>
+
 @endsection
