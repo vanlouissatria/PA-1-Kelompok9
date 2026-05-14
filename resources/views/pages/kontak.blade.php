@@ -302,18 +302,18 @@
         border: 1px solid #f0f0f0;
         background: white;
         height: 100%;
-        max-width: 900px;
+        max-width: 1100px;
         margin: 0 auto;
     }
     
     .map-card iframe {
         width: 100%;
-        height: 420px;
+        height: 550px;
         border: 0;
     }
     
     .map-info {
-        padding: 20px;
+        padding: 30px 35px;
         text-align: center;
     }
     
@@ -450,7 +450,7 @@
         <div class="row g-4 justify-content-center">
             <!-- FORM KONTAK -->
             <!-- MAPS & SOSIAL -->
-            <div class="col-lg-8 col-xl-7" data-aos="fade-left">
+            <div class="col-12 col-lg-10 col-xl-10" data-aos="fade-left">
                 <div class="map-card mx-auto">
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.0!2d99.0835095!3d2.3339262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x302e0415b8f7da39%3A0xc6beb74287f355a5!2sBalige%2C%20Toba%20Samosir%2C%20Sumatera%20Utara!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
