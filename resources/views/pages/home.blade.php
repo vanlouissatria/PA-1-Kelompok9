@@ -799,40 +799,30 @@
     }
     
     /* ==================== PETA LOKASI ==================== */
-    .maps-container {
-        background: white;
+    .map-card {
         border-radius: 24px;
         overflow: hidden;
-        box-shadow: 0 15px 35px rgba(0, 51, 102, 0.15);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        border: 1px solid #f0f0f0;
+        background: white;
         margin-bottom: 30px;
         transition: all 0.5s ease;
     }
     
-    .maps-container:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 25px 45px rgba(0, 51, 102, 0.25);
+    .map-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 18px 35px rgba(0,0,0,0.08);
     }
     
-    .maps-container iframe {
+    .map-card iframe {
         width: 100%;
         height: 550px;
         border: 0;
-        transition: transform 0.5s ease;
     }
     
-    .maps-container:hover iframe {
-        transform: scale(1.02);
-    }
-    
-    .maps-info {
-        background: linear-gradient(135deg, #003366, #0a4a7a);
-        padding: 35px 40px;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        gap: 25px;
+    .map-info {
+        padding: 30px 35px;
+        text-align: center;
     }
     
     .maps-locations {
@@ -841,6 +831,7 @@
         flex-wrap: wrap;
         justify-content: center;
         width: 100%;
+        margin-bottom: 20px;
     }
     
     .maps-location-item {
@@ -1038,8 +1029,8 @@
         .hero-title { font-size: 2.8rem; }
         .destinasi-item, .destinasi-item.reverse { flex-direction: column; gap: 30px; }
         .about-grid { flex-direction: column; text-align: center; }
-        .maps-container iframe { height: 350px; }
-        .maps-info { flex-direction: column; text-align: center; }
+        .map-card iframe { height: 350px; }
+        .map-info { flex-direction: column; text-align: center; }
         .maps-locations { justify-content: center; }
     }
     @media (max-width: 768px) {
@@ -1054,7 +1045,7 @@
         .about-content h3 { font-size: 1.6rem; }
         .cta-content h3 { font-size: 1.6rem; }
         .cta-btn { padding: 10px 28px; font-size: 0.65rem; }
-        .maps-container iframe { height: 280px; }
+        .map-card iframe { height: 280px; }
         .maps-location-item { padding: 6px 18px; }
         .maps-location-item span { font-size: 0.7rem; }
     }
@@ -1063,7 +1054,7 @@
         .hero-subtitle { font-size: 0.5rem; letter-spacing: 0.15em; }
         .dot { width: 8px; height: 8px; }
         .dot.active { width: 20px; }
-        .maps-container iframe { height: 220px; }
+        .map-card iframe { height: 220px; }
     }
 </style>
 
@@ -1204,14 +1195,14 @@
             <p>Tele, Efrata, Sihotang</p>
         </div>
         
-        <div class="maps-container" data-aos="zoom-in" data-aos-duration="1000">
+        <div class="map-card" data-aos="zoom-in" data-aos-duration="1000">
             <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.0!2d98.8835095!3d2.4339262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x302e0415b8f7da39%3A0xc6beb74287f355a5!2sPulau%20Sibandang!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
                 allowfullscreen="" 
                 loading="lazy" 
                 referrerpolicy="no-referrer-when-downgrade">
             </iframe>
-            <div class="maps-info">
+            <div class="map-info">
                 <div class="maps-locations">
                     <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Tele+Tower+Samosir', '_blank')">
                         <i class="fas fa-location-dot"></i>
@@ -1312,7 +1303,7 @@
         });
     }, observerOptions);
     
-    document.querySelectorAll('.stat-item, .destinasi-item, .maps-container').forEach(el => {
+    document.querySelectorAll('.stat-item, .destinasi-item, .map-card').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'all 0.8s ease';
