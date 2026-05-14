@@ -8,21 +8,28 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('umkm', function (Blueprint $table) {
+        Schema::create('umkms', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 255);
+            $table->string('nama_usaha');
+            $table->string('pemilik');
+            $table->string('kategori');
             $table->text('deskripsi');
-            $table->longText('gambar')->nullable();
-            $table->string('lokasi', 255)->nullable();
-            $table->string('kontak', 255)->nullable();
+            $table->text('alamat');
+            $table->string('no_telepon');
+            $table->string('email')->nullable();
+            $table->string('website')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('foto_utama')->nullable();
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 11, 8)->nullable();
             $table->boolean('status')->default(true);
-            $table->integer('urutan')->default(0);
+            $table->integer('views')->default(0);
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('umkm');
+        Schema::dropIfExists('umkms');
     }
 };
