@@ -815,7 +815,7 @@
     
     .maps-container iframe {
         width: 100%;
-        height: 450px;
+        height: 550px;
         border: 0;
         transition: transform 0.5s ease;
     }
@@ -826,19 +826,21 @@
     
     .maps-info {
         background: linear-gradient(135deg, #003366, #0a4a7a);
-        padding: 25px 30px;
+        padding: 35px 40px;
         color: white;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        flex-wrap: wrap;
-        gap: 20px;
+        flex-direction: column;
+        gap: 25px;
     }
     
     .maps-locations {
         display: flex;
-        gap: 25px;
+        gap: 30px;
         flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
     }
     
     .maps-location-item {
