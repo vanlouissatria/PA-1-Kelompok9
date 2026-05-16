@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Umkm extends Model
 {
-    protected $table = 'umkms';
+    protected $table = 'umkm';
     
     protected $fillable = [
         'nama_usaha', 'pemilik', 'kategori', 'deskripsi', 'alamat',
