@@ -683,7 +683,7 @@
             <i class="fas fa-chart-pie"></i> Dashboard
         </a>
         
-<div class="menu-title">Konten</div>
+        <div class="menu-title">Konten</div>
         <a href="{{ route('admin.galeri.index') }}" class="{{ request()->routeIs('admin.galeri.*') ? 'active' : '' }}">
             <i class="fas fa-images"></i> Galeri
         </a>
@@ -697,15 +697,24 @@
             <i class="fas fa-map-marked-alt"></i> Destinasi
         </a>
 
-        <div class="menu-title">Tele</div>
-        <a href="{{ route('admin.umkm.index') }}" class="{{ request()->routeIs('admin.umkm.*') ? 'active' : '' }}">
+        <div class="menu-title">Geosite Tele</div>
+        <a href="{{ url('/admin/tele') }}" class="{{ request()->is('admin/tele') ? 'active' : '' }}">
+            <i class="fas fa-tower-cell"></i> Dashboard Tele
+        </a>
+        <a href="{{ url('/admin/tele/umkm') }}" class="{{ request()->is('admin/tele/umkm*') ? 'active' : '' }}">
             <i class="fas fa-store"></i> UMKM
         </a>
-        <a href="{{ route('admin.fasilitas.index') }}" class="{{ request()->routeIs('admin.fasilitas.*') ? 'active' : '' }}">
+        <a href="{{ url('/admin/tele/fasilitas') }}" class="{{ request()->is('admin/tele/fasilitas*') ? 'active' : '' }}">
             <i class="fas fa-tools"></i> Fasilitas
         </a>
-        <a href="{{ route('admin.penginapan.index') }}" class="{{ request()->routeIs('admin.penginapan.*') ? 'active' : '' }}">
+        <a href="{{ url('/admin/tele/penginapan') }}" class="{{ request()->is('admin/tele/penginapan*') ? 'active' : '' }}">
             <i class="fas fa-hotel"></i> Penginapan
+        </a>
+        <a href="{{ url('/admin/tele/galeri') }}" class="{{ request()->is('admin/tele/galeri*') ? 'active' : '' }}">
+            <i class="fas fa-images"></i> Galeri
+        </a>
+        <a href="{{ url('/admin/tele/informasi') }}" class="{{ request()->is('admin/tele/informasi*') ? 'active' : '' }}">
+            <i class="fas fa-info-circle"></i> Informasi
         </a>
     </div>
 </div>
@@ -721,7 +730,7 @@
         </div>
         <div class="user-menu">
             <span class="user-name"><i class="fas fa-user-circle"></i> {{ Auth::user()->name ?? 'Admin' }}</span>
-            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                 @csrf
                 <button type="submit" class="logout-btn">
                     <i class="fas fa-sign-out-alt"></i> Keluar

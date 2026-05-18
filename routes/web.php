@@ -2,25 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
-
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DestinasiController;
 use App\Http\Controllers\GeositeController;
 
-// --- IMPORT CONTROLLER PUBLIK ---
+// Public Controllers
 use App\Http\Controllers\GaleriController as PublicGaleriController;
 use App\Http\Controllers\InformasiController as PublicInformasiController;
-use App\Http\Controllers\UmkmController as PublicUmkmController;  // PERBAIKI: Hapus typo 'ontroller' dan tambah titik koma
+use App\Http\Controllers\UmkmController as PublicUmkmController;
 
-// --- IMPORT CONTROLLER ADMIN ---
+// Admin Controllers
 use App\Http\Controllers\Admin\AdminGaleriController;
 use App\Http\Controllers\Admin\AdminBeritaController;
 use App\Http\Controllers\Admin\AdminInformasiController;
-use App\Http\Controllers\Admin\AdminUmkmController;
-use App\Http\Controllers\Admin\AdminFasilitasController;
-use App\Http\Controllers\Admin\AdminPenginapanController;
 use App\Http\Controllers\Admin\AdminDestinasiController;
+use App\Http\Controllers\Admin\TeleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,79 +28,73 @@ use App\Http\Controllers\Admin\AdminDestinasiController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // DESTINASI
-Route::get('/destinasi', [DestinasiController::class, 'index'])->name('destinasi');
-Route::get('/destinasi/alam', [DestinasiController::class, 'alam'])->name('destinasi.alam');
-Route::get('/destinasi/buatan', [DestinasiController::class, 'buatan'])->name('destinasi.buatan');
-Route::get('/destinasi/budaya', [DestinasiController::class, 'budaya'])->name('destinasi.budaya');
+Route::prefix('destinasi')->name('destinasi.')->group(function () {
+    Route::get('/', [DestinasiController::class, 'index'])->name('index');
+    Route::get('/alam', [DestinasiController::class, 'alam'])->name('alam');
+    Route::get('/buatan', [DestinasiController::class, 'buatan'])->name('buatan');
+    Route::get('/budaya', [DestinasiController::class, 'budaya'])->name('budaya');
+});
 
 // INFORMASI
 Route::get('/informasi', [PublicInformasiController::class, 'index'])->name('informasi');
 
-// GALERI (PENTING: Pastikan showImage bisa diakses publik)
-Route::get('/galeri', [PublicGaleriController::class, 'index'])->name('galeri');
-Route::get('/galeri/gambar/{id}', [PublicGaleriController::class, 'showImage'])->name('galeri.gambar');
-
-Route::get('/galeri/{slug}', function ($slug) {
-    $galeri = \App\Models\Galeri::where('slug', $slug)->firstOrFail();
-    $galeri->increment('views');
-    return view('pages.galeri-detail', compact('galeri'));
-})->name('galeri.detail');
-
-// BERITA
-Route::get('/berita', function () {
-    $berita = \App\Models\Berita::where('status', true)->latest()->paginate(9);
-    return view('pages.berita', compact('berita'));
-})->name('berita');
-
-Route::get('/berita/{slug}', function ($slug) {
-    $berita = \App\Models\Berita::where('slug', $slug)->where('status', true)->firstOrFail();
-    $berita->increment('views');
-    return view('pages.berita-detail', compact('berita'));
-})->name('berita.detail');
-
-// LAIN-LAIN
-// HAPUS route /umkm yang ini karena akan duplikasi dengan yang di bawah
-// Route::get('/umkm', [HomeController::class, 'umkm'])->name('umkm');  // <-- HAPUS BARIS INI
-Route::get('/budaya', [HomeController::class, 'budaya'])->name('budaya');
-Route::get('/kontak', function () {
-    return view('pages.kontak');
-})->name('kontak');
-
-/*
-|--------------------------------------------------------------------------
-| FRONTEND UMKM ROUTES
-|--------------------------------------------------------------------------
-*/
-// Gunakan PublicUmkmController yang sudah di-import
-Route::controller(PublicUmkmController::class)->group(function () {
-    Route::get('/umkm', 'index')->name('umkm.index');
-    Route::get('/umkm/filter', 'filter')->name('umkm.filter');
-    Route::get('/umkm/{id}', 'show')->name('umkm.show');
+// GALERI
+Route::prefix('galeri')->name('galeri.')->group(function () {
+    Route::get('/', [PublicGaleriController::class, 'index'])->name('index');
+    Route::get('/gambar/{id}', [PublicGaleriController::class, 'showImage'])->name('gambar');
+    Route::get('/{slug}', function ($slug) {
+        $galeri = \App\Models\Galeri::where('slug', $slug)->firstOrFail();
+        $galeri->increment('views');
+        return view('pages.galeri-detail', compact('galeri'));
+    })->name('detail');
 });
 
-/*
-|--------------------------------------------------------------------------
-| GEOSITE ROUTES
-|--------------------------------------------------------------------------
-*/
-Route::get('/geosite/tele', [GeositeController::class, 'tele'])->name('geosite.tele');
-Route::get('/geosite/efrata', [GeositeController::class, 'efrata'])->name('geosite.efrata');
-Route::get('/geosite/sihotang', [GeositeController::class, 'sihotang'])->name('geosite.sihotang');
+// BERITA
+Route::prefix('berita')->name('berita.')->group(function () {
+    Route::get('/', function () {
+        $berita = \App\Models\Berita::where('status', true)->latest()->paginate(9);
+        return view('pages.berita', compact('berita'));
+    })->name('index');
+    
+    Route::get('/{slug}', function ($slug) {
+        $berita = \App\Models\Berita::where('slug', $slug)->where('status', true)->firstOrFail();
+        $berita->increment('views');
+        return view('pages.berita-detail', compact('berita'));
+    })->name('detail');
+});
+
+// UMKM (Public)
+Route::prefix('umkm')->name('umkm.')->controller(PublicUmkmController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/filter', 'filter')->name('filter');
+    Route::get('/{id}', 'show')->name('show');
+});
+
+// GEOSITE
+Route::prefix('geosite')->name('geosite.')->group(function () {
+    Route::get('/tele', [GeositeController::class, 'tele'])->name('tele');
+    Route::get('/efrata', [GeositeController::class, 'efrata'])->name('efrata');
+    Route::get('/sihotang', [GeositeController::class, 'sihotang'])->name('sihotang');
+});
+
+// OTHER PAGES
+Route::get('/budaya', [HomeController::class, 'budaya'])->name('budaya');
+Route::view('/kontak', 'pages.kontak')->name('kontak');
 
 /*
 |--------------------------------------------------------------------------
 | AUTH ROUTES
 |--------------------------------------------------------------------------
 */
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Route Lupa Password
-Route::get('/forgot-password', [AuthController::class, 'showForgotForm'])->name('password.request');
-Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
-Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
-Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', 'showLogin')->name('login');
+    Route::post('/login', 'login');
+    Route::post('/logout', 'logout')->name('logout');
+    Route::get('/forgot-password', 'showForgotForm')->name('password.request');
+    Route::post('/forgot-password', 'sendResetLink')->name('password.email');
+    Route::get('/reset-password/{token}', 'showResetForm')->name('password.reset');
+    Route::post('/reset-password', 'resetPassword')->name('password.update');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -111,46 +102,82 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('
 |--------------------------------------------------------------------------
 */
 Route::prefix('admin')->middleware(['auth'])->group(function () {
-
+    
+    // Dashboard
     Route::get('/', function () {
-        // Menggunakan nama tabel tunggal sesuai dengan struktur database Anda
-        $totalGaleri = DB::table('galeri')->count(); 
+        $totalGaleri = DB::table('galeri')->count();
         $totalBerita = DB::table('berita')->count();
         $totalInformasi = DB::table('informasi')->count();
-        $totalUmkm = DB::table('umkm')->count();
+        $totalUmkm = DB::table('umkms')->count();
         $totalFasilitas = DB::table('fasilitas')->count();
         $totalPenginapan = DB::table('penginapan')->count();
-        $totalViews = 0; // Anda bisa menjumlahkan views dari tabel berita/galeri jika perlu
         
         return view('admin.dashboard', compact(
             'totalGaleri', 'totalBerita', 'totalInformasi',
-            'totalUmkm', 'totalFasilitas', 'totalPenginapan', 'totalViews'
+            'totalUmkm', 'totalFasilitas', 'totalPenginapan'
         ));
     })->name('admin.dashboard');
-
-    // CRUD Resources
+    
+    // GALERI
     Route::resource('galeri', AdminGaleriController::class)->names('admin.galeri');
+    
+    // BERITA
     Route::resource('berita', AdminBeritaController::class)->names('admin.berita');
+    
+    // INFORMASI
     Route::resource('informasi', AdminInformasiController::class)->names('admin.informasi');
-    Route::resource('umkm', AdminUmkmController::class)->names('admin.umkm');
-    Route::resource('fasilitas', AdminFasilitasController::class)->names('admin.fasilitas');
-    Route::resource('penginapan', AdminPenginapanController::class)->names('admin.penginapan');
+    
+    // DESTINASI
     Route::resource('destinasi', AdminDestinasiController::class)->names('admin.destinasi');
-
-    // Toggle Status
+    
+    // Toggle Status Routes
     Route::post('galeri/toggle-status/{id}', [AdminGaleriController::class, 'toggleStatus'])->name('admin.galeri.toggle-status');
     Route::post('berita/toggle-status/{id}', [AdminBeritaController::class, 'toggleStatus'])->name('admin.berita.toggle-status');
     Route::post('informasi/toggle-status/{id}', [AdminInformasiController::class, 'toggleStatus'])->name('admin.informasi.toggle-status');
+    
+    // ==================== TELE ROUTES (LENGKAP) ====================
+    Route::prefix('tele')->name('admin.tele.')->group(function () {
+        // Dashboard
+        Route::get('/', [TeleController::class, 'index'])->name('index');
+        
+        // UMKM
+        Route::get('/umkm', [TeleController::class, 'umkm'])->name('umkm');
+        Route::get('/umkm/create', [TeleController::class, 'umkmCreate'])->name('umkm.create');
+        Route::post('/umkm', [TeleController::class, 'umkmStore'])->name('umkm.store');
+        Route::get('/umkm/{id}/edit', [TeleController::class, 'umkmEdit'])->name('umkm.edit');
+        Route::put('/umkm/{id}', [TeleController::class, 'umkmUpdate'])->name('umkm.update');
+        Route::delete('/umkm/{id}', [TeleController::class, 'umkmDestroy'])->name('umkm.destroy');
+        
+        // Fasilitas
+        Route::get('/fasilitas', [TeleController::class, 'fasilitas'])->name('fasilitas');
+        Route::get('/fasilitas/create', [TeleController::class, 'fasilitasCreate'])->name('fasilitas.create');
+        Route::post('/fasilitas', [TeleController::class, 'fasilitasStore'])->name('fasilitas.store');
+        Route::get('/fasilitas/{id}/edit', [TeleController::class, 'fasilitasEdit'])->name('fasilitas.edit');
+        Route::put('/fasilitas/{id}', [TeleController::class, 'fasilitasUpdate'])->name('fasilitas.update');
+        Route::delete('/fasilitas/{id}', [TeleController::class, 'fasilitasDestroy'])->name('fasilitas.destroy');
+        
+        // Penginapan
+        Route::get('/penginapan', [TeleController::class, 'penginapan'])->name('penginapan');
+        Route::get('/penginapan/create', [TeleController::class, 'penginapanCreate'])->name('penginapan.create');
+        Route::post('/penginapan', [TeleController::class, 'penginapanStore'])->name('penginapan.store');
+        Route::get('/penginapan/{id}/edit', [TeleController::class, 'penginapanEdit'])->name('penginapan.edit');
+        Route::put('/penginapan/{id}', [TeleController::class, 'penginapanUpdate'])->name('penginapan.update');
+        Route::delete('/penginapan/{id}', [TeleController::class, 'penginapanDestroy'])->name('penginapan.destroy');
+        
+        // Galeri
+        Route::get('/galeri', [TeleController::class, 'galeri'])->name('galeri');
+        Route::get('/galeri/create', [TeleController::class, 'galeriCreate'])->name('galeri.create');
+        Route::post('/galeri', [TeleController::class, 'galeriStore'])->name('galeri.store');
+        Route::get('/galeri/{id}/edit', [TeleController::class, 'galeriEdit'])->name('galeri.edit');
+        Route::put('/galeri/{id}', [TeleController::class, 'galeriUpdate'])->name('galeri.update');
+        Route::delete('/galeri/{id}', [TeleController::class, 'galeriDestroy'])->name('galeri.destroy');
+        
+        // Informasi
+        Route::get('/informasi', [TeleController::class, 'informasi'])->name('informasi');
+        Route::get('/informasi/create', [TeleController::class, 'informasiCreate'])->name('informasi.create');
+        Route::post('/informasi', [TeleController::class, 'informasiStore'])->name('informasi.store');
+        Route::get('/informasi/{id}/edit', [TeleController::class, 'informasiEdit'])->name('informasi.edit');
+        Route::put('/informasi/{id}', [TeleController::class, 'informasiUpdate'])->name('informasi.update');
+        Route::delete('/informasi/{id}', [TeleController::class, 'informasiDestroy'])->name('informasi.destroy');
+    });
 });
-
-// ADMIN UMKM ROUTES (Tambahan jika ingin CRUD terpisah)
-// HAPUS bagian ini karena sudah menggunakan AdminUmkmController di atas
-// Route::prefix('admin')->middleware(['auth'])->group(function () {
-//     Route::get('/umkm', [UmkmController::class, 'adminIndex'])->name('admin.umkm.index');
-//     Route::get('/umkm/create', [UmkmController::class, 'create'])->name('admin.umkm.create');
-//     Route::post('/umkm', [UmkmController::class, 'store'])->name('admin.umkm.store');
-//     Route::get('/umkm/{id}/edit', [UmkmController::class, 'edit'])->name('admin.umkm.edit');
-//     Route::put('/umkm/{id}', [UmkmController::class, 'update'])->name('admin.umkm.update');
-//     Route::delete('/umkm/{id}', [UmkmController::class, 'destroy'])->name('admin.umkm.destroy');
-//     Route::patch('/umkm/{id}/toggle-status', [UmkmController::class, 'toggleStatus'])->name('admin.umkm.toggle-status');
-// });

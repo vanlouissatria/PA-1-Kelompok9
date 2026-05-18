@@ -10,20 +10,11 @@ return new class extends Migration
     {
         Schema::create('umkms', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_usaha');
-            $table->string('pemilik');
-            $table->string('kategori');
-            $table->text('deskripsi');
-            $table->text('alamat');
-            $table->string('no_telepon');
-            $table->string('email')->nullable();
-            $table->string('website')->nullable();
-            $table->string('logo')->nullable();
-            $table->string('foto_utama')->nullable();
-            $table->decimal('latitude', 10, 8)->nullable();
-            $table->decimal('longitude', 11, 8)->nullable();
-            $table->boolean('status')->default(true);
-            $table->integer('views')->default(0);
+            $table->string('nama_umkm');
+            $table->string('no_umkm')->unique();
+            $table->enum('kategori', ['Kuliner', 'Fashion', 'Kerajinan', 'Pertanian', 'Jasa', 'Lainnya']);
+            $table->enum('halaman', ['tele', 'efrata', 'sihotang']);
+            $table->string('foto_umkm')->nullable();
             $table->timestamps();
         });
     }

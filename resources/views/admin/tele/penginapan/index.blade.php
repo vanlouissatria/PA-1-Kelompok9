@@ -1,0 +1,77 @@
+@extends('layouts.admin')
+
+@section('title', 'Kelola Penginapan - Tele')
+
+@section('content')
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3 class="card-title">Data Penginapan Tele</h3>
+            <a href="{{ url('/admin/tele/penginapan/create') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Tambah Penginapan
+            </a>
+        </div>
+        <div class="card-body">
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Gambar</th>
+                            <th>Nama</th>
+                            <th>Alamat</th>
+                            <th>No Telepon</th>
+                            <th>Harga</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($penginapan as $key => $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td class="text-center">
+                                @if($item->gambar && file_exists(public_path($item->gambar)))
+                                    <img src="{{ asset($item->gambar) }}" width="50" height="50" style="object-fit: cover; border-radius: 8px;">
+                                @else
+                                    <div style="width: 50px; height: 50px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                                        <i class="fas fa-hotel text-muted"></i>
+                                    </div>
+                                @endif
+                            </td>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ Str::limit($item->alamat, 50) ?? '-' }}</td>
+                            <td>{{ $item->no_telepon ?? '-' }}</td>
+                            <td>Rp {{ number_format($item->harga ?? 0, 0, ',', '.') }}</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a href="{{ url('/admin/tele/penginapan/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <form action="{{ url('/admin/tele/penginapan/'.$item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="7" class="text-center">Belum ada data penginapan. Silakan tambah data baru.</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+            
+            @if($penginapan->hasPages())
+            <div class="mt-3">
+                {{ $penginapan->links() }}
+            </div>
+            @endif
+        </div>
+    </div>
+</div>
+@endsection

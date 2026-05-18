@@ -342,95 +342,60 @@
 </style>
 
 <!-- HERO SECTION -->
-<div class="gallery-hero">
-    <div class="gallery-hero-content">
-        <h1>GALERI</h1>
-        <p>Koleksi Foto Terbaik</p>
-    </div>
-</div>
-
-<!-- STACKED SLIP CARDS SECTION -->
-<section class="gallery-section">
+<section class="galeri-hero">
     <div class="container">
-        <div class="stack-container">
-            @php $counter = 1; @endphp
-            @forelse($galeri ?? [] as $item)
-                @php
-                    $src = asset('image/default.jpg');
-                    if (!empty($item->gambar)) {
-                        if (str_starts_with($item->gambar, 'data:image')) {
-                            $src = $item->gambar;
-                        } elseif (filter_var($item->gambar, FILTER_VALIDATE_URL)) {
-                            $src = $item->gambar;
-                        } else {
-                            $src = asset('storage/' . $item->gambar);
-                        }
-                    }
-                @endphp
-                
-                <div class="slip-card" onclick="openPhoto('{{ $src }}', '{{ addslashes($item->judul) }}', '{{ addslashes($item->deskripsi ?? 'Tidak ada deskripsi') }}', '{{ strtoupper($item->kategori ?? 'GALERI') }}')">
-                    <div class="slip-image">
-                        <img src="{{ $src }}" alt="{{ $item->judul }}" loading="lazy" 
-                             onerror="this.src='{{ asset('image/default.jpg') }}'">
-                        <div class="slip-overlay">
-                            <span class="slip-category">{{ strtoupper($item->kategori ?? 'GALERI') }}</span>
-                            <div class="slip-title-overlay">{{ Str::limit($item->judul, 35) }}</div>
-                        </div>
-                    </div>
-                    <div class="slip-info">
-                        <div class="slip-line"></div>
-                        <div class="slip-title">{{ Str::limit($item->judul, 30) }}</div>
-                        <div class="slip-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>{{ $item->lokasi ?? 'Danau Toba' }}</span>
-                        </div>
-                        <div class="slip-number">#{{ str_pad($counter, 3, '0', STR_PAD_LEFT) }}</div>
-                    </div>
-                </div>
-                @php $counter++; @endphp
-            @empty
-                <div class="empty-gallery">
-                    <i class="fas fa-images"></i>
-                    <p>Belum ada foto galeri</p>
-                </div>
-            @endforelse
-        </div>
+        <h1>Galeri Foto</h1>
+        <p>Dokumentasi keindahan Geopark Danau Toba</p>
     </div>
 </section>
 
-<!-- MODAL -->
-<div id="pModal" class="modal-overlay" onclick="closePhoto()">
-    <div class="close-btn" onclick="closePhoto()">&times;</div>
-    <div class="modal-box" onclick="event.stopPropagation()">
-        <div class="modal-img-part"><img src="" id="mImg"></div>
-        <div class="modal-text-part">
-            <small id="mTag"></small>
-            <h2 id="mTitle"></h2>
-            <p id="mDesc"></p>
+<div class="container">
+    <div class="galeri-grid">
+        @forelse($galeri as $item)
+        <div class="galeri-card" onclick="window.location.href='{{ url('/galeri/'.$item->slug) }}'">
+            <div class="image-wrapper">
+                @php
+                    $imgSrc = '';
+                    if($item->gambar) {
+                        if(file_exists(public_path($item->gambar))) {
+                            $imgSrc = asset($item->gambar);
+                        } elseif(file_exists(public_path('storage/' . $item->gambar))) {
+                            $imgSrc = asset('storage/' . $item->gambar);
+                        } else {
+                            $imgSrc = asset('image/default.jpg');
+                        }
+                    } else {
+                        $imgSrc = asset('image/default.jpg');
+                    }
+                @endphp
+                <img src="{{ $imgSrc }}" alt="{{ $item->judul }}">
+                <div class="overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ Str::limit($item->judul, 50) }}</h5>
+                <p class="card-text">{{ Str::limit($item->deskripsi, 80) }}</p>
+                <small class="text-muted">
+                    <i class="fas fa-eye"></i> {{ $item->views ?? 0 }} views
+                </small>
+            </div>
         </div>
+        @empty
+        <div class="col-12">
+            <div class="empty-state">
+                <i class="fas fa-images fa-3x mb-3 text-muted"></i>
+                <h5>Belum ada foto galeri</h5>
+                <p>Silakan cek kembali nanti</p>
+            </div>
+        </div>
+        @endforelse
     </div>
+    
+    @if($galeri->hasPages())
+    <div class="pagination">
+        {{ $galeri->links() }}
+    </div>
+    @endif
 </div>
-
-<script>
-    function openPhoto(src, title, desc, tag) {
-        document.getElementById('mImg').src = src;
-        document.getElementById('mTitle').innerText = title;
-        document.getElementById('mTag').innerText = tag;
-        document.getElementById('mDesc').innerHTML = desc || 'Tidak ada deskripsi.';
-        document.getElementById('pModal').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
-    
-    function closePhoto() {
-        document.getElementById('pModal').style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-    
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closePhoto();
-        }
-    });
-</script>
-
 @endsection

@@ -323,7 +323,6 @@
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('galeri') ? 'active' : '' }}" href="{{ url('/galeri') }}">Galeri</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('berita') ? 'active' : '' }}" href="{{ url('/berita') }}">Berita</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('kontak') ? 'active' : '' }}" href="{{ url('/kontak') }}">Kontak</a></li>
-                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('umkm*') ? 'active' : '' }}" href="{{ route('umkm.index') }}"><i class="fas fa-store"></i> UMKM</a></li>
                 </ul>
             </div>
         </div>

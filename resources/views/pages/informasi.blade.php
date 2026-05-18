@@ -114,7 +114,7 @@
 </div>
 
 <div class="container">
-    @foreach($informasiList as $index => $info)
+    @foreach($informasi as $index => $info)
         <div class="info-card">
             <div class="row align-items-center">
                 
@@ -122,12 +122,10 @@
                     {{-- Layout: Gambar Kiri --}}
                     <div class="col-lg-6 mb-4 mb-lg-0">
                         <div class="img-wrapper">
-                            @if($info->gambar)
-                                {{-- PERBAIKAN: Langsung panggil variabel base64 tanpa asset() atau storage/ --}}
-                                <img src="{{ $info->gambar }}" 
+                            @if($info->gambar && file_exists(public_path($info->gambar)))
+                                <img src="{{ asset($info->gambar) }}" 
                                      alt="{{ $info->judul }}" 
-                                     loading="lazy"
-                                     onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Foto+Rusak/Besar';">
+                                     loading="lazy">
                             @else
                                 <img src="https://placehold.co/800x600?text=GeoToba" alt="Placeholder">
                             @endif
@@ -136,7 +134,7 @@
                     <div class="col-lg-6 ps-lg-5">
                         <h2 class="info-title">{{ $info->judul }}</h2>
                         <div class="content-text">
-                            {!! $info->konten !!}
+                            {!! nl2br(e($info->konten)) !!}
                         </div>
                     </div>
                 @else
@@ -144,17 +142,15 @@
                     <div class="col-lg-6 order-2 order-lg-1 pe-lg-5">
                         <h2 class="info-title">{{ $info->judul }}</h2>
                         <div class="content-text">
-                            {!! $info->konten !!}
+                            {!! nl2br(e($info->konten)) !!}
                         </div>
                     </div>
                     <div class="col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0">
                         <div class="img-wrapper">
-                            @if($info->gambar)
-                                {{-- PERBAIKAN: Langsung panggil variabel base64 tanpa asset() atau storage/ --}}
-                                <img src="{{ $info->gambar }}" 
+                            @if($info->gambar && file_exists(public_path($info->gambar)))
+                                <img src="{{ asset($info->gambar) }}" 
                                      alt="{{ $info->judul }}" 
-                                     loading="lazy"
-                                     onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Foto+Rusak/Besar';">
+                                     loading="lazy">
                             @else
                                 <img src="https://placehold.co/800x600?text=GeoToba" alt="Placeholder">
                             @endif
