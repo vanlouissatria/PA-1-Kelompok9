@@ -13,6 +13,10 @@
                 @csrf
                 
                 <div class="row">
+                    <div class="form-group">
+    <label>Nama Usaha</label>
+    <input type="text" name="nama_usaha" class="form-control" required>
+</div>
                     <div class="col-md-6 mb-3">
                         <label>Nama UMKM <span class="text-danger">*</span></label>
                         <input type="text" name="nama_usaha" class="form-control @error('nama_usaha') is-invalid @enderror" value="{{ old('nama_usaha') }}" required>

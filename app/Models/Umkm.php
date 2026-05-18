@@ -11,18 +11,25 @@ class UMKM extends Model
 
     protected $table = 'umkm';
     
-    protected $fillable = [
-        'nama_usaha',
-        'pemilik',
-        'no_telepon',
-        'kategori',
-        'geosite',
-        'alamat',
-        'deskripsi',
-        'foto_utama',
-        'status'
-    ];
+// app/Models/Umkm.php
+protected $fillable = [
+    'nama',
+    'nama_usaha',
+    'pemilik',
+    'no_telepon',
+    'kategori',
+    'geosite',
+    'alamat',
+    'deskripsi',
+    'foto_utama',
+    'status',
+];
 
+// Tambahkan default value di model
+protected $attributes = [
+    'geosite' => 'tele',
+    'status' => 1,
+];
     // Accessor untuk mendapatkan URL foto lengkap
     public function getFotoUrlAttribute()
     {

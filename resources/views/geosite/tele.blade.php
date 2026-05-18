@@ -271,85 +271,65 @@
         }
 
         /* ==================== INFORMASI CARD ==================== */
-        /* Layout gambar kiri, teks kanan */
-.informasi-card {
-    display: flex;
-    flex-wrap: wrap;
-    background: white;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    margin-bottom: 40px;
-    transition: var(--transition);
-}
+        .informasi-card {
+            display: flex;
+            flex-wrap: wrap;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            transition: var(--transition);
+        }
 
-.informasi-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-hover);
-}
+        .informasi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
 
-.informasi-image {
-    flex: 1;
-    min-width: 300px;
-    max-height: 350px;
-    overflow: hidden;
-}
+        .informasi-image {
+            flex: 1;
+            min-width: 300px;
+            max-height: 350px;
+            overflow: hidden;
+        }
 
-.informasi-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
+        .informasi-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
 
-.informasi-card:hover .informasi-image img {
-    transform: scale(1.03);
-}
+        .informasi-card:hover .informasi-image img {
+            transform: scale(1.03);
+        }
 
-.informasi-content {
-    flex: 1;
-    padding: 30px;
-}
+        .informasi-content {
+            flex: 1;
+            padding: 30px;
+        }
 
-.informasi-content h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 20px;
-    font-family: 'Cormorant Garamond', serif;
-    border-left: 4px solid var(--gold);
-    padding-left: 15px;
-}
+        .informasi-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            border-left: 4px solid var(--gold);
+            padding-left: 15px;
+        }
 
-.informasi-text {
-    color: #444;
-    line-height: 1.8;
-    font-size: 1rem;
-}
+        .informasi-text {
+            color: #444;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
 
-.informasi-text p {
-    margin-bottom: 15px;
-}
+        .informasi-text p {
+            margin-bottom: 15px;
+        }
 
-/* Responsive untuk mobile */
-@media (max-width: 768px) {
-    .informasi-card {
-        flex-direction: column;
-    }
-    
-    .informasi-image {
-        min-width: 100%;
-        max-height: 250px;
-    }
-    
-    .informasi-content {
-        padding: 20px;
-    }
-    
-    .informasi-content h3 {
-        font-size: 1.2rem;
-    }
-}
         /* ==================== GALERI GRID ==================== */
         .galeri-grid {
             display: grid;
@@ -440,6 +420,7 @@
             position: relative;
             height: 220px;
             overflow: hidden;
+            background: #f0f0f0;
         }
 
         .card-item img {
@@ -794,6 +775,7 @@
         @endif
     </div>
 </section>
+
 <!-- ==================== GALERI SECTION ==================== -->
 <section id="galeri" class="section" style="background: #f8fafc;">
     <div class="container">
@@ -832,7 +814,7 @@
     </div>
 </section>
 
-<!-- ==================== UMKM SECTION ==================== -->
+<!-- ==================== UMKM SECTION (DIPERBAIKI) ==================== -->
 <section id="umkm" class="section">
     <div class="container">
         <div class="section-title" data-aos="fade-up">
@@ -845,7 +827,24 @@
             @forelse($umkm as $item)
             <div class="card-item" data-aos="fade-up" data-aos-delay="{{ $loop->index * 50 }}">
                 <div class="image-wrapper">
-                    <img src="{{ asset($item->foto_utama ?? 'image/default-umkm.jpg') }}" alt="{{ $item->nama_usaha }}">
+                    @php
+                        // Perbaikan path foto UMKM
+                        $fotoUrl = asset('image/default-umkm.jpg'); // default
+                        if($item->foto_utama) {
+                            // Cek apakah file ada di storage
+                            $storagePath = storage_path('app/public/' . $item->foto_utama);
+                            if(file_exists($storagePath)) {
+                                $fotoUrl = asset('storage/' . $item->foto_utama);
+                            } else {
+                                // Coba cek di public
+                                $publicPath = public_path($item->foto_utama);
+                                if(file_exists($publicPath)) {
+                                    $fotoUrl = asset($item->foto_utama);
+                                }
+                            }
+                        }
+                    @endphp
+                    <img src="{{ $fotoUrl }}" alt="{{ $item->nama_usaha }}">
                     <span class="category-badge">{{ $item->kategori ?? 'UMKM' }}</span>
                 </div>
                 <div class="card-body">
@@ -877,7 +876,7 @@
     </div>
 </section>
 
-<!-- ==================== PENGINAPAN SECTION ==================== -->
+<!-- ==================== PENGINAPAN SECTION (DIPERBAIKI) ==================== -->
 <section id="penginapan" class="section" style="background: #f8fafc;">
     <div class="container">
         <div class="section-title" data-aos="fade-up">
@@ -890,7 +889,17 @@
             @forelse($penginapan as $item)
             <div class="card-item" data-aos="fade-up" data-aos-delay="{{ $loop->index * 50 }}">
                 <div class="image-wrapper">
-                    <img src="{{ asset($item->gambar ?? 'image/default-hotel.jpg') }}" alt="{{ $item->nama }}">
+                    @php
+                        $gambarUrl = asset('image/default-hotel.jpg');
+                        if($item->gambar) {
+                            if(file_exists(public_path($item->gambar))) {
+                                $gambarUrl = asset($item->gambar);
+                            } elseif(file_exists(storage_path('app/public/' . $item->gambar))) {
+                                $gambarUrl = asset('storage/' . $item->gambar);
+                            }
+                        }
+                    @endphp
+                    <img src="{{ $gambarUrl }}" alt="{{ $item->nama }}">
                 </div>
                 <div class="card-body">
                     <h4>{{ $item->nama }}</h4>
@@ -920,7 +929,7 @@
     </div>
 </section>
 
-<!-- ==================== FASILITAS SECTION ==================== -->
+<!-- ==================== FASILITAS SECTION (DIPERBAIKI) ==================== -->
 <section id="fasilitas" class="section">
     <div class="container">
         <div class="section-title" data-aos="fade-up">
@@ -933,7 +942,17 @@
             @forelse($fasilitas as $item)
             <div class="card-item" data-aos="fade-up" data-aos-delay="{{ $loop->index * 50 }}">
                 <div class="image-wrapper">
-                    <img src="{{ asset($item->gambar ?? 'image/default-fasilitas.jpg') }}" alt="{{ $item->nama }}">
+                    @php
+                        $gambarUrl = asset('image/default-fasilitas.jpg');
+                        if($item->gambar) {
+                            if(file_exists(public_path($item->gambar))) {
+                                $gambarUrl = asset($item->gambar);
+                            } elseif(file_exists(storage_path('app/public/' . $item->gambar))) {
+                                $gambarUrl = asset('storage/' . $item->gambar);
+                            }
+                        }
+                    @endphp
+                    <img src="{{ $gambarUrl }}" alt="{{ $item->nama }}">
                 </div>
                 <div class="card-body">
                     <h4>{{ $item->nama }}</h4>

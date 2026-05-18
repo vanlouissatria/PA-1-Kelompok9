@@ -13,7 +13,7 @@ class AdminUserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Admin GeoToba',
             'email' => 'teleefratasihotanggeosite@gmail.com',
-            'password' => Hash::make('password123'), // Ganti dengan password yang Anda inginkan
+            'password' => Hash::make('tele123'), // Ganti dengan password yang Anda inginkan
             'role' => 'admin',
             'created_at' => now(),
             'updated_at' => now(),

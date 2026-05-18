@@ -36,43 +36,45 @@ class TeleController extends Controller
         return view('admin.tele.umkm.create');
     }
 
-    public function umkmStore(Request $request)
-    {
-        $request->validate([
-            'nama_usaha' => 'required|string|max:255',
-            'pemilik' => 'required|string|max:255',
-            'no_telepon' => 'required|string|max:20',
-            'kategori' => 'required|string',
-            'foto_utama' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'alamat' => 'nullable|string',
-            'deskripsi' => 'nullable|string'
-        ]);
+   // app/Http/Controllers/Admin/TeleController.php
+public function umkmStore(Request $request)
+{
+    // Validasi
+    $request->validate([
+        'nama_usaha' => 'required|string|max:255',
+        'pemilik' => 'required|string|max:255',
+        'kategori' => 'required|string',
+        'foto_utama' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+    ]);
 
+    // Upload foto
+    $fotoPath = null;
+    if ($request->hasFile('foto_utama')) {
         $file = $request->file('foto_utama');
-        $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
-        
-        if (!file_exists(public_path('image/umkm'))) {
-            mkdir(public_path('image/umkm'), 0777, true);
-        }
-        
-        $file->move(public_path('image/umkm'), $filename);
-        $fotoPath = 'image/umkm/' . $filename;
-
-        UMKM::create([
-            'nama_usaha' => $request->nama_usaha,
-            'pemilik' => $request->pemilik,
-            'no_telepon' => $request->no_telepon,
-            'kategori' => $request->kategori,
-            'geosite' => 'tele',
-            'alamat' => $request->alamat,
-            'deskripsi' => $request->deskripsi,
-            'foto_utama' => $fotoPath,
-            'status' => true
-        ]);
-
-        return redirect()->to('/admin/tele/umkm')->with('success', 'UMKM berhasil ditambahkan');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $fotoPath = $file->storeAs('umkm', $filename, 'public');
     }
 
+    // Simpan data
+    $umkm = Umkm::create([
+        'nama' => $request->nama_usaha,
+        'nama_usaha' => $request->nama_usaha,
+        'pemilik' => $request->pemilik,
+        'no_telepon' => $request->no_telepon,
+        'kategori' => $request->kategori,
+        'geosite' => $request->geosite ?? 'tele',
+        'alamat' => $request->alamat,
+        'deskripsi' => $request->deskripsi,
+        'foto_utama' => $fotoPath,
+        'status' => 1,
+    ]);
+
+    // Debug: cek apakah foto tersimpan
+    \Log::info('Foto path: ' . $fotoPath);
+    \Log::info('Data saved: ', $umkm->toArray());
+
+    return redirect()->route('admin.tele.umkm')->with('success', 'Data UMKM berhasil ditambahkan');
+}
     public function umkmEdit($id)
     {
         $umkm = UMKM::findOrFail($id);
