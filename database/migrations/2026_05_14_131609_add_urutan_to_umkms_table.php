@@ -12,7 +12,7 @@ return new class extends Migration
    public function up()
 {
     Schema::table('umkms', function (Blueprint $table) {
-        $table->integer('urutan')->default(0)->after('status');
+        $table->integer('urutan')->default(0);
     });
 }
 
