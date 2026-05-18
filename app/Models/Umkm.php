@@ -7,15 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class UMKM extends Model
 {
-<<<<<<< HEAD
     use HasFactory;
 
-    protected $table = 'umkms';
-
-=======
     protected $table = 'umkm';
     
->>>>>>> 6f4c4da98609a1f536bf8249cfb9af9417f21bd8
     protected $fillable = [
         'nama_usaha',
         'pemilik',
