@@ -52,7 +52,13 @@
         .section-title h2 { font-size: 2rem; color: var(--primary); font-weight: 700; margin-bottom: 14px; font-family: 'Cormorant Garamond', serif; }
         .divider { width: 90px; height: 3px; background: var(--gold); margin: 0 auto; border-radius: 3px; }
         .section-title p { color: #5b6770; margin-top: 18px; max-width: 640px; margin-left: auto; margin-right: auto; }
-        .sejarah-grid, .grid-umkm, .grid-penginapan, .grid-fasilitas { display: grid; gap: 30px; justify-content: center; justify-items: center; }
+        .sejarah-grid, .grid-umkm, .grid-penginapan, .grid-fasilitas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
+            gap: 30px;
+            justify-content: center;
+            justify-items: center;
+        }
         .sejarah-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         .sejarah-item { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; background: white; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow); }
         .sejarah-item.reverse { grid-template-columns: 1fr 1fr; }
@@ -103,7 +109,8 @@
         .footer-info { text-align: right; }
         .footer-bottom { text-align: center; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.18); font-size: 0.78rem; opacity: 0.65; }
         .empty-state {
-            width: min(100%, 520px);
+            width: 100%;
+            max-width: 420px;
             margin: 0 auto;
             text-align: center;
             padding: 45px;
@@ -111,6 +118,7 @@
             border-radius: 24px;
             color: #6f7a89;
             box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            justify-self: center;
         }
         .empty-state i { font-size: 3rem; color: var(--gold); margin-bottom: 18px; }
         @media (max-width: 992px) { .sejarah-grid { grid-template-columns: 1fr; } .grid-umkm, .grid-penginapan, .grid-fasilitas { grid-template-columns: 1fr; } }
@@ -454,42 +462,5 @@
         });
     });
 </script>
-</body>
-</html>
-
-hamburger.addEventListener('click', () => {
-    mobileOverlay.classList.add('active');
-});
-
-mobileClose.addEventListener('click', () => {
-    mobileOverlay.classList.remove('active');
-});
-
-document.querySelectorAll('.mobile-link').forEach(link => {
-    link.addEventListener('click', () => {
-        mobileOverlay.classList.remove('active');
-    });
-});
-
-const lightbox = document.getElementById('lightbox');
-
-document.querySelectorAll('.galeri-item img').forEach(img => {
-
-    img.addEventListener('click', () => {
-
-        lightbox.classList.add('active');
-
-        document.getElementById('lightboxImg').src = img.src;
-
-    });
-
-});
-
-function closeLightbox() {
-    lightbox.classList.remove('active');
-}
-
-</script>
-
 </body>
 </html>
