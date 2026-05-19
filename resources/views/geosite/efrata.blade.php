@@ -390,17 +390,17 @@
     </div>
 </section>
 
-<section id="lokasi" class="section" style="background: #f8fafc;">
+<section id="efrata" class="section" style="background: #f8fafc; padding: 60px 0;">
     <div class="container">
-        <div class="section-title" data-aos="fade-up">
-            <h2>Lokasi & Akses</h2>
-            <div class="divider"></div>
-            <p>Temukan rute menuju Air Terjun Efrata</p>
+        <div class="section-title text-center" data-aos="fade-up">
+            <h2 style="font-family: 'Playfair Display', serif; color: #0f2c59; font-weight: bold;">Lokasi & Akses Air Terjun Efrata</h2>
+            <div class="divider" style="width: 50px; border: 2px solid #d4af37; margin: 10px auto;"></div>
+            <p class="text-muted">Temukan rute menuju Air Terjun Efrata</p>
         </div>
         
-        <div class="maps-container" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 25px;">
+        <div class="maps-container" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 25px; max-width: 1000px; margin-left: auto; margin-right: auto;">
             <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.299553641774!2d98.64236647573037!3d2.536898797445778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031d0eadb2bb9b1%3A0x4ac3b042ef0cc6cd!2sAir%20Terjun%20Efrata!5e0!3m2!1sid!2sid!4v1716123456789!5m2!1sid!2sid"
+                src="https://maps.google.com/?cid=5387906330743598029&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ"
                 width="100%" 
                 height="400" 
                 style="border:0; display: block;" 
@@ -410,12 +410,10 @@
             </iframe>
         </div>
         
-        <div class="info-rute" data-aos="fade-up">
+        <div class="info-rute" data-aos="fade-up" style="max-width: 1000px; margin: 0 auto;">
             <h4><i class="fas fa-location-dot"></i> Rute Menuju Air Terjun Efrata</h4>
             <p><strong>Dari Pangururan:</strong> Berjarak sekitar 20 km dengan waktu tempuh kurang lebih 30-40 menit berkendara melewati jalan Lintas Tele-Pangururan menuju Desa Sosor Dolok.</p>
             <p><strong>Dari Menara Pandang Tele:</strong> Jaraknya cukup dekat, hanya sekitar 15 km dengan waktu tempuh 25 menit menuruni perbukitan menuju arah Harian.</p>
-            <p><strong>Jam Operasional:</strong> 06.00 - 19.00 WIB (Setiap Hari)</p>
-            <p><strong>Tiket Masuk:</strong> Rp 10.000 - Rp 15.000 per orang.</p>
         </div>
     </div>
 </section>
