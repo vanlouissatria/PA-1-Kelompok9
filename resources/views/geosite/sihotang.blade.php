@@ -442,16 +442,24 @@
         </div>
     </div>
 </section>
-
-<section id="lokasi" class="section">
+<section id="holbung" class="section" style="background: #ffffff; padding: 60px 0;">
     <div class="container">
-        <div class="section-title" data-aos="fade-up">
-            <h2>Lokasi & Akses</h2>
-            <div class="divider"></div>
-            <p>Rute praktis menuju Sihotang.</p>
+        <div class="section-title text-center" data-aos="fade-up">
+            <h2 style="font-family: 'Playfair Display', serif; color: #0f2c59; font-weight: bold;">Lokasi & Akses Bukit Holbung</h2>
+            <div class="divider" style="width: 50px; border: 2px solid #d4af37; margin: 10px auto;"></div>
+            <p class="text-muted">Temukan rute menuju Bukit Holbung</p>
         </div>
-        <div class="maps-container" data-aos="fade-up">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127645.46001033459!2d98.700731!3d2.621083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031d060f0e3180b%3A0xb561ba45f008aa18!2sPulau%20Sihotang!5e0!3m2!1sid!2sid!4v1778767596787!5m2!1sid!2sid" width="100%" height="420" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        
+        <div class="maps-container" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 25px; max-width: 1000px; margin-left: auto; margin-right: auto;">
+            <iframe 
+                src="https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICGtaT2RQ!2e10!4m2!3m1!1s0x3031d0eafd2bb9b1:0x4ac5b042ef0cebcd"
+                width="100%" 
+                height="400" 
+                style="border:0; display: block;" 
+                allowfullscreen="" 
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
         </div>
         <div class="info-rute" data-aos="fade-up">
             <h4><i class="fas fa-location-dot"></i> Rute Menuju Sihotang</h4>
