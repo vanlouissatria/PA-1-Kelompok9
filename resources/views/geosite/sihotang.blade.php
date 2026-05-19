@@ -100,7 +100,7 @@
         .footer-info { text-align: right; }
         .footer-bottom { text-align: center; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.18); font-size: 0.78rem; opacity: 0.65; }
         .empty-state {
-    width: 420px;
+    width: min(100%, 620px);
     min-height: 190px;
 
     display: flex;
