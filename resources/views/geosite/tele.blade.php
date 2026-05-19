@@ -1009,13 +1009,6 @@
         </div>
     </div>
 </section>
-<section class="cta">
-    <div class="container" data-aos="fade-up">
-        <h3>Kunjungi Tele</h3> <div class="divider"></div>
-        <p>Nikmati keindahan Danau Toba dan budaya Batak yang autentik.</p>
-        <a href="{{ route('home') }}" class="cta-btn">Kembali ke Beranda</a>
-    </div>
-</section>
 
 <!-- ==================== FOOTER ==================== -->
 <footer class="footer">
