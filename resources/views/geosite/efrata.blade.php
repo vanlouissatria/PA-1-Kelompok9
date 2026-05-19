@@ -102,7 +102,17 @@
         .footer-text p, .footer-info p { margin: 5px 0; opacity: 0.75; font-size: 0.9rem; }
         .footer-info { text-align: right; }
         .footer-bottom { text-align: center; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.18); font-size: 0.78rem; opacity: 0.65; }
-        .empty-state { text-align: center; padding: 45px; background: white; border-radius: 24px; color: #6f7a89; }
+        .empty-state {
+            width: 100%;
+            max-width: 680px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 45px;
+            background: white;
+            border-radius: 24px;
+            color: #6f7a89;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
         .empty-state i { font-size: 3rem; color: var(--gold); margin-bottom: 18px; }
         @media (max-width: 992px) { .sejarah-grid { grid-template-columns: 1fr; } .grid-umkm, .grid-penginapan, .grid-fasilitas { grid-template-columns: 1fr; } }
         @media (max-width: 768px) { .nav-menu { display: none; } .hamburger { display: block; } .hero { min-height: 55vh; } .hero-title { font-size: 2.2rem; } .section { padding: 55px 0; } .footer-info { text-align: center; } }

@@ -606,11 +606,15 @@
 
         /* ==================== EMPTY STATE ==================== */
         .empty-state {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
             text-align: center;
             padding: 60px;
             background: white;
             border-radius: 20px;
             color: var(--gray);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
         }
 
         /* ==================== RESPONSIVE ==================== */
