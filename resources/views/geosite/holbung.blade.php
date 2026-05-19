@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Sihotang - Geosite Danau Toba</title>
+    <title>Holbung - Geosite Danau Toba</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -240,7 +240,7 @@
 
 <section class="hero">
     <div data-aos="fade-up">
-        <h1 class="hero-title">Sihotang</h1>
+        <h1 class="hero-title">Holbung</h1>
         <p class="hero-subtitle">Pulau Samosir · Danau Toba · Budaya & Alam</p>
     </div>
 </section>
@@ -248,20 +248,20 @@
 <section id="sejarah" class="section">
     <div class="container">
         <div class="section-title" data-aos="fade-up">
-            <h2>Sejarah & Budaya Sihotang</h2>
+            <h2>Sejarah & Budaya Holbung</h2>
             <div class="divider"></div>
         </div>
         <div class="sejarah-grid">
             <div class="sejarah-item" data-aos="fade-right">
-                <div class="sejarah-image"><img src="{{ asset('image/meat/meat-detail.jpg') }}" alt="Sihotang"></div>
-                <div class="sejarah-text"><h4>Panorama Alam</h4><p>Sihotang menawarkan pemandangan Danau Toba yang memukau, udara sejuk, dan pengalaman wisata budaya yang kuat.</p></div>
+                <div class="sejarah-image"><img src="{{ asset('image/meat/meat-detail.jpg') }}" alt="Holbung"></div>
+                <div class="sejarah-text"><h4>Panorama Alam</h4><p>Holbung menawarkan pemandangan Danau Toba yang memukau, udara sejuk, dan pengalaman wisata budaya yang kuat.</p></div>
             </div>
             <div class="sejarah-item reverse" data-aos="fade-left">
-                <div class="sejarah-image"><img src="{{ asset('image/meat/meat-hero.jpg') }}" alt="Sihotang"></div>
-                <div class="sejarah-text"><h4>Budaya Batak</h4><p>Budaya Batak masih hidup di Sihotang melalui rumah adat, tarian, dan kerajinan lokal yang dikenalkan kepada pengunjung.</p></div>
+                <div class="sejarah-image"><img src="{{ asset('image/meat/meat-hero.jpg') }}" alt="Holbung"></div>
+                <div class="sejarah-text"><h4>Budaya Batak</h4><p>Budaya Batak masih hidup di Holbung melalui rumah adat, tarian, dan kerajinan lokal yang dikenalkan kepada pengunjung.</p></div>
             </div>
             <div class="sejarah-item" data-aos="fade-right">
-                <div class="sejarah-image"><img src="{{ asset('image/meat/slide1.jpg') }}" alt="Sihotang"></div>
+                <div class="sejarah-image"><img src="{{ asset('image/meat/slide1.jpg') }}" alt="Holbung"></div>
                 <div class="sejarah-text"><h4>Destinasi Wisata</h4><p>Wilayah ini menjadi salah satu tujuan terbaik di Danau Toba untuk menikmati alam, budaya, dan pengalaman lokal.</p></div>
             </div>
         </div>
@@ -271,9 +271,9 @@
 <section id="informasi" class="section" style="background: var(--light);">
     <div class="container">
         <div class="section-title" data-aos="fade-up">
-            <h2>Informasi Wisata Sihotang</h2>
+            <h2>Informasi Wisata Holbung</h2>
             <div class="divider"></div>
-            <p>Persiapkan perjalanan Anda dengan informasi terbaru seputar Sihotang.</p>
+            <p>Persiapkan perjalanan Anda dengan informasi terbaru seputar Holbung.</p>
         </div>
         @if(isset($informasi) && $informasi->count())
             @foreach($informasi as $info)
@@ -286,7 +286,7 @@
             @endforeach
         @else
             <div class="informasi-card" data-aos="fade-up">
-                <div class="informasi-content"><h3>Informasi Umum Sihotang</h3><div class="informasi-text"><p>Wisata Sihotang buka setiap hari. Akses mudah dari Pangururan dan Tomok, dengan pilihan paket wisata budaya dan alam.</p><p>Pastikan membawa perlengkapan nyaman dan kamera untuk menangkap pemandangan Danau Toba.</p></div></div>
+                <div class="informasi-content"><h3>Informasi Umum Holbung</h3><div class="informasi-text"><p>Wisata Holbung buka setiap hari. Akses mudah dari Pangururan dan Tomok, dengan pilihan paket wisata budaya dan alam.</p><p>Pastikan membawa perlengkapan nyaman dan kamera untuk menangkap pemandangan Danau Toba.</p></div></div>
             </div>
         @endif
     </div>
@@ -295,9 +295,9 @@
 <section id="galeri" class="section">
     <div class="container">
         <div class="section-title" data-aos="fade-up">
-            <h2>Galeri Sihotang</h2>
+            <h2>Galeri Holbung</h2>
             <div class="divider"></div>
-            <p>Dokumentasi pemandangan dan aktivitas wisata di Sihotang.</p>
+            <p>Dokumentasi pemandangan dan aktivitas wisata di Holbung.</p>
         </div>
         <div class="galeri-grid">
             @forelse($galeri as $item)
@@ -316,7 +316,7 @@
                     <div class="galeri-overlay"><h4>{{ $item->judul }}</h4><p>{{ Str::limit($item->deskripsi ?? '', 60) }}</p></div>
                 </div>
             @empty
-                <div class="empty-state"><i class="fas fa-images"></i><p>Belum ada galeri Sihotang.</p></div>
+                <div class="empty-state"><i class="fas fa-images"></i><p>Belum ada galeri Holbung.</p></div>
             @endforelse
         </div>
     </div>
@@ -327,7 +327,7 @@
         <div class="section-title" data-aos="fade-up">
             <h2>UMKM Lokal</h2>
             <div class="divider"></div>
-            <p>Produk usaha masyarakat sekitar Sihotang.</p>
+            <p>Produk usaha masyarakat sekitar Holbung.</p>
         </div>
         <div class="grid-umkm">
             @forelse($umkm as $item)
@@ -357,7 +357,7 @@
                     </div>
                 </div>
             @empty
-                <div class="empty-state"><i class="fas fa-store"></i><p>Belum ada data UMKM untuk Sihotang.</p></div>
+                <div class="empty-state"><i class="fas fa-store"></i><p>Belum ada data UMKM untuk Holbung.</p></div>
             @endforelse
         </div>
     </div>
@@ -368,7 +368,7 @@
         <div class="section-title" data-aos="fade-up">
             <h2>Penginapan</h2>
             <div class="divider"></div>
-            <p>Rekomendasi tempat menginap di sekitar Sihotang.</p>
+            <p>Rekomendasi tempat menginap di sekitar Holbung.</p>
         </div>
         <div class="grid-penginapan">
             @forelse($penginapan as $item)
@@ -399,7 +399,7 @@
                     </div>
                 </div>
             @empty
-                <div class="empty-state"><i class="fas fa-hotel"></i><p>Belum ada data penginapan untuk Sihotang.</p></div>
+                <div class="empty-state"><i class="fas fa-hotel"></i><p>Belum ada data penginapan untuk Holbung.</p></div>
             @endforelse
         </div>
     </div>
@@ -410,7 +410,7 @@
         <div class="section-title" data-aos="fade-up">
             <h2>Fasilitas</h2>
             <div class="divider"></div>
-            <p>Fasilitas pendukung wisata di Sihotang.</p>
+            <p>Fasilitas pendukung wisata di Holbung.</p>
         </div>
         <div class="grid-fasilitas">
             @forelse($fasilitas as $item)
@@ -437,7 +437,7 @@
                     </div>
                 </div>
             @empty
-                <div class="empty-state"><i class="fas fa-concierge-bell"></i><p>Belum ada data fasilitas untuk Sihotang.</p></div>
+                <div class="empty-state"><i class="fas fa-concierge-bell"></i><p>Belum ada data fasilitas untuk Holbung.</p></div>
             @endforelse
         </div>
     </div>
@@ -448,15 +448,15 @@
         <div class="section-title" data-aos="fade-up">
             <h2>Lokasi & Akses</h2>
             <div class="divider"></div>
-            <p>Rute praktis menuju Sihotang.</p>
+            <p>Rute praktis menuju Holbung.</p>
         </div>
         <div class="maps-container" data-aos="fade-up">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127645.46001033459!2d98.700731!3d2.621083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031d060f0e3180b%3A0xb561ba45f008aa18!2sPulau%20Sihotang!5e0!3m2!1sid!2sid!4v1778767596787!5m2!1sid!2sid" width="100%" height="420" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127645.46001033459!2d98.700731!3d2.621083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031d060f0e3180b%3A0xb561ba45f008aa18!2sPulau%20Holbung!5e0!3m2!1sid!2sid!4v1778767596787!5m2!1sid!2sid" width="100%" height="420" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
         <div class="info-rute" data-aos="fade-up">
-            <h4><i class="fas fa-location-dot"></i> Rute Menuju Sihotang</h4>
-            <p><strong>Dari Pangururan:</strong> Perjalanan darat sekitar 40 menit menuju Sihotang melalui Jalan Lintas Samosir.</p>
-            <p><strong>Dari Tomok:</strong> Sekitar 50 menit perjalanan darat menuju kawasan budaya dan alam Sihotang.</p>
+            <h4><i class="fas fa-location-dot"></i> Rute Menuju Holbung</h4>
+            <p><strong>Dari Pangururan:</strong> Perjalanan darat sekitar 40 menit menuju Holbung melalui Jalan Lintas Samosir.</p>
+            <p><strong>Dari Tomok:</strong> Sekitar 50 menit perjalanan darat menuju kawasan budaya dan alam Holbung.</p>
             <p><strong>Jam Operasional:</strong> 08.00 - 18.00 WIB setiap hari.</p>
         </div>
     </div>
@@ -464,7 +464,7 @@
 
 <section class="cta">
     <div class="container" data-aos="fade-up">
-        <h3>Kunjungi Sihotang</h3>
+        <h3>Kunjungi Holbung</h3>
         <div class="divider"></div>
         <p>Nikmati keindahan Danau Toba dan budaya Batak yang autentik.</p>
         <a href="{{ url('/') }}" class="cta-btn">Kembali ke Beranda</a>
@@ -485,7 +485,7 @@
                 </div>
             </div>
             <div class="footer-info">
-                <p><i class="fas fa-map-marker-alt"></i> Pulau Sihotang, Kabupaten Samosir</p>
+                <p><i class="fas fa-map-marker-alt"></i> Pulau Holbung, Kabupaten Samosir</p>
                 <p><i class="fas fa-clock"></i> Buka Setiap Hari: 08.00 - 18.00 WIB</p>
             </div>
         </div>
@@ -525,7 +525,7 @@
 </body>
 </html>
 
-        <h3>Kunjungi Sihotang</h3>
+        <h3>Kunjungi Holbung</h3>
 
         <div class="divider"></div>
 

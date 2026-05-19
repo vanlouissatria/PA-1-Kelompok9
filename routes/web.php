@@ -75,6 +75,9 @@ Route::prefix('geosite')->name('geosite.')->group(function () {
     Route::get('/tele', [GeositeController::class, 'tele'])->name('tele');
     Route::get('/efrata', [GeositeController::class, 'efrata'])->name('efrata');
     Route::get('/sihotang', [GeositeController::class, 'sihotang'])->name('sihotang');
+    Route::get('/sibea-bea', [GeositeController::class, 'sibeaBea'])->name('sibea-bea');
+    Route::get('/bea', [GeositeController::class, 'bea'])->name('bea');
+    Route::get('/holbung', [GeositeController::class, 'holbung'])->name('holbung');
 });
 
 // OTHER PAGES
