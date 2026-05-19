@@ -1232,9 +1232,9 @@
 <section class="section section-light">
     <div class="container">
         <div class="section-title" data-aos="fade-up" data-aos-duration="800">
-            <h2>Lokasi 3 Geosite</h2>
+            <h2>Lokasi 5 Geosite</h2>
             <div class="divider"></div>
-            <p>Tele, Efrata, Sihotang</p>
+            <p>Tele, Efrata, Sihotang, Sibeabea, Holbung</p>
         </div>
         
         <div class="map-card" data-aos="zoom-in" data-aos-duration="1000">
