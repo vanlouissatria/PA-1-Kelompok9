@@ -604,36 +604,36 @@
             opacity: 0.6;
         }
 
- /* ==================== EMPTY STATE ==================== */
+/* ==================== EMPTY STATE ==================== */
 .empty-state {
+    grid-column: 1 / -1; /* MEMAKSA ELEMEN MEMENUHI SEMUA KOLOM GRID */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 250px; /* Memberikan ruang tinggi vertikal agar terlihat pas di tengah */
+    min-height: 250px;
     width: 100%;
-    max-width: 500px;  /* Batas lebar kartu agar mirip seperti di gambar */
-    margin: 40px auto; /* Membuat posisi kartu otomatis berada di tengah container secara horizontal */
+    max-width: 550px;     /* Batas lebar kotak putih */
+    margin: 30px auto;    /* Memposisikan kotak tepat di tengah-tengah layar */
     padding: 40px;
     background: #ffffff;
-    border-radius: 24px; /* Sudut melengkung halus seperti di gambar */
-    box-shadow: var(--shadow);
-    color: var(--gray);
+    border-radius: 24px;  /* Kelengkungan sudut seperti di gambar */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Shadow halus */
 }
 
-/* Mengatur jarak ikon agar pas di atas teks */
+/* Mengatur ukuran dan jarak ikon */
 .empty-state i {
     font-size: 3.5rem;
-    color: #D4AF37; /* Menggunakan warna gold bawaan root */
+    color: #D4AF37;       /* Warna emas ikon hotel/store */
     margin-bottom: 16px;
 }
 
-/* Mengatur teks pesan empty state */
+/* Mengatur style teks */
 .empty-state p {
     font-size: 1rem;
     font-weight: 500;
-    color: #555555;
+    color: #6c757d;
     margin: 0;
 }
         /* ==================== RESPONSIVE ==================== */
