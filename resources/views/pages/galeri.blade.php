@@ -5,11 +5,10 @@
 @section('content')
 
 <style>
-    /* Hero Section */
+    /* HERO SECTION */
     .gallery-hero {
         background: linear-gradient(135deg, #003366 0%, #1a4a7a 100%);
-        padding: 80px 0 50px;
-        margin-top: 70px;
+        padding: 120px 0 60px;
         text-align: center;
         position: relative;
         overflow: hidden;
@@ -27,65 +26,70 @@
     }
 
     @keyframes slowRotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
     }
 
-    .gallery-hero-content {
+    .gallery-hero .container {
         position: relative;
         z-index: 2;
     }
 
     .gallery-hero h1 {
-        font-size: 2.8rem;
+        font-size: 3rem;
         font-weight: 700;
-        font-family: 'Playfair Display', serif;
         color: white;
         margin-bottom: 10px;
+        font-family: 'Playfair Display', serif;
         letter-spacing: 2px;
     }
 
     .gallery-hero p {
-        font-size: 0.85rem;
-        letter-spacing: 3px;
-        text-transform: uppercase;
         color: rgba(255,255,255,0.8);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 0.85rem;
     }
 
+    /* GALLERY SECTION */
     .gallery-section {
-        padding: 60px 0 100px;
+        padding: 70px 0 100px;
         background: linear-gradient(135deg, #f8fafc 0%, #eef2f8 100%);
         min-height: 100vh;
     }
 
-    .container {
+    .gallery-container {
         max-width: 1400px;
-        margin: 0 auto;
+        margin: auto;
         padding: 0 24px;
     }
 
-    /* Stack Container */
+    /* STACK CONTAINER */
     .stack-container {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 0;
-        padding: 20px 0;
-        position: relative;
+        padding: 30px 0;
     }
 
-    /* Slip Card */
+    /* CARD */
     .slip-card {
         position: relative;
         width: 280px;
         background: white;
-        border-radius: 16px;
+        border-radius: 18px;
         overflow: hidden;
         cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.02);
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
         margin-left: -60px;
-        display: block;
+        text-decoration: none;
+        color: inherit;
     }
 
     .slip-card:first-child {
@@ -93,21 +97,22 @@
     }
 
     .slip-card:hover {
-        transform: translateY(-20px) scale(1.02);
-        z-index: 100;
-        box-shadow: 0 25px 40px -10px rgba(0,0,0,0.25);
+        transform: translateY(-15px) scale(1.02);
+        z-index: 10;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     }
 
     .slip-card:hover ~ .slip-card {
         transform: translateX(20px);
     }
 
+    /* IMAGE */
     .slip-image {
         position: relative;
         width: 100%;
         height: 320px;
         overflow: hidden;
-        background: linear-gradient(135deg, #1e293b, #0f172a);
+        background: #ddd;
     }
 
     .slip-image img {
@@ -118,16 +123,21 @@
     }
 
     .slip-card:hover .slip-image img {
-        transform: scale(1.05);
+        transform: scale(1.06);
     }
 
+    /* OVERLAY */
     .slip-overlay {
         position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-        padding: 30px 16px 16px;
+        inset: 0;
+        background: linear-gradient(
+            to top,
+            rgba(0,0,0,0.75),
+            rgba(0,0,0,0.1)
+        );
+        display: flex;
+        align-items: flex-end;
+        padding: 20px;
         opacity: 0;
         transition: opacity 0.3s ease;
     }
@@ -136,40 +146,46 @@
         opacity: 1;
     }
 
+    .slip-overlay-content {
+        color: white;
+    }
+
     .slip-category {
         display: inline-block;
         background: #c6a43b;
         color: #003366;
-        padding: 3px 10px;
-        border-radius: 20px;
-        font-size: 0.6rem;
+        padding: 4px 10px;
+        border-radius: 30px;
+        font-size: 0.65rem;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        margin-bottom: 8px;
     }
 
-    .slip-title-overlay {
-        color: white;
-        font-size: 0.85rem;
+    .slip-overlay-title {
+        font-size: 0.9rem;
         font-weight: 600;
-        margin-top: 8px;
-        line-height: 1.3;
+        line-height: 1.4;
     }
 
+    /* CARD INFO */
     .slip-info {
-        padding: 16px;
-        background: white;
+        padding: 18px;
         position: relative;
-        border-top: 1px solid #f0f0f0;
     }
 
     .slip-line {
         position: absolute;
         top: 0;
         left: 0;
-        right: 0;
         height: 3px;
-        background: linear-gradient(90deg, #c6a43b, #e8c45a, #c6a43b);
+        width: 100%;
+        background: linear-gradient(
+            90deg,
+            #c6a43b,
+            #e8c45a,
+            #c6a43b
+        );
         transform: scaleX(0);
         transition: transform 0.3s ease;
     }
@@ -179,223 +195,206 @@
     }
 
     .slip-title {
-        font-size: 0.9rem;
+        font-size: 1rem;
         font-weight: 600;
         color: #1e293b;
-        margin-bottom: 6px;
-        line-height: 1.4;
+        margin-bottom: 10px;
+        line-height: 1.5;
     }
 
     .slip-location {
-        font-size: 0.7rem;
-        color: #94a3b8;
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 6px;
+        color: #64748b;
+        font-size: 0.8rem;
     }
 
     .slip-location i {
-        font-size: 0.65rem;
         color: #c6a43b;
     }
 
-    .slip-number {
-        position: absolute;
-        bottom: 12px;
-        right: 16px;
-        font-size: 0.6rem;
-        color: #cbd5e1;
-        font-family: monospace;
-        letter-spacing: 1px;
-    }
-
-    /* Modal */
-    .modal-overlay { 
-        position: fixed; 
-        inset: 0; 
-        background: rgba(0,0,0,0.96); 
-        z-index: 9999; 
-        display: none; 
-        align-items: center; 
-        justify-content: center; 
-        backdrop-filter: blur(12px);
-    }
-    .modal-box { 
-        background: #1a1a1a; 
-        width: 90%; 
-        max-width: 1000px; 
-        display: grid; 
-        grid-template-columns: 1.2fr 1fr; 
-        border-radius: 20px; 
-        overflow: hidden; 
-        animation: modalFadeIn 0.4s ease;
-    }
-    @keyframes modalFadeIn {
-        from { opacity: 0; transform: scale(0.96); }
-        to { opacity: 1; transform: scale(1); }
-    }
-    .modal-img-part { 
-        background: #0a0a0a;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-    }
-    .modal-img-part img { 
-        width: 100%; 
-        max-height: 70vh; 
-        object-fit: contain; 
-    }
-    .modal-text-part { 
-        padding: 35px; 
-        color: white; 
-        text-align: left;
-        background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
-    }
-    .close-btn { 
-        position: absolute; 
-        top: 20px; 
-        right: 20px; 
-        color: white; 
-        font-size: 1.5rem; 
-        cursor: pointer; 
-        transition: all 0.3s ease;
-        z-index: 10000;
-        width: 40px;
-        height: 40px;
-        background: rgba(0,0,0,0.5);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        backdrop-filter: blur(5px);
-    }
-    .close-btn:hover { 
-        background: #c6a43b; 
-        color: #003366; 
-        transform: rotate(90deg);
-    }
-    .modal-text-part small {
-        color: #c6a43b;
-        letter-spacing: 2px;
-        font-size: 0.7rem;
-        text-transform: uppercase;
-    }
-    .modal-text-part h2 {
-        font-size: 1.5rem;
-        margin: 12px 0;
-        font-family: 'Playfair Display', serif;
-    }
-    .modal-text-part p {
-        color: #bbb;
-        line-height: 1.7;
-        font-size: 0.85rem;
-    }
-
+    /* EMPTY STATE */
     .empty-gallery {
         text-align: center;
-        padding: 80px;
         background: white;
-        border-radius: 16px;
+        padding: 80px 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
+
     .empty-gallery i {
-        font-size: 3rem;
+        font-size: 4rem;
         color: #cbd5e1;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
     }
 
-    @media (max-width: 1200px) {
-        .slip-card { width: 240px; }
-        .slip-image { height: 280px; }
+    .empty-gallery h5 {
+        color: #1e293b;
+        margin-bottom: 10px;
     }
 
+    .empty-gallery p {
+        color: #64748b;
+    }
+
+    /* PAGINATION */
+    .pagination-wrapper {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* RESPONSIVE */
     @media (max-width: 992px) {
+
         .stack-container {
-            justify-content: center;
-            flex-wrap: wrap;
             gap: 20px;
         }
+
         .slip-card {
-            margin-left: 0 !important;
+            margin-left: 0;
             width: 260px;
         }
-        .slip-card:hover ~ .slip-card { transform: none; }
-        .slip-card:hover { transform: translateY(-10px); }
+
+        .slip-card:hover ~ .slip-card {
+            transform: none;
+        }
     }
 
-    @media (max-width: 768px) { 
-        .modal-box { 
-            grid-template-columns: 1fr; 
-            max-height: 85vh;
-            overflow-y: auto;
+    @media (max-width: 768px) {
+
+        .gallery-hero h1 {
+            font-size: 2.2rem;
         }
-        .gallery-hero h1 { font-size: 2rem; }
-        .stack-container { gap: 16px; }
-        .slip-card { width: calc(50% - 8px); }
-        .slip-image { height: 260px; }
+
+        .slip-card {
+            width: calc(50% - 10px);
+        }
+
+        .slip-image {
+            height: 260px;
+        }
     }
 
     @media (max-width: 560px) {
-        .slip-card { width: 100%; }
-        .slip-image { height: 280px; }
+
+        .slip-card {
+            width: 100%;
+        }
+
+        .slip-image {
+            height: 280px;
+        }
     }
 </style>
 
-<!-- HERO SECTION -->
-<section class="galeri-hero">
+<!-- HERO -->
+<section class="gallery-hero">
     <div class="container">
         <h1>Galeri Foto</h1>
-        <p>Dokumentasi keindahan Geopark Danau Toba</p>
+        <p>Dokumentasi Keindahan Geopark Danau Toba</p>
     </div>
 </section>
 
-<div class="container">
-    <div class="galeri-grid">
-        @forelse($galeri as $item)
-        <div class="galeri-card" onclick="window.location.href='{{ url('/galeri/'.$item->slug) }}'">
-            <div class="image-wrapper">
+<!-- GALLERY -->
+<section class="gallery-section">
+    <div class="gallery-container">
+
+        <div class="stack-container">
+
+            @forelse($galeri as $item)
+
                 @php
                     $imgSrc = '';
-                    if($item->gambar) {
-                        if(file_exists(public_path($item->gambar))) {
+
+                    if ($item->gambar) {
+
+                        if (file_exists(public_path($item->gambar))) {
                             $imgSrc = asset($item->gambar);
-                        } elseif(file_exists(public_path('storage/' . $item->gambar))) {
+
+                        } elseif (file_exists(public_path('storage/' . $item->gambar))) {
                             $imgSrc = asset('storage/' . $item->gambar);
+
                         } else {
                             $imgSrc = asset('image/default.jpg');
                         }
+
                     } else {
                         $imgSrc = asset('image/default.jpg');
                     }
                 @endphp
-                <img src="{{ $imgSrc }}" alt="{{ $item->judul }}">
-                <div class="overlay">
-                    <i class="fas fa-search-plus"></i>
+
+                <a href="{{ url('/galeri/' . $item->slug) }}"
+                   class="slip-card">
+
+                    <div class="slip-image">
+
+                        <img src="{{ $imgSrc }}"
+                             alt="{{ $item->judul }}">
+
+                        <div class="slip-overlay">
+                            <div class="slip-overlay-content">
+
+                                <span class="slip-category">
+                                    Galeri
+                                </span>
+
+                                <div class="slip-overlay-title">
+                                    {{ Str::limit($item->judul, 40) }}
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="slip-info">
+
+                        <div class="slip-line"></div>
+
+                        <h5 class="slip-title">
+                            {{ Str::limit($item->judul, 50) }}
+                        </h5>
+
+                        <div class="slip-location">
+                            <i class="fas fa-eye"></i>
+                            {{ $item->views ?? 0 }} views
+                        </div>
+
+                    </div>
+
+                </a>
+
+            @empty
+
+                <div class="col-12">
+                    <div class="empty-gallery">
+
+                        <i class="fas fa-images"></i>
+
+                        <h5>Belum ada foto galeri</h5>
+
+                        <p>
+                            Silakan cek kembali nanti
+                        </p>
+
+                    </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">{{ Str::limit($item->judul, 50) }}</h5>
-                <p class="card-text">{{ Str::limit($item->deskripsi, 80) }}</p>
-                <small class="text-muted">
-                    <i class="fas fa-eye"></i> {{ $item->views ?? 0 }} views
-                </small>
-            </div>
+
+            @endforelse
+
         </div>
-        @empty
-        <div class="col-12">
-            <div class="empty-state">
-                <i class="fas fa-images fa-3x mb-3 text-muted"></i>
-                <h5>Belum ada foto galeri</h5>
-                <p>Silakan cek kembali nanti</p>
+
+        @if($galeri->hasPages())
+
+            <div class="pagination-wrapper">
+                {{ $galeri->links() }}
             </div>
-        </div>
-        @endforelse
+
+        @endif
+
     </div>
-    
-    @if($galeri->hasPages())
-    <div class="pagination">
-        {{ $galeri->links() }}
-    </div>
-    @endif
-</div>
+</section>
+
 @endsection

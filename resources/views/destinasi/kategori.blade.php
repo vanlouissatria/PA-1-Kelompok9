@@ -122,16 +122,24 @@
     /* Empty State */
     .empty-state {
         grid-column: 1 / -1;
+        width: 100%;
+        max-width: 640px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         text-align: center;
         padding: 60px 20px;
         background: white;
         border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
     
     .empty-state i {
         font-size: 3rem;
         color: #ccc;
-        margin-bottom: 15px;
+        margin-bottom: 18px;
     }
     
     .empty-state h3 {
