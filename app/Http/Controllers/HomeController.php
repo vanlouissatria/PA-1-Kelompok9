@@ -3,33 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\Galeri;
-use App\Models\KoleksiFoto;
+// Model KoleksiFoto sudah dihapus dari sini
 
 class HomeController extends Controller
 {
     public function index()
     {
-        // Hero Slider (5 foto)
-        $slide1 = KoleksiFoto::where('nama_foto', 'slide1.jpg')->first();
-        $slide2 = KoleksiFoto::where('nama_foto', 'slide2.jpg')->first();
-        $slide3 = KoleksiFoto::where('nama_foto', 'slide3.jpg')->first();
-        $slide4 = KoleksiFoto::where('nama_foto', 'slide4.jpg')->first();
-        $slide5 = KoleksiFoto::where('nama_foto', 'slide5.jpg')->first();
+        // Hero Slider (Menggunakan path string statis langsung)
+        $slide1 = 'assets/img/slide1.jpg';
+        $slide2 = 'assets/img/slide2.jpg';
+        $slide3 = 'assets/img/slide3.jpg';
+        $slide4 = 'assets/img/slide4.jpg';
+        $slide5 = 'assets/img/slide5.jpg';
         
         // About Image
-        $aboutImage = KoleksiFoto::where('nama_foto', 'berita.jpg')->first();
+        $aboutImage = 'assets/img/berita.jpg';
         
-        // Destinasi Images
-        $destinasiMeat = KoleksiFoto::where('nama_foto', 'meat-detail.jpg')->first();
-        $destinasiBatu = KoleksiFoto::where('nama_foto', 'batu-detail.jpg')->first();
-        $destinasiLiang = KoleksiFoto::where('nama_foto', 'liang-detail.jpg')->first();
+        // Destinasi Images Path
+        $destinasiMeat = 'assets/img/meat-detail.jpg';
+        $destinasiBatu = 'assets/img/batu-detail.jpg';
+        $destinasiLiang = 'assets/img/liang-detail.jpg';
         
         // Data destinasi
         $destinasi = [
             (object)[
                 'slug' => 'meat',
                 'nama' => 'Meat',
-                'foto' => $destinasiMeat,
+                'foto' => $destinasiMeat, // Sekarang berisi string path
                 'lokasi' => 'Desa Tampahan, Kecamatan Tampahan, Kabupaten Toba',
                 'deskripsi' => 'Desa Meat adalah desa wisata di tepi Danau Toba.',
                 'tags' => ['Makam Raja Hunsa', 'Tari Tortor', 'Tenun Ulos'],
@@ -38,7 +38,7 @@ class HomeController extends Controller
             (object)[
                 'slug' => 'batu-bahisan',
                 'nama' => 'Batu Bahisan',
-                'foto' => $destinasiBatu,
+                'foto' => $destinasiBatu, // Sekarang berisi string path
                 'lokasi' => 'Desa Aek Bolon Jae, Balige',
                 'deskripsi' => 'Situs batu bersejarah dengan nilai budaya Batak.',
                 'tags' => ['Formasi Batuan Unik', 'Spot Fotografi'],
@@ -47,7 +47,7 @@ class HomeController extends Controller
             (object)[
                 'slug' => 'liang-sipege',
                 'nama' => 'Liang Sipege',
-                'foto' => $destinasiLiang,
+                'foto' => $destinasiLiang, // Sekarang berisi string path
                 'lokasi' => 'Hutagaol Peatalun, Balige',
                 'deskripsi' => 'Gua alam dengan stalaktit dan stalakmit.',
                 'tags' => ['Goa Alami', 'Caving'],
@@ -55,7 +55,7 @@ class HomeController extends Controller
             ],
         ];
         
-        // Galeri untuk CRUD (6 foto terbaru)
+        // Galeri tetap aktif menggunakan model Galeri (6 foto terbaru)
         $galeri = Galeri::where('status', 1)
             ->orderBy('created_at', 'desc')
             ->take(6)
