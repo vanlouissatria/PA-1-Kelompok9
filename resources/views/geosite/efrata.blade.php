@@ -455,6 +455,44 @@
     </div>
 </section>
 
+<section id="lokasi" class="section" style="background: #f8fafc;">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Lokasi & Akses</h2>
+            <div class="divider"></div>
+            <p>Temukan rute menuju Air Terjun Efrata</p>
+        </div>
+        
+        <div class="maps-container" data-aos="fade-up">
+            <iframe 
+                src="http://googleusercontent.com/maps.google.com/4" 
+                width="100%" 
+                height="400" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        </div>
+        
+        <div class="info-rute" data-aos="fade-up">
+            <h4><i class="fas fa-location-dot"></i> Rute Menuju Air Terjun Efrata</h4>
+            <p><strong>Dari Pangururan:</strong> Berjarak sekitar 20 km dengan waktu tempuh kurang lebih 30-40 menit berkendara melewati jalan Lintas Tele-Pangururan menuju Desa Sosor Dolok.</p>
+            <p><strong>Dari Menara Pandang Tele:</strong> Jaraknya cukup dekat, hanya sekitar 15 km dengan waktu tempuh 25 menit menuruni perbukitan menuju arah Harian.</p>
+            <p><strong>Jam Operasional:</strong> 06.00 - 19.00 WIB (Setiap Hari)</p>
+            <p><strong>Tiket Masuk:</strong> Rp 10.000 - Rp 15.000 per orang.</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta" style="background: #002F5F; padding: 60px 0; text-align: center; color: white;">
+    <div class="container" data-aos="fade-up">
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 15px;">Kunjungi Efrata</h3>
+        <div class="divider" style="margin-bottom: 20px;"></div>
+        <p style="opacity: 0.9; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto;">Nikmati keindahan keasrian Air Terjun Efrata dan panorama alam yang autentik.</p>
+        <a href="{{ route('home') }}" class="cta-btn" style="display: inline-block; padding: 12px 35px; background: var(--gold); color: #002F5F; text-decoration: none; font-weight: 600; border-radius: 30px; transition: var(--transition);">Kembali ke Beranda</a>
+    </div>
+</section>
+
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-content">
@@ -469,12 +507,12 @@
                 </div>
             </div>
             <div class="footer-info">
-                <p><i class="fas fa-map-marker-alt"></i> Menara Pandang Tele, Kabupaten Samosir</p>
-                <p><i class="fas fa-clock"></i> Buka Setiap Hari: 08.00 - 18.00 WIB</p>
+                <p><i class="fas fa-map-marker-alt"></i> Air Terjun Efrata, Desa Sosor Dolok, Harian, Samosir</p>
+                <p><i class="fas fa-clock"></i> Buka Setiap Hari: 06.00 - 19.00 WIB</p>
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; 2026 Geopark Danau Toba. All rights reserved.
+            © 2026 Geopark Danau Toba. All rights reserved.
         </div>
     </div>
 </footer>
