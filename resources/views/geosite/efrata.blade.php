@@ -1,5 +1,3 @@
-<!-- resources/views/wisata/efrata.blade.php -->
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -123,12 +121,7 @@
         @media (max-width: 992px) { .sejarah-grid { grid-template-columns: 1fr; } .grid-umkm, .grid-penginapan, .grid-fasilitas { grid-template-columns: 1fr; } }
         @media (max-width: 768px) { .nav-menu { display: none; } .hamburger { display: block; } .hero { min-height: 55vh; } .hero-title { font-size: 2.2rem; } .section { padding: 55px 0; } .footer-info { text-align: center; } }
         @media (max-width: 576px) { .navbar { padding: 0; } .nav-container { padding: 14px 18px; } .hero-title { font-size: 1.8rem; } .hero-subtitle { font-size: 0.95rem; } }
-        .grid-umkm .empty-state,
-.grid-penginapan .empty-state,
-.grid-fasilitas .empty-state,
-.galeri-grid .empty-state {
-    grid-column: 1 / -1;
-}
+        .grid-umkm .empty-state, .grid-penginapan .empty-state, .grid-fasilitas .empty-state, .galeri-grid .empty-state { grid-column: 1 / -1; }
     </style>
 </head>
 <body>
@@ -160,7 +153,7 @@
 </div>
 
 <div class="mobile-overlay" id="mobileOverlay">
-    <div class="mobile-close" id="mobileClose">&times;</div>
+    <div class="mobile-close" id="mobileClose">×</div>
     <a href="{{ url('/') }}" class="mobile-link">Home</a>
     <a href="#sejarah" class="mobile-link">Sejarah</a>
     <a href="#informasi" class="mobile-link">Informasi</a>
@@ -397,64 +390,6 @@
     </div>
 </section>
 
-<section id="lokasi" class="section" style="background: var(--light);">
-    <div class="container">
-        <div class="section-title" data-aos="fade-up">
-            <h2>Lokasi & Akses</h2>
-            <div class="divider"></div>
-            <p>Rute dan informasi lokasi menuju Air Terjun Efrata.</p>
-        </div>
-        <div class="maps-container" data-aos="fade-up">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63479.01502924349!2d98.67868252580793!3d2.375320725649328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031bb3ef2cfd4d9%3A0x40e115a6f7ad8e59!2sAir%20Terjun%20Efrata!5e0!3m2!1sid!2sid!4v1778767596787!5m2!1sid!2sid" width="100%" height="420" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-        <div class="info-rute" data-aos="fade-up">
-            <h4><i class="fas fa-location-dot"></i> Rute menuju Efrata</h4>
-            <p><strong>Dari Medan:</strong> Perjalanan sekitar 5-6 jam menuju Parapat, dilanjutkan dengan perjalanan darat ke Samosir. Efrata dapat dicapai dari Pangururan dalam waktu sekitar 1 jam 15 menit.</p>
-            <p><strong>Dari Parapat:</strong> Naik kapal ferry ke Tomok, lalu melanjutkan perjalanan darat sekitar 1 jam 30 menit menuju Air Terjun Efrata.</p>
-            <p><strong>Jam Operasional:</strong> 08.00 - 18.00 WIB setiap hari.</p>
-        </div>
-    </div>
-</section>
-
-<section id="lokasi" class="section" style="background: #f8fafc;">
-    <div class="container">
-        <div class="section-title" data-aos="fade-up">
-            <h2>Lokasi & Akses</h2>
-            <div class="divider"></div>
-            <p>Temukan rute menuju Menara Pandang Tele</p>
-        </div>
-        
-        <div class="maps-container" data-aos="fade-up">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.4449733479133!2d98.65088637583683!3d2.3551523575306494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031dd7aee90d9fb%3A0xe67ca0df0df3c1ab!2sMenara%20Pandang%20Tele!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
-                width="100%" 
-                height="400" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy">
-            </iframe>
-        </div>
-        
-        <div class="info-rute" data-aos="fade-up">
-            <h4><i class="fas fa-location-dot"></i> Rute Menuju Menara Pandang Tele</h4>
-            <p><strong>Dari Medan:</strong> Perjalanan darat sekitar 5-6 jam melalui Parapat, kemudian menyeberang dengan feri ke Pulau Samosir (sekitar 45 menit). Setelah sampai di Pulau Samosir, perjalanan ke Menara Pandang Tele sekitar 1 jam dari Pelabuhan Tomok.</p>
-            <p><strong>Dari Pangururan:</strong> Hanya 22 km dengan waktu tempuh sekitar 40 menit melalui Jalan Lintas Tele–Pangururan.</p>
-            <p><strong>Dari Pelabuhan Tomok:</strong> Jarak sekitar 50 km dengan waktu tempuh 1.5 jam.</p>
-            <p><strong>Jam Operasional:</strong> 08.00 - 18.00 WIB (Setiap Hari)</p>
-            <p><strong>Tiket Masuk:</strong> Rp 15.000 - Rp 25.000 per orang.</p>
-        </div>
-    </div>
-</section>
-
-<section class="cta" style="background: #002F5F; padding: 60px 0; text-align: center; color: white;">
-    <div class="container" data-aos="fade-up">
-        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 15px;">Kunjungi Tele</h3>
-        <div class="divider" style="margin-bottom: 20px;"></div>
-        <p style="opacity: 0.9; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto;">Nikmati keindahan Danau Toba dan budaya Batak yang autentik.</p>
-        <a href="{{ route('home') }}" class="cta-btn" style="display: inline-block; padding: 12px 35px; background: var(--gold); color: #002F5F; text-decoration: none; font-weight: 600; border-radius: 30px; transition: var(--transition);">Kembali ke Beranda</a>
-    </div>
-</section>
-
 <section id="lokasi" class="section" style="background: #f8fafc;">
     <div class="container">
         <div class="section-title" data-aos="fade-up">
@@ -465,7 +400,7 @@
         
         <div class="maps-container" data-aos="fade-up">
             <iframe 
-                src="http://googleusercontent.com/maps.google.com/4" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63479.01502924349!2d98.67868252580793!3d2.375320725649328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031bb3ef2cfd4d9%3A0x40e115a6f7ad8e59!2sAir%20Terjun%20Efrata!5e0!3m2!1sid!2sid!4v1778767596787!5m2!1sid!2sid" 
                 width="100%" 
                 height="400" 
                 style="border:0;" 
@@ -497,9 +432,9 @@
     <div class="footer-container">
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="/image/logo/logobankindonesia.jpg" alt="Logo Bank Indonesia">
+                <img src="{{ asset('image/logo/logobankindonesia.jpg') }}" alt="Logo Bank Indonesia">
                 <div class="footer-divider"></div>
-                <img src="/image/logo/del.jpg" alt="Logo Del">
+                <img src="{{ asset('image/logo/del.jpg') }}" alt="Logo Del">
                 <div class="footer-divider"></div>
                 <div class="footer-text">
                     <h4>GEO<span>TOBA</span></h4>
