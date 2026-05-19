@@ -119,14 +119,8 @@ Route::controller(AuthController::class)->group(function () {
 Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 // WARISAN ALAM DAN BUDAYA
-Route::prefix('warisan')->name('admin.warisan.')->group(function () {
-    Route::get('/',          [AdminWarisanController::class, 'index'])->name('index');
-    Route::get('/create',    [AdminWarisanController::class, 'create'])->name('create');
-    Route::post('/',         [AdminWarisanController::class, 'store'])->name('store');
-    Route::get('/{id}/edit', [AdminWarisanController::class, 'edit'])->name('edit');
-    Route::put('/{id}',      [AdminWarisanController::class, 'update'])->name('update');
-    Route::delete('/{id}',   [AdminWarisanController::class, 'destroy'])->name('destroy');
-});   
+Route::resource('warisan', AdminWarisanController::class)->names('admin.warisan'); 
+
     // Dashboard
     Route::get('/', function () {
         $totalGaleri = DB::table('galeri')->count();
