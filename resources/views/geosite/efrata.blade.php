@@ -416,13 +416,52 @@
     </div>
 </section>
 
+<section id="lokasi" class="section" style="background: #f8fafc;">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Lokasi & Akses</h2>
+            <div class="divider"></div>
+            <p>Temukan rute menuju Menara Pandang Tele</p>
+        </div>
+        
+        <div class="maps-container" data-aos="fade-up">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.4449733479133!2d98.65088637583683!3d2.3551523575306494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031dd7aee90d9fb%3A0xe67ca0df0df3c1ab!2sMenara%20Pandang%20Tele!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
+                width="100%" 
+                height="400" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        </div>
+        
+        <div class="info-rute" data-aos="fade-up">
+            <h4><i class="fas fa-location-dot"></i> Rute Menuju Menara Pandang Tele</h4>
+            <p><strong>Dari Medan:</strong> Perjalanan darat sekitar 5-6 jam melalui Parapat, kemudian menyeberang dengan feri ke Pulau Samosir (sekitar 45 menit). Setelah sampai di Pulau Samosir, perjalanan ke Menara Pandang Tele sekitar 1 jam dari Pelabuhan Tomok.</p>
+            <p><strong>Dari Pangururan:</strong> Hanya 22 km dengan waktu tempuh sekitar 40 menit melalui Jalan Lintas Tele–Pangururan.</p>
+            <p><strong>Dari Pelabuhan Tomok:</strong> Jarak sekitar 50 km dengan waktu tempuh 1.5 jam.</p>
+            <p><strong>Jam Operasional:</strong> 08.00 - 18.00 WIB (Setiap Hari)</p>
+            <p><strong>Tiket Masuk:</strong> Rp 15.000 - Rp 25.000 per orang.</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta" style="background: #002F5F; padding: 60px 0; text-align: center; color: white;">
+    <div class="container" data-aos="fade-up">
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 15px;">Kunjungi Tele</h3>
+        <div class="divider" style="margin-bottom: 20px;"></div>
+        <p style="opacity: 0.9; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto;">Nikmati keindahan Danau Toba dan budaya Batak yang autentik.</p>
+        <a href="{{ route('home') }}" class="cta-btn" style="display: inline-block; padding: 12px 35px; background: var(--gold); color: #002F5F; text-decoration: none; font-weight: 600; border-radius: 30px; transition: var(--transition);">Kembali ke Beranda</a>
+    </div>
+</section>
+
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="{{ asset('image/logo/logobankindonesia.jpg') }}" alt="Logo BI">
+                <img src="/image/logo/logobankindonesia.jpg" alt="Logo Bank Indonesia">
                 <div class="footer-divider"></div>
-                <img src="{{ asset('image/logo/del.jpg') }}" alt="Logo Del">
+                <img src="/image/logo/del.jpg" alt="Logo Del">
                 <div class="footer-divider"></div>
                 <div class="footer-text">
                     <h4>GEO<span>TOBA</span></h4>
@@ -430,42 +469,32 @@
                 </div>
             </div>
             <div class="footer-info">
-                <p><i class="fas fa-map-marker-alt"></i> Kecamatan Sianjur Mula-Mula, Kabupaten Samosir</p>
+                <p><i class="fas fa-map-marker-alt"></i> Menara Pandang Tele, Kabupaten Samosir</p>
                 <p><i class="fas fa-clock"></i> Buka Setiap Hari: 08.00 - 18.00 WIB</p>
             </div>
         </div>
-        <div class="footer-bottom">&copy; 2026 Geopark Danau Toba. All rights reserved.</div>
+        <div class="footer-bottom">
+            &copy; 2026 Geopark Danau Toba. All rights reserved.
+        </div>
     </div>
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    AOS.init({ duration: 700, once: true, offset: 50, disable: 'mobile' });
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+
+    // Mobile Menu Logic
     const hamburger = document.getElementById('hamburger');
     const mobileOverlay = document.getElementById('mobileOverlay');
     const mobileClose = document.getElementById('mobileClose');
-    const closeMenu = () => { mobileOverlay.classList.remove('active'); document.body.style.overflow = ''; };
-    hamburger.addEventListener('click', () => { mobileOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; });
-    mobileClose.addEventListener('click', closeMenu);
-    document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', closeMenu));
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link, .mobile-link');
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const top = section.offsetTop - 120;
-            if(window.scrollY >= top) current = section.getAttribute('id');
-        });
-        navLinks.forEach(link => { link.classList.remove('active'); if(link.getAttribute('href') === `#${current}`) link.classList.add('active'); });
-    });
-    document.querySelectorAll('.nav-link[href^="#"], .mobile-link[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if(target) target.scrollIntoView({ behavior: 'smooth' });
-            closeMenu();
-        });
-    });
+
+    if(hamburger && mobileOverlay && mobileClose) {
+        hamburger.addEventListener('click', () => mobileOverlay.classList.add('active'));
+        mobileClose.addEventListener('click', () => mobileOverlay.classList.remove('active'));
+    }
 </script>
 </body>
 </html>
