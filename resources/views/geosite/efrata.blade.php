@@ -400,7 +400,7 @@
         
         <div class="maps-container" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 25px; max-width: 1000px; margin-left: auto; margin-right: auto;">
             <iframe 
-                src="https://maps.google.com/?cid=5387906330743598029&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.5362541489675!2d98.61466037583687!3d2.5280208381270275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031d0ead7abcb91%3A0x4ac3b04debcedbcd!2sAir%20Terjun%20Efrata!5e0!3m2!1sid!2sid!4v1716120000000!5m2!1sid!2sid"
                 width="100%" 
                 height="400" 
                 style="border:0; display: block;" 
