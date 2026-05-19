@@ -7,7 +7,7 @@
     @keyframes fadeInUp {
         from {
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(40px);
         }
         to {
             opacity: 1;
@@ -57,13 +57,11 @@
         }
     }
     
-    @keyframes shimmer {
-        0% {
-            background-position: -1000px 0;
-        }
-        100% {
-            background-position: 1000px 0;
-        }
+    /* Perbaikan Efek Shimmer yang Lembut & Aman */
+    @keyframes shimmerOverlay {
+        0% { opacity: 0.3; }
+        50% { opacity: 0.5; }
+        100% { opacity: 0.3; }
     }
     
     @keyframes float {
@@ -76,12 +74,8 @@
     }
     
     @keyframes rotateSlow {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
     }
     
     @keyframes borderGlow {
@@ -90,17 +84,6 @@
         }
         50% {
             box-shadow: 0 0 20px rgba(198, 164, 59, 0.8);
-        }
-    }
-    
-    @keyframes slideInRight {
-        from {
-            opacity: 0;
-            transform: translateX(100px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
         }
     }
     
@@ -147,7 +130,7 @@
         width: 100%;
         height: 100%;
         background: linear-gradient(135deg, rgba(0,51,102,0.4) 0%, rgba(0,102,153,0.2) 100%);
-        animation: shimmer 3s infinite;
+        animation: shimmerOverlay 4s infinite ease-in-out;
     }
     
     .slide-1 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/home/tele1.jpg'); }
@@ -159,7 +142,7 @@
     .hero-content {
         position: absolute;
         z-index: 10;
-        bottom: 20%;
+        bottom: 25%;
         left: 0;
         right: 0;
         text-align: center;
@@ -239,11 +222,6 @@
         transform: translateY(-3px);
         letter-spacing: 0.3em;
         animation: pulse 0.5s ease;
-    }
-    
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(40px); }
-        to { opacity: 1; transform: translateY(0); }
     }
     
     .slider-dots {
@@ -372,7 +350,6 @@
         color: #003366;
         position: relative;
         display: inline-block;
-        animation: fadeInUp 0.8s ease;
     }
     
     .section-title h2::before {
@@ -424,7 +401,6 @@
         margin: 20px auto 0;
         font-size: 0.85rem;
         line-height: 1.6;
-        animation: fadeInUp 0.8s ease 0.2s both;
     }
     
     /* ==================== STATS ==================== */
@@ -716,48 +692,6 @@
         transform: translateX(10px);
     }
     
-    .destinasi-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-bottom: 30px;
-    }
-    
-    .destinasi-tags span {
-        background: rgba(0, 51, 102, 0.1);
-        padding: 5px 16px;
-        font-size: 0.7rem;
-        color: #003366;
-        border-radius: 30px;
-        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        cursor: pointer;
-        font-weight: 500;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .destinasi-tags span::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(198,164,59,0.3), transparent);
-        transition: left 0.4s ease;
-    }
-    
-    .destinasi-tags span:hover::before {
-        left: 100%;
-    }
-    
-    .destinasi-tags span:hover {
-        background: #c6a43b;
-        color: #003366;
-        transform: translateY(-5px) scale(1.05);
-        box-shadow: 0 5px 15px rgba(198,164,59,0.3);
-    }
-    
     .destinasi-link {
         display: inline-block;
         border: 1px solid #c6a43b;
@@ -798,240 +732,11 @@
         box-shadow: 0 8px 20px rgba(198,164,59,0.3);
     }
     
-    /* ==================== PETA LOKASI ==================== */
-    .map-card {
-        border-radius: 24px;
-        overflow: hidden;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.04);
-        border: 1px solid #f0f0f0;
-        background: white;
-        margin-bottom: 30px;
-        transition: all 0.5s ease;
-    }
-    
-    .map-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 18px 35px rgba(0,0,0,0.08);
-    }
-    
-    .map-card iframe {
-        width: 100%;
-        height: 550px;
-        border: 0;
-    }
-    
-    .map-info {
-        padding: 30px 35px;
-        text-align: center;
-    }
-    
-    .maps-locations {
-        display: flex;
-        gap: 30px;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 100%;
-        margin-bottom: 20px;
-    }
-    
-    .maps-location-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        background: rgba(255,255,255,0.1);
-        padding: 10px 24px;
-        border-radius: 50px;
-        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        cursor: pointer;
-        border: 1px solid transparent;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .maps-location-item::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-        transition: left 0.4s ease;
-    }
-    
-    .maps-location-item:hover::before {
-        left: 100%;
-    }
-    
-    .maps-location-item:hover {
-        background: #c6a43b;
-        transform: translateY(-5px) scale(1.05);
-        border-color: rgba(255,255,255,0.3);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
-    
-    .maps-location-item i {
-        font-size: 1rem;
-        color: #c6a43b;
-        transition: all 0.3s ease;
-    }
-    
-    .maps-location-item:hover i {
-        color: #003366;
-        transform: rotate(360deg) scale(1.2);
-    }
-    
-    .maps-location-item span {
-        font-size: 0.85rem;
-        font-weight: 500;
-        transition: all 0.3s ease;
-    }
-    
-    .maps-location-item:hover span {
-        letter-spacing: 1px;
-    }
-    
-    .maps-note {
-        font-size: 0.75rem;
-        color: rgba(255,255,255,0.7);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        transition: all 0.3s ease;
-    }
-    
-    .maps-note:hover {
-        transform: translateX(5px);
-        color: white;
-    }
-    
-    .maps-note i {
-        color: #c6a43b;
-        animation: pulse 2s infinite;
-    }
-    
-    /* ==================== CTA ==================== */
-    .cta-section {
-        background: linear-gradient(135deg, #003366 0%, #0a4a7a 50%, #005c8a 100%);
-        padding: 80px 0;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .cta-section::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
-        animation: rotate 20s linear infinite;
-    }
-    
-    .cta-section::after {
-        content: '✦';
-        position: absolute;
-        font-size: 3rem;
-        color: rgba(255,255,255,0.05);
-        bottom: 20px;
-        right: 30px;
-        animation: float 3s ease-in-out infinite;
-    }
-    
-    @keyframes rotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
-    
-    .cta-content { 
-        max-width: 600px; 
-        margin: 0 auto;
-        position: relative;
-        z-index: 2;
-    }
-    
-    .cta-content h3 {
-        font-size: 2rem;
-        font-family: 'Cormorant Garamond', serif;
-        font-weight: 500;
-        margin-bottom: 20px;
-        color: white;
-        animation: fadeInUp 0.8s ease;
-    }
-    
-    .cta-content .divider {
-        width: 50px;
-        height: 2px;
-        background: #c6a43b;
-        margin: 0 auto 25px;
-        transition: width 0.5s ease;
-    }
-    
-    .cta-content:hover .divider {
-        width: 100px;
-    }
-    
-    .cta-content p {
-        color: rgba(255, 255, 255, 0.8);
-        margin-bottom: 35px;
-        font-size: 0.9rem;
-        line-height: 1.7;
-        animation: fadeInUp 0.8s ease 0.2s both;
-    }
-    
-    .cta-btn {
-        display: inline-block;
-        background: #c6a43b;
-        color: #003366;
-        padding: 14px 42px;
-        font-size: 0.75rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        text-decoration: none;
-        border-radius: 40px;
-        font-weight: 600;
-        position: relative;
-        overflow: hidden;
-        animation: fadeInUp 0.8s ease 0.4s both;
-    }
-    
-    .cta-btn::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.5);
-        transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
-    }
-    
-    .cta-btn:hover::before {
-        width: 300px;
-        height: 300px;
-    }
-    
-    .cta-btn:hover {
-        background: white;
-        color: #003366;
-        transform: translateY(-5px) scale(1.05);
-        letter-spacing: 0.3em;
-        box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-    }
-    
     /* ==================== RESPONSIVE ==================== */
     @media (max-width: 992px) {
         .hero-title { font-size: 2.8rem; }
         .destinasi-item, .destinasi-item.reverse { flex-direction: column; gap: 30px; }
         .about-grid { flex-direction: column; text-align: center; }
-        .map-card iframe { height: 350px; }
-        .map-info { flex-direction: column; text-align: center; }
-        .maps-locations { justify-content: center; }
     }
     @media (max-width: 768px) {
         .hero-title { font-size: 2rem; }
@@ -1043,22 +748,15 @@
         .stats-grid { flex-direction: column; align-items: center; gap: 25px; }
         .stat-number { font-size: 2rem; }
         .about-content h3 { font-size: 1.6rem; }
-        .cta-content h3 { font-size: 1.6rem; }
-        .cta-btn { padding: 10px 28px; font-size: 0.65rem; }
-        .map-card iframe { height: 280px; }
-        .maps-location-item { padding: 6px 18px; }
-        .maps-location-item span { font-size: 0.7rem; }
     }
     @media (max-width: 480px) {
         .hero-title { font-size: 1.6rem; }
         .hero-subtitle { font-size: 0.5rem; letter-spacing: 0.15em; }
         .dot { width: 8px; height: 8px; }
         .dot.active { width: 20px; }
-        .map-card iframe { height: 220px; }
     }
 </style>
 
-<!-- ==================== HERO SLIDER ==================== -->
 <section class="hero-section" id="home">
     <div class="slides-container">
         <div class="slide slide-1 active"></div>
@@ -1091,7 +789,6 @@
     </div>
 </section>
 
-<!-- ==================== STATISTICS ==================== -->
 <section class="section section-white">
     <div class="container">
         <div class="stats-grid">
@@ -1115,14 +812,13 @@
     </div>
 </section>
 
-<!-- ==================== ABOUT ==================== -->
 <section class="section section-light" id="about">
     <div class="container">
         <div class="about-grid">
             <div class="about-content" data-aos="fade-right" data-aos-duration="1000">
                 <h3>Warisan Geologi Kelas Dunia</h3>
                 <p>Danau Toba, terbentuk dari letusan supervolcano 74.000 tahun lalu, adalah danau vulkanik terbesar di dunia. Diakui UNESCO sebagai Global Geopark pada tahun 2020.</p>
-                <p>Kawasan ini menyimpan nilai geologi luar biasa, keanekaragaman hayati, dan warisan budaya Batak yang autentik. Tiga geosite unggulan di Pulau Sibandang menanti Anda jelajahi.</p>
+                <p>Kawasan ini menyimpan nilai geologi luar biasa, keanekaragaman hayati, dan warisan budaya Batak yang autentik. Tiga geosite unggulan di Kawasan Kaldera Toba menanti Anda jelajahi.</p>
             </div>
             <div class="about-image" data-aos="fade-left" data-aos-duration="1000">
                 <img src="/image/efrata/tobaa.jpg" alt="Danau Toba">
@@ -1131,17 +827,16 @@
     </div>
 </section>
 
-<!-- ==================== DESTINASI ==================== -->
 <section id="destinasi" class="section section-white">
     <div class="container">
         <div class="section-title" data-aos="fade-up" data-aos-duration="800">
             <h2>Destinasi Unggulan</h2>
             <div class="divider"></div>
-            <p>Tiga geosite di Pulau Sibandang, Caldera Danau Toba</p>
+            <p>Tiga geosite unggulan di kawasan Kaldera Danau Toba</p>
         </div>
+        
         <div class="destinasi-list">
             
-            <!-- TELE -->
             <div class="destinasi-item" data-aos="fade-up" data-aos-duration="1000">
                 <div class="destinasi-image">
                     <img src="/image/tele/tele1.jpg" alt="Tele">
@@ -1151,11 +846,10 @@
                     <h3>Tele</h3>
                     <div class="destinasi-location">Desa Turpuk Limbong, Kecamatan Harian, Kabupaten Samosir, Sumatera Utara</div>
                     <p class="destinasi-desc">Menara Pandang Tele terletak di Tele, Kecamatan Harian, Kabupaten Samosir, Sumatera Utara. Meskipun masih berada di daratan Sumatera, namun Tele sudah masuk ke dalam Kabupaten Samosir. Tele sendiri merupakan kawasan tertinggi di sekitar Danau Toba.</p>
-                    <a href="{{ url('/geosite/tele') }}" class="destinasi-link">Jelajahi Lebih Lanjut →</a>
+                    <a href="{{ url('/geosite/tele') }}" class="destinasi-link">Jelajahi Lebih Lanjut</a>
                 </div>
             </div>
             
-            <!-- EFRATA-->
             <div class="destinasi-item reverse" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                 <div class="destinasi-image">
                     <img src="/image/efrata/efrata5.jpg" alt="Efrata">
@@ -1165,205 +859,25 @@
                     <h3>Efrata</h3>
                     <div class="destinasi-location">Desa Sosor Dolok, Kecamatan Harian, Kabupaten Samosir, Provinsi Sumatera Utara.</div>
                     <p class="destinasi-desc">Air Terjun Efrata adalah obyek wisata alam yang terletak di Sosor Dolok, Kecamatan Harian, Samosir. Tempat ini dibuka untuk khalayak dari pagi sampai sore. Meskipun banyak difavoritkan oleh orang yang berkunjung, biaya masuknya serba murah meriah.</p>
-                    <a href="{{ url('/geosite/efrata') }}" class="destinasi-link">Jelajahi Lebih Lanjut →</a>
+                    <a href="{{ url('/geosite/efrata') }}" class="destinasi-link">Jelajahi Lebih Lanjut</a>
                 </div>
             </div>
-            
-            <!-- SIHOTANG-->
+
             <div class="destinasi-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                 <div class="destinasi-image">
-                    <img src="/image/sihotang/sihotang2.jpg" alt="Sihotang">
+                    <img src="/image/home/sihotang2.jpg" alt="Sihotang">
                 </div>
                 <div class="destinasi-content">
                     <div class="destinasi-number">03 — GEOSITE</div>
                     <h3>Sihotang</h3>
-                    <div class="destinasi-location">Sihotang, kecamatan Harian Kabupaten Samosir, Sumatera utara</div>
-                    <p class="destinasi-desc">Desa Sihotang terletak di kecamatan Harian Kabupaten Samosir, Sumatera utara. Sesuai dengan namanaya Rura Sihotang berada di kaki gunung Uruk Taduhan, setengah desanya di kelilingi pengunungan yang tinggi dan indah yg di tumbuhi pepohonan kecik nan hijau, setengahnya lagi berada di tepian pantai Danau Toba.</p>
-                    <a href="{{ url('/geosite/sihotang') }}" class="destinasi-link">Jelajahi Lebih Lanjut →</a>
+                    <div class="destinasi-location">Desa Sihotang, Kecamatan Harian, Kabupaten Samosir, Provinsi Sumatera Utara.</div>
+                    <p class="destinasi-desc">Lembah Sihotang menawarkan perpaduan pemandangan persawahan hijau berlatar perbukitan terjal dan tepian pantai Danau Toba yang tenang, menyimpan sejarah asal-usul marga Sihotang.</p>
+                    <a href="{{ url('/geosite/sihotang') }}" class="destinasi-link">Jelajahi Lebih Lanjut</a>
                 </div>
             </div>
+            
         </div>
     </div>
 </section>
-
-<!-- SIBEABEA -->
-<div class="destinasi-item reverse" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
-    <div class="destinasi-image">
-        <img src="/image/sibeabea/sibeabea1.jpg" alt="Sibeabea">
-    </div>
-    <div class="destinasi-content">
-        <div class="destinasi-number">04 — GEOSITE</div>
-        <h3>Sibeabea</h3>
-        <div class="destinasi-location">
-            Kecamatan Harian, Kabupaten Samosir, Sumatera Utara
-        </div>
-        <p class="destinasi-desc">
-            Sibeabea merupakan salah satu destinasi wisata unggulan di kawasan Danau Toba
-            dengan pemandangan perbukitan dan panorama danau yang sangat indah.
-        </p>
-        <a href="{{ url('/geosite/sibeabea') }}" class="destinasi-link">
-            Jelajahi Lebih Lanjut →
-        </a>
-    </div>
-</div>
-
-<!-- HOLBUNG -->
-<div class="destinasi-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
-    <div class="destinasi-image">
-        <img src="/image/holbung/holbung1.jpg" alt="Holbung">
-    </div>
-    <div class="destinasi-content">
-        <div class="destinasi-number">05 — GEOSITE</div>
-        <h3>Holbung</h3>
-        <div class="destinasi-location">
-            Pulau Samosir, Sumatera Utara
-        </div>
-        <p class="destinasi-desc">
-            Bukit Holbung terkenal dengan hamparan bukit hijau yang sering disebut
-            sebagai “Bukit Teletubbies”-nya Danau Toba.
-        </p>
-        <a href="{{ url('/geosite/holbung') }}" class="destinasi-link">
-            Jelajahi Lebih Lanjut →
-        </a>
-    </div>
-</div>
-
-<!-- ==================== PETA LOKASI 3 DESA ==================== -->
-<section class="section section-light">
-    <div class="container">
-        <div class="section-title" data-aos="fade-up" data-aos-duration="800">
-            <h2>Lokasi 3 Geosite</h2>
-            <div class="divider"></div>
-            <p>Tele, Efrata, Sihotang</p>
-        </div>
-        
-        <div class="map-card" data-aos="zoom-in" data-aos-duration="1000">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.0!2d98.8835095!3d2.4339262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x302e0415b8f7da39%3A0xc6beb74287f355a5!2sPulau%20Sibandang!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-            <div class="map-info">
-                <div class="maps-locations">
-                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Tele+Tower+Samosir', '_blank')">
-                        <i class="fas fa-location-dot"></i>
-                        <span>Menara Pandang Tele</span>
-                    </div>
-                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Efrata+Waterfall+Samosir', '_blank')">
-                        <i class="fas fa-location-dot"></i>
-                        <span>Air Terjun Efrata</span>
-                    </div>
-                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Sihotang+Samosir', '_blank')">
-                        <i class="fas fa-location-dot"></i>
-                        <span>Desa Sihotang</span>
-                    </div>
-                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Sibeabea+Samosir', '_blank')">
-                        <i class="fas fa-location-dot"></i>
-                        <span>Sibeabea</span>
-                    </div>
-                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Bukit+Holbung+Samosir', '_blank')">
-                        <i class="fas fa-location-dot"></i>
-                        <span>Bukit Holbung</span>
-                    </div>
-                </div>
-                </div>
-                <div class="maps-note">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Klik lokasi untuk melihat peta detail</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== CTA ==================== -->
-<section class="cta-section">
-    <div class="container">
-        <div class="cta-content" data-aos="fade-up" data-aos-duration="800">
-            <h3>Mulai Petualangan Anda</h3>
-            <div class="divider"></div>
-            <p>Temukan keajaiban geologi dan kekayaan budaya Batak di Geopark Toba, warisan dunia yang diakui UNESCO.</p>
-            <a href="#destinasi" class="cta-btn">Jelajahi Sekarang</a>
-        </div>
-    </div>
-</section>
-
-<script>
-    // ==================== HERO SLIDER ====================
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    let slideInterval;
-    const slideCount = slides.length;
-
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.remove('active');
-            if (dots[i]) dots[i].classList.remove('active');
-        });
-        
-        slides[index].classList.add('active');
-        if (dots[index]) dots[index].classList.add('active');
-        currentSlide = index;
-    }
-
-    function nextSlide() {
-        let next = (currentSlide + 1) % slideCount;
-        showSlide(next);
-    }
-
-    function startSlider() {
-        if (slideInterval) clearInterval(slideInterval);
-        slideInterval = setInterval(nextSlide, 5000);
-    }
-
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            clearInterval(slideInterval);
-            showSlide(index);
-            startSlider();
-        });
-    });
-
-    startSlider();
-
-    // ==================== SMOOTH SCROLL ====================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('clic   k', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
-    
-    // ==================== ADDITIONAL ANIMATION ON SCROLL ====================
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    document.querySelectorAll('.stat-item, .destinasi-item, .map-card').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.8s ease';
-        observer.observe(el);
-    });
-</script>
-
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-<script>AOS.init({ duration: 800, once: true, offset: 50 });</script>
 
 @endsection
