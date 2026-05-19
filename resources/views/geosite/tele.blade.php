@@ -604,19 +604,38 @@
             opacity: 0.6;
         }
 
-        /* ==================== EMPTY STATE ==================== */
-        .empty-state {
-            width: 100%;
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 60px;
-            background: white;
-            border-radius: 20px;
-            color: var(--gray);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-        }
+/* ==================== EMPTY STATE ==================== */
+.empty-state {
+    grid-column: 1 / -1; /* MEMAKSA ELEMEN MEMENUHI SEMUA KOLOM GRID */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 250px;
+    width: 100%;
+    max-width: 550px;     /* Batas lebar kotak putih */
+    margin: 30px auto;    /* Memposisikan kotak tepat di tengah-tengah layar */
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 24px;  /* Kelengkungan sudut seperti di gambar */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Shadow halus */
+}
 
+/* Mengatur ukuran dan jarak ikon */
+.empty-state i {
+    font-size: 3.5rem;
+    color: #D4AF37;       /* Warna emas ikon hotel/store */
+    margin-bottom: 16px;
+}
+
+/* Mengatur style teks */
+.empty-state p {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #6c757d;
+    margin: 0;
+}
         /* ==================== RESPONSIVE ==================== */
         @media (max-width: 992px) {
             .hero-title {
@@ -695,9 +714,6 @@
             .galeri-grid {
                 grid-template-columns: 1fr;
             }
-        }
-        .grid-umkm .empty-state, .grid-penginapan .empty-state, .grid-fasilitas .empty-state,.galeri-grid .empty-state {
-            grid-column: 1 / -1;
         }
     </style>
 </head>

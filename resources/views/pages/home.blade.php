@@ -1182,6 +1182,48 @@
                     <a href="{{ url('/geosite/sihotang') }}" class="destinasi-link">Jelajahi Lebih Lanjut →</a>
                 </div>
             </div>
+
+                        <!-- SIBEABEA -->
+            <div class="destinasi-item reverse" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                <div class="destinasi-image">
+                    <img src="/image/sibeabea/sibeabea1.jpg" alt="Sibeabea">
+            </div>
+            <div class="destinasi-content">
+                <div class="destinasi-number">04 — GEOSITE</div>
+                    <h3>Sibeabea</h3>
+                <div class="destinasi-location">
+                    Kecamatan Harian, Kabupaten Samosir, Sumatera Utara
+                </div>
+                    <p class="destinasi-desc">
+                        Sibeabea merupakan salah satu destinasi wisata unggulan di kawasan Danau Toba
+                        dengan pemandangan perbukitan dan panorama danau yang sangat indah.
+                    </p>
+                    <a href="{{ url('/geosite/sibeabea') }}" class="destinasi-link">
+                        Jelajahi Lebih Lanjut →
+                    </a>
+                </div>
+            </div>
+
+            <!-- HOLBUNG -->
+            <div class="destinasi-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
+                <div class="destinasi-image">
+                    <img src="/image/holbung/holbung1.jpg" alt="Holbung">
+                </div>
+                <div class="destinasi-content">
+                <div class="destinasi-number">05 — GEOSITE</div>
+                    <h3>Holbung</h3>
+                <div class="destinasi-location">
+                    Pulau Samosir, Sumatera Utara
+                </div>
+                    <p class="destinasi-desc">
+                        Bukit Holbung terkenal dengan hamparan bukit hijau yang sering disebut
+                        sebagai “Bukit Teletubbies”-nya Danau Toba.
+                    </p>
+                    <a href="{{ url('/geosite/holbung') }}" class="destinasi-link">
+                        Jelajahi Lebih Lanjut →
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -1190,9 +1232,9 @@
 <section class="section section-light">
     <div class="container">
         <div class="section-title" data-aos="fade-up" data-aos-duration="800">
-            <h2>Lokasi 3 Geosite</h2>
+            <h2>Lokasi 5 Geosite</h2>
             <div class="divider"></div>
-            <p>Tele, Efrata, Sihotang</p>
+            <p>Tele, Efrata, Sihotang, Sibeabea, Holbung</p>
         </div>
         
         <div class="map-card" data-aos="zoom-in" data-aos-duration="1000">
@@ -1216,6 +1258,15 @@
                         <i class="fas fa-location-dot"></i>
                         <span>Desa Sihotang</span>
                     </div>
+                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Sibeabea+Samosir', '_blank')">
+                        <i class="fas fa-location-dot"></i>
+                        <span>Sibeabea</span>
+                    </div>
+                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Bukit+Holbung+Samosir', '_blank')">
+                        <i class="fas fa-location-dot"></i>
+                        <span>Bukit Holbung</span>
+                    </div>
+                </div>
                 </div>
                 <div class="maps-note">
                     <i class="fas fa-map-marker-alt"></i>
@@ -1279,7 +1330,7 @@
 
     // ==================== SMOOTH SCROLL ====================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('clic   k', function(e) {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {

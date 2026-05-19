@@ -75,6 +75,14 @@ Route::prefix('geosite')->name('geosite.')->group(function () {
     Route::get('/tele', [GeositeController::class, 'tele'])->name('tele');
     Route::get('/efrata', [GeositeController::class, 'efrata'])->name('efrata');
     Route::get('/sihotang', [GeositeController::class, 'sihotang'])->name('sihotang');
+    // Rute utama (menggunakan tanda hubung)
+    Route::get('/sibea-bea', [GeositeController::class, 'sibeaBea'])->name('sibea-bea');
+    
+    // TAMBAHKAN BARIS INI: Rute alternatif tanpa tanda hubung agar tidak 404
+    Route::get('/sibeabea', [GeositeController::class, 'sibeaBea']); 
+    
+    Route::get('/bea', [GeositeController::class, 'bea'])->name('bea');
+    Route::get('/holbung', [GeositeController::class, 'holbung'])->name('holbung');
 });
 
 // OTHER PAGES

@@ -1,5 +1,3 @@
-<!-- resources/views/wisata/efrata.blade.php -->
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -123,12 +121,7 @@
         @media (max-width: 992px) { .sejarah-grid { grid-template-columns: 1fr; } .grid-umkm, .grid-penginapan, .grid-fasilitas { grid-template-columns: 1fr; } }
         @media (max-width: 768px) { .nav-menu { display: none; } .hamburger { display: block; } .hero { min-height: 55vh; } .hero-title { font-size: 2.2rem; } .section { padding: 55px 0; } .footer-info { text-align: center; } }
         @media (max-width: 576px) { .navbar { padding: 0; } .nav-container { padding: 14px 18px; } .hero-title { font-size: 1.8rem; } .hero-subtitle { font-size: 0.95rem; } }
-        .grid-umkm .empty-state,
-.grid-penginapan .empty-state,
-.grid-fasilitas .empty-state,
-.galeri-grid .empty-state {
-    grid-column: 1 / -1;
-}
+        .grid-umkm .empty-state, .grid-penginapan .empty-state, .grid-fasilitas .empty-state, .galeri-grid .empty-state { grid-column: 1 / -1; }
     </style>
 </head>
 <body>
@@ -160,7 +153,7 @@
 </div>
 
 <div class="mobile-overlay" id="mobileOverlay">
-    <div class="mobile-close" id="mobileClose">&times;</div>
+    <div class="mobile-close" id="mobileClose">×</div>
     <a href="{{ url('/') }}" class="mobile-link">Home</a>
     <a href="#sejarah" class="mobile-link">Sejarah</a>
     <a href="#informasi" class="mobile-link">Informasi</a>
@@ -397,22 +390,41 @@
     </div>
 </section>
 
-<section id="lokasi" class="section" style="background: var(--light);">
+<section id="lokasi" class="section" style="background: #f8fafc;">
     <div class="container">
         <div class="section-title" data-aos="fade-up">
             <h2>Lokasi & Akses</h2>
             <div class="divider"></div>
-            <p>Rute dan informasi lokasi menuju Air Terjun Efrata.</p>
+            <p>Temukan rute menuju Air Terjun Efrata</p>
         </div>
+        
         <div class="maps-container" data-aos="fade-up">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63479.01502924349!2d98.67868252580793!3d2.375320725649328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031bb3ef2cfd4d9%3A0x40e115a6f7ad8e59!2sAir%20Terjun%20Efrata!5e0!3m2!1sid!2sid!4v1778767596787!5m2!1sid!2sid" width="100%" height="420" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63479.01502924349!2d98.67868252580793!3d2.375320725649328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031bb3ef2cfd4d9%3A0x40e115a6f7ad8e59!2sAir%20Terjun%20Efrata!5e0!3m2!1sid!2sid!4v1778767596787!5m2!1sid!2sid" 
+                width="100%" 
+                height="400" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
         </div>
+        
         <div class="info-rute" data-aos="fade-up">
-            <h4><i class="fas fa-location-dot"></i> Rute menuju Efrata</h4>
-            <p><strong>Dari Medan:</strong> Perjalanan sekitar 5-6 jam menuju Parapat, dilanjutkan dengan perjalanan darat ke Samosir. Efrata dapat dicapai dari Pangururan dalam waktu sekitar 1 jam 15 menit.</p>
-            <p><strong>Dari Parapat:</strong> Naik kapal ferry ke Tomok, lalu melanjutkan perjalanan darat sekitar 1 jam 30 menit menuju Air Terjun Efrata.</p>
-            <p><strong>Jam Operasional:</strong> 08.00 - 18.00 WIB setiap hari.</p>
+            <h4><i class="fas fa-location-dot"></i> Rute Menuju Air Terjun Efrata</h4>
+            <p><strong>Dari Pangururan:</strong> Berjarak sekitar 20 km dengan waktu tempuh kurang lebih 30-40 menit berkendara melewati jalan Lintas Tele-Pangururan menuju Desa Sosor Dolok.</p>
+            <p><strong>Dari Menara Pandang Tele:</strong> Jaraknya cukup dekat, hanya sekitar 15 km dengan waktu tempuh 25 menit menuruni perbukitan menuju arah Harian.</p>
+            <p><strong>Jam Operasional:</strong> 06.00 - 19.00 WIB (Setiap Hari)</p>
+            <p><strong>Tiket Masuk:</strong> Rp 10.000 - Rp 15.000 per orang.</p>
         </div>
+    </div>
+</section>
+
+<section class="cta" style="background: #002F5F; padding: 60px 0; text-align: center; color: white;">
+    <div class="container" data-aos="fade-up">
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 15px;">Kunjungi Efrata</h3>
+        <div class="divider" style="margin-bottom: 20px;"></div>
+        <p style="opacity: 0.9; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto;">Nikmati keindahan keasrian Air Terjun Efrata dan panorama alam yang autentik.</p>
+        <a href="{{ route('home') }}" class="cta-btn" style="display: inline-block; padding: 12px 35px; background: var(--gold); color: #002F5F; text-decoration: none; font-weight: 600; border-radius: 30px; transition: var(--transition);">Kembali ke Beranda</a>
     </div>
 </section>
 
@@ -420,7 +432,7 @@
     <div class="footer-container">
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="{{ asset('image/logo/logobankindonesia.jpg') }}" alt="Logo BI">
+                <img src="{{ asset('image/logo/logobankindonesia.jpg') }}" alt="Logo Bank Indonesia">
                 <div class="footer-divider"></div>
                 <img src="{{ asset('image/logo/del.jpg') }}" alt="Logo Del">
                 <div class="footer-divider"></div>
@@ -430,42 +442,32 @@
                 </div>
             </div>
             <div class="footer-info">
-                <p><i class="fas fa-map-marker-alt"></i> Kecamatan Sianjur Mula-Mula, Kabupaten Samosir</p>
-                <p><i class="fas fa-clock"></i> Buka Setiap Hari: 08.00 - 18.00 WIB</p>
+                <p><i class="fas fa-map-marker-alt"></i> Air Terjun Efrata, Desa Sosor Dolok, Harian, Samosir</p>
+                <p><i class="fas fa-clock"></i> Buka Setiap Hari: 06.00 - 19.00 WIB</p>
             </div>
         </div>
-        <div class="footer-bottom">&copy; 2026 Geopark Danau Toba. All rights reserved.</div>
+        <div class="footer-bottom">
+            © 2026 Geopark Danau Toba. All rights reserved.
+        </div>
     </div>
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    AOS.init({ duration: 700, once: true, offset: 50, disable: 'mobile' });
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+
+    // Mobile Menu Logic
     const hamburger = document.getElementById('hamburger');
     const mobileOverlay = document.getElementById('mobileOverlay');
     const mobileClose = document.getElementById('mobileClose');
-    const closeMenu = () => { mobileOverlay.classList.remove('active'); document.body.style.overflow = ''; };
-    hamburger.addEventListener('click', () => { mobileOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; });
-    mobileClose.addEventListener('click', closeMenu);
-    document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', closeMenu));
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link, .mobile-link');
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const top = section.offsetTop - 120;
-            if(window.scrollY >= top) current = section.getAttribute('id');
-        });
-        navLinks.forEach(link => { link.classList.remove('active'); if(link.getAttribute('href') === `#${current}`) link.classList.add('active'); });
-    });
-    document.querySelectorAll('.nav-link[href^="#"], .mobile-link[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if(target) target.scrollIntoView({ behavior: 'smooth' });
-            closeMenu();
-        });
-    });
+
+    if(hamburger && mobileOverlay && mobileClose) {
+        hamburger.addEventListener('click', () => mobileOverlay.classList.add('active'));
+        mobileClose.addEventListener('click', () => mobileOverlay.classList.remove('active'));
+    }
 </script>
 </body>
 </html>
