@@ -524,28 +524,3 @@
 </script>
 </body>
 </html>
-
-        <h3>Kunjungi Sibea Bea</h3>
-
-        <div class="divider"></div>
-
-        <p>
-            Nikmati keindahan Danau Toba dan budaya Batak yang autentik
-        </p>
-
-        <a href="{{ url('/') }}" class="cta-btn">
-            Kembali ke Beranda
-        </a>
-
-    </div>
-
-</section>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-
-    <div class="lightbox-close" onclick="closeLightbox()">×</div>
-
-    <img id="lightboxImg">
-
-</div>
