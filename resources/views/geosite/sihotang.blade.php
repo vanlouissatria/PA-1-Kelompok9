@@ -100,24 +100,98 @@
         .footer-info { text-align: right; }
         .footer-bottom { text-align: center; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.18); font-size: 0.78rem; opacity: 0.65; }
         .empty-state {
-            width: min(100%, 520px);
-            margin: 0 auto;
-            text-align: center;
-            padding: 45px;
-            background: white;
-            border-radius: 24px;
-            color: #6f7a89;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-        }
-        .empty-state i { font-size: 3rem; color: var(--gold); margin-bottom: 18px; }
-        @media (max-width: 992px) { .sejarah-grid { grid-template-columns: 1fr; } .grid-umkm, .grid-penginapan, .grid-fasilitas { grid-template-columns: 1fr; } }
-        @media (max-width: 768px) { .nav-menu { display: none; } .hamburger { display: block; } .hero { min-height: 55vh; } .hero-title { font-size: 2.2rem; } .section { padding: 55px 0; } .footer-info { text-align: center; } }
-        @media (max-width: 576px) { .navbar { padding: 0; } .nav-container { padding: 14px 18px; } .hero-title { font-size: 1.8rem; } .hero-subtitle { font-size: 0.95rem; } }
-        .grid-umkm .empty-state,
+    width: 420px;
+    min-height: 190px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto;
+    text-align: center;
+    padding: 45px;
+
+    background: white;
+    border-radius: 24px;
+    color: #6f7a89;
+
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+
+    justify-self: center;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    color: var(--gold);
+    margin-bottom: 18px;
+}
+
+.grid-umkm .empty-state,
 .grid-penginapan .empty-state,
 .grid-fasilitas .empty-state,
 .galeri-grid .empty-state {
     grid-column: 1 / -1;
+}
+
+@media (max-width: 992px) {
+    .sejarah-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-umkm,
+    .grid-penginapan,
+    .grid-fasilitas {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .hero {
+        min-height: 55vh;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .section {
+        padding: 55px 0;
+    }
+
+    .footer-info {
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar {
+        padding: 0;
+    }
+
+    .nav-container {
+        padding: 14px 18px;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .empty-state {
+        width: 100%;
+    }
 }
     </style>
 </head>
