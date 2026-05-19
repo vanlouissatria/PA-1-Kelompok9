@@ -604,15 +604,38 @@
             opacity: 0.6;
         }
 
-        /* ==================== EMPTY STATE ==================== */
-        .empty-state {
-            text-align: center;
-            padding: 60px;
-            background: white;
-            border-radius: 20px;
-            color: var(--gray);
-        }
+ /* ==================== EMPTY STATE ==================== */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 250px; /* Memberikan ruang tinggi vertikal agar terlihat pas di tengah */
+    width: 100%;
+    max-width: 500px;  /* Batas lebar kartu agar mirip seperti di gambar */
+    margin: 40px auto; /* Membuat posisi kartu otomatis berada di tengah container secara horizontal */
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 24px; /* Sudut melengkung halus seperti di gambar */
+    box-shadow: var(--shadow);
+    color: var(--gray);
+}
 
+/* Mengatur jarak ikon agar pas di atas teks */
+.empty-state i {
+    font-size: 3.5rem;
+    color: #D4AF37; /* Menggunakan warna gold bawaan root */
+    margin-bottom: 16px;
+}
+
+/* Mengatur teks pesan empty state */
+.empty-state p {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555555;
+    margin: 0;
+}
         /* ==================== RESPONSIVE ==================== */
         @media (max-width: 992px) {
             .hero-title {
