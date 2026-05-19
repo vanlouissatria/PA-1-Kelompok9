@@ -398,14 +398,15 @@
             <p>Temukan rute menuju Air Terjun Efrata</p>
         </div>
         
-        <div class="maps-container" data-aos="fade-up">
+        <div class="maps-container" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 25px;">
             <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63479.01502924349!2d98.67868252580793!3d2.375320725649328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031bb3ef2cfd4d9%3A0x40e115a6f7ad8e59!2sAir%20Terjun%20Efrata!5e0!3m2!1sid!2sid!4v1778767596787!5m2!1sid!2sid"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.4839849221193!2d98.6346747!3d2.512683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3030d0ecfdbe99b1%3A0x4ac4b042efa3ebd5!2sAir%20Terjun%20Efrata!5e0!3m2!1sid!2sid!4v1716132000000!5m2!1sid!2sid"
                 width="100%" 
                 height="400" 
-                style="border:0;" 
+                style="border:0; display: block;" 
                 allowfullscreen="" 
-                loading="lazy">
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
             </iframe>
         </div>
         
