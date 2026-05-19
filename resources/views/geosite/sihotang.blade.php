@@ -41,7 +41,7 @@
         .section-title h2 { font-size: 2rem; color: var(--primary); font-weight: 700; margin-bottom: 14px; font-family: 'Cormorant Garamond', serif; }
         .divider { width: 90px; height: 3px; background: var(--gold); margin: 0 auto; border-radius: 3px; }
         .section-title p { color: #5b6770; margin-top: 18px; max-width: 640px; margin-left: auto; margin-right: auto; }
-        .sejarah-grid, .grid-umkm, .grid-penginapan, .grid-fasilitas { display: grid; gap: 30px; }
+        .sejarah-grid, .grid-umkm, .grid-penginapan, .grid-fasilitas { display: grid; gap: 30px; justify-content: center; }
         .sejarah-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         .sejarah-item { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; background: white; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow); }
         .sejarah-item.reverse { grid-template-columns: 1fr 1fr; }
@@ -58,7 +58,7 @@
         .informasi-content h3 { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif; border-left: 4px solid var(--gold); padding-left: 15px; }
         .informasi-text { color: #444; line-height: 1.8; font-size: 1rem; }
         .informasi-text p { margin-bottom: 15px; }
-        .galeri-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+        .galeri-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; justify-content: center; }
         .galeri-item { position: relative; overflow: hidden; border-radius: 24px; min-height: 250px; box-shadow: var(--shadow); }
         .galeri-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.45s ease; }
         .galeri-item:hover img { transform: scale(1.08); }
@@ -100,8 +100,7 @@
         .footer-info { text-align: right; }
         .footer-bottom { text-align: center; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.18); font-size: 0.78rem; opacity: 0.65; }
         .empty-state {
-            width: 100%;
-            max-width: 680px;
+            width: min(100%, 520px);
             margin: 0 auto;
             text-align: center;
             padding: 45px;
