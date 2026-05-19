@@ -1049,47 +1049,5 @@
         <a href="{{ route('home') }}" class="cta-btn" style="display: inline-block; padding: 12px 35px; background: var(--gold); color: #002F5F; text-decoration: none; font-weight: 600; border-radius: 30px; transition: var(--transition);">Kembali ke Beranda</a>
     </div>
 </section>
-
-<footer class="footer">
-    <div class="footer-container">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img src="/image/logo/logobankindonesia.jpg" alt="Logo Bank Indonesia">
-                <div class="footer-divider"></div>
-                <img src="/image/logo/del.jpg" alt="Logo Del">
-                <div class="footer-divider"></div>
-                <div class="footer-text">
-                    <h4>GEO<span>TOBA</span></h4>
-                    <p>Geopark Danau Toba</p>
-                </div>
-            </div>
-            <div class="footer-info">
-                <p><i class="fas fa-map-marker-alt"></i> Menara Pandang Tele, Kabupaten Samosir</p>
-                <p><i class="fas fa-clock"></i> Buka Setiap Hari: 08.00 - 18.00 WIB</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2026 Geopark Danau Toba. All rights reserved.
-        </div>
-    </div>
-</footer>
-
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({
-        duration: 800,
-        once: true
-    });
-
-    // Mobile Menu Logic
-    const hamburger = document.getElementById('hamburger');
-    const mobileOverlay = document.getElementById('mobileOverlay');
-    const mobileClose = document.getElementById('mobileClose');
-
-    if(hamburger && mobileOverlay && mobileClose) {
-        hamburger.addEventListener('click', () => mobileOverlay.classList.add('active'));
-        mobileClose.addEventListener('click', () => mobileOverlay.classList.remove('active'));
-    }
-</script>
 </body>
 </html>
