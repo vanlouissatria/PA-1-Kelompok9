@@ -696,6 +696,9 @@
                 grid-template-columns: 1fr;
             }
         }
+        .grid-umkm .empty-state, .grid-penginapan .empty-state, .grid-fasilitas .empty-state,.galeri-grid .empty-state {
+            grid-column: 1 / -1;
+        }
     </style>
 </head>
 <body>

@@ -113,6 +113,12 @@
         @media (max-width: 992px) { .sejarah-grid { grid-template-columns: 1fr; } .grid-umkm, .grid-penginapan, .grid-fasilitas { grid-template-columns: 1fr; } }
         @media (max-width: 768px) { .nav-menu { display: none; } .hamburger { display: block; } .hero { min-height: 55vh; } .hero-title { font-size: 2.2rem; } .section { padding: 55px 0; } .footer-info { text-align: center; } }
         @media (max-width: 576px) { .navbar { padding: 0; } .nav-container { padding: 14px 18px; } .hero-title { font-size: 1.8rem; } .hero-subtitle { font-size: 0.95rem; } }
+        .grid-umkm .empty-state,
+.grid-penginapan .empty-state,
+.grid-fasilitas .empty-state,
+.galeri-grid .empty-state {
+    grid-column: 1 / -1;
+}
     </style>
 </head>
 <body>
