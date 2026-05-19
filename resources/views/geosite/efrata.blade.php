@@ -400,7 +400,7 @@
         
         <div class="maps-container" data-aos="fade-up">
             <iframe 
-                src="https://www.google.com/maps?q=Efrata+Waterfall+Samosir" 
+                src="{{ $geo->maps_link }}" 
                 width="100%" 
                 height="400" 
                 style="border:0;" 
