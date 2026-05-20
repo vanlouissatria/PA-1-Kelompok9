@@ -1191,7 +1191,7 @@
                         <!-- SIBEABEA -->
             <div class="destinasi-item reverse" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
                 <div class="destinasi-image">
-                    <img src="/image/sibeabea/sibeabea1.jpg" alt="Sibeabea">
+                    <img src="/image/sibeabea/sibeabea.jpg" alt="Sibeabea">
             </div>
             <div class="destinasi-content">
                 <div class="destinasi-number">04 — GEOSITE</div>
