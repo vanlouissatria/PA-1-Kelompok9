@@ -1207,7 +1207,7 @@
             <!-- HOLBUNG -->
             <div class="destinasi-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
                 <div class="destinasi-image">
-                    <img src="/image/holbung/holbung1.jpg" alt="Holbung">
+                    <img src="/image/holbung/Holbung.jpg" alt="Holbung">
                 </div>
                 <div class="destinasi-content">
                 <div class="destinasi-number">05 — GEOSITE</div>
