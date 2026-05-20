@@ -454,15 +454,15 @@
         <!-- Google Maps -->
         <div class="maps-container" data-aos="fade-up"
             style="border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 25px;">
-            <iframe
-                src="https://maps.google.com/maps?q=Sibeabea%20Samosir&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                width="100%"
-                height="450"
-                style="border:0; display:block;"
-                allowfullscreen=""
-                loading="lazy">
-            </iframe>
-        </div>
+        <iframe
+            src="https://maps.google.com/maps?q=Patung%20Yesus%20Sibeabea%20Samosir&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="450"
+            style="border:0; display:block;"
+            allowfullscreen=""
+            loading="lazy">
+        </iframe>
+    </div>
         <div class="info-rute" data-aos="fade-up">
             <h4><i class="fas fa-location-dot"></i> Rute Menuju Sibea Bea</h4>
             <p><strong>Dari Pangururan:</strong> Perjalanan darat sekitar 40 menit menuju Sibea Bea melalui Jalan Lintas Samosir.</p>
