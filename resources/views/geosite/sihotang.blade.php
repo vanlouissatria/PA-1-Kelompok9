@@ -442,22 +442,31 @@
         </div>
     </div>
 </section>
-
-<section id="lokasi" class="section">
+<section id="sihotang" class="section" style="background: #ffffff; padding: 60px 0;">
     <div class="container">
-        <div class="section-title" data-aos="fade-up">
-            <h2>Lokasi & Akses</h2>
-            <div class="divider"></div>
-            <p>Rute praktis menuju Sihotang.</p>
+        <div class="section-title text-center" data-aos="fade-up">
+            <h2 style="font-family: 'Playfair Display', serif; color: #0f2c59; font-weight: bold;">Lokasi & Akses Rura Sihotang</h2>
+            <div class="divider" style="width: 50px; border: 2px solid #d4af37; margin: 10px auto;"></div>
+            <p class="text-muted">Temukan rute menuju Kenegerian / Rura Sihotang</p>
         </div>
-        <div class="maps-container" data-aos="fade-up">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127645.46001033459!2d98.700731!3d2.621083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031d060f0e3180b%3A0xb561ba45f008aa18!2sPulau%20Sihotang!5e0!3m2!1sid!2sid!4v1778767596787!5m2!1sid!2sid" width="100%" height="420" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        
+        <div class="maps-container" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 25px; max-width: 1000px; margin-left: auto; margin-right: auto;">
+            <iframe 
+                src="https://maps.google.com/maps/contrib/110956834161572886671"
+                width="100%" 
+                height="400" 
+                style="border:0; display: block;" 
+                allowfullscreen="" 
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
         </div>
-        <div class="info-rute" data-aos="fade-up">
-            <h4><i class="fas fa-location-dot"></i> Rute Menuju Sihotang</h4>
-            <p><strong>Dari Pangururan:</strong> Perjalanan darat sekitar 40 menit menuju Sihotang melalui Jalan Lintas Samosir.</p>
-            <p><strong>Dari Tomok:</strong> Sekitar 50 menit perjalanan darat menuju kawasan budaya dan alam Sihotang.</p>
-            <p><strong>Jam Operasional:</strong> 08.00 - 18.00 WIB setiap hari.</p>
+        
+        <div class="info-rute" data-aos="fade-up" style="max-width: 1000px; margin: 0 auto;">
+            <h4><i class="fas fa-location-dot"></i> Rute Menuju Rura Sihotang</h4>
+            <p><strong>Jalur Darat (Via Harian):</strong> Dapat diakses dari simpang Tele menuruni perbukitan ke arah Kecamatan Harian Boho, lalu melanjutkan perjalanan menyusuri kaki gunung Uruk Tatuhan menuju Kenegerian Sihotang.</p>
+            <p><strong>Jalur Danau (Via Kapal Tradisional):</strong> Anda dapat menyeberang menggunakan kapal motor/boat tradisional dari Pelabuhan Pintu Batu (Pangururan) langsung menuju Dermaga Sihotang dengan waktu penyeberangan yang sangat singkat.</p>
+            <p><strong>Karakteristik Tempat:</strong> Daerah lembah eksotis yang dikelilingi pegunungan tinggi di satu sisi dan langsung berbatasan dengan tepian pantai Danau Toba di sisi lainnya.</p>
         </div>
     </div>
 </section>
