@@ -1174,7 +1174,19 @@
                 </div>
             </div>
             
-           
+            <!-- SIHOTANG-->
+            <div class="destinasi-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                <div class="destinasi-image">
+                    <img src="/image/sihotang/sihotang2.jpg" alt="Sihotang">
+                </div>
+                <div class="destinasi-content">
+                    <div class="destinasi-number">03 — GEOSITE</div>
+                    <h3>Sihotang</h3>
+                    <div class="destinasi-location">Sihotang, kecamatan Harian Kabupaten Samosir, Sumatera utara</div>
+                    <p class="destinasi-desc">Desa Sihotang terletak di kecamatan Harian Kabupaten Samosir, Sumatera utara. Sesuai dengan namanaya Rura Sihotang berada di kaki gunung Uruk Taduhan, setengah desanya di kelilingi pengunungan yang tinggi dan indah yg di tumbuhi pepohonan kecik nan hijau, setengahnya lagi berada di tepian pantai Danau Toba.</p>
+                    <a href="{{ url('/geosite/sihotang') }}" class="destinasi-link">Jelajahi Lebih Lanjut →</a>
+                </div>
+            </div>
 
                         <!-- SIBEABEA -->
             <div class="destinasi-item reverse" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
