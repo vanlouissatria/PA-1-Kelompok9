@@ -32,18 +32,26 @@ class adminGaleriController extends Controller
             'status' => 'nullable|boolean'
         ]);
 
-        $image = $request->file('gambar');
-        $imageData = file_get_contents($image->getRealPath());
-        $base64 = base64_encode($imageData);
-        $mimeType = $image->getMimeType();
-        $gambarBase64 = 'data:' . $mimeType . ';base64,' . $base64;
+        // Upload gambar
+        $gambarPath = null;
+
+        if ($request->hasFile('gambar')) {
+
+            $file = $request->file('gambar');
+
+            $namaFile = time() . '.' . $file->getClientOriginalExtension();
+
+            $file->move(public_path('uploads/galeri'), $namaFile);
+
+            $gambarPath = 'uploads/galeri/' . $namaFile;
+        }
 
         Galeri::create([
             'judul' => $request->judul,
             'slug' => Str::slug($request->judul),
             'kategori' => $request->kategori,
             'deskripsi' => $request->deskripsi,
-            'gambar' => $gambarBase64,
+            'gambar' => $gambarPath,
             'lokasi' => $request->lokasi,
             'tanggal_foto' => $request->tanggal_foto,
             'status' => $request->has('status') ? 1 : 0
@@ -83,12 +91,21 @@ class adminGaleriController extends Controller
             'status' => $request->has('status') ? 1 : 0
         ];
 
+        // Jika upload gambar baru
         if ($request->hasFile('gambar')) {
-            $image = $request->file('gambar');
-            $imageData = file_get_contents($image->getRealPath());
-            $base64 = base64_encode($imageData);
-            $mimeType = $image->getMimeType();
-            $data['gambar'] = 'data:' . $mimeType . ';base64,' . $base64;
+
+            // Hapus gambar lama
+            if ($galeri->gambar && file_exists(public_path($galeri->gambar))) {
+                unlink(public_path($galeri->gambar));
+            }
+
+            $file = $request->file('gambar');
+
+            $namaFile = time() . '.' . $file->getClientOriginalExtension();
+
+            $file->move(public_path('uploads/galeri'), $namaFile);
+
+            $data['gambar'] = 'uploads/galeri/' . $namaFile;
         }
 
         $galeri->update($data);
@@ -100,6 +117,12 @@ class adminGaleriController extends Controller
     public function destroy($id)
     {
         $galeri = Galeri::findOrFail($id);
+
+        // Hapus file gambar
+        if ($galeri->gambar && file_exists(public_path($galeri->gambar))) {
+            unlink(public_path($galeri->gambar));
+        }
+
         $galeri->delete();
 
         return redirect()->route('admin.galeri.index')
@@ -109,9 +132,14 @@ class adminGaleriController extends Controller
     public function toggleStatus($id)
     {
         $galeri = Galeri::findOrFail($id);
+
         $galeri->status = !$galeri->status;
+
         $galeri->save();
 
-        return response()->json(['success' => true, 'status' => $galeri->status]);
+        return response()->json([
+            'success' => true,
+            'status' => $galeri->status
+        ]);
     }
 }

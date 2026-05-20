@@ -40,7 +40,7 @@
                     <td style="font-weight: 600; color: #444;">{{ $galeris->firstItem() + $index }}</td>
                     <td>
                         @if($galeri->gambar)
-                            <img src="{{ $galeri->gambar }}" alt="{{ $galeri->judul }}" 
+                            <img src="{{ asset($galeri->gambar) }}" alt="{{ $galeri->judul }}" 
                                  style="width: 100px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid #eee;">
                         @else
                             <div style="width: 100px; height: 70px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
