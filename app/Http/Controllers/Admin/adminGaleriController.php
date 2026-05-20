@@ -12,6 +12,7 @@ class adminGaleriController extends Controller
     public function index()
     {
         $galeris = Galeri::latest()->paginate(10);
+
         return view('admin.galeri.index', compact('galeris'));
     }
 
@@ -46,9 +47,10 @@ class adminGaleriController extends Controller
             $gambarPath = 'uploads/galeri/' . $namaFile;
         }
 
+        // Simpan ke database
         Galeri::create([
             'judul' => $request->judul,
-            'slug' => Str::slug($request->judul),
+            'slug' => Str::slug($request->judul) . '-' . time(),
             'kategori' => $request->kategori,
             'deskripsi' => $request->deskripsi,
             'gambar' => $gambarPath,
@@ -64,6 +66,7 @@ class adminGaleriController extends Controller
     public function edit($id)
     {
         $galeri = Galeri::findOrFail($id);
+
         return view('admin.galeri.edit', compact('galeri'));
     }
 
@@ -83,7 +86,7 @@ class adminGaleriController extends Controller
 
         $data = [
             'judul' => $request->judul,
-            'slug' => Str::slug($request->judul),
+            'slug' => Str::slug($request->judul) . '-' . time(),
             'kategori' => $request->kategori,
             'deskripsi' => $request->deskripsi,
             'lokasi' => $request->lokasi,
