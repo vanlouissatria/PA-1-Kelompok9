@@ -450,15 +450,16 @@
             <p class="text-muted">Temukan rute menuju Kenegerian / Rura Sihotang</p>
         </div>
         
-        <div class="maps-container" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 25px; max-width: 1000px; margin-left: auto; margin-right: auto;">
-            <iframe 
-                src="https://maps.google.com/maps/contrib/110956834161572886671"
-                width="100%" 
-                height="400" 
-                style="border:0; display: block;" 
-                allowfullscreen="" 
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
+        <!-- Google Maps -->
+        <div class="maps-container" data-aos="fade-up"
+            style="border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 25px;">
+            <iframe
+                src="https://maps.google.com/maps?q=Sihotang%20Samosir&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="450"
+                style="border:0; display:block;"
+                allowfullscreen=""
+                loading="lazy">
             </iframe>
         </div>
         
