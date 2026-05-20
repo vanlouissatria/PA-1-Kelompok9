@@ -696,6 +696,9 @@
         <a href="{{ route('admin.destinasi.index') }}" class="{{ request()->routeIs('admin.destinasi.*') ? 'active' : '' }}">
             <i class="fas fa-map-marked-alt"></i> Destinasi
         </a>
+        <a href="{{ route('admin.warisan.index') }}" class="{{ request()->routeIs('admin.warisan.*') ? 'active' : '' }}">
+    <i class="fas fa-landmark"></i> Warisan Alam & Budaya
+</a>
 
         <div class="menu-title">Geosite Tele</div>
         <a href="{{ url('/admin/tele') }}" class="{{ request()->is('admin/tele') ? 'active' : '' }}">
