@@ -450,8 +450,17 @@
             <div class="divider"></div>
             <p>Rute praktis menuju Holbung.</p>
         </div>
-        <div class="maps-container" data-aos="fade-up">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127645.46001033459!2d98.700731!3d2.621083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031d060f0e3180b%3A0xb561ba45f008aa18!2sPulau%20Holbung!5e0!3m2!1sid!2sid!4v1778767596787!5m2!1sid!2sid" width="100%" height="420" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <!-- Google Maps -->
+        <div class="maps-container" data-aos="fade-up"
+            style="border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 25px;">
+            <iframe
+                src="https://maps.google.com/maps?q=Bukit%20Holbung%20Samosir&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="450"
+                style="border:0; display:block;"
+                allowfullscreen=""
+                loading="lazy">
+            </iframe>
         </div>
         <div class="info-rute" data-aos="fade-up">
             <h4><i class="fas fa-location-dot"></i> Rute Menuju Holbung</h4>

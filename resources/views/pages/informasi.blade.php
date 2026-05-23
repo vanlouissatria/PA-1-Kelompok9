@@ -122,7 +122,7 @@
                     {{-- Layout: Gambar Kiri --}}
                     <div class="col-lg-6 mb-4 mb-lg-0">
                         <div class="img-wrapper">
-                            @if($info->gambar && file_exists(public_path($info->gambar)))
+                            @if($info->gambar)
                                 <img src="{{ asset($info->gambar) }}" 
                                      alt="{{ $info->judul }}" 
                                      loading="lazy">
@@ -134,7 +134,8 @@
                     <div class="col-lg-6 ps-lg-5">
                         <h2 class="info-title">{{ $info->judul }}</h2>
                         <div class="content-text">
-                            {!! nl2br(e($info->konten)) !!}
+                            {{-- PERBAIKAN: Gunakan field yang benar dan render HTML --}}
+                            {!! $info->deskripsi ?? $info->konten ?? 'Deskripsi tidak tersedia' !!}
                         </div>
                     </div>
                 @else
@@ -142,12 +143,13 @@
                     <div class="col-lg-6 order-2 order-lg-1 pe-lg-5">
                         <h2 class="info-title">{{ $info->judul }}</h2>
                         <div class="content-text">
-                            {!! nl2br(e($info->konten)) !!}
+                            {{-- PERBAIKAN: Gunakan field yang benar dan render HTML --}}
+                            {!! $info->deskripsi ?? $info->konten ?? 'Deskripsi tidak tersedia' !!}
                         </div>
                     </div>
                     <div class="col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0">
                         <div class="img-wrapper">
-                            @if($info->gambar && file_exists(public_path($info->gambar)))
+                            @if($info->gambar)
                                 <img src="{{ asset($info->gambar) }}" 
                                      alt="{{ $info->judul }}" 
                                      loading="lazy">

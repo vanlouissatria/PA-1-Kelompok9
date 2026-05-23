@@ -1095,22 +1095,27 @@
 <section class="section section-white">
     <div class="container">
         <div class="stats-grid">
+
             <div class="stat-item" data-aos="zoom-in" data-aos-duration="800">
-                <div class="stat-number">3</div>
+                <div class="stat-number">{{ $jumlahDestinasi }}</div>
                 <div class="stat-label">GEOSITES</div>
             </div>
+
             <div class="stat-item" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100">
                 <div class="stat-number">74.000</div>
                 <div class="stat-label">TAHUN SEJARAH</div>
             </div>
+
             <div class="stat-item" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="200">
                 <div class="stat-number">15+</div>
                 <div class="stat-label">WARISAN BUDAYA</div>
             </div>
+
             <div class="stat-item" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300">
                 <div class="stat-number">100+</div>
                 <div class="stat-label">UMKM LOKAL</div>
             </div>
+
         </div>
     </div>
 </section>
@@ -1186,7 +1191,7 @@
                         <!-- SIBEABEA -->
             <div class="destinasi-item reverse" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
                 <div class="destinasi-image">
-                    <img src="/image/sibeabea/sibeabea1.jpg" alt="Sibeabea">
+                    <img src="/image/sibeabea/sibeabea.jpg" alt="Sibeabea">
             </div>
             <div class="destinasi-content">
                 <div class="destinasi-number">04 — GEOSITE</div>
@@ -1207,7 +1212,7 @@
             <!-- HOLBUNG -->
             <div class="destinasi-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
                 <div class="destinasi-image">
-                    <img src="/image/holbung/holbung1.jpg" alt="Holbung">
+                    <img src="/image/holbung/Holbung.jpg" alt="Holbung">
                 </div>
                 <div class="destinasi-content">
                 <div class="destinasi-number">05 — GEOSITE</div>

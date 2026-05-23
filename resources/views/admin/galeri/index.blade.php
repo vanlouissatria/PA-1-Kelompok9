@@ -22,7 +22,7 @@
     @endif
 
     {{-- 3. Tabel Manajemen --}}
-    <div class="table-responsive" style="background: white; padding: 20px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <div class="table-responsive" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
         <table class="table" style="width: 100%; vertical-align: middle;">
             <thead>
                 <tr style="color: #8A92A6; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; border-bottom: 2px solid #f0f2f5;">
@@ -39,8 +39,12 @@
                 <tr style="border-bottom: 1px solid #f0f2f5;">
                     <td style="font-weight: 600; color: #444;">{{ $galeris->firstItem() + $index }}</td>
                     <td>
-                        @if($galeri->gambar)
-                            <img src="{{ $galeri->gambar }}" alt="{{ $galeri->judul }}" 
+                        @php
+                            $gambar = $galeri->gambar;
+                            $gambarAda = $gambar && file_exists(public_path($gambar));
+                        @endphp
+                        @if($gambarAda)
+                            <img src="{{ asset($gambar) }}" alt="{{ $galeri->judul }}"
                                  style="width: 100px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid #eee;">
                         @else
                             <div style="width: 100px; height: 70px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
@@ -63,7 +67,7 @@
                     </td>
                     <td>
                         {{-- PEMBUNGKUS TOMBOL AGAR RAPI --}}
-                        <div class="d-flex align-items: center; gap: 8px;">
+                        <div class="d-flex align-items-center gap-2">
                             {{-- Tombol Edit --}}
                             <a href="{{ route('admin.galeri.edit', $galeri->id) }}" 
                                class="btn btn-sm btn-warning" 
@@ -99,7 +103,7 @@
     </div>
 
     {{-- 4. Pagination --}}
-    <div class="d-flex justify-content-between align-items: center; mt-4">
+    <div class="d-flex justify-content-between align-items-center mt-4">
         <p class="text-muted small">Menampilkan {{ $galeris->firstItem() }} sampai {{ $galeris->lastItem() }} dari {{ $galeris->total() }} data</p>
         <div>
             {{ $galeris->links() }}

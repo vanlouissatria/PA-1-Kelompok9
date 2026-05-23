@@ -322,6 +322,8 @@
                     </li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('galeri') ? 'active' : '' }}" href="{{ url('/galeri') }}">Galeri</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('berita') ? 'active' : '' }}" href="{{ url('/berita') }}">Berita</a></li>
+                    <!-- [TAMBAHAN] Menu Warisan Alam dan Budaya -->
+                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('warisan.index') ? 'active' : '' }}" href="{{ route('warisan.index') }}">Warisan Alam & Budaya</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('kontak') ? 'active' : '' }}" href="{{ url('/kontak') }}">Kontak</a></li>
                 </ul>
             </div>
@@ -352,6 +354,8 @@
                         <li class="mb-2"><a href="{{ url('/berita') }}">Berita</a></li>
                         <li class="mb-2"><a href="{{ url('/kontak') }}">Kontak</a></li>
                         <li class="mb-2"><a href="{{ route('umkm.index') }}">UMKM</a></li>
+                        <!-- [TAMBAHAN] Menu Warisan di Footer -->
+                        <li class="mb-2"><a href="{{ route('warisan.index') }}">Warisan Alam & Budaya</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">

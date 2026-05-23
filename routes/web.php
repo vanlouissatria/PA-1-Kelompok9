@@ -1,11 +1,16 @@
 <?php
 
+
+
+
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DestinasiController;
 use App\Http\Controllers\GeositeController;
+use App\Http\Controllers\WarisanController;  
 
 // Public Controllers
 use App\Http\Controllers\GaleriController as PublicGaleriController;
@@ -18,7 +23,7 @@ use App\Http\Controllers\Admin\AdminBeritaController;
 use App\Http\Controllers\Admin\AdminInformasiController;
 use App\Http\Controllers\Admin\AdminDestinasiController;
 use App\Http\Controllers\Admin\TeleController;
-
+use App\Http\Controllers\Admin\WarisanController as AdminWarisanController;
 /*
 |--------------------------------------------------------------------------
 | FRONTEND ROUTES (PUBLIK)
@@ -37,6 +42,8 @@ Route::prefix('destinasi')->name('destinasi.')->group(function () {
 
 // INFORMASI
 Route::get('/informasi', [PublicInformasiController::class, 'index'])->name('informasi');
+// WARISAN ALAM DAN BUDAYA
+Route::get('/warisan-alam-budaya', [WarisanController::class, 'index'])->name('warisan.index');
 
 // GALERI
 Route::prefix('galeri')->name('galeri.')->group(function () {
@@ -110,7 +117,10 @@ Route::controller(AuthController::class)->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::prefix('admin')->middleware(['auth'])->group(function () {
-    
+
+// WARISAN ALAM DAN BUDAYA
+Route::resource('warisan', AdminWarisanController::class)->names('admin.warisan'); 
+
     // Dashboard
     Route::get('/', function () {
         $totalGaleri = DB::table('galeri')->count();

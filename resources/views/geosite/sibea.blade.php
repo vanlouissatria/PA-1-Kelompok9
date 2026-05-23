@@ -450,9 +450,19 @@
             <div class="divider"></div>
             <p>Rute praktis menuju Sibea Bea.</p>
         </div>
-        <div class="maps-container" data-aos="fade-up">
-           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.5332213753765!2d98.64753047424564!3d2.3253503976542155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031e72e1fa0a8b1%3A0x6bfa8a57df3884ff!2sBukit%20Sibea-bea!5e0!3m2!1sid!2sid!4v1716100000000!5m2!1sid!2sid" width="100%" height="420" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
+
+        <!-- Google Maps -->
+        <div class="maps-container" data-aos="fade-up"
+            style="border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 25px;">
+        <iframe
+            src="https://maps.google.com/maps?q=Patung%20Yesus%20Sibeabea%20Samosir&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="450"
+            style="border:0; display:block;"
+            allowfullscreen=""
+            loading="lazy">
+        </iframe>
+    </div>
         <div class="info-rute" data-aos="fade-up">
             <h4><i class="fas fa-location-dot"></i> Rute Menuju Sibea Bea</h4>
             <p><strong>Dari Pangururan:</strong> Perjalanan darat sekitar 40 menit menuju Sibea Bea melalui Jalan Lintas Samosir.</p>

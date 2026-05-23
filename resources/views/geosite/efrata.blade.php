@@ -392,22 +392,27 @@
 
 <section id="lokasi" class="section" style="background: #f8fafc;">
     <div class="container">
+
         <div class="section-title" data-aos="fade-up">
             <h2>Lokasi & Akses</h2>
             <div class="divider"></div>
             <p>Temukan rute menuju Air Terjun Efrata</p>
         </div>
-        
-        <div class="maps-container" data-aos="fade-up">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63479.01502924349!2d98.67868252580793!3d2.375320725649328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031bb3ef2cfd4d9%3A0x40e115a6f7ad8e59!2sAir%20Terjun%20Efrata!5e0!3m2!1sid!2sid!4v1778767596787!5m2!1sid!2sid" 
-                width="100%" 
-                height="400" 
-                style="border:0;" 
-                allowfullscreen="" 
+
+        <!-- Google Maps -->
+        <div class="maps-container" data-aos="fade-up"
+            style="border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 25px;">
+            <iframe
+                src="https://maps.google.com/maps?q=Air%20Terjun%20Efrata&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="450"
+                style="border:0; display:block;"
+                allowfullscreen=""
                 loading="lazy">
             </iframe>
         </div>
+
+
         
         <div class="info-rute" data-aos="fade-up">
             <h4><i class="fas fa-location-dot"></i> Rute Menuju Air Terjun Efrata</h4>
