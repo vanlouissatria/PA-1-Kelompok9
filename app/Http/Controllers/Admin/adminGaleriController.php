@@ -30,7 +30,7 @@ class adminGaleriController extends Controller
             'gambar' => 'required|image|mimes:jpeg,png,jpg|max:4096',
             'lokasi' => 'nullable|string',
             'tanggal_foto' => 'nullable|date',
-            'status' => 'nullable|boolean'
+            'status' => $request->has('status') ? 1 : 0
         ]);
 
         // Upload gambar
@@ -81,7 +81,7 @@ class adminGaleriController extends Controller
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:4096',
             'lokasi' => 'nullable|string',
             'tanggal_foto' => 'nullable|date',
-            'status' => 'nullable|boolean'
+            'status' => $request->has('status') ? 1 : 0
         ]);
 
         $data = [
