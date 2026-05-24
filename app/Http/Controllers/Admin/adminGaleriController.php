@@ -11,10 +11,12 @@ class adminGaleriController extends Controller
 {
     public function index()
     {
-        $galeris = Galeri::latest()->paginate(10);
+        $galeris = Galeri::where('kategori', '!=', 'tele')
+                    ->latest()
+                    ->paginate(10);
 
-        return view('admin.galeri.index', compact('galeris'));
-    }
+    return view('admin.galeri.index', compact('galeris'));
+}
 
     public function create()
     {

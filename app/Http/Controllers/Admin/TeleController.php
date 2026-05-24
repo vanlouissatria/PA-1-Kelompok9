@@ -9,7 +9,7 @@ use App\Models\Penginapan;
 use App\Models\Galeri;
 use App\Models\Informasi;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class TeleController extends Controller
 {
@@ -36,45 +36,43 @@ class TeleController extends Controller
         return view('admin.tele.umkm.create');
     }
 
-   // app/Http/Controllers/Admin/TeleController.php
-public function umkmStore(Request $request)
-{
-    // Validasi
-    $request->validate([
-        'nama_usaha' => 'required|string|max:255',
-        'pemilik' => 'required|string|max:255',
-        'kategori' => 'required|string',
-        'foto_utama' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
-    ]);
+    public function umkmStore(Request $request)
+    {
+        $request->validate([
+            'nama_usaha' => 'required|string|max:255',
+            'pemilik' => 'required|string|max:255',
+            'kategori' => 'required|string',
+            'foto_utama' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
 
-    // Upload foto
-    $fotoPath = null;
-    if ($request->hasFile('foto_utama')) {
-        $file = $request->file('foto_utama');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $fotoPath = $file->storeAs('umkm', $filename, 'public');
+        $fotoPath = null;
+        if ($request->hasFile('foto_utama')) {
+            $file = $request->file('foto_utama');
+            $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
+            
+            if (!file_exists(public_path('image/umkm'))) {
+                mkdir(public_path('image/umkm'), 0777, true);
+            }
+            
+            $file->move(public_path('image/umkm'), $filename);
+            $fotoPath = 'image/umkm/' . $filename;
+        }
+
+        UMKM::create([
+            'nama_usaha' => $request->nama_usaha, // Disesuaikan, duplikasi kolom 'nama' dihapus
+            'pemilik' => $request->pemilik,
+            'no_telepon' => $request->no_telepon,
+            'kategori' => $request->kategori,
+            'geosite' => 'tele',
+            'alamat' => $request->alamat,
+            'deskripsi' => $request->deskripsi,
+            'foto_utama' => $fotoPath,
+            'status' => 1,
+        ]);
+
+        return redirect()->to('/admin/tele/umkm')->with('success', 'Data UMKM berhasil ditambahkan');
     }
 
-    // Simpan data
-    $umkm = Umkm::create([
-        'nama' => $request->nama_usaha,
-        'nama_usaha' => $request->nama_usaha,
-        'pemilik' => $request->pemilik,
-        'no_telepon' => $request->no_telepon,
-        'kategori' => $request->kategori,
-        'geosite' => $request->geosite ?? 'tele',
-        'alamat' => $request->alamat,
-        'deskripsi' => $request->deskripsi,
-        'foto_utama' => $fotoPath,
-        'status' => 1,
-    ]);
-
-    // Debug: cek apakah foto tersimpan
-    \Log::info('Foto path: ' . $fotoPath);
-    \Log::info('Data saved: ', $umkm->toArray());
-
-    return redirect()->route('admin.tele.umkm')->with('success', 'Data UMKM berhasil ditambahkan');
-}
     public function umkmEdit($id)
     {
         $umkm = UMKM::findOrFail($id);
@@ -102,10 +100,11 @@ public function umkmStore(Request $request)
             'kategori' => $request->kategori,
             'alamat' => $request->alamat,
             'deskripsi' => $request->deskripsi,
+            'geosite' => 'tele'
         ];
 
         if ($request->hasFile('foto_utama')) {
-            if ($umkm->foto_utama && file_exists(public_path($umkm->foto_utama))) {
+            if ($umkm->foto_utama && is_file(public_path($umkm->foto_utama))) {
                 unlink(public_path($umkm->foto_utama));
             }
             
@@ -127,7 +126,7 @@ public function umkmStore(Request $request)
     public function umkmDestroy($id)
     {
         $umkm = UMKM::findOrFail($id);
-        if ($umkm->foto_utama && file_exists(public_path($umkm->foto_utama))) {
+        if ($umkm->foto_utama && is_file(public_path($umkm->foto_utama))) {
             unlink(public_path($umkm->foto_utama));
         }
         $umkm->delete();
@@ -136,14 +135,10 @@ public function umkmStore(Request $request)
 
     // ==================== FASILITAS ====================
     public function fasilitas()
-{
-    // Ambil data dengan geosite 'tele'
-    $fasilitas = Fasilitas::where('geosite', 'tele')
-                          ->orderBy('created_at', 'desc')
-                          ->paginate(10);
-    
-    return view('admin.tele.fasilitas.index', compact('fasilitas'));
-}
+    {
+        $fasilitas = Fasilitas::where('geosite', 'tele')->orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.tele.fasilitas.index', compact('fasilitas'));
+    }
 
     public function fasilitasCreate()
     {
@@ -151,37 +146,37 @@ public function umkmStore(Request $request)
     }
 
     public function fasilitasStore(Request $request)
-{
-    $request->validate([
-        'nama' => 'required|string|max:255',
-        'deskripsi' => 'nullable|string',
-        'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        'harga' => 'nullable|numeric'
-    ]);
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'harga' => 'nullable|numeric'
+        ]);
 
-    $data = [
-        'nama' => $request->nama,
-        'deskripsi' => $request->deskripsi,
-        'geosite' => 'tele',  // ← PASTIKAN 'tele'
-        'harga' => $request->harga,
-        'status' => 1
-    ];
+        $data = [
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            'geosite' => 'tele',
+            'harga' => $request->harga,
+            'status' => 1
+        ];
 
-    if ($request->hasFile('gambar')) {
-        $file = $request->file('gambar');
-        $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
-        
-        if (!file_exists(public_path('image/fasilitas'))) {
-            mkdir(public_path('image/fasilitas'), 0777, true);
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
+            
+            if (!file_exists(public_path('image/fasilitas'))) {
+                mkdir(public_path('image/fasilitas'), 0777, true);
+            }
+            
+            $file->move(public_path('image/fasilitas'), $filename);
+            $data['gambar'] = 'image/fasilitas/' . $filename;
         }
-        
-        $file->move(public_path('image/fasilitas'), $filename);
-        $data['gambar'] = 'image/fasilitas/' . $filename;
-    }
 
-    Fasilitas::create($data);
-    return redirect()->to('/admin/tele/fasilitas')->with('success', 'Fasilitas berhasil ditambahkan');
-}
+        Fasilitas::create($data);
+        return redirect()->to('/admin/tele/fasilitas')->with('success', 'Fasilitas berhasil ditambahkan');
+    }
 
     public function fasilitasEdit($id)
     {
@@ -190,47 +185,47 @@ public function umkmStore(Request $request)
     }
 
     public function fasilitasUpdate(Request $request, $id)
-{
-    $fasilitas = Fasilitas::findOrFail($id);
-    
-    $request->validate([
-        'nama' => 'required|string|max:255',
-        'deskripsi' => 'nullable|string',
-        'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        'harga' => 'nullable|numeric'
-    ]);
+    {
+        $fasilitas = Fasilitas::findOrFail($id);
+        
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'harga' => 'nullable|numeric'
+        ]);
 
-    $data = [
-        'nama' => $request->nama,
-        'deskripsi' => $request->deskripsi,
-        'harga' => $request->harga,
-        'geosite' => 'tele'  // ← PASTIKAN TETAP 'tele'
-    ];
+        $data = [
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            'harga' => $request->harga,
+            'geosite' => 'tele'
+        ];
 
-    if ($request->hasFile('gambar')) {
-        if ($fasilitas->gambar && file_exists(public_path($fasilitas->gambar))) {
-            unlink(public_path($fasilitas->gambar));
+        if ($request->hasFile('gambar')) {
+            if ($fasilitas->gambar && is_file(public_path($fasilitas->gambar))) {
+                unlink(public_path($fasilitas->gambar));
+            }
+            
+            $file = $request->file('gambar');
+            $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
+            
+            if (!file_exists(public_path('image/fasilitas'))) {
+                mkdir(public_path('image/fasilitas'), 0777, true);
+            }
+            
+            $file->move(public_path('image/fasilitas'), $filename);
+            $data['gambar'] = 'image/fasilitas/' . $filename;
         }
-        
-        $file = $request->file('gambar');
-        $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
-        
-        if (!file_exists(public_path('image/fasilitas'))) {
-            mkdir(public_path('image/fasilitas'), 0777, true);
-        }
-        
-        $file->move(public_path('image/fasilitas'), $filename);
-        $data['gambar'] = 'image/fasilitas/' . $filename;
+
+        $fasilitas->update($data);
+        return redirect()->to('/admin/tele/fasilitas')->with('success', 'Fasilitas berhasil diperbarui');
     }
-
-    $fasilitas->update($data);
-    return redirect()->to('/admin/tele/fasilitas')->with('success', 'Fasilitas berhasil diperbarui');
-}
 
     public function fasilitasDestroy($id)
     {
         $fasilitas = Fasilitas::findOrFail($id);
-        if ($fasilitas->gambar && file_exists(public_path($fasilitas->gambar))) {
+        if ($fasilitas->gambar && is_file(public_path($fasilitas->gambar))) {
             unlink(public_path($fasilitas->gambar));
         }
         $fasilitas->delete();
@@ -309,11 +304,12 @@ public function umkmStore(Request $request)
             'deskripsi' => $request->deskripsi,
             'alamat' => $request->alamat,
             'no_telepon' => $request->no_telepon,
-            'harga' => $request->harga
+            'harga' => $request->harga,
+            'geosite' => 'tele'
         ];
 
         if ($request->hasFile('gambar')) {
-            if ($penginapan->gambar && file_exists(public_path($penginapan->gambar))) {
+            if ($penginapan->gambar && is_file(public_path($penginapan->gambar))) {
                 unlink(public_path($penginapan->gambar));
             }
             
@@ -335,7 +331,7 @@ public function umkmStore(Request $request)
     public function penginapanDestroy($id)
     {
         $penginapan = Penginapan::findOrFail($id);
-        if ($penginapan->gambar && file_exists(public_path($penginapan->gambar))) {
+        if ($penginapan->gambar && is_file(public_path($penginapan->gambar))) {
             unlink(public_path($penginapan->gambar));
         }
         $penginapan->delete();
@@ -362,24 +358,28 @@ public function umkmStore(Request $request)
             'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
-        $slug = \Illuminate\Support\Str::slug($request->judul) . '-' . time() . '-' . rand(100, 999);
-        $file = $request->file('gambar');
-        $filename = time() . '_' . rand(100, 999) . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
-        
-        if (!file_exists(public_path('image/galeri'))) {
-            mkdir(public_path('image/galeri'), 0777, true);
+        $slug = Str::slug($request->judul) . '-' . time() . '-' . rand(100, 999);
+        $gambarPath = null;
+
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $filename = time() . '_' . rand(100, 999) . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
+            
+            if (!file_exists(public_path('image/galeri'))) {
+                mkdir(public_path('image/galeri'), 0777, true);
+            }
+            
+            $file->move(public_path('image/galeri'), $filename);
+            $gambarPath = 'image/galeri/' . $filename;
         }
-        
-        $file->move(public_path('image/galeri'), $filename);
-        $gambarPath = 'image/galeri/' . $filename;
 
         Galeri::create([
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             'gambar' => $gambarPath,
             'slug' => $slug,
-            'kategori' => 'tele',
-            'status' => true
+            'kategori' => 'tele', // Kunci kategori agar tidak masuk ke halaman utama
+            'status' => 1
         ]);
 
         return redirect()->to('/admin/tele/galeri')->with('success', 'Galeri berhasil ditambahkan');
@@ -404,10 +404,11 @@ public function umkmStore(Request $request)
         $data = [
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
+            'kategori' => 'tele'
         ];
 
         if ($request->hasFile('gambar')) {
-            if ($galeri->gambar && file_exists(public_path($galeri->gambar))) {
+            if ($galeri->gambar && is_file(public_path($galeri->gambar))) {
                 unlink(public_path($galeri->gambar));
             }
             
@@ -429,7 +430,7 @@ public function umkmStore(Request $request)
     public function galeriDestroy($id)
     {
         $galeri = Galeri::findOrFail($id);
-        if ($galeri->gambar && file_exists(public_path($galeri->gambar))) {
+        if ($galeri->gambar && is_file(public_path($galeri->gambar))) {
             unlink(public_path($galeri->gambar));
         }
         $galeri->delete();
@@ -437,56 +438,50 @@ public function umkmStore(Request $request)
     }
 
     // ==================== INFORMASI ====================
-   public function informasi()
-{
-    // HANYA data dengan kategori 'tele'
-    $informasi = Informasi::where('kategori', 'tele')
-                          ->orderBy('created_at', 'desc')
-                          ->paginate(10);
-    
-    return view('admin.tele.informasi.index', compact('informasi'));
-}
+    public function informasi()
+    {
+        $informasi = Informasi::where('kategori', 'tele')->orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.tele.informasi.index', compact('informasi'));
+    }
 
     public function informasiCreate()  
     {
         return view('admin.tele.informasi.create');
     }
 
-   public function informasiStore(Request $request)
-{
-    $request->validate([
-        'judul' => 'required|string|max:255',
-        'isi' => 'required|string',
-        'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
-    ]);
+    public function informasiStore(Request $request)
+    {
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'isi' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
 
-    // Buat slug UNIK dengan timestamp milisecond + random
-    $slug = \Illuminate\Support\Str::slug($request->judul) . '-' . round(microtime(true) * 1000) . '-' . rand(10, 99);
+        $slug = Str::slug($request->judul) . '-' . round(microtime(true) * 1000) . '-' . rand(10, 99);
+        $data = [
+            'judul' => $request->judul,
+            'konten' => $request->isi,
+            'kategori' => 'tele',
+            'status' => 1,
+            'slug' => $slug
+        ];
 
-    $data = [
-        'judul' => $request->judul,
-        'konten' => $request->isi,
-        'kategori' => 'tele',
-        'status' => 1,
-        'slug' => $slug
-    ];
-
-    if ($request->hasFile('gambar')) {
-        $file = $request->file('gambar');
-        $filename = round(microtime(true) * 1000) . '_' . rand(10, 99) . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
-        
-        if (!file_exists(public_path('image/informasi'))) {
-            mkdir(public_path('image/informasi'), 0777, true);
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $filename = round(microtime(true) * 1000) . '_' . rand(10, 99) . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
+            
+            if (!file_exists(public_path('image/informasi'))) {
+                mkdir(public_path('image/informasi'), 0777, true);
+            }
+            
+            $file->move(public_path('image/informasi'), $filename);
+            $data['gambar'] = 'image/informasi/' . $filename;
         }
-        
-        $file->move(public_path('image/informasi'), $filename);
-        $data['gambar'] = 'image/informasi/' . $filename;
+
+        Informasi::create($data);
+        return redirect()->to('/admin/tele/informasi')->with('success', 'Informasi Tele berhasil ditambahkan');
     }
 
-    Informasi::create($data);
-    
-    return redirect()->to('/admin/tele/informasi')->with('success', 'Informasi Tele berhasil ditambahkan');
-}
     public function informasiUpdate(Request $request, $id)
     {
         $informasi = Informasi::findOrFail($id);
@@ -500,10 +495,11 @@ public function umkmStore(Request $request)
         $data = [
             'judul' => $request->judul,
             'konten' => $request->isi,
+            'kategori' => 'tele'
         ];
 
         if ($request->hasFile('gambar')) {
-            if ($informasi->gambar && file_exists(public_path($informasi->gambar))) {
+            if ($informasi->gambar && is_file(public_path($informasi->gambar))) {
                 unlink(public_path($informasi->gambar));
             }
             
@@ -525,11 +521,10 @@ public function umkmStore(Request $request)
     public function informasiDestroy($id)
     {
         $informasi = Informasi::findOrFail($id);
-        if ($informasi->gambar && file_exists(public_path($informasi->gambar))) {
+        if ($informasi->gambar && is_file(public_path($informasi->gambar))) {
             unlink(public_path($informasi->gambar));
         }
         $informasi->delete();
         return redirect()->to('/admin/tele/informasi')->with('success', 'Informasi berhasil dihapus');
     }
-    
 }

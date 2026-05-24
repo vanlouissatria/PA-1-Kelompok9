@@ -14,16 +14,12 @@ class GaleriController extends Controller
     {
         // Hanya tampilkan galeri yang BUKAN untuk Tele (kategori 'tele')
         // dan galeri dengan status aktif
-        $galeri = Galeri::where('status', 1)
-                        ->where(function($query) {
-                            $query->whereNull('kategori')
-                                  ->orWhere('kategori', '!=', 'tele')
-                                  ->orWhere('kategori', 'umum');
-                        })
+        $galeri = Galeri::where('kategori', '!=', 'tele')
+                        ->where('status', 1)
                         ->orderBy('created_at', 'desc')
                         ->paginate(12);
         
-        return view('pages.galeri', compact('galeri'));
+        return view('admin.pages.galeri', compact('galeri'));
     }
 
     /**
@@ -55,6 +51,6 @@ class GaleriController extends Controller
     {
         $galeri = Galeri::where('slug', $slug)->firstOrFail();
         $galeri->increment('views');
-        return view('pages.galeri-detail', compact('galeri'));
+        return view('admin.pages.galeri-detail', compact('galeri'));
     }
 }
