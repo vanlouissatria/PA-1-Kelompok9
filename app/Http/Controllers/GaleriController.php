@@ -19,7 +19,7 @@ class GaleriController extends Controller
                         ->orderBy('created_at', 'desc')
                         ->paginate(12);
         
-        return view('admin.pages.galeri', compact('galeri'));
+        return view('pages.galeri', compact('galeri'));
     }
 
     /**
@@ -51,6 +51,6 @@ class GaleriController extends Controller
     {
         $galeri = Galeri::where('slug', $slug)->firstOrFail();
         $galeri->increment('views');
-        return view('admin.pages.galeri-detail', compact('galeri'));
+        return view('pages.galeri-detail', compact('galeri'));
     }
 }
