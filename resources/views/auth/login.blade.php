@@ -46,6 +46,7 @@
                                 <label class="form-label">Password</label>
                                 <input type="password" name="password" class="form-control" required>
                             </div>
+                            <!-- TAMBAHKAN LINK LUPA PASSWORD DI SINI -->
                             <div class="forgot-link">
                                 <a href="{{ route('password.request') }}">Lupa Password?</a>
                             </div>
