@@ -11,7 +11,7 @@
         min-height: 100vh;
     }
 
-    /* HERO SECTION (Diselaraskan dengan Berita, Galeri, & Warisan) */
+    /* HERO SECTION */
     .information-hero {
         background: linear-gradient(135deg, #003366 0%, #1a4a7a 100%);
         padding: 120px 0 60px;
@@ -59,160 +59,117 @@
     }
 
     /* MAIN CONTENT SECTION */
-    .information-section {
-        padding: 70px 0 100px;
-        background: linear-gradient(135deg, #f8fafc 0%, #eef2f8 100%);
-        flex: 1; /* Memastikan section ini mengambil sisa ruang agar footer tetap di bawah */
+    .info-showcase-section {
+        padding: 80px 0 100px;
+        background: #f4f8fb;
+        flex: 1;
     }
 
-    .information-container {
-        max-width: 1400px;
+    .info-showcase-container {
+        max-width: 1200px;
         margin: auto;
         padding: 0 24px;
     }
 
-    /* STACK CONTAINER (Efek Kartu Bertumpuk) */
-    .stack-container {
+    /* TATA LETAK ROW BARIS */
+    .info-showcase-row {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0;
-        padding: 30px 0;
+        align-items: flex-start; /* Menggunakan flex-start agar saat gambar mengecil, baris teks tetap rapi */
+        gap: 60px;
+        margin-bottom: 100px;
     }
 
-    /* SLIP CARD STYLE */
-    .slip-card {
-        position: relative;
-        width: 280px;
-        background: white;
-        border-radius: 18px;
-        overflow: hidden;
-        cursor: pointer;
-        transition: all 0.4s ease;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        margin-left: -60px;
-        text-decoration: none;
-        color: inherit;
+    /* Efek Selang-seling Layout (Genap: Gambar Kanan, Teks Kiri) */
+    .info-showcase-row:nth-child(even) {
+        flex-direction: row-reverse;
     }
 
-    .slip-card:first-child {
-        margin-left: 0;
-    }
-
-    .slip-card:hover {
-        transform: translateY(-15px) scale(1.02);
-        z-index: 10;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
-
-    .slip-card:hover ~ .slip-card {
-        transform: translateX(20px);
-    }
-
-    /* IMAGE CONTAINER */
-    .slip-image {
-        position: relative;
+    /* BLOK GAMBAR BARIS */
+    .info-image-block {
+        flex: 1;
         width: 100%;
-        height: 320px;
-        overflow: hidden;
-        background: #ddd;
     }
 
-    .slip-image img {
+    .info-image-wrapper {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
+        height: auto; /* MENGUBAH JADI AUTO: Menghapus sisa ruang kosong di atas/bawah */
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(0, 31, 63, 0.08);
+        background: transparent; /* Menghilangkan latar putih agar tidak ada sisa kotak bingkai */
     }
 
-    .slip-card:hover .slip-image img {
-        transform: scale(1.06);
+    .info-image-wrapper img {
+        width: 100%;
+        height: auto; /* Memastikan gambar melebar penuh mengikuti kolom secara proporsional */
+        display: block;
+        object-fit: cover; /* Memaksa komponen visual mengisi ruang tanpa distorsi gepeng */
+        border-radius: 20px;
     }
 
-    /* OVERLAY ON HOVER */
-    .slip-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.1));
-        display: flex;
-        align-items: flex-end;
-        padding: 20px;
-        opacity: 0;
-        transition: opacity 0.3s ease;
+    /* BLOK TEKS & DETAIL */
+    .info-content-block {
+        flex: 1.3;
+        width: 100%;
     }
 
-    .slip-card:hover .slip-overlay {
-        opacity: 1;
-    }
-
-    .slip-overlay-content {
-        color: white;
-    }
-
-    .slip-category {
-        display: inline-block;
-        background: #c6a43b;
-        color: #003366;
-        padding: 4px 10px;
-        border-radius: 30px;
-        font-size: 0.65rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        margin-bottom: 8px;
-    }
-
-    .slip-overlay-title {
+    /* Label Urutan Atas */
+    .info-meta-index {
         font-size: 0.9rem;
-        font-weight: 600;
-        line-height: 1.4;
-    }
-
-    /* CARD INFO SECTION */
-    .slip-info {
-        padding: 18px;
-        position: relative;
-    }
-
-    .slip-line {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 3px;
-        width: 100%;
-        background: linear-gradient(90deg, #c6a43b, #e8c45a, #c6a43b);
-        transform: scaleX(0);
-        transition: transform 0.3s ease;
-    }
-
-    .slip-card:hover .slip-line {
-        transform: scaleX(1);
-    }
-
-    .slip-title {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #1e293b;
-        margin-bottom: 10px;
-        line-height: 1.5;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .slip-location {
+        font-weight: 700;
+        color: #c6a43b;
+        letter-spacing: 2px;
+        margin-bottom: 12px;
         display: flex;
         align-items: center;
-        gap: 6px;
-        color: #64748b;
-        font-size: 0.8rem;
+        gap: 10px;
     }
 
-    .slip-location i {
-        color: #c6a43b;
+    .info-meta-index::after {
+        content: '';
+        display: inline-block;
+        width: 40px;
+        height: 1px;
+        background-color: #c6a43b;
+    }
+
+    /* Judul Informasi */
+    .info-showcase-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #003366;
+        margin-bottom: 12px;
+        line-height: 1.3;
+    }
+
+    /* Sub-informasi Kategori */
+    .info-sub-label {
+        font-size: 0.75rem;
+        color: #7a8b9e;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 25px;
+        font-weight: 600;
+    }
+
+    /* Deskripsi / Full Konten Teks Informasi */
+    .info-full-content {
+        font-size: 1.05rem;
+        color: #334155;
+        line-height: 1.8;
+        text-align: justify;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .info-full-content p {
+        margin-bottom: 1.5rem;
     }
 
     /* EMPTY STATE */
-    .empty-gallery {
+    .empty-info-box {
         text-align: center;
         background: white;
         padding: 80px 30px;
@@ -221,37 +178,16 @@
         width: 100%;
     }
 
-    .empty-gallery i {
-        font-size: 4rem;
-        color: #cbd5e1;
-        margin-bottom: 20px;
-    }
-
-    .empty-gallery h5 {
-        color: #1e293b;
-        margin-bottom: 10px;
-    }
-
-    .empty-gallery p {
-        color: #64748b;
-    }
-
     /* RESPONSIVE */
     @media (max-width: 992px) {
-        .stack-container { gap: 20px; }
-        .slip-card { margin-left: 0; width: 260px; }
-        .slip-card:hover ~ .slip-card { transform: none; }
-    }
-
-    @media (max-width: 768px) {
-        .information-hero h1 { font-size: 2.2rem; }
-        .slip-card { width: calc(50% - 10px); }
-        .slip-image { height: 260px; }
-    }
-
-    @media (max-width: 560px) {
-        .slip-card { width: 100%; }
-        .slip-image { height: 280px; }
+        .info-showcase-row, .info-showcase-row:nth-child(even) {
+            flex-direction: column;
+            gap: 35px;
+            margin-bottom: 70px;
+        }
+        .info-showcase-title {
+            font-size: 1.8rem;
+        }
     }
 </style>
 
@@ -263,46 +199,56 @@
         </div>
     </section>
 
-    <section class="information-section">
-        <div class="information-container">
+    <section class="info-showcase-section">
+        <div class="info-showcase-container">
             
-            <div class="stack-container">
-                @forelse($informasi as $info)
-                    <a href="{{ url('/informasi/' . ($info->slug ?? $info->id)) }}" class="slip-card">
-                        <div class="slip-line"></div>
-                        
-                        <div class="slip-image">
-                            @if($info->gambar)
+            @forelse($informasi as $index => $info)
+                <div class="info-showcase-row">
+                    
+                    <div class="info-image-block">
+                        <div class="info-image-wrapper">
+                            @if($info->gambar && file_exists(public_path($info->gambar)))
                                 <img src="{{ asset($info->gambar) }}" alt="{{ $info->judul }}" loading="lazy">
                             @else
-                                <img src="https://placehold.co/800x600?text=GeoToba" alt="Placeholder">
+                                <img src="https://placehold.co/800x600?text=GeoToba+Informasi" alt="Placeholder">
                             @endif
-                            
-                            <div class="slip-overlay">
-                                <div class="slip-overlay-content">
-                                    <span class="slip-category">Edukasi</span>
-                                    <div class="slip-overlay-title">{{ $info->judul }}</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    <div class="slip-info">
-                        <div class="slip-title">{{ $info->judul }}</div>
-                        <div class="slip-location">
-                            <i class="fas fa-history"></i> Sejarah Toba
                         </div>
                     </div>
-                </a>
+
+                    <div class="info-content-block">
+                        <div class="info-meta-index">
+                            {{ sprintf('%02d', ($index + 1)) }} — INFORMASI
+                        </div>
+                        
+                        <h2 class="info-showcase-title">{{ $info->judul }}</h2>
+                        
+                        <div class="info-sub-label">
+                            <i class="fas fa-history"></i> Sejarah Toba
+                            <span class="mx-2">|</span>
+                            <i class="fas fa-graduation-cap"></i> Edukasi
+                        </div>
+
+                        <div class="info-full-content">
+                            {!! $info->konten !!}
+                        </div>
+                    </div>
+
+                </div>
             @empty
-                <div class="empty-gallery">
-                    <i class="fas fa-file-alt"></i>
+                <div class="empty-info-box">
+                    <i class="fas fa-file-alt fa-3x text-muted d-block mb-3"></i>
                     <h5>Belum Ada Informasi</h5>
-                    <p>Data mengenai pembentukan Danau Toba belum tersedia saat ini.</p>
+                    <p class="text-muted">Data mengenai edukasi pembentukan Danau Toba belum tersedia saat ini.</p>
                 </div>
             @endforelse
-        </div>
 
-    </div>
-</section>
+            @if(method_exists($informasi, 'links'))
+                <div class="d-flex justify-content-center mt-5">
+                    {{ $informasi->links() }}
+                </div>
+            @endif
+
+        </div>
+    </section>
 </div>
 @endsection

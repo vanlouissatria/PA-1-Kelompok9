@@ -91,4 +91,14 @@ class AdminDestinasiController extends Controller
 
         return redirect()->route('admin.destinasi.index')->with('success', 'Destinasi berhasil dihapus!');
     }
+
+    // Toggle status
+    public function toggleStatus($id)
+    {
+        $destinasi = Destinasi::findOrFail($id);
+        $destinasi->status = !($destinasi->status ?? false);
+        $destinasi->save();
+
+        return response()->json(['success' => true, 'status' => $destinasi->status]);
+    }
 }

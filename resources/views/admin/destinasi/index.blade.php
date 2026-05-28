@@ -39,16 +39,14 @@
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="{{ route('admin.destinasi.edit', $item->id) }}" class="btn btn-warning btn-sm mr-2">
-                                        <i class="fas fa-edit"></i> Edit
-                                    </a>
-                                    <form action="{{ route('admin.destinasi.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash"></i> Hapus
-                                        </button>
-                                    </form>
+                                    <button type="button" 
+                                            class="btn btn-sm toggle-status-btn" 
+                                            data-id="{{ $item->id }}"
+                                            data-status="{{ $item->status ?? 0 }}"
+                                            title="Toggle status"
+                                            style="font-weight: 600; padding: 5px 10px; border-radius: 6px; display: inline-flex; align-items: center; background-color: {{ ($item->status ?? false) ? '#28a745' : '#6c757d' }}; color: white; border: none; cursor: pointer; font-size: 0.85rem;">
+                                        <i class="fas {{ ($item->status ?? false) ? 'fa-eye' : 'fa-eye-slash' }}"></i>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -64,4 +62,54 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButtons = document.querySelectorAll('.toggle-status-btn');
+    
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = this.getAttribute('data-id');
+            const currentStatus = parseInt(this.getAttribute('data-status'));
+            const button = this;
+            const icon = button.querySelector('i');
+            
+            icon.className = 'fas fa-spinner fa-spin';
+            button.disabled = true;
+
+            fetch(`{{ url('/admin/destinasi/toggle-status') }}/${itemId}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const newStatus = data.status;
+                    
+                    if (newStatus) {
+                        button.style.backgroundColor = '#28a745';
+                        button.setAttribute('data-status', '1');
+                    } else {
+                        button.style.backgroundColor = '#6c757d';
+                        button.setAttribute('data-status', '0');
+                    }
+                    icon.className = newStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
+            })
+            .finally(() => {
+                button.disabled = false;
+            });
+        });
+    });
+});
+</script>
 @endsection

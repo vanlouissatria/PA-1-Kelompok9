@@ -42,6 +42,7 @@ Route::prefix('destinasi')->name('destinasi.')->group(function () {
 
 // INFORMASI
 Route::get('/informasi', [PublicInformasiController::class, 'index'])->name('informasi');
+Route::get('/informasi/{slug}', [PublicInformasiController::class, 'show'])->name('informasi.detail');
 // WARISAN ALAM DAN BUDAYA
 Route::get('/warisan-alam-budaya', [WarisanController::class, 'index'])->name('warisan.index');
 
@@ -136,6 +137,13 @@ Route::resource('warisan', AdminWarisanController::class)->names('admin.warisan'
         ));
     })->name('admin.dashboard');
     
+    // Toggle Status Routes (must be before resource routes)
+    Route::post('galeri/toggle-status/{id}', [AdminGaleriController::class, 'toggleStatus'])->name('admin.galeri.toggle-status');
+    Route::post('berita/toggle-status/{id}', [AdminBeritaController::class, 'toggleStatus'])->name('admin.berita.toggle-status');
+    Route::post('informasi/toggle-status/{id}', [AdminInformasiController::class, 'toggleStatus'])->name('admin.informasi.toggle-status');
+    Route::post('destinasi/toggle-status/{id}', [AdminDestinasiController::class, 'toggleStatus'])->name('admin.destinasi.toggle-status');
+    Route::post('fasilitas/toggle-status/{id}', [AdminFasilitasController::class, 'toggleStatus'])->name('admin.fasilitas.toggle-status');
+    
     // GALERI
     Route::resource('galeri', AdminGaleriController::class)->names('admin.galeri');
     
@@ -147,11 +155,6 @@ Route::resource('warisan', AdminWarisanController::class)->names('admin.warisan'
     
     // DESTINASI
     Route::resource('destinasi', AdminDestinasiController::class)->names('admin.destinasi');
-    
-    // Toggle Status Routes
-    Route::post('galeri/toggle-status/{id}', [AdminGaleriController::class, 'toggleStatus'])->name('admin.galeri.toggle-status');
-    Route::post('berita/toggle-status/{id}', [AdminBeritaController::class, 'toggleStatus'])->name('admin.berita.toggle-status');
-    Route::post('informasi/toggle-status/{id}', [AdminInformasiController::class, 'toggleStatus'])->name('admin.informasi.toggle-status');
     
     // ==================== TELE ROUTES (LENGKAP) ====================
     Route::prefix('tele')->name('admin.tele.')->group(function () {

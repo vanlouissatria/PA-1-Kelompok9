@@ -139,17 +139,6 @@
         transform: scale(1);
     }
     
-    .slide::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(0,51,102,0.4) 0%, rgba(0,102,153,0.2) 100%);
-        animation: shimmer 3s infinite;
-    }
-    
     .slide-1 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/home/tele1.jpg'); }
     .slide-2 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/home/efrata5.jpg'); }
     .slide-3 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/home/sihotang2.jpg'); }
@@ -928,16 +917,6 @@
         height: 200%;
         background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
         animation: rotate 20s linear infinite;
-    }
-    
-    .cta-section::after {
-        content: '✦';
-        position: absolute;
-        font-size: 3rem;
-        color: rgba(255,255,255,0.05);
-        bottom: 20px;
-        right: 30px;
-        animation: float 3s ease-in-out infinite;
     }
     
     @keyframes rotate {

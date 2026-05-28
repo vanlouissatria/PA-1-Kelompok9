@@ -11,7 +11,8 @@ class adminInformasiController extends Controller
 {
     public function index()
     {
-        $informasi = Informasi::orderBy('created_at', 'desc')->paginate(10);
+        // Menambahkan properti urutan sesuai kebutuhan kolom tabel index
+        $informasi = Informasi::orderBy('urutan', 'asc')->orderBy('created_at', 'desc')->paginate(10);
         return view('admin.informasi.index', compact('informasi'));
     }
     
@@ -30,17 +31,20 @@ class adminInformasiController extends Controller
         ]);
         
         try {
-            $gambarBase64 = null;
+            $gambarPath = null;
             if ($request->hasFile('gambar')) {
                 $file = $request->file('gambar');
-                $gambarBase64 = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file));
+                $namaFile = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads/informasi'), $namaFile);
+                $gambarPath = 'uploads/informasi/' . $namaFile;
             }
             
             Informasi::create([
                 'judul' => $request->judul,
                 'slug' => Str::slug($request->judul),
                 'konten' => $request->konten,
-                'gambar' => $gambarBase64,
+                'urutan' => $request->urutan ?? 0, // Mengakomodasi field urutan
+                'gambar' => $gambarPath,
                 'status' => $request->has('status') ? 1 : 0
             ]);
             
@@ -76,12 +80,20 @@ class adminInformasiController extends Controller
                 'judul' => $request->judul,
                 'slug' => Str::slug($request->judul),
                 'konten' => $request->konten,
+                'urutan' => $request->urutan ?? 0, // Mengakomodasi field urutan
                 'status' => $request->has('status') ? 1 : 0
             ];
             
             if ($request->hasFile('gambar')) {
+                // Hapus gambar lama jika ada
+                if ($informasi->gambar && file_exists(public_path($informasi->gambar))) {
+                    unlink(public_path($informasi->gambar));
+                }
+                
                 $file = $request->file('gambar');
-                $data['gambar'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file));
+                $namaFile = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads/informasi'), $namaFile);
+                $data['gambar'] = 'uploads/informasi/' . $namaFile;
             }
             
             $informasi->update($data);
@@ -100,6 +112,12 @@ class adminInformasiController extends Controller
     {
         try {
             $informasi = Informasi::findOrFail($id);
+            
+            // Hapus file gambar jika ada
+            if ($informasi->gambar && file_exists(public_path($informasi->gambar))) {
+                unlink(public_path($informasi->gambar));
+            }
+            
             $informasi->delete();
             
             return redirect()->route('admin.informasi.index')
@@ -111,13 +129,28 @@ class adminInformasiController extends Controller
         }
     }
     
+    /**
+     * PERBAIKAN UTAMA: Mengubah fungsi toggleStatus agar merespon AJAX JSON secara real-time
+     */
     public function toggleStatus($id)
     {
-        $informasi = Informasi::findOrFail($id);
-        $informasi->status = !$informasi->status;
-        $informasi->save();
-        
-        $statusText = $informasi->status ? 'diaktifkan' : 'dinonaktifkan';
-        return redirect()->back()->with('success', "Informasi berhasil {$statusText}!");
+        try {
+            $informasi = Informasi::findOrFail($id);
+            
+            // Balik nilai status (0 jadi 1, 1 jadi 0)
+            $informasi->status = $informasi->status ? 0 : 1;
+            $informasi->save();
+            
+            // Mengembalikan response berupa JSON, bukan redirect back
+            return response()->json([
+                'success' => true,
+                'status' => $informasi->status
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengubah status.'
+            ], 500);
+        }
     }
 }

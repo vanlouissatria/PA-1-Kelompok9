@@ -54,20 +54,13 @@
                         @endif
                     </td>
                     <td class="px-4 py-3 flex gap-2">
-                        <a href="{{ route('admin.warisan.edit', $item->id) }}"
-                           class="bg-yellow-400 text-white px-3 py-1 rounded text-xs hover:bg-yellow-500">
-                            Edit
-                        </a>
-                        <form action="{{ route('admin.warisan.destroy', $item->id) }}"
-                              method="POST"
-                              onsubmit="return confirm('Yakin hapus item ini?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                    class="bg-red-500 text-white px-3 py-1 rounded text-xs hover:bg-red-600">
-                                Hapus
-                            </button>
-                        </form>
+                        <button type="button" 
+                                class="toggle-status-btn bg-blue-600 text-white px-3 py-1 rounded text-xs hover:bg-blue-700" 
+                                data-id="{{ $item->id }}"
+                                data-status="{{ $item->status }}"
+                                title="{{ $item->status ? 'Nonaktifkan' : 'Aktifkan' }}">
+                            <i class="fas {{ $item->status ? 'fa-eye' : 'fa-eye-slash' }}"></i>
+                        </button>
                     </td>
                 </tr>
                 @empty
@@ -86,4 +79,64 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButtons = document.querySelectorAll('.toggle-status-btn');
+    
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = this.getAttribute('data-id');
+            const currentStatus = parseInt(this.getAttribute('data-status'));
+            const button = this;
+            
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+            fetch(`{{ url('/admin/warisan/toggle-status') }}/${itemId}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const newStatus = data.status;
+                    
+                    if (newStatus) {
+                        button.className = 'toggle-status-btn bg-blue-600 text-white px-3 py-1 rounded text-xs hover:bg-blue-700';
+                        button.setAttribute('data-status', '1');
+                        button.setAttribute('title', 'Nonaktifkan');
+                        button.innerHTML = '<i class="fas fa-eye"></i>';
+                    } else {
+                        button.className = 'toggle-status-btn bg-blue-600 text-white px-3 py-1 rounded text-xs hover:bg-blue-700';
+                        button.setAttribute('data-status', '0');
+                        button.setAttribute('title', 'Aktifkan');
+                        button.innerHTML = '<i class="fas fa-eye-slash"></i>';
+                    }
+
+                    const row = button.closest('tr');
+                    const statusCell = row.querySelector('td:nth-child(5)');
+                    if (newStatus) {
+                        statusCell.innerHTML = '<span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">Aktif</span>';
+                    } else {
+                        statusCell.innerHTML = '<span class="bg-red-100 text-red-700 px-2 py-1 rounded text-xs">Nonaktif</span>';
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                button.innerHTML = currentStatus ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            })
+            .finally(() => {
+                button.disabled = false;
+            });
+        });
+    });
+});
+</script>
 @endsection
