@@ -1,16 +1,20 @@
 <?php
 
-
-
-
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Http\Request;
+
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DestinasiController;
 use App\Http\Controllers\GeositeController;
-use App\Http\Controllers\WarisanController;  
+use App\Http\Controllers\WarisanController;
+use App\Http\Controllers\KontakController;
+use App\Http\Controllers\KontakMessageController;
+
+// FRONTEND CONTROLLER KONTAK
+use App\Http\Controllers\KontakController as PublicKontakController;
 
 // Public Controllers
 use App\Http\Controllers\GaleriController as PublicGaleriController;
@@ -22,8 +26,10 @@ use App\Http\Controllers\Admin\AdminGaleriController;
 use App\Http\Controllers\Admin\AdminBeritaController;
 use App\Http\Controllers\Admin\AdminInformasiController;
 use App\Http\Controllers\Admin\AdminDestinasiController;
+use App\Http\Controllers\Admin\AdminKontakController;
 use App\Http\Controllers\Admin\TeleController;
 use App\Http\Controllers\Admin\WarisanController as AdminWarisanController;
+
 /*
 |--------------------------------------------------------------------------
 | FRONTEND ROUTES (PUBLIK)
@@ -42,7 +48,8 @@ Route::prefix('destinasi')->name('destinasi.')->group(function () {
 
 // INFORMASI
 Route::get('/informasi', [PublicInformasiController::class, 'index'])->name('informasi');
-// WARISAN ALAM DAN BUDAYA
+
+// WARISAN
 Route::get('/warisan-alam-budaya', [WarisanController::class, 'index'])->name('warisan.index');
 
 // GALERI
@@ -62,7 +69,6 @@ Route::prefix('berita')->name('berita.')->group(function () {
         $berita = \App\Models\Berita::where('status', true)->latest()->paginate(9);
         return view('pages.berita', compact('berita'));
     })->name('index');
-    
     Route::get('/{slug}', function ($slug) {
         $berita = \App\Models\Berita::where('slug', $slug)->where('status', true)->firstOrFail();
         $berita->increment('views');
@@ -70,7 +76,7 @@ Route::prefix('berita')->name('berita.')->group(function () {
     })->name('detail');
 });
 
-// UMKM (Public)
+// UMKM PUBLIC
 Route::prefix('umkm')->name('umkm.')->controller(PublicUmkmController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/filter', 'filter')->name('filter');
@@ -82,46 +88,78 @@ Route::prefix('geosite')->name('geosite.')->group(function () {
     Route::get('/tele', [GeositeController::class, 'tele'])->name('tele');
     Route::get('/efrata', [GeositeController::class, 'efrata'])->name('efrata');
     Route::get('/sihotang', [GeositeController::class, 'sihotang'])->name('sihotang');
-    // Rute utama (menggunakan tanda hubung)
     Route::get('/sibea-bea', [GeositeController::class, 'sibeaBea'])->name('sibea-bea');
-    
-    // TAMBAHKAN BARIS INI: Rute alternatif tanpa tanda hubung agar tidak 404
-    Route::get('/sibeabea', [GeositeController::class, 'sibeaBea']); 
-    
+    Route::get('/sibeabea', [GeositeController::class, 'sibeaBea']);
     Route::get('/bea', [GeositeController::class, 'bea'])->name('bea');
     Route::get('/holbung', [GeositeController::class, 'holbung'])->name('holbung');
 });
 
 // OTHER PAGES
 Route::get('/budaya', [HomeController::class, 'budaya'])->name('budaya');
-Route::view('/kontak', 'pages.kontak')->name('kontak');
+
+// KONTAK DINAMIS
+Route::get('/kontak', [PublicKontakController::class, 'index'])->name('kontak');
 
 /*
 |--------------------------------------------------------------------------
-| AUTH ROUTES
+| AUTH ROUTES (LOGIN, LOGOUT, LUPA PASSWORD)
 |--------------------------------------------------------------------------
 */
+
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'showLogin')->name('login');
     Route::post('/login', 'login');
     Route::post('/logout', 'logout')->name('logout');
-    Route::get('/forgot-password', 'showForgotForm')->name('password.request');
-    Route::post('/forgot-password', 'sendResetLink')->name('password.email');
-    Route::get('/reset-password/{token}', 'showResetForm')->name('password.reset');
-    Route::post('/reset-password', 'resetPassword')->name('password.update');
 });
+
+// ROUTE UNTUK LUPA PASSWORD (Reset Password)
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->name('password.request');
+
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
+
+    $status = Password::sendResetLink($request->only('email'));
+
+    return $status === Password::RESET_LINK_SENT
+                ? back()->with(['status' => __($status)])
+                : back()->withErrors(['email' => __($status)]);
+})->name('password.email');
+
+Route::get('/reset-password/{token}', function ($token) {
+    return view('auth.reset-password', ['token' => $token]);
+})->name('password.reset');
+
+Route::post('/reset-password', function (Request $request) {
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:8|confirmed',
+    ]);
+
+    $status = Password::reset(
+        $request->only('email', 'password', 'password_confirmation', 'token'),
+        function ($user, $password) {
+            $user->password = bcrypt($password);
+            $user->save();
+        }
+    );
+
+    return $status === Password::PASSWORD_RESET
+                ? redirect()->route('login')->with('status', __($status))
+                : back()->withErrors(['email' => [__($status)]]);
+})->name('password.update');
 
 /*
 |--------------------------------------------------------------------------
-| ADMIN ROUTES
+| ADMIN ROUTES (dengan middleware auth)
 |--------------------------------------------------------------------------
 */
+
 Route::prefix('admin')->middleware(['auth'])->group(function () {
 
-// WARISAN ALAM DAN BUDAYA
-Route::resource('warisan', AdminWarisanController::class)->names('admin.warisan'); 
-
-    // Dashboard
+    // DASHBOARD
     Route::get('/', function () {
         $totalGaleri = DB::table('galeri')->count();
         $totalBerita = DB::table('berita')->count();
@@ -129,73 +167,38 @@ Route::resource('warisan', AdminWarisanController::class)->names('admin.warisan'
         $totalUmkm = DB::table('umkms')->count();
         $totalFasilitas = DB::table('fasilitas')->count();
         $totalPenginapan = DB::table('penginapan')->count();
-        
+
         return view('admin.dashboard', compact(
             'totalGaleri', 'totalBerita', 'totalInformasi',
             'totalUmkm', 'totalFasilitas', 'totalPenginapan'
         ));
     })->name('admin.dashboard');
-    
+
+    // WARISAN
+    Route::resource('warisan', AdminWarisanController::class)->names('admin.warisan');
+
     // GALERI
     Route::resource('galeri', AdminGaleriController::class)->names('admin.galeri');
-    
+
     // BERITA
     Route::resource('berita', AdminBeritaController::class)->names('admin.berita');
-    
+
     // INFORMASI
     Route::resource('informasi', AdminInformasiController::class)->names('admin.informasi');
-    
+
     // DESTINASI
     Route::resource('destinasi', AdminDestinasiController::class)->names('admin.destinasi');
-    
-    // Toggle Status Routes
+
+    // KONTAK
+    Route::resource('kontak', AdminKontakController::class)->names('admin.kontak');
+
+    // TOGGLE STATUS
     Route::post('galeri/toggle-status/{id}', [AdminGaleriController::class, 'toggleStatus'])->name('admin.galeri.toggle-status');
     Route::post('berita/toggle-status/{id}', [AdminBeritaController::class, 'toggleStatus'])->name('admin.berita.toggle-status');
     Route::post('informasi/toggle-status/{id}', [AdminInformasiController::class, 'toggleStatus'])->name('admin.informasi.toggle-status');
-    
-    // ==================== TELE ROUTES (LENGKAP) ====================
+
+    // TELE ROUTES
     Route::prefix('tele')->name('admin.tele.')->group(function () {
-        // Dashboard
         Route::get('/', [TeleController::class, 'index'])->name('index');
-        
-        // UMKM
-        Route::get('/umkm', [TeleController::class, 'umkm'])->name('umkm');
-        Route::get('/umkm/create', [TeleController::class, 'umkmCreate'])->name('umkm.create');
-        Route::post('/umkm', [TeleController::class, 'umkmStore'])->name('umkm.store');
-        Route::get('/umkm/{id}/edit', [TeleController::class, 'umkmEdit'])->name('umkm.edit');
-        Route::put('/umkm/{id}', [TeleController::class, 'umkmUpdate'])->name('umkm.update');
-        Route::delete('/umkm/{id}', [TeleController::class, 'umkmDestroy'])->name('umkm.destroy');
-        
-        // Fasilitas
-        Route::get('/fasilitas', [TeleController::class, 'fasilitas'])->name('fasilitas');
-        Route::get('/fasilitas/create', [TeleController::class, 'fasilitasCreate'])->name('fasilitas.create');
-        Route::post('/fasilitas', [TeleController::class, 'fasilitasStore'])->name('fasilitas.store');
-        Route::get('/fasilitas/{id}/edit', [TeleController::class, 'fasilitasEdit'])->name('fasilitas.edit');
-        Route::put('/fasilitas/{id}', [TeleController::class, 'fasilitasUpdate'])->name('fasilitas.update');
-        Route::delete('/fasilitas/{id}', [TeleController::class, 'fasilitasDestroy'])->name('fasilitas.destroy');
-        
-        // Penginapan
-        Route::get('/penginapan', [TeleController::class, 'penginapan'])->name('penginapan');
-        Route::get('/penginapan/create', [TeleController::class, 'penginapanCreate'])->name('penginapan.create');
-        Route::post('/penginapan', [TeleController::class, 'penginapanStore'])->name('penginapan.store');
-        Route::get('/penginapan/{id}/edit', [TeleController::class, 'penginapanEdit'])->name('penginapan.edit');
-        Route::put('/penginapan/{id}', [TeleController::class, 'penginapanUpdate'])->name('penginapan.update');
-        Route::delete('/penginapan/{id}', [TeleController::class, 'penginapanDestroy'])->name('penginapan.destroy');
-        
-        // Galeri
-        Route::get('/galeri', [TeleController::class, 'galeri'])->name('galeri');
-        Route::get('/galeri/create', [TeleController::class, 'galeriCreate'])->name('galeri.create');
-        Route::post('/galeri', [TeleController::class, 'galeriStore'])->name('galeri.store');
-        Route::get('/galeri/{id}/edit', [TeleController::class, 'galeriEdit'])->name('galeri.edit');
-        Route::put('/galeri/{id}', [TeleController::class, 'galeriUpdate'])->name('galeri.update');
-        Route::delete('/galeri/{id}', [TeleController::class, 'galeriDestroy'])->name('galeri.destroy');
-        
-        // Informasi
-        Route::get('/informasi', [TeleController::class, 'informasi'])->name('informasi');
-        Route::get('/informasi/create', [TeleController::class, 'informasiCreate'])->name('informasi.create');
-        Route::post('/informasi', [TeleController::class, 'informasiStore'])->name('informasi.store');
-        Route::get('/informasi/{id}/edit', [TeleController::class, 'informasiEdit'])->name('informasi.edit');
-        Route::put('/informasi/{id}', [TeleController::class, 'informasiUpdate'])->name('informasi.update');
-        Route::delete('/informasi/{id}', [TeleController::class, 'informasiDestroy'])->name('informasi.destroy');
     });
 });

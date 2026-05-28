@@ -242,58 +242,6 @@
         line-height: 1.5;
     }
     
-    /* ==================== FORM ==================== */
-    .form-card {
-        background: white;
-        border-radius: 24px;
-        padding: 35px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.04);
-        border: 1px solid #f0f0f0;
-        height: 100%;
-    }
-    
-    .form-card h3 {
-        font-size: 1.5rem;
-        font-family: 'Cormorant Garamond', serif;
-        font-weight: 500;
-        margin-bottom: 20px;
-        color: #1a1a1a;
-    }
-    
-    .form-control, .form-select {
-        border: 1px solid #e0e0e0;
-        border-radius: 12px;
-        padding: 12px 16px;
-        font-size: 0.85rem;
-        transition: all 0.3s ease;
-    }
-    
-    .form-control:focus, .form-select:focus {
-        border-color: #c6a43b;
-        box-shadow: 0 0 0 3px rgba(198, 164, 59, 0.08);
-        outline: none;
-    }
-    
-    .btn-send {
-        background: #1a1a1a;
-        color: white;
-        border: none;
-        padding: 12px 30px;
-        border-radius: 50px;
-        font-weight: 600;
-        letter-spacing: 1px;
-        transition: all 0.3s ease;
-        width: 100%;
-        font-size: 0.75rem;
-        text-transform: uppercase;
-    }
-    
-    .btn-send:hover {
-        background: #c6a43b;
-        color: #1a1a1a;
-        transform: translateY(-2px);
-    }
-    
     /* ==================== MAPS ==================== */
     .map-card {
         border-radius: 24px;
@@ -374,9 +322,6 @@
         .kontak-section {
             padding: 40px 0;
         }
-        .form-card {
-            margin-bottom: 25px;
-        }
     }
     
     @media (max-width: 576px) {
@@ -386,20 +331,14 @@
         .kontak-card {
             padding: 20px 15px;
         }
-        .form-card {
-            padding: 25px;
-        }
     }
 </style>
-
-<!-- ==================== LOGO SECTION ==================== -->
-   
 
 <!-- HERO -->
 <section class="kontak-hero">
     <div class="container">
-        <h1 data-aos="fade-up">Hubungi Kami</h1>
-        <p data-aos="fade-up" data-aos-delay="100">Senang mendengar dari Anda</p>
+        <h1 data-aos="fade-up">{{ $kontak->judul ?? 'Hubungi Kami' }}</h1>
+        <p data-aos="fade-up" data-aos-delay="100">{{ $kontak->subjudul ?? 'Senang mendengar dari Anda' }}</p>
     </div>
 </section>
 
@@ -407,50 +346,65 @@
 <section class="kontak-section">
     <div class="container">
         <div class="row g-4 mb-5">
-            <!-- ALAMAT -->
+            <!-- ALAMAT (Dinamis) -->
             <div class="col-md-4" data-aos="fade-up">
                 <div class="kontak-card">
                     <div class="kontak-icon">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
                     <h4>Alamat</h4>
-                    <p>Geosite Danau Toba</p>
-                    <p>Pulau Sibandang, Danau Toba</p>
-                    <p>Sumatera Utara, Indonesia</p>
+                    {!! nl2br(e($kontak->alamat ?? 'Geosite Danau Toba<br>Pulau Sibandang, Danau Toba<br>Sumatera Utara, Indonesia')) !!}
                 </div>
             </div>
             
-            <!-- TELEPON -->
+            <!-- TELEPON (Dinamis) -->
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="kontak-card">
                     <div class="kontak-icon">
                         <i class="fas fa-phone-alt"></i>
                     </div>
                     <h4>Telepon</h4>
-                    <p>+62 812 3456 7890</p>
-                    <p>+62 813 9876 5432</p>
-                    <p>(0622) 12345</p>
+                    @if($kontak->telepon1)
+                        <p>{{ $kontak->telepon1 }}</p>
+                    @endif
+                    @if($kontak->telepon2)
+                        <p>{{ $kontak->telepon2 }}</p>
+                    @endif
+                    @if($kontak->telepon3)
+                        <p>{{ $kontak->telepon3 }}</p>
+                    @endif
+                    @if(!$kontak->telepon1 && !$kontak->telepon2 && !$kontak->telepon3)
+                        <p>Nomor telepon belum diisi</p>
+                    @endif
                 </div>
             </div>
             
-            <!-- EMAIL -->
+            <!-- EMAIL (Dinamis) -->
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="kontak-card">
                     <div class="kontak-icon">
                         <i class="fas fa-envelope"></i>
                     </div>
                     <h4>Email</h4>
-                    <p>info@geotoba.com</p>
-                    <p>reservasi@geotoba.com</p>
-                    <p>support@geotoba.com</p>
+                    @if($kontak->email1)
+                        <p>{{ $kontak->email1 }}</p>
+                    @endif
+                    @if($kontak->email2)
+                        <p>{{ $kontak->email2 }}</p>
+                    @endif
+                    @if($kontak->email3)
+                        <p>{{ $kontak->email3 }}</p>
+                    @endif
+                    @if(!$kontak->email1 && !$kontak->email2 && !$kontak->email3)
+                        <p>Email belum diisi</p>
+                    @endif
                 </div>
             </div>
         </div>
         
         <div class="row g-4 justify-content-center">
-            <!-- FORM KONTAK -->
             <!-- MAPS & SOSIAL -->
-            <div class="col-12 col-lg-10 col-xl-10" data-aos="fade-left">
+            <div class="col-12 col-lg-10" data-aos="fade-left">
                 <div class="map-card mx-auto">
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.0!2d99.0835095!3d2.3339262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x302e0415b8f7da39%3A0xc6beb74287f355a5!2sBalige%2C%20Toba%20Samosir%2C%20Sumatera%20Utara!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
