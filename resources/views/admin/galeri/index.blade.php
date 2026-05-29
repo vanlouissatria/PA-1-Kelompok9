@@ -1,140 +1,258 @@
+{{-- resources/views/admin/galeri/index.blade.php --}}
 @extends('layouts.admin')
 
+@section('title', 'Manajemen Galeri')
+
 @section('content')
+<style>
+    :root {
+        --bi-blue: #002F5F;
+    }
+
+    .page-header-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #000;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+
+    .btn-bi-tambah {
+        background-color: var(--bi-blue) !important;
+        color: white !important;
+        border: none !important;
+        padding: 8px 18px;
+        border-radius: 6px;
+        font-weight: 600;
+        text-decoration: none !important;
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 25px;
+        font-size: 0.95rem;
+        transition: all 0.2s;
+    }
+
+    .btn-bi-tambah:hover {
+        background-color: #001f3f !important;
+        transform: translateY(-1px);
+    }
+
+    .table thead th {
+        color: #8A92A6;
+        font-size: 0.85rem;
+        font-weight: 700;
+        border-top: none;
+        border-bottom: 1px solid #EEEEEE;
+        text-transform: uppercase;
+        padding-bottom: 15px;
+        background-color: transparent;
+    }
+
+    .card {
+        border: none;
+        box-shadow: none;
+        background: transparent;
+    }
+
+    .card-body {
+        padding: 0;
+    }
+
+    .badge-status {
+        padding: 5px 12px;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+
+    .badge-kategori {
+        background: #f8f9fa;
+        color: #333;
+        padding: 6px 12px;
+        border-radius: 30px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border: 1px solid #e9ecef;
+    }
+
+    .galeri-image {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid #eee;
+    }
+
+    .empty-image {
+        width: 70px;
+        height: 70px;
+        background: #f1f1f1;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
 <div class="container-fluid">
-    {{-- 1. Judul Besar Paling Atas --}}
-    <h1 style="font-size: 2.5rem; font-weight: 800; color: #000; margin-bottom: 10px;">Manajemen Galeri</h1>
 
-    {{-- 2. Tombol Tambah --}}
-    <div style="margin-bottom: 20px;">
-        <a href="{{ route('admin.galeri.create') }}" 
-           style="background-color: #002F5F; color: white !important; padding: 10px 20px; border-radius: 6px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center;">
-            <i class="fas fa-plus me-2"></i> Tambah Galeri
-        </a>
-    </div>
+    {{-- Judul --}}
+    <h1 class="page-header-title">Manajemen Galeri</h1>
 
-    {{-- Alert Success --}}
+    {{-- Tombol Tambah --}}
+    <a href="{{ route('admin.galeri.create') }}" class="btn-bi-tambah">
+        <i class="fas fa-plus me-2" style="font-size: 0.8rem;"></i>
+        Tambah Galeri
+    </a>
+
+    {{-- Alert --}}
     @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-success border-0 shadow-sm mb-4">
             {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
-    {{-- 3. Tabel Manajemen --}}
-    <div class="table-responsive" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-        <table class="table" style="width: 100%; vertical-align: middle;">
+    {{-- Tabel --}}
+    <div class="table-responsive">
+        <table class="table align-middle">
+
             <thead>
-                <tr style="color: #8A92A6; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; border-bottom: 2px solid #f0f2f5;">
+                <tr>
                     <th width="5%">NO</th>
                     <th width="12%">GAMBAR</th>
                     <th width="35%">JUDUL</th>
-                    <th width="20%">KATEGORI</th>
+                    <th width="18%">KATEGORI</th>
                     <th width="15%">STATUS</th>
-                    <th width="13%">AKSI</th>
+                    <th width="15%">AKSI</th>
                 </tr>
             </thead>
+
             <tbody>
                 @forelse($galeris as $index => $galeri)
-                <tr style="border-bottom: 1px solid #f0f2f5;">
-                    <td style="font-weight: 600; color: #444;">{{ $galeris->firstItem() + $index }}</td>
+                <tr>
+
+                    {{-- Nomor --}}
                     <td>
-                        @php
-                            $gambar = $galeri->gambar;
-                            $gambarAda = $gambar && file_exists(public_path($gambar));
-                        @endphp
-                        @if($gambarAda)
-                            <img src="{{ asset($gambar) }}" alt="{{ $galeri->judul }}"
-                                 style="width: 100px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid #eee;">
+                        {{ $galeris->firstItem() + $index }}
+                    </td>
+
+                    {{-- Gambar --}}
+                    <td>
+                        @if($galeri->gambar)
+                            <img src="{{ asset($galeri->gambar) }}"
+                                 class="galeri-image"
+                                 alt="Galeri">
                         @else
-                            <div style="width: 100px; height: 70px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                            <div class="empty-image">
                                 <i class="fas fa-image text-muted"></i>
                             </div>
                         @endif
                     </td>
-                    <td style="font-weight: 700; color: #2D3748;">{{ $galeri->judul }}</td>
+
+                    {{-- Judul --}}
                     <td>
-                        <span class="badge bg-light text-dark" style="padding: 6px 12px; border-radius: 50px; font-weight: 500; border: 1px solid #e2e8f0;">
-                            {{ strtoupper($galeri->kategori) }}
+                        <div style="font-weight: 600; color: #111;">
+                            {{ $galeri->judul }}
+                        </div>
+                    </td>
+
+                    {{-- Kategori --}}
+                    <td>
+                        <span class="badge-kategori">
+                            {{ ucfirst($galeri->kategori) }}
                         </span>
                     </td>
+
+                    {{-- Status --}}
                     <td>
-                        @if($galeri->status)
-                            <span class="badge bg-success" style="border-radius: 50px;">Aktif</span>
-                        @else
-                            <span class="badge bg-secondary" style="border-radius: 50px;">Draft</span>
-                        @endif
+                        <span class="badge {{ $galeri->status ? 'bg-success' : 'bg-danger' }} badge-status">
+                            {{ $galeri->status ? 'Aktif' : 'Tidak' }}
+                        </span>
                     </td>
+
+                    {{-- Aksi --}}
                     <td>
-                        {{-- TOMBOL TOGGLE STATUS SAJA --}}
-                        <div class="d-flex align-items-center gap-2">
-                            {{-- Tombol Toggle Status (Icon Only) --}}
-                            <button type="button" 
-                                    class="btn btn-sm toggle-status-btn" 
+                        <div class="d-flex gap-2">
+
+                            {{-- Toggle --}}
+                            <button type="button"
+                                    class="btn btn-sm toggle-status-btn"
                                     data-id="{{ $galeri->id }}"
                                     data-status="{{ $galeri->status }}"
                                     title="{{ $galeri->status ? 'Nonaktifkan galeri ini' : 'Aktifkan galeri ini' }}"
-                                    style="font-weight: 600; padding: 5px 10px; border-radius: 6px; display: inline-flex; align-items: center; background-color: {{ $galeri->status ? '#28a745' : '#6c757d' }}; color: white; border: none; cursor: pointer; font-size: 0.85rem;">
+                                    style="font-weight: 600; padding: 6px 12px; border-radius: 6px; display: inline-flex; align-items: center; background-color: {{ $galeri->status ? '#28a745' : '#6c757d' }}; color: white; border: none; cursor: pointer; font-size: 0.85rem;">
+
                                 <i class="fas {{ $galeri->status ? 'fa-eye' : 'fa-eye-slash' }}"></i>
                             </button>
+
+                            {{-- Edit --}}
+                            <a href="{{ route('admin.galeri.edit', $galeri->id) }}"
+                               class="btn btn-sm"
+                               title="Edit galeri"
+                               style="font-weight: 600; padding: 6px 12px; border-radius: 6px; display: inline-flex; align-items: center; background-color: #ffc107; color: #000; border: none; text-decoration: none; font-size: 0.85rem;">
+
+                                <i class="fas fa-pen"></i>
+                            </a>
+
+                            {{-- Hapus --}}
+                            <form action="{{ route('admin.galeri.destroy', $galeri->id) }}"
+                                  method="POST"
+                                  onsubmit="return confirm('Apakah Anda yakin ingin menghapus galeri ini?');"
+                                  style="display: inline; margin: 0;">
+
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit"
+                                        class="btn btn-sm"
+                                        title="Hapus galeri"
+                                        style="font-weight: 600; padding: 6px 12px; border-radius: 6px; display: inline-flex; align-items: center; background-color: #dc3545; color: white; border: none; cursor: pointer; font-size: 0.85rem;">
+
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+
                         </div>
                     </td>
+
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" style="padding: 40px 0; color: #A0AEC0; text-align: center; font-style: italic;">
-                        <i class="fas fa-folder-open d-block mb-2" style="font-size: 2rem;"></i>
-                        Belum ada data galeri yang tersedia.
+                    <td colspan="6" class="text-center py-5 text-muted">
+                        Data galeri masih kosong.
                     </td>
                 </tr>
                 @endforelse
             </tbody>
+
         </table>
     </div>
 
-    {{-- 4. Pagination --}}
-    <div class="d-flex justify-content-between align-items-center mt-4">
-        <p class="text-muted small">Menampilkan {{ $galeris->firstItem() }} sampai {{ $galeris->lastItem() }} dari {{ $galeris->total() }} data</p>
-        <div>
-            {{ $galeris->links() }}
-        </div>
+    {{-- Pagination --}}
+    <div class="mt-4">
+        {{ $galeris->links() }}
     </div>
-</div>
 
-{{-- CSS Tambahan untuk merapikan pagination Laravel --}}
-<style>
-    .pagination { margin-bottom: 0; }
-    .page-link { color: #002F5F; border-radius: 5px; margin: 0 2px; }
-    .page-item.active .page-link { background-color: #002F5F; border-color: #002F5F; }
-    .table thead th { border-top: none; }
-    .btn:hover { opacity: 0.9; transform: translateY(-1px); transition: all 0.2s; }
-    .toggle-status-btn {
-        transition: all 0.3s ease;
-    }
-    .toggle-status-btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-</style>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Handle toggle status button clicks
+
     const toggleButtons = document.querySelectorAll('.toggle-status-btn');
-    
+
     toggleButtons.forEach(button => {
+
         button.addEventListener('click', function() {
-            const galeriId = this.getAttribute('data-id');
+
+            const itemId = this.getAttribute('data-id');
             const currentStatus = parseInt(this.getAttribute('data-status'));
-            const button = this;
 
-            // Show loading state
-            const icon = button.querySelector('i');
+            const btn = this;
+            const icon = btn.querySelector('i');
+
             icon.className = 'fas fa-spinner fa-spin';
-            button.disabled = true;
+            btn.disabled = true;
 
-            // Send AJAX request
-            fetch(`{{ url('/admin/galeri/toggle-status') }}/${galeriId}`, {
+            fetch(`{{ url('/admin/galeri/toggle-status') }}/${itemId}`, {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
@@ -143,95 +261,63 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify({})
             })
+
             .then(response => response.json())
+
             .then(data => {
+
                 if (data.success) {
+
                     const newStatus = data.status;
-                    
-                    // Update button appearance and icon
+
                     if (newStatus) {
-                        // Status: Active
-                        button.style.backgroundColor = '#28a745';
-                        button.setAttribute('data-status', '1');
-                        button.setAttribute('title', 'Nonaktifkan galeri ini');
+
+                        btn.style.backgroundColor = '#28a745';
+                        btn.setAttribute('data-status', '1');
+                        btn.setAttribute('title', 'Nonaktifkan galeri ini');
+
                         icon.className = 'fas fa-eye';
+
                     } else {
-                        // Status: Draft
-                        button.style.backgroundColor = '#6c757d';
-                        button.setAttribute('data-status', '0');
-                        button.setAttribute('title', 'Aktifkan galeri ini');
+
+                        btn.style.backgroundColor = '#6c757d';
+                        btn.setAttribute('data-status', '0');
+                        btn.setAttribute('title', 'Aktifkan galeri ini');
+
                         icon.className = 'fas fa-eye-slash';
                     }
 
-                    // Show success notification
-                    const message = newStatus ? 'Galeri berhasil diaktifkan!' : 'Galeri berhasil dinonaktifkan!';
-                    showNotification(message, 'success');
-
-                    // Update the status badge in the same row
-                    const row = button.closest('tr');
+                    const row = btn.closest('tr');
                     const statusCell = row.querySelector('td:nth-child(5)');
+
                     if (newStatus) {
-                        statusCell.innerHTML = '<span class="badge bg-success" style="border-radius: 50px;">Aktif</span>';
+                        statusCell.innerHTML =
+                            '<span class="badge bg-success badge-status">Aktif</span>';
                     } else {
-                        statusCell.innerHTML = '<span class="badge bg-secondary" style="border-radius: 50px;">Draft</span>';
+                        statusCell.innerHTML =
+                            '<span class="badge bg-danger badge-status">Tidak</span>';
                     }
-                } else {
-                    showNotification('Gagal mengubah status', 'error');
-                    // Restore original icon
-                    icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
                 }
             })
-            .catch(error => {
-                console.error('Error:', error);
-                showNotification('Terjadi kesalahan server', 'error');
-                // Restore original icon
-                icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
-            })
-            .finally(() => {
-                button.disabled = false;
-            });
-        });
-    });
-});
 
-// Function to show notification
-function showNotification(message, type = 'info') {
-    const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
-    const alertHtml = `
-        <div class="alert ${alertClass} alert-dismissible fade show" role="alert" style="margin-top: 20px;">
-            ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    `;
-    
-    const container = document.querySelector('.container-fluid');
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = alertHtml;
-    container.insertBefore(tempDiv.firstElementChild, container.querySelector('.table-responsive'));
-    
-    // Auto dismiss after 3 seconds
-    setTimeout(() => {
-        const alert = container.querySelector('.alert:not(.table-responsive + *)');
-        if (alert) {
-            alert.remove();
-        }
-    }, 3000);
-}
-</script>
-    `;
-    
-    const container = document.querySelector('.container-fluid');
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = alertHtml;
-    container.insertBefore(tempDiv.firstElementChild, container.querySelector('.table-responsive'));
-    
-    // Auto dismiss after 3 seconds
-    setTimeout(() => {
-        const alert = container.querySelector('.alert:not(.table-responsive + *)');
-        if (alert) {
-            alert.remove();
-        }
-    }, 3000);
-}
+            .catch(error => {
+
+                console.error('Error:', error);
+
+                icon.className =
+                    currentStatus
+                    ? 'fas fa-eye'
+                    : 'fas fa-eye-slash';
+            })
+
+            .finally(() => {
+                btn.disabled = false;
+            });
+
+        });
+
+    });
+
+});
 </script>
 @endsection

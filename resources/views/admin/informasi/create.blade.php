@@ -92,6 +92,24 @@
         background: #f8f9fa;
         color: #001f3f;
     }
+
+    /* Toggle status */
+    .btn-toggle-status {
+        background-color: #28a745;
+        color: white;
+        padding: 0.6rem 2rem;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border: none;
+        transition: background-color 0.2s;
+    }
+
+    .form-check-input:not(:checked) + .btn-toggle-status {
+        background-color: #6c757d;
+    }
 </style>
 
 <div class="card">
@@ -151,14 +169,31 @@
                               rows="10" placeholder="Tuliskan informasi detail di sini..." required>{{ old('konten') }}</textarea>
                 </div>
 
-                {{-- Status Aktif --}}
-                <div class="col-12 mb-4">
-                    <div class="form-check form-switch mt-2">
-                        <input class="form-check-input" type="checkbox" name="status" id="statusSwitch" value="1" {{ old('status') ? 'checked' : 'checked' }}>
-                        <label class="form-check-label fw-bold ms-2" for="statusSwitch" style="color: var(--bi-blue);">Aktifkan Informasi Ini</label>
+                {{-- Status --}}
+                <div class="col-md-6 mb-4">
+                    <label class="form-label">
+                        Status Tampilkan Galeri
+                    </label>
+
+                    <input type="hidden" name="status" value="0">
+
+                    <div class="form-check p-0 m-0">
+
+                        <input class="form-check-input d-none"
+                            type="checkbox"
+                            name="status"
+                            id="statusSwitch"
+                            value="1"
+                            checked>
+
+                        <label class="btn-toggle-status" for="statusSwitch">
+                            <i class="fas fa-eye"
+                            id="statusIcon"
+                            style="font-size: 1.1rem;"></i>
+                        </label>
+
                     </div>
                 </div>
-            </div>
 
             <hr class="my-4">
 
@@ -190,6 +225,18 @@
             reader.readAsDataURL(file);
         } else {
             container.style.display = 'none';
+        }
+    });
+
+    // Toggle icon mata
+    document.getElementById('statusSwitch').addEventListener('change', function() {
+
+        const icon = document.getElementById('statusIcon');
+
+        if (this.checked) {
+            icon.className = 'fas fa-eye';
+        } else {
+            icon.className = 'fas fa-eye-slash';
         }
     });
 </script>
