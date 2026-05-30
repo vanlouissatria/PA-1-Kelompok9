@@ -11,8 +11,14 @@ class adminInformasiController extends Controller
 {
     public function index()
     {
-        // Menambahkan properti urutan sesuai kebutuhan kolom tabel index
-        $informasi = Informasi::orderBy('urutan', 'asc')->orderBy('created_at', 'desc')->paginate(10);
+        // Menampilkan hanya informasi utama, bukan informasi Tele
+        $informasi = Informasi::where(function ($query) {
+                        $query->whereNull('kategori')
+                              ->orWhere('kategori', 'informasi');
+                    })
+                    ->orderBy('urutan', 'asc')
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(10);
         return view('admin.informasi.index', compact('informasi'));
     }
     
@@ -44,6 +50,7 @@ class adminInformasiController extends Controller
                 'slug' => Str::slug($request->judul),
                 'konten' => $request->konten,
                 'urutan' => $request->urutan ?? 0, // Mengakomodasi field urutan
+                'kategori' => 'informasi',
                 'gambar' => $gambarPath,
                 'status' => $request->has('status') ? 1 : 0
             ]);
@@ -81,6 +88,7 @@ class adminInformasiController extends Controller
                 'slug' => Str::slug($request->judul),
                 'konten' => $request->konten,
                 'urutan' => $request->urutan ?? 0, // Mengakomodasi field urutan
+                'kategori' => 'informasi',
                 'status' => $request->has('status') ? 1 : 0
             ];
             
