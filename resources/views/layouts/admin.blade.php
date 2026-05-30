@@ -705,15 +705,26 @@
 </a>
 
         @php
+            $validGeosites = [
+                'tele' => 'Tele',
+                'efrata' => 'Efrata',
+                'sihotang' => 'Sihotang',
+                'sibea-bea' => 'Sibea Bea',
+                'holbung' => 'Holbung',
+            ];
             $currentGeosite = request()->segment(3) ?? 'tele';
-            $currentGeosite = in_array($currentGeosite, ['tele','efrata','sihotang','sibea-bea','holbung']) ? $currentGeosite : 'tele';
-            $currentGeositeTitle = ucwords(str_replace('-', ' ', $currentGeosite));
+            $currentGeosite = array_key_exists($currentGeosite, $validGeosites) ? $currentGeosite : 'tele';
+            $currentGeositeTitle = $validGeosites[$currentGeosite];
         @endphp
 
-        <div class="menu-title">Geosite {{ $currentGeositeTitle }}</div>
-        <a href="{{ url('/admin/geosite/'.$currentGeosite) }}" class="{{ request()->is('admin/geosite/'.$currentGeosite) ? 'active' : '' }}">
-            <i class="fas fa-tower-cell"></i> Dashboard {{ $currentGeositeTitle }}
-        </a>
+        <div class="menu-title">Geosite</div>
+        @foreach($validGeosites as $geoSlug => $geoLabel)
+            <a href="{{ url('/admin/geosite/'.$geoSlug) }}" class="{{ request()->is('admin/geosite/'.$geoSlug) ? 'active' : '' }}">
+                <i class="fas fa-tower-cell"></i> Dashboard {{ $geoLabel }}
+            </a>
+        @endforeach
+
+        <div class="menu-title">Modul {{ $currentGeositeTitle }}</div>
         <a href="{{ url('/admin/geosite/'.$currentGeosite.'/umkm') }}" class="{{ request()->is('admin/geosite/'.$currentGeosite.'/umkm*') ? 'active' : '' }}">
             <i class="fas fa-store"></i> UMKM
         </a>
