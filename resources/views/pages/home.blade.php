@@ -139,11 +139,51 @@
         transform: scale(1);
     }
     
-    .slide-1 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/home/tele1.jpg'); }
-    .slide-2 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/home/efrata5.jpg'); }
-    .slide-3 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/home/sihotang2.jpg'); }
-    .slide-4 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/home/sihotang3.jpg'); }
-    .slide-5 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/home/efrata1.jpg'); }
+    /* Variasi warna untuk setiap slide agar tidak monoton */
+.slide-1 { 
+    background-image: linear-gradient(
+        125deg,
+        rgba(0, 30, 60, 0.7) 0%,
+        rgba(0, 80, 120, 0.5) 40%,
+        rgba(0, 30, 60, 0.7) 100%
+    ), url('/image/home/tele1.jpg');
+}
+
+.slide-2 { 
+    background-image: linear-gradient(
+        125deg,
+        rgba(0, 40, 70, 0.7) 0%,
+        rgba(212, 175, 55, 0.2) 40%,
+        rgba(0, 40, 70, 0.7) 100%
+    ), url('/image/home/efrata5.jpg');
+}
+
+.slide-3 { 
+    background-image: linear-gradient(
+        125deg,
+        rgba(0, 20, 50, 0.7) 0%,
+        rgba(100, 150, 200, 0.3) 40%,
+        rgba(0, 20, 50, 0.7) 100%
+    ), url('/image/home/sihotang2.jpg');
+}
+
+.slide-4 { 
+    background-image: linear-gradient(
+        125deg,
+        rgba(0, 35, 65, 0.7) 0%,
+        rgba(212, 175, 55, 0.25) 40%,
+        rgba(0, 35, 65, 0.7) 100%
+    ), url('/image/home/sihotang3.jpg');
+}
+
+.slide-5 { 
+    background-image: linear-gradient(
+        125deg,
+        rgba(0, 25, 55, 0.7) 0%,
+        rgba(80, 130, 180, 0.35) 40%,
+        rgba(0, 25, 55, 0.7) 100%
+    ), url('/image/home/efrata1.jpg');
+}
     
     .hero-content {
         position: absolute;
@@ -1257,18 +1297,6 @@
                     <span>Klik lokasi untuk melihat peta detail</span>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== CTA ==================== -->
-<section class="cta-section">
-    <div class="container">
-        <div class="cta-content" data-aos="fade-up" data-aos-duration="800">
-            <h3>Mulai Petualangan Anda</h3>
-            <div class="divider"></div>
-            <p>Temukan keajaiban geologi dan kekayaan budaya Batak di Geopark Toba, warisan dunia yang diakui UNESCO.</p>
-            <a href="#destinasi" class="cta-btn">Jelajahi Sekarang</a>
         </div>
     </div>
 </section>
