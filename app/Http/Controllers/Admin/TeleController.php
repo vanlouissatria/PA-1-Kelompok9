@@ -15,7 +15,7 @@ class TeleController extends Controller
 {
     protected function ensureGeosite(string $geosite)
     {
-        $valid = ['tele', 'efrata', 'sihotang', 'sibea-bea', 'bea', 'holbung'];
+        $valid = ['tele', 'efrata', 'sihotang', 'sibea-bea', 'holbung'];
         if (!in_array($geosite, $valid)) {
             abort(404);
         }
@@ -35,7 +35,6 @@ class TeleController extends Controller
             'efrata' => 'Efrata',
             'sihotang' => 'Sihotang',
             'sibea-bea' => 'Sibea Bea',
-            'bea' => 'Bea',
             'holbung' => 'Holbung',
         ];
     }
@@ -76,7 +75,7 @@ class TeleController extends Controller
         $geosite = $this->ensureGeosite($geosite);
         $selectedGeosite = $this->ensureGeosite($request->input('geosite', $geosite));
         $request->validate([
-            'geosite' => 'required|string|in:tele,efrata,sihotang,sibea-bea,bea,holbung',
+            'geosite' => 'required|string|in:tele,efrata,sihotang,sibea-bea,holbung',
             'nama_usaha' => 'required|string|max:255',
             'pemilik' => 'required|string|max:255',
             'kategori' => 'required|string',
@@ -196,7 +195,7 @@ class TeleController extends Controller
         $geosite = $this->ensureGeosite($geosite);
         $selectedGeosite = $this->ensureGeosite($request->input('geosite', $geosite));
         $request->validate([
-            'geosite' => 'required|string|in:tele,efrata,sihotang,sibea-bea,bea,holbung',
+            'geosite' => 'required|string|in:tele,efrata,sihotang,sibea-bea,holbung',
             'nama' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
@@ -307,7 +306,7 @@ class TeleController extends Controller
         $geosite = $this->ensureGeosite($geosite);
         $selectedGeosite = $this->ensureGeosite($request->input('geosite', $geosite));
         $request->validate([
-            'geosite' => 'required|string|in:tele,efrata,sihotang,sibea-bea,bea,holbung',
+            'geosite' => 'required|string|in:tele,efrata,sihotang,sibea-bea,holbung',
             'nama' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'alamat' => 'nullable|string',
@@ -425,7 +424,7 @@ class TeleController extends Controller
         $geosite = $this->ensureGeosite($geosite);
         $selectedGeosite = $this->ensureGeosite($request->input('geosite', $geosite));
         $request->validate([
-            'geosite' => 'required|string|in:tele,efrata,sihotang,sibea-bea,bea,holbung',
+            'geosite' => 'required|string|in:tele,efrata,sihotang,sibea-bea,holbung',
             'judul' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048'
@@ -536,7 +535,7 @@ class TeleController extends Controller
         $geosite = $this->ensureGeosite($geosite);
         $selectedGeosite = $this->ensureGeosite($request->input('geosite', $geosite));
         $request->validate([
-            'geosite' => 'required|string|in:tele,efrata,sihotang,sibea-bea,bea,holbung',
+            'geosite' => 'required|string|in:tele,efrata,sihotang,sibea-bea,holbung',
             'judul' => 'required|string|max:255',
             'isi' => 'required|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'

@@ -704,23 +704,29 @@
 </a>
 </a>
 
-        <div class="menu-title">Geosite Tele</div>
-        <a href="{{ url('/admin/geosite/tele') }}" class="{{ request()->is('admin/geosite/tele') ? 'active' : '' }}">
-            <i class="fas fa-tower-cell"></i> Dashboard Tele
+        @php
+            $currentGeosite = request()->segment(3) ?? 'tele';
+            $currentGeosite = in_array($currentGeosite, ['tele','efrata','sihotang','sibea-bea','holbung']) ? $currentGeosite : 'tele';
+            $currentGeositeTitle = ucwords(str_replace('-', ' ', $currentGeosite));
+        @endphp
+
+        <div class="menu-title">Geosite {{ $currentGeositeTitle }}</div>
+        <a href="{{ url('/admin/geosite/'.$currentGeosite) }}" class="{{ request()->is('admin/geosite/'.$currentGeosite) ? 'active' : '' }}">
+            <i class="fas fa-tower-cell"></i> Dashboard {{ $currentGeositeTitle }}
         </a>
-        <a href="{{ url('/admin/geosite/tele/umkm') }}" class="{{ request()->is('admin/geosite/tele/umkm*') ? 'active' : '' }}">
+        <a href="{{ url('/admin/geosite/'.$currentGeosite.'/umkm') }}" class="{{ request()->is('admin/geosite/'.$currentGeosite.'/umkm*') ? 'active' : '' }}">
             <i class="fas fa-store"></i> UMKM
         </a>
-        <a href="{{ url('/admin/geosite/tele/fasilitas') }}" class="{{ request()->is('admin/geosite/tele/fasilitas*') ? 'active' : '' }}">
+        <a href="{{ url('/admin/geosite/'.$currentGeosite.'/fasilitas') }}" class="{{ request()->is('admin/geosite/'.$currentGeosite.'/fasilitas*') ? 'active' : '' }}">
             <i class="fas fa-tools"></i> Fasilitas
         </a>
-        <a href="{{ url('/admin/geosite/tele/penginapan') }}" class="{{ request()->is('admin/geosite/tele/penginapan*') ? 'active' : '' }}">
+        <a href="{{ url('/admin/geosite/'.$currentGeosite.'/penginapan') }}" class="{{ request()->is('admin/geosite/'.$currentGeosite.'/penginapan*') ? 'active' : '' }}">
             <i class="fas fa-hotel"></i> Penginapan
         </a>
-        <a href="{{ url('/admin/geosite/tele/galeri') }}" class="{{ request()->is('admin/geosite/tele/galeri*') ? 'active' : '' }}">
+        <a href="{{ url('/admin/geosite/'.$currentGeosite.'/galeri') }}" class="{{ request()->is('admin/geosite/'.$currentGeosite.'/galeri*') ? 'active' : '' }}">
             <i class="fas fa-images"></i> Galeri
         </a>
-        <a href="{{ url('/admin/geosite/tele/informasi') }}" class="{{ request()->is('admin/geosite/tele/informasi*') ? 'active' : '' }}">
+        <a href="{{ url('/admin/geosite/'.$currentGeosite.'/informasi') }}" class="{{ request()->is('admin/geosite/'.$currentGeosite.'/informasi*') ? 'active' : '' }}">
             <i class="fas fa-info-circle"></i> Informasi
         </a>
     </div>

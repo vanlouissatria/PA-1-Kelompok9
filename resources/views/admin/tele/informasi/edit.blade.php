@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Informasi - Tele')
+@section('title')
+    Edit Informasi - {{ $geositeTitle }}
+@endsection
 
 @section('content')
 <div class="container-fluid">

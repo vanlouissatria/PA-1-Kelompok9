@@ -1,12 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Kelola Penginapan - Tele')
+@section('title')
+    Kelola Penginapan - {{ $geositeTitle }}
+@endsection
 
 @section('content')
 <div class="container-fluid">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h3 class="card-title">Data Penginapan Tele</h3>
+            <h3 class="card-title">Data Penginapan {{ $geositeTitle }}</h3>
             <a href="{{ url('/admin/geosite/'.$geosite.'/penginapan/create') }}" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Tambah Penginapan
             </a>

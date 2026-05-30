@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Kelola Galeri - Tele')
+@section('title')
+    Kelola Galeri - {{ $geositeTitle }}
+@endsection
 
 @section('content')
 <div class="container-fluid">
@@ -8,9 +10,9 @@
         
         {{-- Header --}}
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h3 class="card-title">Data Galeri Tele</h3>
+            <h3 class="card-title">Data Galeri {{ $geositeTitle }}</h3>
 
-            <a href="{{ route('admin.galeri.create') }}" class="btn btn-primary">
+            <a href="{{ url('/admin/geosite/'.$geosite.'/galeri/create') }}" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Tambah Galeri
             </a>
         </div>
@@ -102,7 +104,7 @@
 
                                     {{-- Edit --}}
                                     <a 
-                                        href="{{ route('admin.galeri.edit', $item->id) }}" 
+                                        href="{{ url('/admin/geosite/'.$geosite.'/galeri/'.$item->id.'/edit') }}" 
                                         class="btn btn-warning btn-sm"
                                     >
                                         Edit
@@ -110,7 +112,7 @@
 
                                     {{-- Hapus --}}
                                     <form 
-                                        action="{{ route('admin.galeri.destroy', $item->id) }}" 
+                                        action="{{ url('/admin/geosite/'.$geosite.'/galeri/'.$item->id) }}" 
                                         method="POST"
                                         class="d-inline"
                                         onsubmit="return confirm('Yakin hapus?')"

@@ -1,11 +1,13 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard Tele')
+@section('title')
+    Dashboard {{ $geositeTitle }}
+@endsection
 
 @section('content')
 <style>
-    /* CSS Kustom untuk Dashboard Tele - Style Icon Only */
-    .dashboard-tele {
+    /* CSS Kustom untuk Dashboard Geosite - Style Icon Only */
+    .dashboard-geosite {
         animation: fadeIn 0.5s ease;
     }
     
@@ -139,10 +141,10 @@
     }
 </style>
 
-<div class="container-fluid dashboard-tele">
+<div class="container-fluid dashboard-geosite">
     <div class="dashboard-header">
-        <h1><i class="fas fa-tower-cell" style="color: #D4AF37;"></i> Dashboard Tele</h1>
-        <p>Kelola konten untuk halaman Menara Pandang Tele</p>
+        <h1><i class="fas fa-tower-cell" style="color: #D4AF37;"></i> Dashboard {{ $geositeTitle }}</h1>
+        <p>Kelola konten untuk halaman {{ $geositeTitle }}</p>
     </div>
     
     <div class="icon-grid">
