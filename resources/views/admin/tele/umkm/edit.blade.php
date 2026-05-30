@@ -9,7 +9,7 @@
             <h3 class="card-title">Edit UMKM</h3>
         </div>
         <div class="card-body">
-            <form action="{{ url('/admin/tele/umkm/'.$umkm->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('/admin/geosite/'.$geosite.'/umkm/'.$umkm->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 
@@ -80,7 +80,7 @@
                 
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="{{ url('/admin/tele/umkm') }}" class="btn btn-secondary">Batal</a>
+                    <a href="{{ url('/admin/geosite/'.$geosite.'/umkm') }}" class="btn btn-secondary">Batal</a>
                 </div>
             </form>
         </div>

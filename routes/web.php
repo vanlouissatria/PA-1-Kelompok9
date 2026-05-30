@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\AdminGaleriController;
 use App\Http\Controllers\Admin\AdminBeritaController;
 use App\Http\Controllers\Admin\AdminInformasiController;
 use App\Http\Controllers\Admin\AdminDestinasiController;
+use App\Http\Controllers\Admin\AdminFasilitasController;
 use App\Http\Controllers\Admin\AdminKontakController;
 use App\Http\Controllers\Admin\TeleController;
 use App\Http\Controllers\Admin\WarisanController as AdminWarisanController;
@@ -190,49 +191,49 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('warisan', AdminWarisanController::class)->names('admin.warisan');
     Route::resource('kontak', AdminKontakController::class)->names('admin.kontak');
     
-    // ==================== SUBMENU GEOSITE TELE (PERBAIKAN ROUTING MANUAL) ====================
-    Route::prefix('tele')->name('admin.tele.')->group(function () {
-        // Halaman Utama Dashboard Tele
-        Route::get('/', [TeleController::class, 'index'])->name('index');
+    // ==================== SUBMENU GEOSITE ADMIN GENERAL ====================
+    Route::prefix('geosite')->name('admin.geosite.')->group(function () {
+        // Halaman Utama Dashboard geosite
+        Route::get('/{geosite}', [TeleController::class, 'index'])->name('index');
 
-        // Modul UMKM Tele
-        Route::get('/umkm', [TeleController::class, 'umkm'])->name('umkm.index');
-        Route::get('/umkm/create', [TeleController::class, 'umkmCreate'])->name('umkm.create');
-        Route::post('/umkm', [TeleController::class, 'umkmStore'])->name('umkm.store');
-        Route::get('/umkm/{id}/edit', [TeleController::class, 'umkmEdit'])->name('umkm.edit');
-        Route::put('/umkm/{id}', [TeleController::class, 'umkmUpdate'])->name('umkm.update');
-        Route::delete('/umkm/{id}', [TeleController::class, 'umkmDestroy'])->name('umkm.destroy');
+        // Modul UMKM
+        Route::get('/{geosite}/umkm', [TeleController::class, 'umkm'])->name('umkm.index');
+        Route::get('/{geosite}/umkm/create', [TeleController::class, 'umkmCreate'])->name('umkm.create');
+        Route::post('/{geosite}/umkm', [TeleController::class, 'umkmStore'])->name('umkm.store');
+        Route::get('/{geosite}/umkm/{id}/edit', [TeleController::class, 'umkmEdit'])->name('umkm.edit');
+        Route::put('/{geosite}/umkm/{id}', [TeleController::class, 'umkmUpdate'])->name('umkm.update');
+        Route::delete('/{geosite}/umkm/{id}', [TeleController::class, 'umkmDestroy'])->name('umkm.destroy');
 
-        // Modul FASILITAS Tele
-        Route::get('/fasilitas', [TeleController::class, 'fasilitas'])->name('fasilitas.index');
-        Route::get('/fasilitas/create', [TeleController::class, 'fasilitasCreate'])->name('fasilitas.create');
-        Route::post('/fasilitas', [TeleController::class, 'fasilitasStore'])->name('fasilitas.store');
-        Route::get('/fasilitas/{id}/edit', [TeleController::class, 'fasilitasEdit'])->name('fasilitas.edit');
-        Route::put('/fasilitas/{id}', [TeleController::class, 'fasilitasUpdate'])->name('fasilitas.update');
-        Route::delete('/fasilitas/{id}', [TeleController::class, 'fasilitasDestroy'])->name('fasilitas.destroy');
+        // Modul FASILITAS
+        Route::get('/{geosite}/fasilitas', [TeleController::class, 'fasilitas'])->name('fasilitas.index');
+        Route::get('/{geosite}/fasilitas/create', [TeleController::class, 'fasilitasCreate'])->name('fasilitas.create');
+        Route::post('/{geosite}/fasilitas', [TeleController::class, 'fasilitasStore'])->name('fasilitas.store');
+        Route::get('/{geosite}/fasilitas/{id}/edit', [TeleController::class, 'fasilitasEdit'])->name('fasilitas.edit');
+        Route::put('/{geosite}/fasilitas/{id}', [TeleController::class, 'fasilitasUpdate'])->name('fasilitas.update');
+        Route::delete('/{geosite}/fasilitas/{id}', [TeleController::class, 'fasilitasDestroy'])->name('fasilitas.destroy');
 
-        // Modul PENGINAPAN Tele
-        Route::get('/penginapan', [TeleController::class, 'penginapan'])->name('penginapan.index');
-        Route::get('/penginapan/create', [TeleController::class, 'penginapanCreate'])->name('penginapan.create');
-        Route::post('/penginapan', [TeleController::class, 'penginapanStore'])->name('penginapan.store');
-        Route::get('/penginapan/{id}/edit', [TeleController::class, 'penginapanEdit'])->name('penginapan.edit');
-        Route::put('/penginapan/{id}', [TeleController::class, 'penginapanUpdate'])->name('penginapan.update');
-        Route::delete('/penginapan/{id}', [TeleController::class, 'penginapanDestroy'])->name('penginapan.destroy');
+        // Modul PENGINAPAN
+        Route::get('/{geosite}/penginapan', [TeleController::class, 'penginapan'])->name('penginapan.index');
+        Route::get('/{geosite}/penginapan/create', [TeleController::class, 'penginapanCreate'])->name('penginapan.create');
+        Route::post('/{geosite}/penginapan', [TeleController::class, 'penginapanStore'])->name('penginapan.store');
+        Route::get('/{geosite}/penginapan/{id}/edit', [TeleController::class, 'penginapanEdit'])->name('penginapan.edit');
+        Route::put('/{geosite}/penginapan/{id}', [TeleController::class, 'penginapanUpdate'])->name('penginapan.update');
+        Route::delete('/{geosite}/penginapan/{id}', [TeleController::class, 'penginapanDestroy'])->name('penginapan.destroy');
 
-        // Modul GALERI Tele
-        Route::get('/galeri', [TeleController::class, 'galeri'])->name('galeri.index');
-        Route::get('/galeri/create', [TeleController::class, 'galeriCreate'])->name('galeri.create');
-        Route::post('/galeri', [TeleController::class, 'galeriStore'])->name('galeri.store');
-        Route::get('/galeri/{id}/edit', [TeleController::class, 'galeriEdit'])->name('galeri.edit');
-        Route::put('/galeri/{id}', [TeleController::class, 'galeriUpdate'])->name('galeri.update');
-        Route::delete('/galeri/{id}', [TeleController::class, 'galeriDestroy'])->name('galeri.destroy');
+        // Modul GALERI
+        Route::get('/{geosite}/galeri', [TeleController::class, 'galeri'])->name('galeri.index');
+        Route::get('/{geosite}/galeri/create', [TeleController::class, 'galeriCreate'])->name('galeri.create');
+        Route::post('/{geosite}/galeri', [TeleController::class, 'galeriStore'])->name('galeri.store');
+        Route::get('/{geosite}/galeri/{id}/edit', [TeleController::class, 'galeriEdit'])->name('galeri.edit');
+        Route::put('/{geosite}/galeri/{id}', [TeleController::class, 'galeriUpdate'])->name('galeri.update');
+        Route::delete('/{geosite}/galeri/{id}', [TeleController::class, 'galeri.destroy'])->name('galeri.destroy');
 
-        // Modul INFORMASI Tele
-        Route::get('/informasi', [TeleController::class, 'informasi'])->name('informasi.index');
-        Route::get('/informasi/create', [TeleController::class, 'informasiCreate'])->name('informasi.create');
-        Route::post('/informasi', [TeleController::class, 'informasiStore'])->name('informasi.store');
-        Route::get('/informasi/{id}/edit', [TeleController::class, 'informasiEdit'])->name('informasi.edit');
-        Route::put('/informasi/{id}', [TeleController::class, 'informasiUpdate'])->name('informasi.update');
-        Route::delete('/informasi/{id}', [TeleController::class, 'informasiDestroy'])->name('informasi.destroy');
+        // Modul INFORMASI
+        Route::get('/{geosite}/informasi', [TeleController::class, 'informasi'])->name('informasi.index');
+        Route::get('/{geosite}/informasi/create', [TeleController::class, 'informasiCreate'])->name('informasi.create');
+        Route::post('/{geosite}/informasi', [TeleController::class, 'informasiStore'])->name('informasi.store');
+        Route::get('/{geosite}/informasi/{id}/edit', [TeleController::class, 'informasiEdit'])->name('informasi.edit');
+        Route::put('/{geosite}/informasi/{id}', [TeleController::class, 'informasiUpdate'])->name('informasi.update');
+        Route::delete('/{geosite}/informasi/{id}', [TeleController::class, 'informasiDestroy'])->name('informasi.destroy');
     });
 });

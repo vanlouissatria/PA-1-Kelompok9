@@ -705,22 +705,22 @@
 </a>
 
         <div class="menu-title">Geosite Tele</div>
-        <a href="{{ url('/admin/tele') }}" class="{{ request()->is('admin/tele') ? 'active' : '' }}">
+        <a href="{{ url('/admin/geosite/tele') }}" class="{{ request()->is('admin/geosite/tele') ? 'active' : '' }}">
             <i class="fas fa-tower-cell"></i> Dashboard Tele
         </a>
-        <a href="{{ url('/admin/tele/umkm') }}" class="{{ request()->is('admin/tele/umkm*') ? 'active' : '' }}">
+        <a href="{{ url('/admin/geosite/tele/umkm') }}" class="{{ request()->is('admin/geosite/tele/umkm*') ? 'active' : '' }}">
             <i class="fas fa-store"></i> UMKM
         </a>
-        <a href="{{ url('/admin/tele/fasilitas') }}" class="{{ request()->is('admin/tele/fasilitas*') ? 'active' : '' }}">
+        <a href="{{ url('/admin/geosite/tele/fasilitas') }}" class="{{ request()->is('admin/geosite/tele/fasilitas*') ? 'active' : '' }}">
             <i class="fas fa-tools"></i> Fasilitas
         </a>
-        <a href="{{ url('/admin/tele/penginapan') }}" class="{{ request()->is('admin/tele/penginapan*') ? 'active' : '' }}">
+        <a href="{{ url('/admin/geosite/tele/penginapan') }}" class="{{ request()->is('admin/geosite/tele/penginapan*') ? 'active' : '' }}">
             <i class="fas fa-hotel"></i> Penginapan
         </a>
-        <a href="{{ url('/admin/tele/galeri') }}" class="{{ request()->is('admin/tele/galeri*') ? 'active' : '' }}">
+        <a href="{{ url('/admin/geosite/tele/galeri') }}" class="{{ request()->is('admin/geosite/tele/galeri*') ? 'active' : '' }}">
             <i class="fas fa-images"></i> Galeri
         </a>
-        <a href="{{ url('/admin/tele/informasi') }}" class="{{ request()->is('admin/tele/informasi*') ? 'active' : '' }}">
+        <a href="{{ url('/admin/geosite/tele/informasi') }}" class="{{ request()->is('admin/geosite/tele/informasi*') ? 'active' : '' }}">
             <i class="fas fa-info-circle"></i> Informasi
         </a>
     </div>
