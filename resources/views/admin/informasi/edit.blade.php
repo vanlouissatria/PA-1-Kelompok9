@@ -134,6 +134,7 @@
             @method('PUT')
             
             <div class="row">
+                <input type="hidden" name="kategori" value="informasi">
                 <div class="col-md-6 mb-3">
                     <label class="form-label required">Judul</label>
                     <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror" 

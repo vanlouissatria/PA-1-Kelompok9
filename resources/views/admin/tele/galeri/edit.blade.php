@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Tambah Galeri - Tele')
+@section('title')
+    Edit Galeri - {{ $geositeTitle }}
+@endsection
 
 @section('content')
 <div class="container-fluid">
@@ -19,7 +21,7 @@
                 </div>
             @endif
 
-            <form action="{{ url('/admin/tele/galeri') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('/admin/geosite/'.$geosite.'/galeri') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 
                 <div class="mb-3">
@@ -43,7 +45,7 @@
                 
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">Simpan</button>
-                    <a href="{{ url('/admin/tele/galeri') }}" class="btn btn-secondary">Batal</a>
+                    <a href="{{ url('/admin/geosite/'.$geosite.'/galeri') }}" class="btn btn-secondary">Batal</a>
                 </div>
             </form>
         </div>

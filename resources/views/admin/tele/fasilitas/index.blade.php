@@ -1,13 +1,15 @@
 @extends('layouts.admin')
 
-@section('title', 'Kelola Fasilitas - Tele')
+@section('title')
+    Kelola Fasilitas - {{ $geositeTitle }}
+@endsection
 
 @section('content')
 <div class="container-fluid">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h3 class="card-title">Data Fasilitas Tele</h3>
-            <a href="{{ route('admin.tele.fasilitas.create') }}" class="btn btn-primary">
+            <h3 class="card-title">Data Fasilitas {{ ucfirst($geosite) }}</h3>
+            <a href="{{ url('/admin/geosite/'.$geosite.'/fasilitas/create') }}" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Tambah Fasilitas
             </a>
         </div>
@@ -30,8 +32,8 @@
                             <td>{{ Str::limit($item->deskripsi, 50) }}</td>
                             <td>Rp {{ number_format($item->harga ?? 0, 0, ',', '.') }}</td>
                             <td>
-                                <a href="{{ route('admin.tele.fasilitas.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('admin.tele.fasilitas.destroy', $item->id) }}" method="POST" class="d-inline">
+                                <a href="{{ url('/admin/geosite/'.$geosite.'/fasilitas/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ url('/admin/geosite/'.$geosite.'/fasilitas/'.$item->id) }}" method="POST" class="d-inline">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</button>
                                 </form>

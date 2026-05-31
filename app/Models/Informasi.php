@@ -15,7 +15,8 @@ class Informasi extends Model
         'konten',
         'gambar',
         'urutan',
-        'status'
+        'status',
+        'kategori'
     ];
 
     protected $casts = [

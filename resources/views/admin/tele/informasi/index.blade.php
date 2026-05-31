@@ -1,13 +1,15 @@
 @extends('layouts.admin')
 
-@section('title', 'Kelola Informasi - Tele')
+@section('title')
+    Kelola Informasi - {{ $geositeTitle }}
+@endsection
 
 @section('content')
 <div class="container-fluid">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h3 class="card-title">Informasi Tele</h3>
-            <a href="{{ url('/admin/tele/informasi/create') }}" class="btn btn-primary">
+            <h3 class="card-title">Informasi {{ $geositeTitle }}</h3>
+            <a href="{{ url('/admin/geosite/'.$geosite.'/informasi/create') }}" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Tambah Informasi
             </a>
         </div>
@@ -57,8 +59,8 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ url('/admin/tele/informasi/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ url('/admin/tele/informasi/'.$item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus?')">
+                                <a href="{{ url('/admin/geosite/'.$geosite.'/informasi/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ url('/admin/geosite/'.$geosite.'/informasi/'.$item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">Hapus</button>

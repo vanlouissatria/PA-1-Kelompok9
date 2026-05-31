@@ -1,11 +1,13 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard Tele')
+@section('title')
+    Dashboard {{ $geositeTitle }}
+@endsection
 
 @section('content')
 <style>
-    /* CSS Kustom untuk Dashboard Tele - Style Icon Only */
-    .dashboard-tele {
+    /* CSS Kustom untuk Dashboard Geosite - Style Icon Only */
+    .dashboard-geosite {
         animation: fadeIn 0.5s ease;
     }
     
@@ -139,43 +141,43 @@
     }
 </style>
 
-<div class="container-fluid dashboard-tele">
+<div class="container-fluid dashboard-geosite">
     <div class="dashboard-header">
-        <h1><i class="fas fa-tower-cell" style="color: #D4AF37;"></i> Dashboard Tele</h1>
-        <p>Kelola konten untuk halaman Menara Pandang Tele</p>
+        <h1><i class="fas fa-tower-cell" style="color: #D4AF37;"></i> Dashboard {{ $geositeTitle }}</h1>
+        <p>Kelola konten untuk halaman {{ $geositeTitle }}</p>
     </div>
     
     <div class="icon-grid">
         <!-- UMKM -->
-        <a href="{{ url('/admin/tele/umkm') }}" class="icon-card umkm">
+        <a href="{{ url('/admin/geosite/'.$geosite.'/umkm') }}" class="icon-card umkm">
             <i class="fas fa-store"></i>
             <div class="count">{{ $umkmCount ?? 0 }}</div>
             <div class="label">UMKM</div>
         </a>
         
         <!-- Fasilitas -->
-        <a href="{{ url('/admin/tele/fasilitas') }}" class="icon-card fasilitas">
+        <a href="{{ url('/admin/geosite/'.$geosite.'/fasilitas') }}" class="icon-card fasilitas">
             <i class="fas fa-concierge-bell"></i>
             <div class="count">{{ $fasilitasCount ?? 0 }}</div>
             <div class="label">Fasilitas</div>
         </a>
         
         <!-- Penginapan -->
-        <a href="{{ url('/admin/tele/penginapan') }}" class="icon-card penginapan">
+        <a href="{{ url('/admin/geosite/'.$geosite.'/penginapan') }}" class="icon-card penginapan">
             <i class="fas fa-hotel"></i>
             <div class="count">{{ $penginapanCount ?? 0 }}</div>
             <div class="label">Penginapan</div>
         </a>
         
         <!-- Galeri -->
-        <a href="{{ url('/admin/tele/galeri') }}" class="icon-card galeri">
+        <a href="{{ url('/admin/geosite/'.$geosite.'/galeri') }}" class="icon-card galeri">
             <i class="fas fa-images"></i>
             <div class="count">{{ $galeriCount ?? 0 }}</div>
             <div class="label">Galeri</div>
         </a>
         
         <!-- Informasi -->
-        <a href="{{ url('/admin/tele/informasi') }}" class="icon-card informasi">
+        <a href="{{ url('/admin/geosite/'.$geosite.'/informasi') }}" class="icon-card informasi">
             <i class="fas fa-info-circle"></i>
             <div class="count">{{ $informasiCount ?? 0 }}</div>
             <div class="label">Informasi</div>

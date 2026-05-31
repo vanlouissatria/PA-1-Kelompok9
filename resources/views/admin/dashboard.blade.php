@@ -103,7 +103,7 @@
     <a href="{{ url('/admin/berita/create') }}" class="btn-primary"><i class="fas fa-plus-circle"></i> Berita</a>
     <a href="{{ url('/admin/informasi/create') }}" class="btn-primary"><i class="fas fa-plus-circle"></i> Informasi</a>
     <a href="{{ url('/admin/destinasi/create') }}" class="btn-primary"><i class="fas fa-plus-circle"></i> Destinasi</a>
-    <a href="{{ url('/admin/tele') }}" class="btn-primary"><i class="fas fa-tower-cell"></i> Kelola Tele</a>
+    <a href="{{ url('/admin/geosite/tele') }}" class="btn-primary"><i class="fas fa-tower-cell"></i> Kelola Tele</a>
 </div>
 
 <!-- PENGUMUMAN -->
