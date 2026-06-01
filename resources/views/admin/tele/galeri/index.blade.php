@@ -101,30 +101,13 @@
                             {{-- Aksi --}}
                             <td>
                                 <div class="btn-group" style="display:flex; gap:5px;">
-
-                                    {{-- Edit --}}
-                                    <a 
-                                        href="{{ url('/admin/geosite/'.$geosite.'/galeri/'.$item->id.'/edit') }}" 
-                                        class="btn btn-warning btn-sm"
-                                    >
-                                        Edit
-                                    </a>
-
-                                    {{-- Hapus --}}
-                                    <form 
-                                        action="{{ url('/admin/geosite/'.$geosite.'/galeri/'.$item->id) }}" 
-                                        method="POST"
-                                        class="d-inline"
-                                        onsubmit="return confirm('Yakin hapus?')"
-                                    >
+                                    <a href="{{ url('/admin/geosite/'.$geosite.'/galeri/'.$item->id) }}" class="btn btn-success btn-sm" title="Lihat"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ url('/admin/geosite/'.$geosite.'/galeri/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <form action="{{ url('/admin/geosite/'.$geosite.'/galeri/'.$item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus?')">
                                         @csrf
                                         @method('DELETE')
-
-                                        <button type="submit" class="btn btn-danger btn-sm">
-                                            Hapus
-                                        </button>
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Hapus"><i class="fas fa-trash"></i></button>
                                     </form>
-
                                 </div>
                             </td>
 
