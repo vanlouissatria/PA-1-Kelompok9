@@ -678,10 +678,10 @@
             <i class="fas fa-map-marked-alt"></i> Destinations
         </a>
         <a href="{{ route('admin.warisan.index') }}" class="{{ request()->routeIs('admin.warisan.*') ? 'active' : '' }}">
-            <i class="fas fa-landmark"></i> Heritage
+            <i class="fas fa-landmark"></i> Warisan Alam & Budaya
         </a>
         <a href="{{ route('admin.kontak.index') }}" class="{{ request()->routeIs('admin.kontak.*') ? 'active' : '' }}">
-            <i class="fas fa-address-book"></i> Contacts
+            <i class="fas fa-address-book"></i> Kontak
         </a>
 
         @php

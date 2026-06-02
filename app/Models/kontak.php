@@ -16,5 +16,6 @@ class kontak extends Model
         'email1',
         'email2',
         'email3',
+        'status',
     ];
 }

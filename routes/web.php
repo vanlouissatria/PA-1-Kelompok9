@@ -182,9 +182,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('informasi/toggle-status/{id}', [AdminInformasiController::class, 'toggleStatus'])->name('admin.informasi.toggle-status');
     Route::post('destinasi/toggle-status/{id}', [AdminDestinasiController::class, 'toggleStatus'])->name('admin.destinasi.toggle-status');
     Route::post('fasilitas/toggle-status/{id}', [AdminFasilitasController::class, 'toggleStatus'])->name('admin.fasilitas.toggle-status');
-    
-    // RUTE BARU: Menangani Toggle Status Warisan Admin agar tidak terbentur resource
     Route::post('warisan/toggle-status/{id}', [AdminWarisanController::class, 'toggleStatus'])->name('admin.warisan.toggle-status');
+    
+    // RUTE TOGGLE STATUS KONTAK (Wajib ditaruh sebelum resource)
+    Route::post('kontak/toggle-status/{id}', [AdminKontakController::class, 'toggleStatus'])->name('admin.kontak.toggle-status');
     
     // KONTEN GLOBAL UTAMA
     Route::resource('galeri', AdminGaleriController::class)->names('admin.galeri');
@@ -241,3 +242,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::delete('/{geosite}/informasi/{id}', [TeleController::class, 'informasiDestroy'])->name('informasi.destroy');
     });
 });
+
+// Temporary test route (remove after debugging) - allows GET toggle without auth/CSRF
+Route::get('debug/kontak/toggle-status/{id}', [AdminKontakController::class, 'toggleStatus']);

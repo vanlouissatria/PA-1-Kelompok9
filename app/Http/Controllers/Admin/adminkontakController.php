@@ -6,14 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Kontak;
 use Illuminate\Http\Request;
 
-class adminkontakController extends Controller
+class AdminKontakController extends Controller
 {
     /**
-     * Tampilkan semua data kontak
+     * Tampilkan semua data kontak menggunakan pagination
      */
     public function index()
     {
-        $kontak = Kontak::latest()->get();
+        // Diubah dari get() ke paginate(10) agar links() di Blade terbaca
+        $kontak = Kontak::latest()->paginate(10);
         return view('admin.kontak.index', compact('kontak'));
     }
 
@@ -26,7 +27,7 @@ class adminkontakController extends Controller
     }
 
     /**
-     * Simpan data kontak
+     * Simpan data kontak baru
      */
     public function store(Request $request)
     {
@@ -39,10 +40,10 @@ class adminkontakController extends Controller
             'email2'   => 'nullable|email',
             'telepon3' => 'nullable|string',
             'email3'   => 'nullable|email',
-            // subjudul (opsional) jika ada di form
             'subjudul' => 'nullable|string',
         ]);
 
+        // Secara default, kontak baru diberi status aktif (true / 1)
         Kontak::create([
             'judul'    => $request->judul,
             'subjudul' => $request->subjudul,
@@ -53,6 +54,7 @@ class adminkontakController extends Controller
             'email1'   => $request->email1,
             'email2'   => $request->email2,
             'email3'   => $request->email3,
+            'status'   => true, 
         ]);
 
         return redirect()
@@ -103,6 +105,31 @@ class adminkontakController extends Controller
         return redirect()
             ->route('admin.kontak.index')
             ->with('success', 'Data kontak berhasil diupdate');
+    }
+
+    /**
+     * Ubah status aktif/nonaktif via AJAX Fetch
+     */
+    public function toggleStatus($id)
+    {
+        try {
+            $kontak = Kontak::findOrFail($id);
+            
+            // Membalikkan nilai boolean status (1 menjadi 0, atau 0 menjadi 1)
+            $kontak->status = !$kontak->status;
+            $kontak->save();
+
+            return response()->json([
+                'success' => true,
+                'status' => $kontak->status
+            ]);
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengubah status kontak.'
+            ], 500);
+        }
     }
 
     /**
