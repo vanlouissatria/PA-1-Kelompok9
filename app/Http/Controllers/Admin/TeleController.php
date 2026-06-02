@@ -424,7 +424,6 @@ class TeleController extends Controller
         $geosite = $this->ensureGeosite($geosite);
         $selectedGeosite = $this->ensureGeosite($request->input('geosite', $geosite));
         $request->validate([
-            'geosite' => 'required|string|in:tele,efrata,sihotang,sibea-bea,holbung',
             'judul' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048'
@@ -572,7 +571,7 @@ class TeleController extends Controller
         $informasi = Informasi::findOrFail($id);
         return view('admin.tele.informasi.show', compact('informasi', 'geosite'));
     }
-    
+
     public function informasiEdit($geosite, $id)
     {
         $geosite = $this->ensureGeosite($geosite);

@@ -44,8 +44,14 @@
                 </div>
                 
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                    <a href="{{ url('/admin/geosite/'.$geosite.'/galeri') }}" class="btn btn-secondary">Batal</a>
+                    <button type="submit" class="btn btn-primary">
+                        Simpan
+                    </button>
+
+                    <a href="{{ url('/admin/geosite/'.$geosite.'/galeri') }}"
+                      class="btn btn-primary">
+                      Batal
+                    </a>
                 </div>
             </form>
         </div>
