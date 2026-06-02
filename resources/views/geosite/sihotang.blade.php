@@ -1333,7 +1333,10 @@ h1, h2, h3, h4, h5, h6 {
             @endforeach
         @else
             <div class="informasi-card" data-aos="fade-up">
-                <div class="informasi-content"><h3>Informasi Umum Sihotang</h3><div class="informasi-text"><p>Wisata Sihotang buka setiap hari. Akses mudah dari Pangururan dan Tomok, dengan pilihan paket wisata budaya dan alam.</p><p>Pastikan membawa perlengkapan nyaman dan kamera untuk menangkap pemandangan Danau Toba.</p></div></div>
+                <div class="informasi-content">
+                <div class="informasi-text">
+                </div>
+                </div>
             </div>
         @endif
     </div>
