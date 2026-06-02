@@ -706,22 +706,7 @@
             </a>
         @endforeach
 
-        <div class="menu-title">Modul {{ $currentGeositeTitle }}</div>
-        <a href="{{ url('/admin/geosite/'.$currentGeosite.'/umkm') }}" class="{{ request()->is('admin/geosite/'.$currentGeosite.'/umkm*') ? 'active' : '' }}">
-            <i class="fas fa-store"></i> UMKM
-        </a>
-        <a href="{{ url('/admin/geosite/'.$currentGeosite.'/fasilitas') }}" class="{{ request()->is('admin/geosite/'.$currentGeosite.'/fasilitas*') ? 'active' : '' }}">
-            <i class="fas fa-tools"></i> Fasilitas
-        </a>
-        <a href="{{ url('/admin/geosite/'.$currentGeosite.'/penginapan') }}" class="{{ request()->is('admin/geosite/'.$currentGeosite.'/penginapan*') ? 'active' : '' }}">
-            <i class="fas fa-hotel"></i> Penginapan
-        </a>
-        <a href="{{ url('/admin/geosite/'.$currentGeosite.'/galeri') }}" class="{{ request()->is('admin/geosite/'.$currentGeosite.'/galeri*') ? 'active' : '' }}">
-            <i class="fas fa-images"></i> Galeri
-        </a>
-        <a href="{{ url('/admin/geosite/'.$currentGeosite.'/informasi') }}" class="{{ request()->is('admin/geosite/'.$currentGeosite.'/informasi*') ? 'active' : '' }}">
-            <i class="fas fa-info-circle"></i> Informasi
-        </a>
+        {{-- Modul links removed — management via Geosite Dashboard only --}}
     </div>
 </div>
 
