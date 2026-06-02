@@ -601,7 +601,9 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-/* ==================== INFORMASI CARD ELEVATED ==================== */
+/* ============================================ */
+/* 1. INFORMASI CARD - PREMIUM ENHANCED        */
+/* ============================================ */
 .informasi-card {
     display: flex;
     flex-wrap: wrap;
@@ -611,7 +613,7 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: var(--shadow-lg);
     margin-bottom: 56px;
     transition: var(--transition-bounce);
-    border: 1px solid rgba(212,175,55,0.1);
+    border: 1px solid rgba(212, 175, 55, 0.15);
 }
 
 .informasi-card:last-child {
@@ -621,13 +623,13 @@ h1, h2, h3, h4, h5, h6 {
 .informasi-card:hover {
     transform: translateY(-12px);
     box-shadow: var(--shadow-xl);
-    border-color: rgba(212,175,55,0.3);
+    border-color: rgba(212, 175, 55, 0.4);
 }
 
 .informasi-image {
     flex: 1.2;
     min-width: 350px;
-    max-height: 400px;
+    max-height: 420px;
     overflow: hidden;
     position: relative;
 }
@@ -646,7 +648,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(0,47,95,0.2), transparent);
+    background: linear-gradient(45deg, rgba(0, 47, 95, 0.3), transparent);
     pointer-events: none;
 }
 
@@ -675,33 +677,62 @@ h1, h2, h3, h4, h5, h6 {
 
 .informasi-content h3 {
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 800;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
     border-left: 5px solid var(--gold);
     padding-left: 24px;
+    letter-spacing: -0.02em;
 }
 
 @media (max-width: 768px) {
     .informasi-content h3 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .informasi-content h3 {
+        font-size: 1.3rem;
+        padding-left: 16px;
     }
 }
 
 .informasi-text {
     color: #2d3e50;
-    line-height: 1.85;
+    line-height: 1.8;
     font-size: 1rem;
 }
 
-.informasi-text p {
-    margin-bottom: 18px;
+@media (max-width: 768px) {
+    .informasi-text {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
 }
 
-/* ==================== GALERI GRID STUNNING ==================== */
+@media (max-width: 480px) {
+    .informasi-text {
+        font-size: 0.9rem;
+        line-height: 1.65;
+    }
+}
+
+.informasi-text p {
+    margin-bottom: 20px;
+}
+
+.informasi-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* ============================================ */
+/* 2. GALERI CARD - IMMERSIVE & MODERN         */
+/* ============================================ */
 .galeri-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -712,7 +743,14 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 768px) {
     .galeri-grid {
         gap: 24px;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .galeri-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
 }
 
@@ -721,9 +759,21 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 28px;
     overflow: hidden;
     cursor: pointer;
-    height: 300px;
+    height: 320px;
     box-shadow: var(--shadow-md);
     transition: var(--transition-bounce);
+}
+
+@media (max-width: 768px) {
+    .galeri-item {
+        height: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .galeri-item {
+        height: 260px;
+    }
 }
 
 .galeri-item:hover {
@@ -747,8 +797,11 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0,47,95,0.95) 0%, rgba(0,47,95,0.7) 50%, transparent 100%);
-    padding: 30px 24px 24px;
+    background: linear-gradient(to top,
+            rgba(0, 47, 95, 0.95) 0%,
+            rgba(0, 47, 95, 0.7) 50%,
+            transparent 100%);
+    padding: 32px 24px 24px;
     color: white;
     transform: translateY(100%);
     transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
@@ -759,19 +812,46 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .galeri-overlay h4 {
-    font-size: 1.2rem;
-    margin: 0 0 8px;
+    font-size: 1.35rem;
     font-weight: 700;
-    letter-spacing: -0.3px;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+    .galeri-overlay h4 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .galeri-overlay h4 {
+        font-size: 1.1rem;
+    }
 }
 
 .galeri-overlay p {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     margin: 0;
-    opacity: 0.85;
+    opacity: 0.9;
+    line-height: 1.5;
 }
 
-/* ==================== CARD GRID MODERN ==================== */
+@media (max-width: 768px) {
+    .galeri-overlay p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .galeri-overlay p {
+        font-size: 0.8rem;
+    }
+}
+
+/* ============================================ */
+/* 3. CARD UNTUK FASILITAS, PENGINAPAN, UMKM   */
+/* ============================================ */
 .grid-umkm,
 .grid-penginapan,
 .grid-fasilitas {
@@ -784,11 +864,21 @@ h1, h2, h3, h4, h5, h6 {
     .grid-umkm,
     .grid-penginapan,
     .grid-fasilitas {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 28px;
     }
 }
 
+@media (max-width: 640px) {
+    .grid-umkm,
+    .grid-penginapan,
+    .grid-fasilitas {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+/* Card Container Premium */
 .card-item {
     background: var(--white);
     border-radius: 28px;
@@ -796,24 +886,60 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: var(--shadow-md);
     transition: var(--transition-bounce);
     cursor: pointer;
-    border: 1px solid rgba(0,0,0,0.03);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 .card-item:hover {
     transform: translateY(-12px);
     box-shadow: var(--shadow-xl);
-    border-color: rgba(212,175,55,0.2);
+    border-color: rgba(212, 175, 55, 0.25);
 }
 
 .card-item:active {
     transform: scale(0.98);
 }
 
+/* Garis emas di atas card saat hover */
+.card-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--gradient-gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    z-index: 2;
+}
+
+.card-item:hover::after {
+    transform: scaleX(1);
+}
+
+/* Image Wrapper dengan Aspect Ratio Modern */
 .card-item .image-wrapper {
     position: relative;
     height: 260px;
     overflow: hidden;
-    background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+    background: linear-gradient(135deg, #f5f7fa, #e9ecef);
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .card-item .image-wrapper {
+        height: 240px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-item .image-wrapper {
+        height: 220px;
+    }
 }
 
 .card-item img {
@@ -827,73 +953,256 @@ h1, h2, h3, h4, h5, h6 {
     transform: scale(1.1);
 }
 
+/* Category Badge yang Lebih Stylish */
 .card-item .category-badge {
     position: absolute;
     top: 18px;
     right: 18px;
-    background: rgba(0,47,95,0.92);
+    background: rgba(0, 47, 95, 0.92);
     backdrop-filter: blur(8px);
     color: white;
     padding: 6px 16px;
-    border-radius: 50px;
+    border-radius: 40px;
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.5px;
-    border: 1px solid rgba(212,175,55,0.4);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    text-transform: uppercase;
+    z-index: 2;
 }
 
+@media (max-width: 480px) {
+    .card-item .category-badge {
+        top: 12px;
+        right: 12px;
+        padding: 5px 12px;
+        font-size: 0.7rem;
+    }
+}
+
+/* Card Body dengan Tipografi Lebih Jelas */
 .card-body {
     padding: 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .card-body {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-body {
+        padding: 20px;
+    }
 }
 
 .card-body h4 {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: var(--primary);
     margin-bottom: 12px;
     transition: var(--transition-fast);
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+    .card-body h4 {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-body h4 {
+        font-size: 1.15rem;
+        margin-bottom: 10px;
+    }
 }
 
 .card-item:hover .card-body h4 {
     color: var(--gold-dark);
 }
 
+/* Deskripsi dengan Line Clamp yang Rapi */
 .card-body .deskripsi {
-    color: #6c757d;
-    font-size: 0.9rem;
+    color: #5a6e7c;
+    font-size: 0.95rem;
     line-height: 1.65;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
+@media (max-width: 768px) {
+    .card-body .deskripsi {
+        font-size: 0.9rem;
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-body .deskripsi {
+        font-size: 0.85rem;
+        line-height: 1.6;
+        -webkit-line-clamp: 3;
+    }
+}
+
+/* Informasi Tambahan (lokasi, dll) */
 .card-body .info-item {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-top: 12px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--gray);
+}
+
+@media (max-width: 768px) {
+    .card-body .info-item {
+        font-size: 0.85rem;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-body .info-item {
+        font-size: 0.8rem;
+        gap: 8px;
+    }
 }
 
 .card-body .info-item i {
     color: var(--gold);
-    width: 22px;
+    width: 24px;
     font-size: 1rem;
+    text-align: center;
 }
 
+@media (max-width: 480px) {
+    .card-body .info-item i {
+        width: 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Harga dengan Font Lebih Menonjol */
 .card-body .harga {
     font-weight: 800;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    margin-top: 18px;
-    font-size: 1.15rem;
+    margin-top: 20px;
+    font-size: 1.25rem;
+    letter-spacing: -0.3px;
+    border-top: 1px dashed rgba(0, 47, 95, 0.1);
+    padding-top: 16px;
 }
 
+@media (max-width: 768px) {
+    .card-body .harga {
+        font-size: 1.15rem;
+        margin-top: 16px;
+        padding-top: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-body .harga {
+        font-size: 1rem;
+        margin-top: 14px;
+        padding-top: 12px;
+    }
+}
+
+/* Tombol CTA Tambahan */
+.card-body .card-btn {
+    display: inline-block;
+    margin-top: 18px;
+    background: transparent;
+    border: 1.5px solid var(--gold);
+    color: var(--primary);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-align: center;
+    transition: var(--transition-fast);
+    cursor: pointer;
+    text-decoration: none;
+    width: fit-content;
+}
+
+@media (max-width: 480px) {
+    .card-body .card-btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+        margin-top: 14px;
+    }
+}
+
+.card-body .card-btn:hover {
+    background: var(--gold);
+    color: var(--primary-dark);
+    border-color: var(--gold-dark);
+    transform: translateX(5px);
+}
+
+/* ============================================ */
+/* 4. OPTIONAL: BADGE LOKASI KHUSUS            */
+/* ============================================ */
+.card-body .lokasi {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--gold-dark);
+    margin-top: 8px;
+}
+
+.card-body .lokasi i {
+    font-size: 0.8rem;
+}
+
+/* ============================================ */
+/* 5. ANIMASI SMOOTH UNTUK SEMUA CARD          */
+/* ============================================ */
+.informasi-card,
+.galeri-item,
+.card-item {
+    animation: fadeInUp 0.7s ease backwards;
+}
+
+.informasi-card:nth-child(1) { animation-delay: 0.05s; }
+.informasi-card:nth-child(2) { animation-delay: 0.1s; }
+.galeri-item:nth-child(1) { animation-delay: 0.05s; }
+.galeri-item:nth-child(2) { animation-delay: 0.1s; }
+.galeri-item:nth-child(3) { animation-delay: 0.15s; }
+.galeri-item:nth-child(4) { animation-delay: 0.2s; }
+.galeri-item:nth-child(5) { animation-delay: 0.25s; }
+.galeri-item:nth-child(6) { animation-delay: 0.3s; }
+.card-item:nth-child(1) { animation-delay: 0.05s; }
+.card-item:nth-child(2) { animation-delay: 0.1s; }
+.card-item:nth-child(3) { animation-delay: 0.15s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 /* ==================== MAPS SECTION PREMIUM ==================== */
 .maps-container {
     border-radius: 32px;
