@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Admin - GeoToba</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
@@ -14,9 +14,11 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: #f8fafc;
-            color: #0f172a;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(145deg, #0a0f1a 0%, #0f1625 50%, #0a0f1a 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            line-height: 1.5;
         }
 
         /* ========== SIDEBAR ========== */
@@ -24,28 +26,73 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 260px;
+            width: 280px;
             height: 100%;
-            background: #ffffff;
-            border-right: 1px solid #e2e8f0;
+            background: linear-gradient(180deg, #0b1120 0%, #0a0f1a 100%);
             z-index: 1000;
             overflow-y: auto;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+            border-right: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #c6a43b;
+            border-radius: 10px;
         }
 
         .sidebar.closed {
             transform: translateX(-100%);
         }
 
+        /* HEADER SIDEBAR - LOGO RAPI */
         .sidebar-header {
             padding: 24px 20px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            background: rgba(212, 175, 55, 0.02);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .logo-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-item img {
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .logo-divider {
+            width: 1px;
+            height: 30px;
+            background: linear-gradient(to bottom, transparent, rgba(212, 175, 55, 0.5), transparent);
         }
 
         .sidebar-header h3 {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: #0f172a;
+            letter-spacing: -0.3px;
+            margin: 8px 0 4px;
         }
 
         .sidebar-header h3 span {
@@ -54,21 +101,22 @@
 
         .sidebar-header p {
             font-size: 0.7rem;
-            color: #64748b;
-            margin-top: 4px;
+            color: #94a3b8;
+            font-weight: 400;
         }
 
+        /* MENU SIDEBAR */
         .sidebar-menu {
-            padding: 16px 0;
+            padding: 20px 0;
         }
 
         .sidebar-menu .menu-title {
-            padding: 8px 20px;
-            font-size: 0.65rem;
+            padding: 12px 20px 6px;
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #94a3b8;
+            color: #c6a43b;
         }
 
         .sidebar-menu a {
@@ -76,36 +124,37 @@
             align-items: center;
             gap: 12px;
             padding: 10px 20px;
-            color: #475569;
+            margin: 2px 12px;
+            color: #a0aec0;
             text-decoration: none;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             font-size: 0.85rem;
             font-weight: 500;
-            margin: 2px 8px;
-            border-radius: 8px;
+            border-radius: 10px;
         }
 
         .sidebar-menu a:hover {
-            background: #f1f5f9;
-            color: #0f172a;
+            background: rgba(198, 164, 59, 0.1);
+            color: #ffffff;
         }
 
         .sidebar-menu a.active {
-            background: #eef2ff;
-            color: #003366;
+            background: rgba(198, 164, 59, 0.15);
+            color: #c6a43b;
         }
 
         .sidebar-menu a i {
-            width: 20px;
+            width: 22px;
             font-size: 1rem;
+            text-align: center;
         }
 
         /* ========== MAIN CONTENT ========== */
         .main-content {
-            margin-left: 260px;
+            margin-left: 280px;
             padding: 24px 32px;
             min-height: 100vh;
-            transition: margin-left 0.3s ease;
+            transition: margin-left 0.4s ease;
         }
 
         .main-content.expanded {
@@ -117,105 +166,119 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 28px;
+            margin-bottom: 32px;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 16px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 8px 24px;
+            border-radius: 60px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
         }
 
         .menu-toggle {
             display: none;
-            background: white;
-            border: 1px solid #e2e8f0;
+            background: transparent;
+            border: 1px solid rgba(212, 175, 55, 0.3);
             padding: 8px 12px;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 1rem;
-            color: #475569;
+            color: #c6a43b;
+            transition: all 0.2s ease;
         }
 
         .menu-toggle:hover {
-            background: #f1f5f9;
+            background: rgba(198, 164, 59, 0.1);
         }
 
         .page-title {
             font-size: 1.3rem;
             font-weight: 600;
-            color: #0f172a;
+            color: #f1f5f9;
         }
 
         .user-menu {
             display: flex;
             align-items: center;
             gap: 16px;
-            background: white;
-            padding: 6px 16px;
-            border-radius: 40px;
-            border: 1px solid #e2e8f0;
         }
 
         .user-name {
             font-size: 0.85rem;
             font-weight: 500;
-            color: #334155;
+            color: #cbd5e1;
+        }
+
+        .user-name i {
+            color: #c6a43b;
+            margin-right: 8px;
         }
 
         .logout-btn {
-            background: #f1f5f9;
-            color: #475569;
-            padding: 6px 14px;
+            background: rgba(220, 38, 38, 0.2);
+            color: #f87171;
+            padding: 6px 18px;
             border-radius: 30px;
             font-size: 0.75rem;
             font-weight: 500;
-            border: none;
+            border: 1px solid rgba(220, 38, 38, 0.3);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
         .logout-btn:hover {
-            background: #fee2e2;
-            color: #dc2626;
+            background: #dc2626;
+            color: white;
+            border-color: transparent;
         }
 
         /* ========== STATISTICS CARDS ========== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 16px;
+            gap: 20px;
             margin-bottom: 32px;
         }
 
         .stat-card {
-            background: white;
-            padding: 16px;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            transition: all 0.2s;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 20px 16px;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(212, 175, 55, 0.1);
         }
 
         .stat-card:hover {
-            border-color: #cbd5e1;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transform: translateY(-4px);
+            border-color: rgba(212, 175, 55, 0.3);
+            background: rgba(15, 23, 42, 0.8);
         }
 
         .stat-number {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            color: #0f172a;
+            color: #fbbf24;
         }
 
         .stat-label {
             font-size: 0.7rem;
-            color: #64748b;
-            margin-top: 4px;
+            color: #94a3b8;
+            margin-top: 6px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         /* ========== TABLE CARD ========== */
         .card-table {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 24px;
             margin-bottom: 24px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid rgba(212, 175, 55, 0.1);
         }
 
         .card-header {
@@ -228,76 +291,68 @@
         }
 
         .card-header h5 {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            color: #0f172a;
+            color: #fbbf24;
+            padding-left: 12px;
+            border-left: 3px solid #c6a43b;
         }
 
         /* ========== BUTTONS ========== */
         .btn-primary {
-            background: #003366;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #c6a43b;
+            padding: 8px 20px;
+            border-radius: 12px;
             font-size: 0.8rem;
             font-weight: 500;
             text-decoration: none;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            border: none;
+            border: 1px solid rgba(212, 175, 55, 0.3);
             cursor: pointer;
         }
 
         .btn-primary:hover {
-            background: #1a4a7a;
-        }
-
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #64748b;
-            text-decoration: none;
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-            transition: all 0.2s;
-        }
-
-        .btn-back:hover {
-            color: #003366;
+            background: rgba(198, 164, 59, 0.15);
+            color: #fbbf24;
+            border-color: rgba(212, 175, 55, 0.5);
         }
 
         .btn-submit {
-            background: #003366;
-            color: white;
-            padding: 10px 24px;
-            border-radius: 10px;
+            background: linear-gradient(135deg, #c6a43b, #b8860b);
+            color: #0f172a;
+            padding: 10px 28px;
+            border-radius: 12px;
             font-size: 0.85rem;
             font-weight: 600;
             border: none;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
         .btn-submit:hover {
-            background: #1a4a7a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(198, 164, 59, 0.3);
         }
 
         .btn-cancel {
-            background: #f1f5f9;
-            color: #475569;
-            padding: 10px 24px;
-            border-radius: 10px;
+            background: rgba(100, 116, 139, 0.2);
+            color: #94a3b8;
+            padding: 10px 28px;
+            border-radius: 12px;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 500;
             text-decoration: none;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(100, 116, 139, 0.3);
         }
 
         .btn-cancel:hover {
-            background: #e2e8f0;
+            background: rgba(100, 116, 139, 0.3);
+            color: #cbd5e1;
         }
 
         /* ========== FORM STYLES ========== */
@@ -307,22 +362,22 @@
         }
 
         .form-card {
-            background: white;
-            border-radius: 20px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
             padding: 32px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid rgba(212, 175, 55, 0.15);
         }
 
         .form-card h2 {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            color: #0f172a;
+            color: #fbbf24;
             margin-bottom: 8px;
         }
 
         .form-card p {
-            color: #64748b;
+            color: #94a3b8;
             font-size: 0.85rem;
             margin-bottom: 28px;
         }
@@ -341,28 +396,30 @@
         .form-group label {
             display: block;
             font-size: 0.8rem;
-            font-weight: 600;
-            color: #334155;
+            font-weight: 500;
+            color: #cbd5e1;
             margin-bottom: 6px;
         }
 
         .form-group .required {
-            color: #ef4444;
+            color: #f87171;
         }
 
         .form-control {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
+            padding: 10px 14px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
             font-size: 0.85rem;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            background: rgba(0, 0, 0, 0.3);
+            color: #e2e8f0;
         }
 
         .form-control:focus {
             outline: none;
-            border-color: #003366;
-            box-shadow: 0 0 0 3px rgba(0,51,102,0.1);
+            border-color: #c6a43b;
+            box-shadow: 0 0 0 3px rgba(198, 164, 59, 0.1);
         }
 
         textarea.form-control {
@@ -370,38 +427,12 @@
             min-height: 100px;
         }
 
-        .form-group small {
-            display: block;
-            font-size: 0.7rem;
-            color: #94a3b8;
-            margin-top: 4px;
-        }
-
-        .form-check {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .form-check input {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-
-        .form-check label {
-            font-size: 0.85rem;
-            color: #334155;
-            cursor: pointer;
-        }
-
         .form-actions {
             display: flex;
             gap: 12px;
             margin-top: 24px;
             padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
         }
 
         /* ========== TABLE STYLES ========== */
@@ -417,54 +448,49 @@
 
         th {
             text-align: left;
-            padding: 12px 8px;
+            padding: 12px 12px;
             font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #64748b;
-            border-bottom: 1px solid #e2e8f0;
+            letter-spacing: 0.8px;
+            color: #c6a43b;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         td {
-            padding: 12px 8px;
+            padding: 12px 12px;
             font-size: 0.85rem;
-            color: #334155;
-            border-bottom: 1px solid #f1f5f9;
+            color: #cbd5e1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             vertical-align: middle;
+        }
+
+        tr:hover td {
+            background: rgba(198, 164, 59, 0.05);
         }
 
         /* ========== BADGES ========== */
         .badge {
-            padding: 4px 10px;
-            border-radius: 30px;
+            padding: 4px 12px;
+            border-radius: 20px;
             font-size: 0.7rem;
             font-weight: 500;
+            display: inline-block;
         }
 
         .badge-success {
-            background: #dcfce7;
-            color: #166534;
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.3);
         }
 
         .badge-danger {
-            background: #fee2e2;
-            color: #991b1b;
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(248, 113, 113, 0.3);
         }
 
-        .badge-number {
-            display: inline-block;
-            min-width: 30px;
-            text-align: center;
-            background: #f1f5f9;
-            padding: 4px 8px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: #475569;
-        }
-
-        /* ========== ACTION BUTTONS ========== */
         .btn-group {
             display: flex;
             gap: 8px;
@@ -472,35 +498,37 @@
         }
 
         .btn-edit {
-            background: #e0e7ff;
-            color: #3730a3;
-            padding: 5px 12px;
-            border-radius: 6px;
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            padding: 4px 12px;
+            border-radius: 8px;
             font-size: 0.7rem;
             font-weight: 500;
             text-decoration: none;
-            transition: all 0.2s;
-            display: inline-block;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(59, 130, 246, 0.3);
         }
 
         .btn-edit:hover {
-            background: #c7d2fe;
+            background: #3b82f6;
+            color: white;
         }
 
         .btn-delete {
-            background: #fee2e2;
-            color: #991b1b;
-            padding: 5px 12px;
-            border-radius: 6px;
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            padding: 4px 12px;
+            border-radius: 8px;
             font-size: 0.7rem;
             font-weight: 500;
-            border: none;
+            border: 1px solid rgba(239, 68, 68, 0.3);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
         .btn-delete:hover {
-            background: #fecaca;
+            background: #ef4444;
+            color: white;
         }
 
         /* ========== IMAGE PREVIEW ========== */
@@ -508,36 +536,7 @@
             width: 45px;
             height: 45px;
             object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .img-placeholder {
-            width: 45px;
-            height: 45px;
-            background: #f1f5f9;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.65rem;
-            color: #94a3b8;
-        }
-
-        /* ========== ALERT ========== */
-        .alert-success {
-            background: #dcfce7;
-            color: #166534;
-            padding: 12px 16px;
             border-radius: 10px;
-            margin-bottom: 20px;
-            font-size: 0.85rem;
-        }
-
-        /* ========== EMPTY STATE ========== */
-        .empty-state {
-            text-align: center;
-            padding: 40px;
-            color: #94a3b8;
         }
 
         /* ========== PAGINATION ========== */
@@ -546,7 +545,29 @@
             display: flex;
             justify-content: flex-end;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
+        }
+
+        .pagination .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 36px;
+            padding: 0 8px;
+            border-radius: 10px;
+            background: rgba(15, 23, 42, 0.8);
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .pagination .page-link:hover {
+            background: rgba(198, 164, 59, 0.2);
+            color: #fbbf24;
+            border-color: rgba(212, 175, 55, 0.5);
         }
 
         /* ========== RESPONSIVE ========== */
@@ -579,11 +600,6 @@
                 gap: 12px;
             }
             
-            .card-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
             .form-row {
                 grid-template-columns: 1fr;
                 gap: 0;
@@ -593,25 +609,8 @@
                 padding: 20px;
             }
             
-            .btn-group {
-                flex-direction: row;
-            }
-            
             .page-title {
                 font-size: 1.1rem;
-            }
-            
-            .top-bar {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-            
-            .user-menu {
-                padding: 4px 12px;
-            }
-            
-            .user-name {
-                font-size: 0.75rem;
             }
         }
 
@@ -623,48 +622,21 @@
             .top-bar {
                 flex-direction: column;
                 align-items: stretch;
+                border-radius: 20px;
             }
             
             .user-menu {
                 justify-content: space-between;
             }
-            
-            th, td {
-                font-size: 0.7rem;
-                padding: 6px 4px;
-            }
-            
-            .btn-edit, .btn-delete {
-                padding: 3px 8px;
-                font-size: 0.6rem;
-            }
-            
-            .stat-card {
-                padding: 12px;
-            }
-            
-            .stat-number {
-                font-size: 1.2rem;
-            }
-            
-            .card-table {
-                padding: 12px;
-            }
-            
-            .form-card {
-                padding: 16px;
-            }
-            
-            .form-card h2 {
-                font-size: 1.1rem;
-            }
         }
 
-        @media (max-width: 480px) {
-            .btn-group {
-                flex-direction: column;
-                gap: 4px;
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .main-content > * {
+            animation: fadeIn 0.4s ease-out backwards;
         }
     </style>
     @stack('styles')
@@ -674,27 +646,36 @@
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
-        <h3>Geo<span>Toba</span></h3>
-        <p>Administrator</p>
+        <div class="logo-container">
+            <div class="logo-item">
+                <img src="{{ asset('image/logo/logobankindonesia.jpg') }}" alt="Bank Indonesia">
+            </div>
+            <div class="logo-divider"></div>
+            <div class="logo-item">
+                <img src="{{ asset('image/logo/del.jpg') }}" alt="Institut Teknologi Del">
+            </div>
+        </div>
+        <h3>GEO<span>TOBA</span></h3>
+        <p>Administrator Panel</p>
     </div>
     <div class="sidebar-menu">
-        <div class="menu-title">Menu</div>
+        <div class="menu-title">Main Menu</div>
         <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
             <i class="fas fa-chart-pie"></i> Dashboard
         </a>
         
-        <div class="menu-title">Konten</div>
+        <div class="menu-title">Content</div>
         <a href="{{ route('admin.galeri.index') }}" class="{{ request()->routeIs('admin.galeri.*') ? 'active' : '' }}">
-            <i class="fas fa-images"></i> Galeri
+            <i class="fas fa-images"></i> Gallery
         </a>
         <a href="{{ route('admin.berita.index') }}" class="{{ request()->routeIs('admin.berita.*') ? 'active' : '' }}">
-            <i class="fas fa-newspaper"></i> Berita
+            <i class="fas fa-newspaper"></i> News
         </a>
         <a href="{{ route('admin.informasi.index') }}" class="{{ request()->routeIs('admin.informasi.*') ? 'active' : '' }}">
-            <i class="fas fa-info-circle"></i> Informasi
+            <i class="fas fa-info-circle"></i> Information
         </a>
         <a href="{{ route('admin.destinasi.index') }}" class="{{ request()->routeIs('admin.destinasi.*') ? 'active' : '' }}">
-            <i class="fas fa-map-marked-alt"></i> Destinasi
+            <i class="fas fa-map-marked-alt"></i> Destinations
         </a>
         <a href="{{ route('admin.warisan.index') }}" class="{{ request()->routeIs('admin.warisan.*') ? 'active' : '' }}">
             <i class="fas fa-landmark"></i> Warisan Alam & Budaya
@@ -716,14 +697,14 @@
             $currentGeositeTitle = $validGeosites[$currentGeosite];
         @endphp
 
-        <div class="menu-title">Geosite</div>
+        <div class="menu-title">Geosites</div>
         @foreach($validGeosites as $geoSlug => $geoLabel)
             <a href="{{ url('/admin/geosite/'.$geoSlug) }}" class="{{ request()->is('admin/geosite/'.$geoSlug) ? 'active' : '' }}">
-                <i class="fas fa-tower-cell"></i> Dashboard {{ $geoLabel }}
+                <i class="fas fa-mountain"></i> {{ $geoLabel }}
             </a>
         @endforeach
 
-        <div class="menu-title">Modul {{ $currentGeositeTitle }}</div>
+        <div class="menu-title">{{ $currentGeositeTitle }} Modules</div>
         <a href="{{ url('/admin/geosite/'.$currentGeosite.'/umkm') }}" class="{{ request()->is('admin/geosite/'.$currentGeosite.'/umkm*') ? 'active' : '' }}">
             <i class="fas fa-store"></i> UMKM
         </a>
@@ -756,7 +737,7 @@
             <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                 @csrf
                 <button type="submit" class="logout-btn">
-                    <i class="fas fa-sign-out-alt"></i> Keluar
+                    <i class="fas fa-sign-out-alt"></i> Logout
                 </button>
             </form>
         </div>
@@ -766,10 +747,8 @@
 </div>
 
 <script>
-    // Toggle sidebar untuk mobile
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
-    const mainContent = document.getElementById('mainContent');
 
     if (menuToggle) {
         menuToggle.addEventListener('click', function() {
@@ -777,7 +756,6 @@
         });
     }
 
-    // Tutup sidebar saat klik di luar (untuk mobile)
     document.addEventListener('click', function(event) {
         const isMobile = window.innerWidth <= 768;
         if (isMobile && sidebar && !sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
@@ -785,7 +763,6 @@
         }
     });
 
-    // Handle resize window
     window.addEventListener('resize', function() {
         if (window.innerWidth > 768) {
             sidebar.classList.remove('open');
