@@ -1337,10 +1337,7 @@ h1, h2, h3, h4, h5, h6 {
         @else
             <div class="informasi-card" data-aos="fade-up">
                 <div class="informasi-content">
-                    <h3>Informasi Umum Efrata</h3>
                     <div class="informasi-text">
-                        <p>Wisata Air Terjun Efrata buka setiap hari. Suhu udara sejuk dan akses jalan menuju lokasi nyaman untuk kendaraan pribadi.</p>
-                        <p>Disarankan membawa pakaian ganti, alas kaki anti selip, dan kamera untuk foto spot alam.</p>
                     </div>
                 </div>
             </div>
