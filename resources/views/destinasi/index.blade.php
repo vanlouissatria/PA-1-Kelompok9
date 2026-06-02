@@ -5,36 +5,28 @@
 @section('content')
 
 <style>
-    /* ==================== HERO SECTION ==================== */
-    .destinasi-hero {
-        height: 50vh;
-        min-height: 400px;
-        background: linear-gradient(135deg, rgba(0,51,102,0.75), rgba(0,51,102,0.55)), url('/image/destinasi-hero.jpg');
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: white;
-        margin-top: 76px;
+    /* ==================== HERO SECTION (same as home) ==================== */
+    .hero-section {
+        height: 100vh;
         position: relative;
+        overflow: hidden;
+        margin-top: 0;
     }
-    
-    .destinasi-hero h1 {
-        font-size: 3rem;
-        font-weight: 700;
-        margin-bottom: 15px;
-        animation: fadeInUp 0.8s ease;
-    }
-    
-    .destinasi-hero p {
-        font-size: 1rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        opacity: 0.9;
-        animation: fadeInUp 0.8s ease 0.1s both;
-    }
+
+    .slides-container { position: relative; width: 100%; height: 100%; }
+    .slide { position: absolute; top:0; left:0; width:100%; height:100%; background-size:cover; background-position:center; opacity:0; transform:scale(1.02); transition: opacity 1s ease-in-out, transform 8s ease-out; z-index:1; }
+    .slide.active { opacity:1; z-index:2; transform:scale(1); }
+
+    .slide-1{ background-image: linear-gradient(125deg, rgba(0,30,60,0.7) 0%, rgba(0,80,120,0.5) 40%, rgba(0,30,60,0.7) 100%), url('{{ asset('image/home/tele1.jpg') }}'); }
+    .slide-2{ background-image: linear-gradient(125deg, rgba(0,40,70,0.7) 0%, rgba(212,175,55,0.2) 40%, rgba(0,40,70,0.7) 100%), url('{{ asset('image/home/efrata5.jpg') }}'); }
+    .slide-3{ background-image: linear-gradient(125deg, rgba(0,20,50,0.7) 0%, rgba(100,150,200,0.3) 40%, rgba(0,20,50,0.7) 100%), url('{{ asset('image/home/sihotang2.jpg') }}'); }
+    .slide-4{ background-image: linear-gradient(125deg, rgba(0,35,65,0.7) 0%, rgba(212,175,55,0.25) 40%, rgba(0,35,65,0.7) 100%), url('{{ asset('image/home/sihotang3.jpg') }}'); }
+    .slide-5{ background-image: linear-gradient(125deg, rgba(0,25,55,0.7) 0%, rgba(80,130,180,0.35) 40%, rgba(0,25,55,0.7) 100%), url('{{ asset('image/home/efrata1.jpg') }}'); }
+
+    .hero-content{ position:absolute; z-index:10; bottom:20%; left:0; right:0; text-align:center; color:white; padding:0 20px; }
+    .hero-subtitle{ font-size:0.7rem; letter-spacing:0.35em; text-transform:uppercase; margin-bottom:20px; font-weight:300; opacity:0.9; }
+    .hero-title{ font-size:3rem; font-weight:700; font-family:'Cormorant Garamond', serif; line-height:1.2; margin-bottom:12px; color:white; text-shadow:0 2px 15px rgba(0,0,0,0.4); }
+    .hero-divider{ width:60px; height:2px; background:#c6a43b; margin:10px auto 18px; }
     
     @keyframes fadeInUp {
         from {
@@ -44,6 +36,15 @@
         to {
             opacity: 1;
             transform: translateY(0);
+        }
+    }
+
+    @keyframes borderGlow {
+        0%, 100% {
+            box-shadow: 0 0 5px rgba(198, 164, 59, 0.3);
+        }
+        50% {
+            box-shadow: 0 0 20px rgba(198, 164, 59, 0.8);
         }
     }
     
@@ -176,43 +177,77 @@
         margin-bottom: 0;
     }
     
-    /* ==================== STATS SECTION ==================== */
+    /* ==================== STATS SECTION (home style) ==================== */
     .stats-section {
         background: linear-gradient(135deg, #003366, #1a4a7a);
         padding: 60px 0;
     }
-    
+
     .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 30px;
-    }
-    
-    .stat-item {
+        display: flex;
+        justify-content: space-between;
         text-align: center;
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+
+    .stat-item {
+        flex: 1;
+        min-width: 100px;
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         padding: 20px;
-        background: rgba(255,255,255,0.08);
+        background: rgba(0, 51, 102, 0.05);
         border-radius: 16px;
-        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
     }
-    
+
+    .stat-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(198,164,59,0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .stat-item:hover::before {
+        left: 100%;
+    }
+
     .stat-item:hover {
-        background: rgba(255,255,255,0.15);
-        transform: translateY(-5px);
+        transform: translateY(-10px) scale(1.05);
+        background: rgba(0, 51, 102, 0.1);
+        animation: borderGlow 1s infinite;
     }
-    
+
     .stat-number {
-        font-size: 2rem;
-        font-weight: 700;
+        font-size: 2.5rem;
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 600;
         color: #c6a43b;
         margin-bottom: 8px;
+        transition: all 0.3s ease;
     }
-    
+
+    .stat-item:hover .stat-number {
+        transform: scale(1.1);
+        color: #003366;
+    }
+
     .stat-label {
-        font-size: 0.7rem;
-        letter-spacing: 1px;
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
         text-transform: uppercase;
-        color: rgba(255,255,255,0.8);
+        color: #003366;
+        font-weight: 600;
+        transition: letter-spacing 0.3s ease;
+    }
+
+    .stat-item:hover .stat-label {
+        letter-spacing: 0.3em;
     }
     
     /* ==================== RESPONSIVE ==================== */
@@ -249,11 +284,17 @@
     }
 </style>
 
-<!-- HERO SECTION -->
-<section class="destinasi-hero">
-    <div data-aos="fade-up">
-        <h1>Destinasi Geosite</h1>
-        <p>Jelajahi Pesona Caldera Danau Toba</p>
+<!-- HERO SECTION (same structure as home) -->
+<section class="hero-section">
+    <div class="slides-container">
+        <div class="slide slide-5 active"></div>
+    </div>
+
+    <div class="hero-content" data-aos="fade-up">
+        <div class="hero-subtitle">Destinasi Geosite</div>
+        <h1 class="hero-title">Destinasi Geosite</h1>
+        <div class="hero-divider"></div>
+        <p style="max-width:720px; margin:0 auto; color: rgba(255,255,255,0.9);">Jelajahi pesona caldera Danau Toba dan temukan destinasi terbaik untuk setiap pengalaman wisata.</p>
     </div>
 </section>
 
@@ -271,7 +312,7 @@
             <!-- Destinasi Alam -->
             <a href="{{ url('/destinasi/alam') }}" class="category-card" data-aos="fade-up" data-aos-delay="0">
                 <div class="card-image">
-                    <img src="/image/destinasi/alam.jpg" alt="Destinasi Alam">
+                    <img src="{{ $kategoriImages['alam'] ?? asset('image/home/efrata1.jpg') }}" alt="Destinasi Alam">
                     <div class="card-overlay"></div>
                 </div>
                 <div class="card-content">
@@ -286,7 +327,7 @@
             <!-- Destinasi Buatan -->
             <a href="{{ url('/destinasi/buatan') }}" class="category-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="card-image">
-                    <img src="/image/destinasi/buatan.jpg" alt="Destinasi Buatan">
+                    <img src="{{ $kategoriImages['buatan'] ?? asset('image/home/tele1.jpg') }}" alt="Destinasi Buatan">
                     <div class="card-overlay"></div>
                 </div>
                 <div class="card-content">
@@ -301,7 +342,7 @@
             <!-- Destinasi Budaya -->
             <a href="{{ url('/destinasi/budaya') }}" class="category-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="card-image">
-                    <img src="/image/destinasi/budaya.jpg" alt="Destinasi Budaya">
+                    <img src="{{ $kategoriImages['budaya'] ?? asset('image/home/sihotang.jpg') }}" alt="Destinasi Budaya">
                     <div class="card-overlay"></div>
                 </div>
                 <div class="card-content">
@@ -325,7 +366,7 @@
                 <div class="stat-label">TAHUN SEJARAH</div>
             </div>
             <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
-                <div class="stat-number">3</div>
+                <div class="stat-number">{{ $jumlahGeosite ?? 0 }}</div>
                 <div class="stat-label">GEOSITE UNGGULAN</div>
             </div>
             <div class="stat-item" data-aos="fade-up" data-aos-delay="200">

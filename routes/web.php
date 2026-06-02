@@ -183,6 +183,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('destinasi/toggle-status/{id}', [AdminDestinasiController::class, 'toggleStatus'])->name('admin.destinasi.toggle-status');
     Route::post('fasilitas/toggle-status/{id}', [AdminFasilitasController::class, 'toggleStatus'])->name('admin.fasilitas.toggle-status');
     
+    // RUTE BARU: Menangani Toggle Status Warisan Admin agar tidak terbentur resource
+    Route::post('warisan/toggle-status/{id}', [AdminWarisanController::class, 'toggleStatus'])->name('admin.warisan.toggle-status');
+    
     // KONTEN GLOBAL UTAMA
     Route::resource('galeri', AdminGaleriController::class)->names('admin.galeri');
     Route::resource('berita', AdminBeritaController::class)->names('admin.berita');
@@ -226,7 +229,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('/{geosite}/galeri', [TeleController::class, 'galeriStore'])->name('galeri.store');
         Route::get('/{geosite}/galeri/{id}/edit', [TeleController::class, 'galeriEdit'])->name('galeri.edit');
         Route::put('/{geosite}/galeri/{id}', [TeleController::class, 'galeriUpdate'])->name('galeri.update');
-        Route::delete('/{geosite}/galeri/{id}', [TeleController::class, 'galeri.destroy'])->name('galeri.destroy');
+        Route::delete('/{geosite}/galeri/{id}', [TeleController::class, 'galeriDestroy'])->name('galeri.destroy');
 
         // Modul INFORMASI
         Route::get('/{geosite}/informasi', [TeleController::class, 'informasi'])->name('informasi.index');

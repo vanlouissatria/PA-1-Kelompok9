@@ -81,10 +81,10 @@
 
     /* STACK CONTAINER - SAME AS GALERI */
     .stack-container {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
         justify-content: center;
-        gap: 0;
+        gap: 24px;
         padding: 40px 0;
         position: relative;
     }
@@ -92,14 +92,17 @@
     /* SLIP CARD - SAME EXACT STYLE AS GALERI */
     .slip-card {
         position: relative;
-        width: 280px;
+        width: 100%;
+        max-width: 320px;
         background: white;
-        border-radius: 16px;
+        border-radius: 14px;
         overflow: hidden;
         cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.02);
-        margin-left: -60px;
+        transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.35s;
+        box-shadow: 0 8px 20px rgba(2,6,23,0.06);
+        margin: 0;
+        display: flex;
+        flex-direction: column;
     }
 
     .slip-card:first-child {
@@ -113,16 +116,13 @@
         box-shadow: 0 25px 40px -10px rgba(0,0,0,0.25);
     }
 
-    /* Efek hover untuk card di sampingnya */
-    .slip-card:hover ~ .slip-card {
-        transform: translateX(20px);
-    }
+    /* Remove overlapping transform on adjacent cards for grid layout */
 
     /* Container gambar - SAME AS GALERI */
     .slip-image {
         position: relative;
         width: 100%;
-        height: 320px;
+        height: 220px;
         overflow: hidden;
         background: linear-gradient(135deg, #1e293b, #0f172a);
     }
@@ -180,6 +180,30 @@
         background: white;
         position: relative;
         border-top: 1px solid #f0f0f0;
+    }
+
+    .slip-actions {
+        margin-top: 12px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+
+    .btn-read {
+        background: #003366;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.12s ease;
+    }
+
+    .btn-read:hover {
+        background: #c6a43b;
+        color: #003366;
+        transform: translateY(-2px);
     }
 
     /* Decorative line seperti slip */
@@ -569,6 +593,9 @@
                             <span>{{ $item->views ?? 0 }}</span>
                         </div>
                         <div class="slip-number">#{{ str_pad($counter, 3, '0', STR_PAD_LEFT) }}</div>
+                        <div class="slip-actions">
+                            <button class="btn-read" onclick="openReader({{ $item->id }})">Baca</button>
+                        </div>
                     </div>
                 </div>
                 @php $counter++; @endphp
