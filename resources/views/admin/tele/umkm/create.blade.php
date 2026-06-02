@@ -13,18 +13,6 @@
         <div class="card-body">
             <form action="{{ url('/admin/geosite/'.$geosite.'/umkm') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                
-                <div class="row">
-                    <div class="col-md-12 mb-3">
-                        <label>Destinasi <span class="text-danger">*</span></label>
-                        <select name="geosite" class="form-control @error('geosite') is-invalid @enderror" required>
-                            @foreach($geositeOptions as $value => $label)
-                                <option value="{{ $value }}" {{ old('geosite', $geosite) == $value ? 'selected' : '' }}>{{ $label }}</option>
-                            @endforeach
-                        </select>
-                        @error('geosite')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
-                    <div class="form-group">
     <label>Nama Usaha</label>
     <input type="text" name="nama_usaha" class="form-control" required>
 </div>

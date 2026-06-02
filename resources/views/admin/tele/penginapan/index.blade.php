@@ -21,56 +21,55 @@
             @endif
 
             <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Gambar</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>No Telepon</th>
-                            <th>Harga</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($penginapan as $key => $item)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td class="text-center">
-                                @if($item->gambar && file_exists(public_path($item->gambar)))
-                                    <img src="{{ asset($item->gambar) }}" width="50" height="50" style="object-fit: cover; border-radius: 8px;">
-                                @else
-                                    <div style="width: 50px; height: 50px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
-                                        <i class="fas fa-hotel text-muted"></i>
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th width="50">No</th>
+                                <th width="80">Gambar</th>
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>No Telepon</th>
+                                <th>Harga</th>
+                                <th width="150">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($penginapan as $key => $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td class="text-center">
+                                    @if($item->gambar && file_exists(public_path($item->gambar)))
+                                        <img src="{{ asset($item->gambar) }}" width="50" height="50" style="object-fit: cover; border-radius: 8px;">
+                                    @else
+                                        <div style="width: 50px; height: 50px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                                            <i class="fas fa-hotel text-muted"></i>
+                                        </div>
+                                    @endif
+                                </td>
+                                <td>{{ $item->nama }}</td>
+                                <td>{{ Str::limit($item->alamat, 50) ?? '-' }}</td>
+                                <td>{{ $item->no_telepon ?? '-' }}</td>
+                                <td>Rp {{ number_format($item->harga ?? 0, 0, ',', '.') }}</td>
+                                <td>
+                                    <div class="btn-group" style="display:flex; gap:5px;">
+                                        <a href="{{ url('/admin/geosite/'.$geosite.'/penginapan/'.$item->id) }}" class="btn btn-success btn-sm" title="Lihat"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ url('/admin/geosite/'.$geosite.'/penginapan/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
+                                        <form action="{{ url('/admin/geosite/'.$geosite.'/penginapan/'.$item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm" title="Hapus"><i class="fas fa-trash"></i></button>
+                                        </form>
                                     </div>
-                                @endif
-                            </td>
-                            <td>{{ $item->nama }}</td>
-                            <td>{{ Str::limit($item->alamat, 50) ?? '-' }}</td>
-                            <td>{{ $item->no_telepon ?? '-' }}</td>
-                            <td>Rp {{ number_format($item->harga ?? 0, 0, ',', '.') }}</td>
-                            <td>
-                                <div class="btn-group" style="display:flex; gap:5px;">
-                                    <a href="{{ url('/admin/geosite/'.$geosite.'/penginapan/'.$item->id) }}" class="btn btn-success btn-sm" title="Lihat"><i class="fas fa-eye"></i></a>
-                                    <a href="{{ url('/admin/geosite/'.$geosite.'/penginapan/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
-                                    <form action="{{ url('/admin/geosite/'.$geosite.'/penginapan/'.$item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" title="Hapus"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                </div>
-                            </td>"},{"filePath":"d:\\Geosite-Tele-Efrata-Sihotang\\resources\\views\\admin\\tele\\galeri\\index.blade.php","oldString":"<td>\n                                @if($item->gambar)\n                                    <img \n                                        src=\"{{ $item->gambar }}\" \n                                        width=\"80\" \n                                        height=\"60\"\n                                        style=\"object-fit: cover; border-radius: 8px;\"\n                                    >\n                                @else\n                                    <div style=\"\n                                        width:80px;\n                                        height:60px;\n                                        background:#f1f5f9;\n                                        display:flex;\n                                        align-items:center;\n                                        justify-content:center;\n                                        border-radius:8px;\n                                    \">\n                                        <i class=\"fas fa-image text-muted\"></i>\n                                    </div>\n                                @endif\n                            </td>\n\n                            {{-- Judul --}}\n                            <td>\n                                {{ $item->judul }}\n                            </td>\n\n                            {{-- Kategori --}}\n                            <td>\n                                <span class=\"badge bg-info\">\n                                    {{ $item->kategori }}\n                                </span>\n                            </td>\n\n                            {{-- Status --}}\n                            <td>\n                                @if($item->status)\n                                    <span class=\"badge bg-success\">\n                                        Aktif\n                                    </span>\n                                @else\n                                    <span class=\"badge bg-secondary\">\n                                        Draft\n                                    </span>\n                                @endif\n                            </td>\n\n                            {{-- Aksi --}}\n                            <td>\n                                <div class=\"btn-group\" style=\"display:flex; gap:5px;\">\n\n                                    {{-- Edit --}}\n                                    <a \n                                        href=\"{{ url('/admin/geosite/'.$geosite.'/galeri/'.$item->id.'/edit') }}\" \n                                        class=\"btn btn-warning btn-sm\"\n                                    >\n                                        Edit\n                                    </a>\n\n                                    {{-- Hapus --}}\n                                    <form \n                                        action=\"{{ url('/admin/geosite/'.$geosite.'/galeri/'.$item->id) }}\" \n                                        method=\"POST\"\n                                        class=\"d-inline\"\n                                        onsubmit=\"return confirm('Yakin hapus?')\"\n                                    >\n                                        @csrf\n                                        @method('DELETE')\n\n                                        <button type=\"submit\" class=\"btn btn-danger btn-sm\">\n                                            Hapus\n                                        </button>\n                                    </form>\n\n                                </div>\n                            </td>","newString":"<td>\n                                @if($item->gambar)\n                                    <img \n                                        src=\"{{ $item->gambar }}\" \n                                        width=\"80\" \n                                        height=\"60\"\n                                        style=\"object-fit: cover; border-radius: 8px;\"\n                                    >\n                                @else\n                                    <div style=\"\n                                        width:80px;\n                                        height:60px;\n                                        background:#f1f5f9;\n                                        display:flex;\n                                        align-items:center;\n                                        justify-content:center;\n                                        border-radius:8px;\n                                    \">\n                                        <i class=\"fas fa-image text-muted\"></i>\n                                    </div>\n                                @endif\n                            </td>\n\n                            {{-- Judul --}}\n                            <td>\n                                {{ $item->judul }}\n                            </td>\n\n                            {{-- Kategori --}}\n                            <td>\n                                <span class=\"badge bg-info\">\n                                    {{ $item->kategori }}\n                                </span>\n                            </td>\n\n                            {{-- Status --}}\n                            <td>\n                                @if($item->status)\n                                    <span class=\"badge bg-success\">\n                                        Aktif\n                                    </span>\n                                @else\n                                    <span class=\"badge bg-secondary\">\n                                        Draft\n                                    </span>\n                                @endif\n                            </td>\n\n                            {{-- Aksi --}}\n                            <td>\n                                <div class=\"btn-group\" style=\"display:flex; gap:5px;\">\n\n                                    <a href=\"{{ url('/admin/geosite/'.$geosite.'/galeri/'.$item->id) }}\" class=\"btn btn-success btn-sm\" title=\"Lihat\"><i class=\"fas fa-eye\"></i></a>\n                                    <a \n                                        href=\"{{ url('/admin/geosite/'.$geosite.'/galeri/'.$item->id.'/edit') }}\" \n                                        class=\"btn btn-warning btn-sm\" title=\"Edit\">\n                                        <i class=\"fas fa-edit\"></i>\n                                    </a>\n\n                                    {{-- Hapus --}}\n                                    <form \n                                        action=\"{{ url('/admin/geosite/'.$geosite.'/galeri/'.$item->id) }}\" \n                                        method=\"POST\"\n                                        class=\"d-inline\"\n                                        onsubmit=\"return confirm('Yakin hapus?')\"\n                                    >\n                                        @csrf\n                                        @method('DELETE')\n\n                                        <button type=\"submit\" class=\"btn btn-danger btn-sm\" title=\"Hapus\">\n                                            <i class=\"fas fa-trash\"></i>\n                                        </button>\n                                    </form>\n\n                                </div>\n                            </td>"},{"filePath":"d:\\Geosite-Tele-Efrata-Sihotang\\resources\\views\\admin\\tele\\umkm\\index.blade.php","oldString":"<td>\n                                {{ $item->nama_usaha }}\n                            </td>\n                            <td>\n                                {{ Str::limit($item->deskripsi, 50) }}\n                            </td>\n                            <td>Rp {{ number_format($item->harga ?? 0, 0, ',', '.') }}</td>\n                            <td>\n                                <div style=\"display:flex; gap:5px;\">\n                                    <a href=\"{{ url('/admin/geosite/'.$geosite.'/umkm/'.$item->id.'/edit') }}\" class=\"btn btn-warning btn-sm\">Edit</a>\n                                    <form action=\"{{ url('/admin/geosite/'.$geosite.'/umkm/'.$item->id) }}\" method=\"POST\" class=\"d-inline\" onsubmit=\"return confirm('Yakin hapus?')\">\n                                        @csrf\n                                        @method('DELETE')\n                                        <button type=\"submit\" class=\"btn btn-danger btn-sm\">Hapus</button>\n                                    </form>\n                                </div>\n                            </td>","newString":"<td>\n                                {{ $item->nama_usaha }}\n                            </td>\n                            <td>\n                                {{ Str::limit($item->deskripsi, 50) }}\n                            </td>\n                            <td>Rp {{ number_format($item->harga ?? 0, 0, ',', '.') }}</td>\n                            <td>\n                                <div class=\"btn-group\" style=\"display:flex; gap:5px;\">\n                                    <a href=\"{{ url('/admin/geosite/'.$geosite.'/umkm/'.$item->id) }}\" class=\"btn btn-success btn-sm\" title=\"Lihat\"><i class=\"fas fa-eye\"></i></a>\n                                    <a href=\"{{ url('/admin/geosite/'.$geosite.'/umkm/'.$item->id.'/edit') }}\" class=\"btn btn-warning btn-sm\" title=\"Edit\"><i class=\"fas fa-edit\"></i></a>\n                                    <form action=\"{{ url('/admin/geosite/'.$geosite.'/umkm/'.$item->id) }}\" method=\"POST\" class=\"d-inline\" onsubmit=\"return confirm('Yakin hapus?')\">\n                                        @csrf\n                                        @method('DELETE')\n                                        <button type=\"submit\" class=\"btn btn-danger btn-sm\" title=\"Hapus\"><i class=\"fas fa-trash\"></i></button>\n                                    </form>\n                                </div>\n                            </td>"},{"filePath":"d:\\Geosite-Tele-Efrata-Sihotang\\resources\\views\\admin\\tele\\informasi\\index.blade.php","oldString":"                            <td>\n                                {{ $item->judul }}\n                            </td>\n                            <td>\n                                {{ Str::limit($item->konten, 50) }}\n                            </td>\n                            <td>\n                                <div class=\"btn-group\" style=\"display:flex; gap:5px;\">\n                                    <a href=\"{{ url('/admin/geosite/'.$geosite.'/informasi/'.$item->id.'/edit') }}\" class=\"btn btn-warning btn-sm\">Edit</a>\n                                    <form action=\"{{ url('/admin/geosite/'.$geosite.'/informasi/'.$item->id) }}\" method=\"POST\" class=\"d-inline\" onsubmit=\"return confirm('Yakin hapus?')\">\n                                        @csrf\n                                        @method('DELETE')\n                                        <button type=\"submit\" class=\"btn btn-danger btn-sm\">Hapus</button>\n                                    </form>\n                                </div>\n                            </td>","newString":"                            <td>\n                                {{ $item->judul }}\n                            </td>\n                            <td>\n                                {{ Str::limit($item->konten, 50) }}\n                            </td>\n                            <td>\n                                <div class=\"btn-group\" style=\"display:flex; gap:5px;\">\n                                    <a href=\"{{ url('/admin/geosite/'.$geosite.'/informasi/'.$item->id) }}\" class=\"btn btn-success btn-sm\" title=\"Lihat\"><i class=\"fas fa-eye\"></i></a>\n                                    <a href=\"{{ url('/admin/geosite/'.$geosite.'/informasi/'.$item->id.'/edit') }}\" class=\"btn btn-warning btn-sm\" title=\"Edit\"><i class=\"fas fa-edit\"></i></a>\n                                    <form action=\"{{ url('/admin/geosite/'.$geosite.'/informasi/'.$item->id) }}\" method=\"POST\" class=\"d-inline\" onsubmit=\"return confirm('Yakin hapus?')\">\n                                        @csrf\n                                        @method('DELETE')\n                                        <button type=\"submit\" class=\"btn btn-danger btn-sm\" title=\"Hapus\"><i class=\"fas fa-trash\"></i></button>\n                                    </form>\n                                </div>\n                            </td>"}]}')]}]}
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="7" class="text-center">Belum ada data penginapan. Silakan tambah data baru.</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-            
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="7" class="text-center">Belum ada data penginapan. Silakan tambah data baru.</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             @if($penginapan->hasPages())
             <div class="mt-3">
                 {{ $penginapan->links() }}

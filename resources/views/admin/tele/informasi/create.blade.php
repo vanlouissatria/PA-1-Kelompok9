@@ -23,17 +23,6 @@
 
             <form action="{{ url('/admin/geosite/'.$geosite.'/informasi') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                
-                <div class="mb-3">
-                    <label>Destinasi <span class="text-danger">*</span></label>
-                    <select name="geosite" class="form-control @error('geosite') is-invalid @enderror" required>
-                        @foreach($geositeOptions as $value => $label)
-                            <option value="{{ $value }}" {{ old('geosite', $geosite) == $value ? 'selected' : '' }}>{{ $label }}</option>
-                        @endforeach
-                    </select>
-                    @error('geosite')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                </div>
-
                 <div class="mb-3">
                     <label>Judul Informasi <span class="text-danger">*</span></label>
                     <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror" value="{{ old('judul') }}" required>
