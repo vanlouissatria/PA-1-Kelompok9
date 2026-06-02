@@ -20,7 +20,7 @@
         left: -50%;
         width: 200%;
         height: 200%;
-        background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
         animation: slowRotate 20s linear infinite;
     }
 
@@ -44,356 +44,324 @@
     }
 
     .heritage-hero p {
-        color: rgba(255,255,255,0.8);
+        color: rgba(255,255,255,0.88);
         text-transform: uppercase;
-        letter-spacing: 3px;
-        font-size: 0.85rem;
+        letter-spacing: 2px;
+        font-size: 0.92rem;
     }
 
-    /* HERITAGE SECTION & BLOCKS */
+    /* SECTION LAYOUT */
     .heritage-section {
         padding: 70px 0 100px;
         background: linear-gradient(135deg, #f8fafc 0%, #eef2f8 100%);
-        min-height: 100vh;
     }
 
     .heritage-container {
-        max-width: 1400px;
-        margin: auto;
+        max-width: 1200px;
+        margin: 0 auto;
         padding: 0 24px;
     }
 
     .heritage-category-block {
         background: #ffffff;
-        border-radius: 20px;
+        border-radius: 28px;
         padding: 40px;
-        margin-bottom: 50px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        margin-bottom: 42px;
+        box-shadow: 0 16px 35px rgba(29, 47, 76, 0.08);
         border-left: 6px solid #c6a43b;
     }
 
     .heritage-title-wrapper {
         display: flex;
         align-items: center;
-        gap: 15px;
-        margin-bottom: 15px;
-        border-bottom: 2px solid #f1f5f9;
-        padding-bottom: 15px;
+        gap: 16px;
+        margin-bottom: 28px;
+        border-bottom: 1px solid #e6eef7;
+        padding-bottom: 18px;
     }
 
     .heritage-title-wrapper i {
         font-size: 2rem;
-        color: #003366;
+        color: #1f4b79;
     }
 
     .heritage-title-wrapper h2 {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #003366;
+        font-size: 2rem;
+        color: #1f4b79;
         margin: 0;
         font-family: 'Playfair Display', serif;
     }
 
-    /* STACK CONTAINER (Efek Kartu Bertumpuk) */
-    .stack-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start; /* Diubah ke kiri agar tumpukan rapi mulai dari kiri */
-        gap: 0;
-        padding: 30px 0 10px 40px; /* Tambah padding kiri agar kartu pertama tidak mepet */
+    .heritage-description {
+        color: #475569;
+        line-height: 1.8;
+        font-size: 0.98rem;
+        max-width: 860px;
+        margin-bottom: 28px;
     }
 
-    /* CARD STYLE */
-    .slip-card {
-        position: relative;
+    .heritage-items {
+        display: grid;
+        gap: 24px;
+    }
+
+    .heritage-item {
+        display: grid;
+        grid-template-columns: 280px minmax(0, 1fr);
+        gap: 28px;
+        align-items: flex-start;
+        padding: 20px 0;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .heritage-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .heritage-item:nth-child(even) {
+        grid-template-columns: minmax(0, 1fr) 280px;
+    }
+
+    .heritage-item:nth-child(even) .heritage-item-image {
+        order: 2;
+    }
+
+    .heritage-item-image {
+        border-radius: 16px;
+        overflow: hidden;
         width: 280px;
-        background: white;
-        border-radius: 18px;
-        overflow: hidden;
-        cursor: pointer;
-        transition: all 0.4s ease;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        margin-left: -60px;
-        text-decoration: none;
-        color: inherit;
+        height: 220px;
+        box-shadow: 0 12px 28px rgba(15, 44, 69, 0.06);
+        flex-shrink: 0;
     }
 
-    .slip-card:first-child {
-        margin-left: 0;
-    }
-
-    .slip-card:hover {
-        transform: translateY(-15px) scale(1.02);
-        z-index: 10;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
-
-    .slip-card:hover ~ .slip-card {
-        transform: translateX(20px);
-    }
-
-    /* IMAGE CONTAINER */
-    .slip-image {
-        position: relative;
-        width: 100%;
-        height: 320px;
-        overflow: hidden;
-        background: #ddd;
-    }
-
-    .slip-image img {
+    .heritage-item-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.5s ease;
+        display: block;
+        transition: transform 0.4s ease;
     }
 
-    .slip-card:hover .slip-image img {
-        transform: scale(1.06);
+    .heritage-item:hover .heritage-item-image img {
+        transform: scale(1.02);
     }
 
-    /* OVERLAY ON HOVER */
-    .slip-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.1));
+    .heritage-item-content {
         display: flex;
-        align-items: flex-end;
-        padding: 20px;
-        opacity: 0;
-        transition: opacity 0.3s ease;
+        flex-direction: column;
+        gap: 14px;
+        min-width: 0;
     }
 
-    .slip-card:hover .slip-overlay {
-        opacity: 1;
-    }
-
-    .slip-overlay-content {
-        color: white;
-    }
-
-    .slip-category {
-        display: inline-block;
-        background: #c6a43b;
-        color: #003366;
-        padding: 4px 10px;
-        border-radius: 30px;
-        font-size: 0.65rem;
+    .heritage-item-title {
+        font-size: 1.3rem;
         font-weight: 700;
-        text-transform: uppercase;
-        margin-bottom: 8px;
-    }
-
-    .slip-overlay-title {
-        font-size: 0.9rem;
-        font-weight: 600;
+        color: #0f3b2c;
+        margin: 0;
         line-height: 1.4;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
-    /* CARD INFO SECTION */
-    .slip-info {
-        padding: 18px;
-        position: relative;
-    }
-
-    .slip-line {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 3px;
-        width: 100%;
-        background: linear-gradient(90deg, #c6a43b, #e8c45a, #c6a43b);
-        transform: scaleX(0);
-        transition: transform 0.3s ease;
-    }
-
-    .slip-card:hover .slip-line {
-        transform: scaleX(1);
-    }
-
-    .slip-title {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #1e293b;
-        margin-bottom: 10px;
-        line-height: 1.5;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .slip-location {
+    .heritage-item-meta {
         display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        color: #64748b;
+        font-size: 0.85rem;
+    }
+
+    .heritage-item-meta span {
+        display: inline-flex;
         align-items: center;
         gap: 6px;
-        color: #64748b;
-        font-size: 0.8rem;
     }
 
-    .slip-location i {
+    .heritage-item-meta i {
         color: #c6a43b;
     }
 
-    /* EMPTY STATE */
+    .heritage-item-text {
+        color: #334155;
+        line-height: 1.75;
+        font-size: 0.95rem;
+        margin: 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        hyphens: auto;
+    }
+
+    .heritage-items.collapsed .heritage-item:nth-child(n+2) {
+        display: none;
+    }
+
+    .read-more-btn {
+        padding: 14px 26px;
+        margin-top: 12px;
+        border: none;
+        border-radius: 999px;
+        background: #c6a43b;
+        color: #09212f;
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .read-more-btn:hover {
+        background: #a58a36;
+        transform: translateY(-2px);
+    }
+
     .empty-text {
         color: #64748b;
         font-style: italic;
         font-size: 0.95rem;
         display: flex;
         align-items: center;
-        gap: 8px;
-        padding: 20px 0;
+        gap: 10px;
+        padding: 20px 0 10px;
     }
 
-    /* RESPONSIVE */
     @media (max-width: 992px) {
-        .stack-container { gap: 20px; padding-left: 0; }
-        .slip-card { margin-left: 0; width: 260px; }
-        .slip-card:hover ~ .slip-card { transform: none; }
+        .heritage-item {
+            grid-template-columns: 1fr;
+        }
+
+        .heritage-item:nth-child(even) {
+            grid-template-columns: 1fr;
+        }
+
+        .heritage-item:nth-child(even) .heritage-item-image {
+            order: 0;
+        }
+
+        .heritage-item-image {
+            width: 100%;
+            height: 240px;
+        }
     }
 
-    @media (max-width: 768px) {
-        .heritage-hero h1 { font-size: 2.2rem; }
-        .slip-card { width: calc(50% - 10px); }
-        .slip-image { height: 260px; }
-    }
+    @media (max-width: 680px) {
+        .heritage-category-block {
+            padding: 28px 20px;
+        }
 
-    @media (max-width: 560px) {
-        .slip-card { width: 100%; }
-        .slip-image { height: 280px; }
+        .heritage-title-wrapper {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .heritage-item {
+            gap: 14px;
+            padding: 16px 0;
+        }
+
+        .heritage-item-title {
+            font-size: 1.15rem;
+        }
+
+        .heritage-item-text {
+            font-size: 0.9rem;
+        }
+
+        .heritage-item-image {
+            width: 100%;
+            height: 200px;
+        }
+
+        .read-more-btn {
+            padding: 12px 20px;
+            font-size: 0.9rem;
+        }
     }
 </style>
 
 <section class="heritage-hero">
     <div class="container">
         <h1>Warisan Alam & Budaya</h1>
-        <p>Discover the Heritage of Geopark Danau Toba</p>
+        <p>Tiga kategori utama, satu halaman. Detail muncul dalam kartu tanpa pindah halaman.</p>
     </div>
 </section>
 
 <section class="heritage-section">
     <div class="heritage-container">
 
-        <div class="heritage-category-block">
-            <div class="heritage-title-wrapper">
-                <i class="fas fa-mountain"></i>
-                <h2>Geodiversity</h2>
-            </div>
-            
-            <div class="stack-container">
-                @forelse($geodiversity ?? [] as $item)
-                    <a href="{{ url('/warisan/' . $item->slug) }}" class="slip-card">
-                        <div class="slip-line"></div>
-                        <div class="slip-image">
-                                @php
-                                    $warisanImage = $item->gambar;
-                                    if ($warisanImage && !\Illuminate\Support\Str::startsWith($warisanImage, ['http://', 'https://', 'data:'])) {
-                                        $warisanImage = asset('storage/' . ltrim($warisanImage, '/'));
-                                    }
-                                @endphp
-                                <img src="{{ $warisanImage ?: asset('image/default.jpg') }}" alt="{{ $item->judul }}">
-                                <div class="slip-overlay">
-                                    <div class="slip-overlay-content">
-                                        <span class="slip-category">{{ $item->label_jenis }}</span>
-                                        <div class="slip-overlay-title">{{ $item->judul }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        <div class="slip-info">
-                            <div class="slip-title">{{ $item->judul }}</div>
-                            <div class="slip-location">
-                                <i class="fas fa-map-marker-alt"></i> Geopark Toba
-                            </div>
-                        </div>
-                    </a>
-                @empty
-                    <p class="empty-text">
-                        <i class="fas fa-info-circle"></i> Belum ada data geodiversity.
-                    </p>
-                @endforelse
-            </div>
-        </div>
+        @php
+            $categories = [
+                'geodiversity' => ['icon' => 'fas fa-mountain', 'label' => 'Geodiversity', 'items' => $geodiversity ?? []],
+                'biodiversity' => ['icon' => 'fas fa-leaf', 'label' => 'Biodiversity', 'items' => $biodiversity ?? []],
+                'cultural_diversity' => ['icon' => 'fas fa-landmark', 'label' => 'Cultural Diversity', 'items' => $cultural_diversity ?? []],
+            ];
+        @endphp
 
-        <div class="heritage-category-block">
-            <div class="heritage-title-wrapper">
-                <i class="fas fa-leaf"></i>
-                <h2>Biodiversity</h2>
-            </div>
-            
-            <div class="stack-container">
-                @forelse($biodiversity ?? [] as $item)
-                    <a href="{{ url('/warisan/' . $item->slug) }}" class="slip-card">
-                        <div class="slip-line"></div>
-                        <div class="slip-image">
-                                @php
-                                    $warisanImage = $item->gambar;
-                                    if ($warisanImage && !\Illuminate\Support\Str::startsWith($warisanImage, ['http://', 'https://', 'data:'])) {
-                                        $warisanImage = asset('storage/' . ltrim($warisanImage, '/'));
-                                    }
-                                @endphp
-                                <img src="{{ $warisanImage ?: asset('image/default.jpg') }}" alt="{{ $item->judul }}">
-                                <div class="slip-overlay">
-                                    <div class="slip-overlay-content">
-                                        <span class="slip-category">{{ $item->label_jenis }}</span>
-                                        <div class="slip-overlay-title">{{ $item->judul }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        <div class="slip-info">
-                            <div class="slip-title">{{ $item->judul }}</div>
-                            <div class="slip-location">
-                                <i class="fas fa-map-marker-alt"></i> Geopark Toba
-                            </div>
-                        </div>
-                    </a>
-                @empty
-                    <p class="empty-text">
-                        <i class="fas fa-info-circle"></i> Belum ada data biodiversity.
-                    </p>
-                @endforelse
-            </div>
-        </div>
+        @foreach($categories as $key => $category)
+            <div class="heritage-category-block">
+                <div class="heritage-title-wrapper">
+                    <i class="{{ $category['icon'] }}"></i>
+                    <h2>{{ $category['label'] }}</h2>
+                </div>
+                <p class="heritage-description">
+                    Data di bawah ini adalah hasil input melalui panel admin untuk jenis {{ strtolower($category['label']) }}. Setiap item ditampilkan dalam satu baris yang bergantian penempatan gambar dan teks.
+                </p>
 
-        <div class="heritage-category-block">
-            <div class="heritage-title-wrapper">
-                <i class="fas fa-landmark"></i>
-                <h2>Cultural Diversity</h2>
-            </div>
-            
-            <div class="stack-container">
-                @forelse($cultural_diversity ?? [] as $item)
-                    <a href="{{ url('/warisan/' . $item->slug) }}" class="slip-card">
-                        <div class="slip-line"></div>
-                        <div class="slip-image">
-                                @php
-                                    $warisanImage = $item->gambar;
-                                    if ($warisanImage && !\Illuminate\Support\Str::startsWith($warisanImage, ['http://', 'https://', 'data:'])) {
-                                        $warisanImage = asset('storage/' . ltrim($warisanImage, '/'));
-                                    }
-                                @endphp
-                                <img src="{{ $warisanImage ?: asset('image/default.jpg') }}" alt="{{ $item->judul }}">
-                                <div class="slip-overlay">
-                                    <div class="slip-overlay-content">
-                                        <span class="slip-category">{{ $item->label_jenis }}</span>
-                                        <div class="slip-overlay-title">{{ $item->judul }}</div>
+                @if(count($category['items']) > 0)
+                    <div class="heritage-items collapsed" id="heritage-items-{{ $key }}">
+                        @foreach($category['items'] as $item)
+                            @php
+                                $warisanImage = $item->gambar;
+                                if ($warisanImage && !\Illuminate\Support\Str::startsWith($warisanImage, ['http://', 'https://', 'data:'])) {
+                                    $warisanImage = asset('storage/' . ltrim($warisanImage, '/'));
+                                }
+                            @endphp
+                            <div class="heritage-item" id="warisan-item-{{ $item->id }}">
+                                <div class="heritage-item-image">
+                                    <img src="{{ $warisanImage ?: asset('image/default.jpg') }}" alt="{{ $item->judul }}">
+                                </div>
+                                <div class="heritage-item-content">
+                                    <h3 class="heritage-item-title">{{ $item->judul }}</h3>
+                                    <div class="heritage-item-meta">
+                                        <span><i class="fas fa-layer-group"></i> {{ $item->label_jenis }}</span>
+                                        <span><i class="fas fa-sort-numeric-down"></i> Urutan {{ $item->urutan }}</span>
                                     </div>
+                                    <p class="heritage-item-text">{!! nl2br(e($item->deskripsi)) !!}</p>
                                 </div>
                             </div>
-                        <div class="slip-info">
-                            <div class="slip-title">{{ $item->judul }}</div>
-                            <div class="slip-location">
-                                <i class="fas fa-map-marker-alt"></i> Geopark Toba
-                            </div>
-                        </div>
-                    </a>
-                @empty
-                    <p class="empty-text">
-                        <i class="fas fa-info-circle"></i> Belum ada data cultural diversity.
-                    </p>
-                @endforelse
+                        @endforeach
+                    </div>
+                    @if(count($category['items']) > 1)
+                        <button type="button" class="read-more-btn" onclick="toggleCategory('{{ $key }}', this)">
+                            Baca Selengkapnya ({{ count($category['items']) - 1 }} data lainnya)
+                        </button>
+                    @endif
+                @else
+                    <p class="empty-text"><i class="fas fa-info-circle"></i> Belum ada data {{ strtolower($category['label']) }}.</p>
+                @endif
             </div>
-        </div>
+        @endforeach
 
     </div>
 </section>
+
+<script>
+    function toggleCategory(categoryKey, button) {
+        const container = document.getElementById('heritage-items-' + categoryKey);
+        if (!container) return;
+        
+        const isCollapsed = container.classList.contains('collapsed');
+        
+        if (isCollapsed) {
+            container.classList.remove('collapsed');
+            button.textContent = 'Sembunyikan';
+        } else {
+            container.classList.add('collapsed');
+            // Hitung jumlah item yang tersembunyi
+            const itemCount = container.querySelectorAll('.heritage-item').length;
+            button.textContent = 'Baca Selengkapnya (' + (itemCount - 1) + ' data lainnya)';
+        }
+    }
+</script>
 @endsection
