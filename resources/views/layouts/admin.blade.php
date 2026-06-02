@@ -15,8 +15,8 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(145deg, #0a0f1a 0%, #0f1625 50%, #0a0f1a 100%);
-            color: #e2e8f0;
+            background: #f5f7fc;
+            color: #1e293b;
             min-height: 100vh;
             line-height: 1.5;
         }
@@ -28,12 +28,12 @@
             left: 0;
             width: 280px;
             height: 100%;
-            background: linear-gradient(180deg, #0b1120 0%, #0a0f1a 100%);
+            background: #ffffff;
             z-index: 1000;
             overflow-y: auto;
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
-            border-right: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
+            border-right: 1px solid #e9eef3;
         }
 
         .sidebar::-webkit-scrollbar {
@@ -41,11 +41,11 @@
         }
 
         .sidebar::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.03);
+            background: #f1f1f1;
         }
 
         .sidebar::-webkit-scrollbar-thumb {
-            background: #c6a43b;
+            background: #cbd5e1;
             border-radius: 10px;
         }
 
@@ -56,8 +56,8 @@
         /* HEADER SIDEBAR - LOGO RAPI */
         .sidebar-header {
             padding: 24px 20px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-            background: rgba(212, 175, 55, 0.02);
+            border-bottom: 1px solid #eef2f6;
+            background: #ffffff;
         }
 
         .logo-container {
@@ -85,7 +85,7 @@
         .logo-divider {
             width: 1px;
             height: 30px;
-            background: linear-gradient(to bottom, transparent, rgba(212, 175, 55, 0.5), transparent);
+            background: linear-gradient(to bottom, transparent, #cbd5e1, transparent);
         }
 
         .sidebar-header h3 {
@@ -93,15 +93,16 @@
             font-weight: 700;
             letter-spacing: -0.3px;
             margin: 8px 0 4px;
+            color: #0f3b2c;
         }
 
         .sidebar-header h3 span {
-            color: #c6a43b;
+            color: #b78d2e;
         }
 
         .sidebar-header p {
             font-size: 0.7rem;
-            color: #94a3b8;
+            color: #5b6e8c;
             font-weight: 400;
         }
 
@@ -116,7 +117,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #c6a43b;
+            color: #b78d2e;
         }
 
         .sidebar-menu a {
@@ -125,7 +126,7 @@
             gap: 12px;
             padding: 10px 20px;
             margin: 2px 12px;
-            color: #a0aec0;
+            color: #334155;
             text-decoration: none;
             transition: all 0.2s ease;
             font-size: 0.85rem;
@@ -134,13 +135,13 @@
         }
 
         .sidebar-menu a:hover {
-            background: rgba(198, 164, 59, 0.1);
-            color: #ffffff;
+            background: #f1f5f9;
+            color: #0f3b2c;
         }
 
         .sidebar-menu a.active {
-            background: rgba(198, 164, 59, 0.15);
-            color: #c6a43b;
+            background: #eef2ff;
+            color: #b78d2e;
         }
 
         .sidebar-menu a i {
@@ -169,33 +170,33 @@
             margin-bottom: 32px;
             flex-wrap: wrap;
             gap: 16px;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
             padding: 8px 24px;
             border-radius: 60px;
-            border: 1px solid rgba(212, 175, 55, 0.15);
+            border: 1px solid #eef2f6;
         }
 
         .menu-toggle {
             display: none;
             background: transparent;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            border: 1px solid #e2e8f0;
             padding: 8px 12px;
             border-radius: 10px;
             cursor: pointer;
             font-size: 1rem;
-            color: #c6a43b;
+            color: #b78d2e;
             transition: all 0.2s ease;
         }
 
         .menu-toggle:hover {
-            background: rgba(198, 164, 59, 0.1);
+            background: #f8fafc;
         }
 
         .page-title {
             font-size: 1.3rem;
             font-weight: 600;
-            color: #f1f5f9;
+            color: #0f3b2c;
         }
 
         .user-menu {
@@ -207,22 +208,22 @@
         .user-name {
             font-size: 0.85rem;
             font-weight: 500;
-            color: #cbd5e1;
+            color: #475569;
         }
 
         .user-name i {
-            color: #c6a43b;
+            color: #b78d2e;
             margin-right: 8px;
         }
 
         .logout-btn {
-            background: rgba(220, 38, 38, 0.2);
-            color: #f87171;
+            background: #fee2e2;
+            color: #b91c1c;
             padding: 6px 18px;
             border-radius: 30px;
             font-size: 0.75rem;
             font-weight: 500;
-            border: 1px solid rgba(220, 38, 38, 0.3);
+            border: 1px solid #fecaca;
             cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -242,29 +243,29 @@
         }
 
         .stat-card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(10px);
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
             padding: 20px 16px;
             border-radius: 20px;
             transition: all 0.2s ease;
-            border: 1px solid rgba(212, 175, 55, 0.1);
+            border: 1px solid #edf2f7;
         }
 
         .stat-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(212, 175, 55, 0.3);
-            background: rgba(15, 23, 42, 0.8);
+            border-color: #e2e8f0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
         }
 
         .stat-number {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #fbbf24;
+            color: #b78d2e;
         }
 
         .stat-label {
             font-size: 0.7rem;
-            color: #94a3b8;
+            color: #5b6e8c;
             margin-top: 6px;
             font-weight: 500;
             text-transform: uppercase;
@@ -273,12 +274,12 @@
 
         /* ========== TABLE CARD ========== */
         .card-table {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(10px);
+            background: #ffffff;
             border-radius: 20px;
             padding: 24px;
             margin-bottom: 24px;
-            border: 1px solid rgba(212, 175, 55, 0.1);
+            border: 1px solid #edf2f7;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
 
         .card-header {
@@ -293,15 +294,15 @@
         .card-header h5 {
             font-size: 1.1rem;
             font-weight: 600;
-            color: #fbbf24;
+            color: #b78d2e;
             padding-left: 12px;
-            border-left: 3px solid #c6a43b;
+            border-left: 3px solid #b78d2e;
         }
 
         /* ========== BUTTONS ========== */
         .btn-primary {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            color: #c6a43b;
+            background: #ffffff;
+            color: #b78d2e;
             padding: 8px 20px;
             border-radius: 12px;
             font-size: 0.8rem;
@@ -311,19 +312,19 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            border: 1px solid #e2e8f0;
             cursor: pointer;
         }
 
         .btn-primary:hover {
-            background: rgba(198, 164, 59, 0.15);
-            color: #fbbf24;
-            border-color: rgba(212, 175, 55, 0.5);
+            background: #fefce8;
+            color: #a16207;
+            border-color: #fde047;
         }
 
         .btn-submit {
-            background: linear-gradient(135deg, #c6a43b, #b8860b);
-            color: #0f172a;
+            background: #b78d2e;
+            color: #ffffff;
             padding: 10px 28px;
             border-radius: 12px;
             font-size: 0.85rem;
@@ -334,25 +335,26 @@
         }
 
         .btn-submit:hover {
+            background: #9a6e25;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(198, 164, 59, 0.3);
+            box-shadow: 0 4px 12px rgba(183, 141, 46, 0.2);
         }
 
         .btn-cancel {
-            background: rgba(100, 116, 139, 0.2);
-            color: #94a3b8;
+            background: #f1f5f9;
+            color: #475569;
             padding: 10px 28px;
             border-radius: 12px;
             font-size: 0.85rem;
             font-weight: 500;
             text-decoration: none;
             transition: all 0.2s ease;
-            border: 1px solid rgba(100, 116, 139, 0.3);
+            border: 1px solid #e2e8f0;
         }
 
         .btn-cancel:hover {
-            background: rgba(100, 116, 139, 0.3);
-            color: #cbd5e1;
+            background: #e6edf5;
+            color: #1e293b;
         }
 
         /* ========== FORM STYLES ========== */
@@ -362,22 +364,22 @@
         }
 
         .form-card {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
+            background: #ffffff;
             border-radius: 24px;
             padding: 32px;
-            border: 1px solid rgba(212, 175, 55, 0.15);
+            border: 1px solid #edf2f7;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
         }
 
         .form-card h2 {
             font-size: 1.4rem;
             font-weight: 600;
-            color: #fbbf24;
+            color: #b78d2e;
             margin-bottom: 8px;
         }
 
         .form-card p {
-            color: #94a3b8;
+            color: #5b6e8c;
             font-size: 0.85rem;
             margin-bottom: 28px;
         }
@@ -397,29 +399,29 @@
             display: block;
             font-size: 0.8rem;
             font-weight: 500;
-            color: #cbd5e1;
+            color: #334155;
             margin-bottom: 6px;
         }
 
         .form-group .required {
-            color: #f87171;
+            color: #b91c1c;
         }
 
         .form-control {
             width: 100%;
             padding: 10px 14px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
             font-size: 0.85rem;
             transition: all 0.2s ease;
-            background: rgba(0, 0, 0, 0.3);
-            color: #e2e8f0;
+            background: #ffffff;
+            color: #1e293b;
         }
 
         .form-control:focus {
             outline: none;
-            border-color: #c6a43b;
-            box-shadow: 0 0 0 3px rgba(198, 164, 59, 0.1);
+            border-color: #b78d2e;
+            box-shadow: 0 0 0 3px rgba(183, 141, 46, 0.1);
         }
 
         textarea.form-control {
@@ -432,7 +434,7 @@
             gap: 12px;
             margin-top: 24px;
             padding-top: 20px;
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            border-top: 1px solid #edf2f7;
         }
 
         /* ========== TABLE STYLES ========== */
@@ -453,21 +455,21 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            color: #c6a43b;
-            background: rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            color: #b78d2e;
+            background: #fafcff;
+            border-bottom: 1px solid #eef2f8;
         }
 
         td {
             padding: 12px 12px;
             font-size: 0.85rem;
-            color: #cbd5e1;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #334155;
+            border-bottom: 1px solid #f1f5f9;
             vertical-align: middle;
         }
 
         tr:hover td {
-            background: rgba(198, 164, 59, 0.05);
+            background: #fefce8;
         }
 
         /* ========== BADGES ========== */
@@ -480,15 +482,15 @@
         }
 
         .badge-success {
-            background: rgba(34, 197, 94, 0.15);
-            color: #4ade80;
-            border: 1px solid rgba(74, 222, 128, 0.3);
+            background: #e6f7ec;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
         }
 
         .badge-danger {
-            background: rgba(239, 68, 68, 0.15);
-            color: #f87171;
-            border: 1px solid rgba(248, 113, 113, 0.3);
+            background: #feeceb;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
         }
 
         .btn-group {
@@ -498,30 +500,30 @@
         }
 
         .btn-edit {
-            background: rgba(59, 130, 246, 0.15);
-            color: #60a5fa;
+            background: #eef2ff;
+            color: #2563eb;
             padding: 4px 12px;
             border-radius: 8px;
             font-size: 0.7rem;
             font-weight: 500;
             text-decoration: none;
             transition: all 0.2s ease;
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            border: 1px solid #cbdffc;
         }
 
         .btn-edit:hover {
-            background: #3b82f6;
+            background: #2563eb;
             color: white;
         }
 
         .btn-delete {
-            background: rgba(239, 68, 68, 0.15);
-            color: #f87171;
+            background: #fee2e2;
+            color: #dc2626;
             padding: 4px 12px;
             border-radius: 8px;
             font-size: 0.7rem;
             font-weight: 500;
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            border: 1px solid #fecaca;
             cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -556,18 +558,18 @@
             height: 36px;
             padding: 0 8px;
             border-radius: 10px;
-            background: rgba(15, 23, 42, 0.8);
-            color: #cbd5e1;
+            background: #ffffff;
+            color: #334155;
             text-decoration: none;
             font-size: 0.8rem;
             transition: all 0.2s ease;
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid #e2e8f0;
         }
 
         .pagination .page-link:hover {
-            background: rgba(198, 164, 59, 0.2);
-            color: #fbbf24;
-            border-color: rgba(212, 175, 55, 0.5);
+            background: #fefce8;
+            color: #b78d2e;
+            border-color: #fde047;
         }
 
         /* ========== RESPONSIVE ========== */
@@ -656,26 +658,26 @@
             </div>
         </div>
         <h3>GEO<span>TOBA</span></h3>
-        <p>Administrator Panel</p>
+        <p>Panel Administrator</p>
     </div>
     <div class="sidebar-menu">
-        <div class="menu-title">Main Menu</div>
+        <div class="menu-title">Menu Utama</div>
         <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
             <i class="fas fa-chart-pie"></i> Dashboard
         </a>
         
-        <div class="menu-title">Content</div>
+        <div class="menu-title">Konten</div>
         <a href="{{ route('admin.galeri.index') }}" class="{{ request()->routeIs('admin.galeri.*') ? 'active' : '' }}">
-            <i class="fas fa-images"></i> Gallery
+            <i class="fas fa-images"></i> Galeri
         </a>
         <a href="{{ route('admin.berita.index') }}" class="{{ request()->routeIs('admin.berita.*') ? 'active' : '' }}">
-            <i class="fas fa-newspaper"></i> News
+            <i class="fas fa-newspaper"></i> Berita
         </a>
         <a href="{{ route('admin.informasi.index') }}" class="{{ request()->routeIs('admin.informasi.*') ? 'active' : '' }}">
-            <i class="fas fa-info-circle"></i> Information
+            <i class="fas fa-info-circle"></i> Informasi
         </a>
         <a href="{{ route('admin.destinasi.index') }}" class="{{ request()->routeIs('admin.destinasi.*') ? 'active' : '' }}">
-            <i class="fas fa-map-marked-alt"></i> Destinations
+            <i class="fas fa-map-marked-alt"></i> Destinasi
         </a>
         <a href="{{ route('admin.warisan.index') }}" class="{{ request()->routeIs('admin.warisan.*') ? 'active' : '' }}">
             <i class="fas fa-landmark"></i> Warisan Alam & Budaya
@@ -697,14 +699,14 @@
             $currentGeositeTitle = $validGeosites[$currentGeosite];
         @endphp
 
-        <div class="menu-title">Geosites</div>
+        <div class="menu-title">Situs Geosite</div>
         @foreach($validGeosites as $geoSlug => $geoLabel)
             <a href="{{ url('/admin/geosite/'.$geoSlug) }}" class="{{ request()->is('admin/geosite/'.$geoSlug) ? 'active' : '' }}">
                 <i class="fas fa-mountain"></i> {{ $geoLabel }}
             </a>
         @endforeach
 
-        <div class="menu-title">{{ $currentGeositeTitle }} Modules</div>
+        <div class="menu-title">Modul {{ $currentGeositeTitle }}</div>
         <a href="{{ url('/admin/geosite/'.$currentGeosite.'/umkm') }}" class="{{ request()->is('admin/geosite/'.$currentGeosite.'/umkm*') ? 'active' : '' }}">
             <i class="fas fa-store"></i> UMKM
         </a>
@@ -737,7 +739,7 @@
             <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                 @csrf
                 <button type="submit" class="logout-btn">
-                    <i class="fas fa-sign-out-alt"></i> Logout
+                    <i class="fas fa-sign-out-alt"></i> Keluar
                 </button>
             </form>
         </div>
