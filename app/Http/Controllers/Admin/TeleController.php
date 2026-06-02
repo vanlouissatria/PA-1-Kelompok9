@@ -566,6 +566,13 @@ class TeleController extends Controller
         return redirect()->to('/admin/geosite/' . $selectedGeosite . '/informasi')->with('success', 'Informasi berhasil ditambahkan');
     }
 
+    public function informasiShow($geosite, $id)
+    {
+        $geosite = $this->ensureGeosite($geosite);
+        $informasi = Informasi::findOrFail($id);
+        return view('admin.tele.informasi.show', compact('informasi', 'geosite'));
+    }
+    
     public function informasiEdit($geosite, $id)
     {
         $geosite = $this->ensureGeosite($geosite);

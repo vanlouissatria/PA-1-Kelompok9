@@ -235,6 +235,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::get('/{geosite}/informasi', [TeleController::class, 'informasi'])->name('informasi.index');
         Route::get('/{geosite}/informasi/create', [TeleController::class, 'informasiCreate'])->name('informasi.create');
         Route::post('/{geosite}/informasi', [TeleController::class, 'informasiStore'])->name('informasi.store');
+        Route::get('/{geosite}/informasi/{id}', [TeleController::class, 'informasiShow'])->name('informasi.show');
         Route::get('/{geosite}/informasi/{id}/edit', [TeleController::class, 'informasiEdit'])->name('informasi.edit');
         Route::put('/{geosite}/informasi/{id}', [TeleController::class, 'informasiUpdate'])->name('informasi.update');
         Route::delete('/{geosite}/informasi/{id}', [TeleController::class, 'informasiDestroy'])->name('informasi.destroy');
