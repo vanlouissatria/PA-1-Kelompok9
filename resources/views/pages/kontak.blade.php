@@ -353,7 +353,7 @@
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
                     <h4>Alamat</h4>
-                    {!! nl2br(e($kontak->alamat ?? 'Geosite Danau Toba<br>Pulau Sibandang, Danau Toba<br>Sumatera Utara, Indonesia')) !!}
+                    {!! nl2br(e($kontak->alamat ?? 'Sigulatti, Sarimarrihit, Kec. Sianjur Mula Mula, Kabupaten Samosir, Sumatera Utara, Indonesia')) !!}
                 </div>
             </div>
             
