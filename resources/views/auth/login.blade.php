@@ -16,8 +16,8 @@
         .card { border-radius: 16px; border: none; }
         .btn-dark { background: #003366; border: none; }
         .btn-dark:hover { background: #c6a43b; color: #003366; }
-        .forgot-link { text-align: right; margin-top: 10px; }
-        .forgot-link a { color: #c6a43b; text-decoration: none; font-size: 0.8rem; }
+        .forgot-link { text-align: right; margin-top: -5px; } /* Sedikit disesuaikan agar menempel pas di bawah input */
+        .forgot-link a { color: #c6a43b; text-decoration: none; font-size: 0.85rem; }
         .forgot-link a:hover { text-decoration: underline; }
     </style>
 </head>
@@ -36,20 +36,23 @@
                         @if($errors->any())
                             <div class="alert alert-danger">{{ $errors->first() }}</div>
                         @endif
+                        
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
+                            
                             <div class="mb-3">
                                 <label class="form-label">Email</label>
                                 <input type="email" name="email" class="form-control" required autofocus>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Password</label>
+                            
+                            <div class="mb-2"> <label class="form-label">Password</label>
                                 <input type="password" name="password" class="form-control" required>
                             </div>
-                            <!-- TAMBAHKAN LINK LUPA PASSWORD DI SINI -->
+                            
                             <div class="forgot-link">
                                 <a href="{{ route('password.request') }}">Lupa Password?</a>
                             </div>
+                            
                             <button type="submit" class="btn btn-dark w-100 mt-3">Login</button>
                         </form>
                     </div>

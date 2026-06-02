@@ -144,7 +144,14 @@
 
                         @if($item->gambar)
 
-                            <img src="{{ asset($item->gambar) }}"
+                            @php
+                                $gambarPath = $item->gambar;
+                                if (!\Illuminate\Support\Str::startsWith($gambarPath, ['http://', 'https://', 'data:'])) {
+                                    $gambarPath = asset('storage/' . ltrim($gambarPath, '/'));
+                                }
+                            @endphp
+
+                            <img src="{{ $gambarPath }}"
                                  width="100"
                                  height="70"
                                  style="object-fit: cover; border-radius: 8px;"
@@ -318,98 +325,133 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+(function() {
+    function initToggleButtons(){
+        const toggleButtons = document.querySelectorAll('.toggle-status-btn');
 
-    const toggleButtons = document.querySelectorAll('.toggle-status-btn');
+        toggleButtons.forEach(button => {
 
-    toggleButtons.forEach(button => {
+            // Avoid double-binding
+            if (button.__toggleBound) return;
+            button.__toggleBound = true;
 
-        button.addEventListener('click', function() {
+            button.addEventListener('click', function() {
 
-            const itemId = this.getAttribute('data-id');
-            const currentStatus = parseInt(this.getAttribute('data-status'));
+                const itemId = this.getAttribute('data-id');
+                const currentStatus = parseInt(this.getAttribute('data-status'));
 
-            const btn = this;
-            const icon = btn.querySelector('i');
+                const btn = this;
+                const icon = btn.querySelector('i');
 
-            icon.className = 'fas fa-spinner fa-spin';
-            btn.disabled = true;
+                console.debug('Toggle click:', { id: itemId, status: currentStatus });
 
-            fetch(`{{ url('/admin/destinasi/toggle-status') }}/${itemId}`, {
-
-                method: 'POST',
-
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-
-                body: JSON.stringify({})
-
-            })
-
-            .then(response => response.json())
-
-            .then(data => {
-
-                if (data.success) {
-
-                    const newStatus = data.status;
-
-                    if (newStatus) {
-
-                        btn.style.backgroundColor = '#28a745';
-                        btn.setAttribute('data-status', '1');
-                        btn.setAttribute('title', 'Nonaktifkan destinasi ini');
-
-                        icon.className = 'fas fa-eye';
-
-                    } else {
-
-                        btn.style.backgroundColor = '#6c757d';
-                        btn.setAttribute('data-status', '0');
-                        btn.setAttribute('title', 'Aktifkan destinasi ini');
-
-                        icon.className = 'fas fa-eye-slash';
-                    }
-
-                    const row = btn.closest('tr');
-                    const statusCell = row.querySelector('td:nth-child(5)');
-
-                    if (newStatus) {
-
-                        statusCell.innerHTML =
-                            '<span class="badge bg-success badge-status">Aktif</span>';
-
-                    } else {
-
-                        statusCell.innerHTML =
-                            '<span class="badge bg-secondary badge-status">Draft</span>';
-                    }
+                if(icon){
+                    icon.className = 'fas fa-spinner fa-spin';
                 }
+                btn.disabled = true;
 
-            })
+                fetch(`{{ url('/admin/destinasi/toggle-status') }}/${itemId}`, {
 
-            .catch(error => {
+                    method: 'POST',
 
-                console.error('Error:', error);
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
 
-                icon.className =
-                    currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
+                    body: JSON.stringify({})
 
-            })
+                })
 
-            .finally(() => {
+                .then(response => {
+                    console.debug('Toggle response status:', response.status);
+                    if (!response.ok) {
+                        // 419 indicates CSRF token mismatch in Laravel
+                        if (response.status === 419) {
+                            throw new Error('CSRF token mismatch (419). Please refresh the page and try again.');
+                        }
+                        return response.text().then(txt => { throw new Error('HTTP ' + response.status + ': ' + txt); });
+                    }
+                    // Try parse JSON, handle invalid JSON
+                    return response.json().catch(err => { throw new Error('Invalid JSON response'); });
+                })
 
-                btn.disabled = false;
+                .then(data => {
+
+                    console.debug('Toggle data:', data);
+
+                    if (data && data.success) {
+
+                        const newStatus = data.status;
+
+                        if (newStatus) {
+
+                            btn.style.backgroundColor = '#28a745';
+                            btn.setAttribute('data-status', '1');
+                            btn.setAttribute('title', 'Nonaktifkan destinasi ini');
+
+                            if(icon) icon.className = 'fas fa-eye';
+
+                        } else {
+
+                            btn.style.backgroundColor = '#6c757d';
+                            btn.setAttribute('data-status', '0');
+                            btn.setAttribute('title', 'Aktifkan destinasi ini');
+
+                            if(icon) icon.className = 'fas fa-eye-slash';
+                        }
+
+                        const row = btn.closest('tr');
+                        const statusCell = row.querySelector('td:nth-child(5)');
+
+                        if (newStatus) {
+
+                            statusCell.innerHTML =
+                                '<span class="badge bg-success badge-status">Aktif</span>';
+
+                        } else {
+
+                            statusCell.innerHTML =
+                                '<span class="badge bg-secondary badge-status">Draft</span>';
+                        }
+                    } else {
+                        throw new Error('Unexpected response structure');
+                    }
+
+                })
+
+                .catch(error => {
+
+                    console.error('Toggle Error:', error);
+                    // Show a simple alert to user for immediate feedback
+                    try { window.alert('Gagal mengubah status: ' + error.message); } catch(e){}
+
+                    if(icon) icon.className =
+                        currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
+
+                })
+
+                .finally(() => {
+
+                    btn.disabled = false;
+
+                });
 
             });
 
         });
+    }
 
-    });
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initToggleButtons);
+    } else {
+        initToggleButtons();
+    }
 
-});
+    // If table is updated via AJAX later, expose init function
+    window.initDestinasiToggle = initToggleButtons;
+
+})();
 </script>
 @endsection

@@ -285,14 +285,20 @@
                     <a href="{{ url('/warisan/' . $item->slug) }}" class="slip-card">
                         <div class="slip-line"></div>
                         <div class="slip-image">
-                            <img src="{{ $item->gambar ? asset('storage/' . $item->gambar) : asset('image/default.jpg') }}" alt="{{ $item->judul }}">
-                            <div class="slip-overlay">
-                                <div class="slip-overlay-content">
-                                    <span class="slip-category">{{ $item->kategori }}</span>
-                                    <div class="slip-overlay-title">{{ $item->judul }}</div>
+                                @php
+                                    $warisanImage = $item->gambar;
+                                    if ($warisanImage && !\Illuminate\Support\Str::startsWith($warisanImage, ['http://', 'https://', 'data:'])) {
+                                        $warisanImage = asset('storage/' . ltrim($warisanImage, '/'));
+                                    }
+                                @endphp
+                                <img src="{{ $warisanImage ?: asset('image/default.jpg') }}" alt="{{ $item->judul }}">
+                                <div class="slip-overlay">
+                                    <div class="slip-overlay-content">
+                                        <span class="slip-category">{{ $item->label_jenis }}</span>
+                                        <div class="slip-overlay-title">{{ $item->judul }}</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <div class="slip-info">
                             <div class="slip-title">{{ $item->judul }}</div>
                             <div class="slip-location">
@@ -319,14 +325,20 @@
                     <a href="{{ url('/warisan/' . $item->slug) }}" class="slip-card">
                         <div class="slip-line"></div>
                         <div class="slip-image">
-                            <img src="{{ $item->gambar ? asset('storage/' . $item->gambar) : asset('image/default.jpg') }}" alt="{{ $item->judul }}">
-                            <div class="slip-overlay">
-                                <div class="slip-overlay-content">
-                                    <span class="slip-category">{{ $item->kategori }}</span>
-                                    <div class="slip-overlay-title">{{ $item->judul }}</div>
+                                @php
+                                    $warisanImage = $item->gambar;
+                                    if ($warisanImage && !\Illuminate\Support\Str::startsWith($warisanImage, ['http://', 'https://', 'data:'])) {
+                                        $warisanImage = asset('storage/' . ltrim($warisanImage, '/'));
+                                    }
+                                @endphp
+                                <img src="{{ $warisanImage ?: asset('image/default.jpg') }}" alt="{{ $item->judul }}">
+                                <div class="slip-overlay">
+                                    <div class="slip-overlay-content">
+                                        <span class="slip-category">{{ $item->label_jenis }}</span>
+                                        <div class="slip-overlay-title">{{ $item->judul }}</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <div class="slip-info">
                             <div class="slip-title">{{ $item->judul }}</div>
                             <div class="slip-location">
@@ -349,18 +361,24 @@
             </div>
             
             <div class="stack-container">
-                @forelse($cultural ?? [] as $item)
+                @forelse($cultural_diversity ?? [] as $item)
                     <a href="{{ url('/warisan/' . $item->slug) }}" class="slip-card">
                         <div class="slip-line"></div>
                         <div class="slip-image">
-                            <img src="{{ $item->gambar ? asset('storage/' . $item->gambar) : asset('image/default.jpg') }}" alt="{{ $item->judul }}">
-                            <div class="slip-overlay">
-                                <div class="slip-overlay-content">
-                                    <span class="slip-category">{{ $item->kategori }}</span>
-                                    <div class="slip-overlay-title">{{ $item->judul }}</div>
+                                @php
+                                    $warisanImage = $item->gambar;
+                                    if ($warisanImage && !\Illuminate\Support\Str::startsWith($warisanImage, ['http://', 'https://', 'data:'])) {
+                                        $warisanImage = asset('storage/' . ltrim($warisanImage, '/'));
+                                    }
+                                @endphp
+                                <img src="{{ $warisanImage ?: asset('image/default.jpg') }}" alt="{{ $item->judul }}">
+                                <div class="slip-overlay">
+                                    <div class="slip-overlay-content">
+                                        <span class="slip-category">{{ $item->label_jenis }}</span>
+                                        <div class="slip-overlay-title">{{ $item->judul }}</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <div class="slip-info">
                             <div class="slip-title">{{ $item->judul }}</div>
                             <div class="slip-location">

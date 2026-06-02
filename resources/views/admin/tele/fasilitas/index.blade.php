@@ -27,16 +27,30 @@
                         @forelse($fasilitas as $key => $item)
                         <tr>
                             <td>{{ $fasilitas->firstItem() + $key }}</td>
-                            <td>@if($item->gambar)<img src="{{ asset('storage/'.$item->gambar) }}" width="50">@else <i class="fas fa-image fa-2x"></i>@endif</td>
-                            <td>{{ $item->nama }}</td>
+                            <td>
+                                @if($item->gambar)
+                                    @if(\Illuminate\Support\Str::startsWith($item->gambar, 'data:'))
+                                        <img src="{{ $item->gambar }}" width="50">
+                                    @else
+                                        <img src="{{ asset($item->gambar) }}" width="50">
+                                    @endif
+                                @else
+                                    <i class="fas fa-image fa-2x"></i>
+                                @endif
+                            </td>
+                            <td>{{ $item->nama }}</td> 
                             <td>{{ Str::limit($item->deskripsi, 50) }}</td>
                             <td>Rp {{ number_format($item->harga ?? 0, 0, ',', '.') }}</td>
                             <td>
-                                <a href="{{ url('/admin/geosite/'.$geosite.'/fasilitas/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ url('/admin/geosite/'.$geosite.'/fasilitas/'.$item->id) }}" method="POST" class="d-inline">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</button>
-                                </form>
+                                <div class="btn-group" style="display:flex; gap:5px;">
+                                    <a href="{{ url('/admin/geosite/'.$geosite.'/fasilitas/'.$item->id.'/edit') }}" class="btn btn-success btn-sm" title="Lihat"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ url('/admin/geosite/'.$geosite.'/fasilitas/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <form action="{{ url('/admin/geosite/'.$geosite.'/fasilitas/'.$item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Hapus"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         @empty<tr><td colspan="6" class="text-center">Belum ada data</td></tr>@endforelse
