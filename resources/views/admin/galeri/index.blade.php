@@ -137,18 +137,20 @@
     }
 
     .actions-group {
-        display: flex;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
         gap: 0.5rem;
     }
 
     .action-btn {
-        min-width: 40px;
-        min-height: 40px;
+        width: 40px !important;
+        height: 40px !important;
         border-radius: 12px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: white;
+        color: white !important;
         border: none;
         cursor: pointer;
         transition: transform 0.2s ease, opacity 0.2s ease;
@@ -162,12 +164,12 @@
     }
 
     .btn-edit {
-        background: #f59e0b;
-        color: #000;
+        background: #f59e0b !important;
+        color: #000 !important;
     }
 
     .btn-delete {
-        background: #ef4444;
+        background: #ef4444 !important;
     }
 
     .text-secondary {
@@ -243,7 +245,7 @@
 
                     {{-- Aksi --}}
                     <td style="white-space: nowrap; width: 1%;">
-                        <div class="actions-group" style="display: flex !important; flex-direction: row !important; align-items: center; gap: 0.5rem;">
+                        <div class="actions-group">
                             
                             {{-- Toggle Status --}}
                             <button type="button"
@@ -251,7 +253,7 @@
                                     data-id="{{ $galeri->id }}"
                                     data-status="{{ $galeri->status }}"
                                     title="{{ $galeri->status ? 'Nonaktifkan' : 'Aktifkan' }}"
-                                    style="background-color: {{ $galeri->status ? '#16a34a' : '#6b7280' }}; width: 40px; height: 40px; margin: 0;">
+                                    style="background-color: {{ $galeri->status ? '#16a34a' : '#6b7280' }}; margin: 0;">
                                 <i class="fas {{ $galeri->status ? 'fa-eye' : 'fa-eye-slash' }}"></i>
                             </button>
                             
@@ -259,7 +261,7 @@
                             <a href="{{ route('admin.galeri.edit', $galeri->id) }}" 
                                class="action-btn btn-edit" 
                                title="Edit"
-                               style="width: 40px; height: 40px; margin: 0;">
+                               style="margin: 0;">
                                 <i class="fas fa-pen"></i>
                             </a>
                             
@@ -267,7 +269,7 @@
                             <form action="{{ route('admin.galeri.destroy', $galeri->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus galeri ini?');" class="d-inline-block" style="margin: 0; padding: 0;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="action-btn btn-delete" title="Hapus" style="width: 40px; height: 40px; margin: 0;">
+                                <button type="submit" class="action-btn btn-delete" title="Hapus" style="margin: 0;">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>

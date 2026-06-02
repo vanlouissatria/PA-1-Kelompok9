@@ -1,3 +1,4 @@
+{{-- resources/views/admin/geosite/informasi/index.blade.php --}}
 @extends('layouts.admin')
 
 @section('title')
@@ -5,89 +6,330 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">
-    <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h3 class="card-title">Informasi {{ $geositeTitle }}</h3>
-            <a href="{{ url('/admin/geosite/'.$geosite.'/informasi/create') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Tambah Informasi
-            </a>
-        </div>
-        <div class="card-body">
-            @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
+<style>
+    :root {
+        --bi-blue: #002F5F;
+        --bi-blue-dark: #001f3f;
+        --bi-yellow: #f59e0b;
+        --bi-red: #ef4444;
+        --text-heading: #111827;
+        --text-muted: #6b7280;
+        --surface-bg: #ffffff;
+        --border-light: #e5e7eb;
+    }
 
-            @if(session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-            @endif
+    /* Keselarasan Ukuran Judul Utama: 2.75rem */
+    .page-header-title {
+        font-size: 2.75rem;
+        font-weight: 800;
+        color: var(--text-heading);
+        margin-bottom: 1rem;
+        margin-top: 0;
+    }
 
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Gambar</th>
-                            <th>Judul</th>
-                            <th>Kategori</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($informasi as $key => $item)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>
-                                @if($item->gambar && file_exists(public_path($item->gambar)))
-                                    <img src="{{ asset($item->gambar) }}" width="50" height="50" style="object-fit: cover; border-radius: 8px;">
-                                @else
-                                    <div style="width: 50px; height: 50px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
-                                        <i class="fas fa-file-alt text-muted"></i>
-                                    </div>
-                                @endif
-                            </td>
-                            <td>{{ $item->judul }}</br><small class="text-muted">ID: {{ $item->id }}</small></td>
-                            <td>
-                                <span class="badge {{ $item->kategori == 'tele' ? 'bg-primary' : 'bg-secondary' }}">
-                                    {{ $item->kategori ?? '-' }}
-                                </span>
-                            </td>
-                            <td>
-                                <span class="badge {{ $item->status ? 'bg-success' : 'bg-danger' }}">
-                                    {{ $item->status ? 'Aktif' : 'Draft' }}
-                                </span>
-                            </td>
-                            <td>
-                                <div class="btn-group" style="display:flex; gap:5px;">
-                                    <a href="{{ url('/admin/geosite/'.$geosite.'/informasi/'.$item->id) }}" class="btn btn-success btn-sm" title="Lihat"><i class="fas fa-eye"></i></a>
-                                    <a href="{{ url('/admin/geosite/'.$geosite.'/informasi/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
-                                    <form action="{{ url('/admin/geosite/'.$geosite.'/informasi/'.$item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" title="Hapus"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="6" class="text-center py-4">
-                                <i class="fas fa-database fa-2x mb-2 d-block text-muted"></i>
-                                Belum ada data informasi. Silakan tambah data baru.
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-            
-            @if(isset($informasi) && $informasi->hasPages())
-            <div class="mt-3">
-                {{ $informasi->links() }}
-            </div>
-            @endif
-        </div>
+    .page-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.75rem;
+        flex-wrap: wrap;
+    }
+
+    .btn-bi-tambah {
+        background-color: var(--bi-blue) !important;
+        color: white !important;
+        border: none !important;
+        padding: 0.95rem 1.4rem;
+        border-radius: 0.85rem;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none !important;
+        box-shadow: 0 16px 32px rgba(0, 47, 95, 0.12);
+        transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .btn-bi-tambah:hover {
+        background-color: var(--bi-blue-dark) !important;
+        transform: translateY(-1px);
+    }
+
+    /* Transparan tanpa background card putih bawaan bootstrap */
+    .admin-card {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .table thead th {
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        border-top: none;
+        border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+        text-transform: uppercase;
+        padding: 1rem 0.75rem;
+        background: transparent;
+    }
+
+    .table td {
+        vertical-align: middle;
+        padding: 1rem 0.75rem;
+        border-color: rgba(229, 231, 235, 0.9);
+    }
+
+    .table tbody tr:hover {
+        background: rgba(229, 231, 235, 0.3);
+    }
+
+    .thumbnail {
+        width: 90px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 16px;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .placeholder-img {
+        width: 90px;
+        height: 70px;
+        border-radius: 16px;
+        background: #f3f4f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #9ca3af;
+        font-size: 0.9rem;
+    }
+
+    .badge-chip {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.55rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 700;
+    }
+
+    .chip-primary {
+        background: rgba(0, 47, 95, 0.1);
+        color: var(--bi-blue);
+        border: 1px solid rgba(0, 47, 95, 0.2);
+    }
+
+    .chip-secondary {
+        background: #f3f4f6;
+        color: #374151;
+        border: 1px solid #e5e7eb;
+    }
+
+    .badge-status {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.55rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 700;
+    }
+
+    .status-active {
+        background: rgba(16, 185, 129, 0.12);
+        color: #065f46;
+        border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .status-inactive {
+        background: rgba(239, 68, 68, 0.12);
+        color: #991b1b;
+        border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    /* Proteksi Mutlak Penumpukan Tombol Aksi */
+    .actions-group {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: nowrap !important;
+    }
+
+    /* Ukuran Tombol Aksi Kotak Presisi 40px x 40px */
+    .action-btn {
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        text-decoration: none;
+        font-size: 0.85rem;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .action-btn:hover {
+        transform: translateY(-1px);
+        opacity: 0.95;
+    }
+
+    .btn-view {
+        background: #16a34a;
+    }
+
+    .btn-edit {
+        background: #f59e0b;
+        color: #000;
+    }
+
+    .btn-delete {
+        background: #ef4444;
+    }
+
+    .text-secondary {
+        color: var(--text-muted);
+    }
+</style>
+
+{{-- Header Halaman --}}
+<div class="page-actions">
+    <div>
+        <h1 class="page-header-title">Informasi {{ $geositeTitle }}</h1>
     </div>
+    <a href="{{ url('/admin/geosite/'.$geosite.'/informasi/create') }}" class="btn-bi-tambah">
+        <i class="fas fa-plus"></i>
+        Tambah Informasi
+    </a>
+</div>
+
+{{-- Alert System --}}
+@if(session('success'))
+    <div class="alert alert-success border-0 shadow-sm mb-4">
+        <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger border-0 shadow-sm mb-4">
+        <i class="fas fa-exclamation-circle me-2"></i> {{ session('error') }}
+    </div>
+@endif
+
+{{-- Konten Utama --}}
+<div class="admin-card">
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th width="5%">NO</th>
+                    <th width="12%">GAMBAR</th>
+                    <th width="38%">JUDUL INFORMASI</th>
+                    <th width="15%">KATEGORI</th>
+                    <th width="15%">STATUS</th>
+                    <th width="15%">AKSI</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($informasi as $key => $item)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    
+                    {{-- Ganti blok gambar lama dengan kode pintar di bawah ini --}}
+                    <td>
+                        @if($item->gambar)
+                            @php
+                                $gambarPath = $item->gambar;
+                                // Jalur Utama: Jika bukan URL eksternal atau base64, arahkan ke asset storage
+                                if (!\Illuminate\Support\Str::startsWith($gambarPath, ['http://', 'https://', 'data:'])) {
+                                    $gambarPath = asset('storage/' . ltrim($gambarPath, '/'));
+                                }
+                            @endphp
+                            {{-- Jika jalur utama gagal dimuat (terbakar/broken), onerror akan otomatis mencoba jalur alternatif public/ --}}
+                            <img src="{{ $gambarPath }}" 
+                                alt="Gambar Informasi" 
+                                class="thumbnail" 
+                                onerror="this.onerror=null; this.src='{{ asset(ltrim($item->gambar, '/')) }}'; this.alt='Alternatif';">
+                        @else
+                            <div class="placeholder-img">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                        @endif
+                    </td>
+                    {{-- Judul & ID --}}
+                    <td>
+                        <div style="font-weight: 700; color: var(--text-heading); font-size: 1rem; line-height: 1.4;">
+                            {{ $item->judul }}
+                        </div>
+                        <div style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted); margin-top: 0.25rem;">
+                            ID: {{ $item->id }}
+                        </div>
+                    </td>
+
+                    {{-- Kategori --}}
+                    <td>
+                        <span class="badge-chip {{ $item->kategori == 'tele' ? 'chip-primary' : 'chip-secondary' }}">
+                            {{ $item->kategori ?? '-' }}
+                        </span>
+                    </td>
+
+                    {{-- Status --}}
+                    <td>
+                        <span class="badge-status {{ $item->status ? 'status-active' : 'status-inactive' }}">
+                            {{ $item->status ? 'Aktif' : 'Draft' }}
+                        </span>
+                    </td>
+
+                    {{-- Kolom Aksi Terproteksi No-Wrap --}}
+                    <td style="white-space: nowrap; width: 1%;">
+                        <div class="actions-group">
+                            {{-- View / Detail --}}
+                            <a href="{{ url('/admin/geosite/'.$geosite.'/informasi/'.$item->id) }}" class="action-btn btn-view" title="Lihat detail">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            
+                            {{-- Edit --}}
+                            <a href="{{ url('/admin/geosite/'.$geosite.'/informasi/'.$item->id.'/edit') }}" class="action-btn btn-edit" title="Edit informasi">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                            
+                            {{-- Delete --}}
+                            <form action="{{ url('/admin/geosite/'.$geosite.'/informasi/'.$item->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus informasi ini?')" style="display:inline-block; margin: 0; padding: 0;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="action-btn btn-delete" title="Hapus informasi">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="6" class="text-center py-5 text-secondary">
+                        <i class="fas fa-database fa-2x mb-3 d-block" style="color: var(--text-muted); opacity: 0.5;"></i>
+                        Belum ada data informasi. <a href="{{ url('/admin/geosite/'.$geosite.'/informasi/create') }}" class="text-decoration-none" style="color: var(--bi-blue);">Tambah sekarang</a>
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    {{-- Pagination Terproteksi --}}
+    @if(isset($informasi) && $informasi->hasPages())
+    <div class="d-flex justify-content-end mt-4">
+        {{ $informasi->links() }}
+    </div>
+    @endif
 </div>
 @endsection

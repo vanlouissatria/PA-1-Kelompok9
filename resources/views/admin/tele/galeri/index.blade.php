@@ -1,136 +1,363 @@
+{{-- resources/views/admin/tele/galeri/index.blade.php --}}
 @extends('layouts.admin')
 
-@section('title')
-    Kelola Galeri - {{ $geositeTitle }}
-@endsection
+@section('title', 'Manajemen Galeri')
 
 @section('content')
-<div class="container-fluid">
-    <div class="card">
-        
-        {{-- Header --}}
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h3 class="card-title">Data Galeri {{ $geositeTitle }}</h3>
+<style>
+    :root {
+        --bi-blue: #002F5F;
+        --bi-blue-dark: #001f3f;
+        --bi-yellow: #f59e0b;
+        --bi-red: #ef4444;
+        --text-heading: #111827;
+        --text-muted: #6b7280;
+        --surface-bg: #ffffff;
+        --border-light: #e5e7eb;
+    }
 
-            <a href="{{ url('/admin/geosite/'.$geosite.'/galeri/create') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Tambah Galeri
-            </a>
-        </div>
+    .page-header-title {
+        font-size: 2.75rem;
+        font-weight: 800;
+        color: var(--text-heading);
+        margin-bottom: 1rem;
+        margin-top: 0;
+    }
 
-        <div class="card-body">
+    .page-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.75rem;
+        flex-wrap: wrap;
+    }
 
-            {{-- Alert Success --}}
-            @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
+    .btn-bi-tambah {
+        background-color: var(--bi-blue) !important;
+        color: white !important;
+        border: none !important;
+        padding: 0.95rem 1.4rem;
+        border-radius: 0.85rem;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none !important;
+        box-shadow: 0 16px 32px rgba(0, 47, 95, 0.12);
+        transition: transform 0.2s ease, background-color 0.2s ease;
+    }
 
-            {{-- Table --}}
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Gambar</th>
-                            <th>Judul</th>
-                            <th>Kategori</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
+    .btn-bi-tambah:hover {
+        background-color: var(--bi-blue-dark) !important;
+        transform: translateY(-1px);
+    }
 
-                    <tbody>
-                        @forelse($galeri as $key => $item)
-                        <tr>
+    .admin-card {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
 
-                            {{-- Nomor --}}
-                            <td>
-                                {{ $loop->iteration }}
-                            </td>
+    .table thead th {
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        border-top: none;
+        border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+        text-transform: uppercase;
+        padding: 1rem 0.75rem;
+        background: transparent;
+    }
 
-                            {{-- Gambar --}}
-                            <td class="text-center">
-                                @if($item->gambar)
-                                    <img 
-                                        src="{{ $item->gambar }}" 
-                                        width="80" 
-                                        height="60"
-                                        style="object-fit: cover; border-radius: 8px;"
-                                    >
-                                @else
-                                    <div style="
-                                        width:80px;
-                                        height:60px;
-                                        background:#f1f5f9;
-                                        display:flex;
-                                        align-items:center;
-                                        justify-content:center;
-                                        border-radius:8px;
-                                    ">
-                                        <i class="fas fa-image text-muted"></i>
-                                    </div>
-                                @endif
-                            </td>
+    .table td {
+        vertical-align: middle;
+        padding: 1rem 0.75rem;
+        border-color: rgba(229, 231, 235, 0.9);
+    }
 
-                            {{-- Judul --}}
-                            <td>
-                                {{ $item->judul }}
-                            </td>
+    .table tbody tr:hover {
+        background: rgba(229, 231, 235, 0.3);
+    }
 
-                            {{-- Kategori --}}
-                            <td>
-                                <span class="badge bg-info">
-                                    {{ $item->kategori }}
-                                </span>
-                            </td>
+    .thumbnail {
+        width: 90px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 16px;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+    }
 
-                            {{-- Status --}}
-                            <td>
-                                @if($item->status)
-                                    <span class="badge bg-success">
-                                        Aktif
-                                    </span>
-                                @else
-                                    <span class="badge bg-secondary">
-                                        Draft
-                                    </span>
-                                @endif
-                            </td>
+    .placeholder-img {
+        width: 90px;
+        height: 70px;
+        border-radius: 16px;
+        background: #f3f4f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #9ca3af;
+        font-size: 0.9rem;
+    }
 
-                            {{-- Aksi --}}
-                            <td>
-                                <div class="btn-group" style="display:flex; gap:5px;">
-                                    <a href="{{ url('/admin/geosite/'.$geosite.'/galeri/'.$item->id) }}" class="btn btn-success btn-sm" title="Lihat"><i class="fas fa-eye"></i></a>
-                                    <a href="{{ url('/admin/geosite/'.$geosite.'/galeri/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
-                                    <form action="{{ url('/admin/geosite/'.$geosite.'/galeri/'.$item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" title="Hapus"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                </div>
-                            </td>
+    .badge-chip {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.55rem 0.9rem;
+        border-radius: 999px;
+        background: #f3f4f6;
+        color: var(--text-heading);
+        font-size: 0.82rem;
+        font-weight: 600;
+        border: 1px solid #e5e7eb;
+    }
 
-                        </tr>
+    .badge-status {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.55rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 700;
+    }
 
-                        @empty
-                        <tr>
-                            <td colspan="6" class="text-center">
-                                Belum ada data galeri
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
+    .status-active {
+        background: rgba(16, 185, 129, 0.12);
+        color: #065f46;
+        border: 1px solid rgba(16, 185, 129, 0.25);
+    }
 
-                </table>
-            </div>
+    .status-inactive {
+        background: rgba(107, 114, 128, 0.12);
+        color: #374151;
+        border: 1px solid rgba(107, 114, 128, 0.25);
+    }
 
-            {{-- Pagination --}}
-            <div class="mt-3">
-                {{ $galeri->links() }}
-            </div>
+    .actions-group {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
+        gap: 0.5rem;
+    }
 
-        </div>
+    .action-btn {
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: white !important;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        text-decoration: none;
+        font-size: 0.85rem;
+    }
+
+    .action-btn:hover {
+        transform: translateY(-1px);
+        opacity: 0.95;
+    }
+
+    .btn-edit {
+        background: #f59e0b !important;
+        color: #000 !important;
+    }
+
+    .btn-delete {
+        background: #ef4444 !important;
+    }
+
+    .text-secondary {
+        color: var(--text-muted);
+    }
+</style>
+
+{{-- Header Halaman --}}
+<div class="page-actions">
+    <div>
+        <h1 class="page-header-title">Manajemen Galeri</h1>
+    </div>
+    <a href="{{ route('admin.geosite.galeri.create', ['geosite' => 'tele']) }}" class="btn-bi-tambah">
+        <i class="fas fa-plus"></i>
+        Tambah Galeri
+    </a>
+</div>
+
+{{-- Alert Success --}}
+@if(session('success'))
+    <div class="alert alert-success border-0 shadow-sm mb-4">
+        {{ session('success') }}
+    </div>
+@endif
+
+{{-- Konten Utama --}}
+<div class="admin-card">
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th width="5%">NO</th>
+                    <th width="12%">GAMBAR</th>
+                    <th width="40%">JUDUL</th>
+                    <th width="18%">KATEGORI</th>
+                    <th width="15%">STATUS</th>
+                    <th width="10%">AKSI</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($galeri as $index => $item)
+                <tr>
+                    {{-- Nomor --}}
+                    <td>{{ $galeri->firstItem() + $index }}</td>
+                    
+                    {{-- Gambar --}}
+                    <td>
+                        @if($item->gambar)
+                            {{-- Menggunakan asset($item->gambar) agar sama dengan halaman utama --}}
+                            <img src="{{ asset($item->gambar) }}" alt="Galeri" class="thumbnail" onerror="this.onerror=null; this.src='{{ asset('storage/' . $item->gambar) }}';">
+                        @else
+                            <div class="placeholder-img">No Image</div>
+                        @endif
+                    </td>
+
+                    {{-- Judul --}}
+                    <td>
+                        <div style="font-weight: 700; color: var(--text-heading);">{{ $item->judul }}</div>
+                    </td>
+
+                    {{-- Kategori --}}
+                    <td>
+                        <span class="badge-chip">
+                            {{ ucfirst($item->kategori) }}
+                        </span>
+                    </td>
+
+                    {{-- Status --}}
+                    <td>
+                        <span class="badge-status {{ $item->status ? 'status-active' : 'status-inactive' }}">
+                            {{ $item->status ? 'Aktif' : 'Nonaktif' }}
+                        </span>
+                    </td>
+
+                    {{-- Aksi --}}
+                    <td style="white-space: nowrap; width: 1%;">
+                        <div class="actions-group">
+                            
+                            {{-- Toggle Status --}}
+                            <button type="button"
+                                    class="action-btn toggle-status-btn"
+                                    data-id="{{ $item->id }}"
+                                    data-status="{{ $item->status }}"
+                                    title="{{ $item->status ? 'Nonaktifkan' : 'Aktifkan' }}"
+                                    style="background-color: {{ $item->status ? '#16a34a' : '#6b7280' }}; margin: 0;">
+                                <i class="fas {{ $item->status ? 'fa-eye' : 'fa-eye-slash' }}"></i>
+                            </button>
+                            
+                            {{-- Edit --}}
+                            <a href="{{ route('admin.geosite.galeri.edit', ['geosite' => 'tele', 'id' => $item->id]) }}" 
+                               class="action-btn btn-edit" 
+                               title="Edit"
+                               style="margin: 0;">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                            
+                            {{-- Hapus --}}
+                            <form action="{{ route('admin.geosite.galeri.destroy', ['geosite' => 'tele', 'id' => $item->id]) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus galeri ini?');" class="d-inline-block" style="margin: 0; padding: 0;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="action-btn btn-delete" title="Hapus" style="margin: 0;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+
+                        </div>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="6" class="text-center py-5 text-secondary">
+                        Data galeri untuk Tele masih kosong. <a href="{{ route('admin.geosite.galeri.create', ['geosite' => 'tele']) }}" class="text-decoration-none" style="color: var(--bi-blue);">Tambah sekarang</a>
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    {{-- Pagination --}}
+    <div class="mt-4">
+        {{ $galeri->links() }}
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButtons = document.querySelectorAll('.toggle-status-btn');
+
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = this.getAttribute('data-id');
+            const currentStatus = parseInt(this.getAttribute('data-status'));
+            const btn = this;
+            const icon = btn.querySelector('i');
+
+            if (icon) {
+                icon.className = 'fas fa-spinner fa-spin';
+            }
+            btn.disabled = true;
+
+            fetch(`{{ url('/admin/geosite/tele/galeri/toggle-status') }}/${itemId}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const newStatus = data.status;
+
+                    if (newStatus) {
+                        btn.style.backgroundColor = '#16a34a';
+                        btn.setAttribute('data-status', '1');
+                        btn.setAttribute('title', 'Nonaktifkan');
+                        if (icon) icon.className = 'fas fa-eye';
+                    } else {
+                        btn.style.backgroundColor = '#6b7280';
+                        btn.setAttribute('data-status', '0');
+                        btn.setAttribute('title', 'Aktifkan');
+                        if (icon) icon.className = 'fas fa-eye-slash';
+                    }
+
+                    const row = btn.closest('tr');
+                    const statusCell = row.querySelector('td:nth-child(5)');
+
+                    if (newStatus) {
+                        statusCell.innerHTML = '<span class="badge-status status-active">Aktif</span>';
+                    } else {
+                        statusCell.innerHTML = '<span class="badge-status status-inactive">Nonaktif</span>';
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                if (icon) {
+                    icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
+                }
+            })
+            .finally(() => {
+                btn.disabled = false;
+            });
+        });
+    });
+});
+</script>
 @endsection
