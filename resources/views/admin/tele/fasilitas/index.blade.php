@@ -38,7 +38,7 @@
                                     <i class="fas fa-image fa-2x"></i>
                                 @endif
                             </td>
-                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->nama }}</td> 
                             <td>{{ Str::limit($item->deskripsi, 50) }}</td>
                             <td>Rp {{ number_format($item->harga ?? 0, 0, ',', '.') }}</td>
                             <td>
