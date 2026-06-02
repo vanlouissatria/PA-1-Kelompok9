@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-    public function run()
+    public function 
+    run()
     {
         // Cek apakah sudah ada, jika belum buat
         User::firstOrCreate(
