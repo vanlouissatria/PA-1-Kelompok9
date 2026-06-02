@@ -697,12 +697,11 @@
             <i class="fas fa-map-marked-alt"></i> Destinasi
         </a>
         <a href="{{ route('admin.warisan.index') }}" class="{{ request()->routeIs('admin.warisan.*') ? 'active' : '' }}">
-    <i class="fas fa-landmark"></i> Warisan Alam & Budaya
-        <a href="{{ route('admin.kontak.index') }}"
-   class="{{ request()->routeIs('admin.kontak.*') ? 'active' : '' }}">
-    <i class="fas fa-address-book"></i> Kontak
-</a>
-</a>
+            <i class="fas fa-landmark"></i> Warisan Alam & Budaya
+        </a>
+        <a href="{{ route('admin.kontak.index') }}" class="{{ request()->routeIs('admin.kontak.*') ? 'active' : '' }}">
+            <i class="fas fa-address-book"></i> Kontak
+        </a>
 
         @php
             $validGeosites = [
