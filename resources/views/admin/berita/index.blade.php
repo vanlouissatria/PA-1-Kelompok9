@@ -16,6 +16,7 @@
         --border-light: #e5e7eb;
     }
 
+    /* Keselarasan Ukuran Judul Utama: 2.75rem */
     .page-header-title {
         font-size: 2.75rem;
         font-weight: 800;
@@ -53,7 +54,7 @@
         transform: translateY(-1px);
     }
 
-    /* Menyatu dengan background dasar sesuai format referensi */
+    /* Transparan tanpa background card putih bawaan bootstrap */
     .admin-card {
         background: transparent;
         border: none;
@@ -124,15 +125,21 @@
         border: 1px solid rgba(107, 114, 128, 0.25);
     }
 
+    /* Solusi Penumpukan Gambar: Memaksa deretan tombol menyamping horizontal */
     .actions-group {
-        display: flex;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
         gap: 0.5rem;
-        flex-wrap: wrap;
+        flex-wrap: nowrap !important;
     }
 
+    /* Ukuran Tombol Aksi Kotak Presisi 40px x 40px */
     .action-btn {
-        min-width: 40px;
-        min-height: 40px;
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
         border-radius: 12px;
         display: inline-flex;
         align-items: center;
@@ -143,6 +150,8 @@
         transition: transform 0.2s ease, opacity 0.2s ease;
         text-decoration: none;
         font-size: 0.85rem;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .action-btn:hover {
@@ -178,7 +187,7 @@
 {{-- Alert Success --}}
 @if(session('success'))
     <div class="alert alert-success border-0 shadow-sm mb-4">
-        {{ session('success') }}
+        <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
     </div>
 @endif
 
@@ -190,56 +199,78 @@
                 <tr>
                     <th width="5%">NO</th>
                     <th width="12%">GAMBAR</th>
-                    <th width="43%">JUDUL</th>
+                    <th width="38%">JUDUL</th>
                     <th width="15%">PENULIS</th>
                     <th width="15%">STATUS</th>
-                    <th width="10%">AKSI</th>
+                    <th width="15%">AKSI</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($berita as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
+                    
+                    {{-- Gambar --}}
                     <td>
                         @if($item->gambar)
-                            <img src="{{ $item->gambar }}" alt="Gambar Berita" class="thumbnail">
+                            @php
+                                $gambarPath = $item->gambar;
+                                if (!\Illuminate\Support\Str::startsWith($gambarPath, ['http://', 'https://', 'data:'])) {
+                                    $gambarPath = asset('storage/' . ltrim($gambarPath, '/'));
+                                }
+                            @endphp
+                            <img src="{{ $gambarPath }}" alt="Gambar Berita" class="thumbnail">
                         @else
                             <div class="placeholder-img">
                                 <i class="fas fa-image"></i>
                             </div>
                         @endif
                     </td>
+
+                    {{-- Judul Berita --}}
                     <td>
-                        <div style="font-weight: 700; color: var(--text-heading);">{{ $item->judul }}</div>
+                        <div style="font-weight: 700; color: var(--text-heading); font-size: 1rem;">
+                            {{ $item->judul }}
+                        </div>
                     </td>
-                    <td class="text-secondary" style="font-weight: 600;">{{ $item->penulis ?? '-' }}</td>
+
+                    {{-- Penulis --}}
+                    <td>
+                        <div style="font-weight: 600; color: var(--text-heading);">
+                            {{ $item->penulis ?? 'Admin' }}
+                        </div>
+                    </td>
+
+                    {{-- Status --}}
                     <td>
                         <span class="badge-status {{ $item->status ? 'status-active' : 'status-inactive' }}">
-                            {{ $item->status ? 'Aktif' : 'Nonaktif' }}
+                            {{ $item->status ? 'Aktif' : 'Draft' }}
                         </span>
                     </td>
-                    <td>
+
+                    {{-- Kolom Aksi Terproteksi No-Wrap --}}
+                    <td style="white-space: nowrap; width: 1%;">
                         <div class="actions-group">
                             {{-- Toggle Status --}}
                             <button type="button"
                                     class="action-btn toggle-status-btn"
                                     data-id="{{ $item->id }}"
                                     data-status="{{ $item->status }}"
-                                    title="{{ $item->status ? 'Nonaktifkan' : 'Aktifkan' }}"
+                                    title="{{ $item->status ? 'Nonaktifkan berita ini' : 'Aktifkan berita ini' }}"
                                     style="background-color: {{ $item->status ? '#16a34a' : '#6b7280' }};">
                                 <i class="fas {{ $item->status ? 'fa-eye' : 'fa-eye-slash' }}"></i>
                             </button>
                             
                             {{-- Edit --}}
-                            <a href="{{ route('admin.berita.edit', $item->id) }}" class="action-btn btn-edit" title="Edit">
+                            <a href="{{ route('admin.berita.edit', $item->id) }}" class="action-btn btn-edit" title="Edit berita">
                                 <i class="fas fa-pen"></i>
                             </a>
                             
                             {{-- Delete --}}
-                            <form action="{{ route('admin.berita.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus berita ini?');" style="display:inline-block;">
+                            <form action="{{ route('admin.berita.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus berita ini?');" style="display:inline-block; margin: 0; padding: 0;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="action-btn btn-delete" title="Hapus">
+                                <button type="submit" class="action-btn btn-delete" title="Hapus berita">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
@@ -249,7 +280,8 @@
                 @empty
                 <tr>
                     <td colspan="6" class="text-center py-5 text-secondary">
-                        Data masih kosong. <a href="{{ route('admin.berita.create') }}" class="text-decoration-none" style="color: var(--bi-blue);">Tambah sekarang</a>
+                        <i class="fas fa-database fa-2x mb-3 d-block" style="color: var(--text-muted); opacity: 0.5;"></i>
+                        Data berita masih kosong. <a href="{{ route('admin.berita.create') }}" class="text-decoration-none" style="color: var(--bi-blue);">Tambah sekarang</a>
                     </td>
                 </tr>
                 @endforelse
@@ -257,108 +289,82 @@
         </table>
     </div>
 
-    <div class="mt-4">
+    {{-- Pagination --}}
+    <div class="d-flex justify-content-end mt-4">
         {{ $berita->links() }}
     </div>
 </div>
 
 <script>
-(function() {
-    function initBeritaToggleButtons(){
-        const toggleButtons = document.querySelectorAll('.toggle-status-btn');
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButtons = document.querySelectorAll('.toggle-status-btn');
 
-        toggleButtons.forEach(button => {
-            if (button.__toggleBound) return;
-            button.__toggleBound = true;
+    toggleButtons.forEach(button => {
+        if (button.__toggleBound) return;
+        button.__toggleBound = true;
 
-            button.addEventListener('click', function() {
-                const itemId = this.getAttribute('data-id');
-                const currentStatus = parseInt(this.getAttribute('data-status'));
-                const btn = this;
-                const icon = btn.querySelector('i');
+        button.addEventListener('click', function() {
+            const itemId = this.getAttribute('data-id');
+            const currentStatus = parseInt(this.getAttribute('data-status'));
+            const btn = this;
+            const icon = btn.querySelector('i');
 
-                console.debug('Toggle click:', { id: itemId, status: currentStatus });
+            if (icon) icon.className = 'fas fa-spinner fa-spin';
+            btn.disabled = true;
 
-                if (icon) {
-                    icon.className = 'fas fa-spinner fa-spin';
+            fetch(`{{ url('/admin/berita/toggle-status') }}/${itemId}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('HTTP error! status: ' + response.status);
                 }
-                btn.disabled = true;
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.success) {
+                    const newStatus = data.status;
 
-                // URL Ajax menyesuaikan endpoint berita Anda
-                const finalUrl = `{{ url('/admin/berita/toggle-status') }}/${itemId}`;
-
-                fetch(finalUrl, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({})
-                })
-                .then(response => {
-                    console.debug('Toggle response status:', response.status);
-                    if (!response.ok) {
-                        if (response.status === 419) {
-                            throw new Error('CSRF token mismatch (419). Silakan refresh halaman dan coba lagi.');
-                        }
-                        return response.text().then(txt => { throw new Error('HTTP ' + response.status + ': ' + txt); });
+                    if (newStatus) {
+                        btn.style.backgroundColor = '#16a34a';
+                        btn.setAttribute('data-status', '1');
+                        btn.setAttribute('title', 'Nonaktifkan berita ini');
+                        if (icon) icon.className = 'fas fa-eye';
+                    } else {
+                        btn.style.backgroundColor = '#6b7280';
+                        btn.setAttribute('data-status', '0');
+                        btn.setAttribute('title', 'Aktifkan berita ini');
+                        if (icon) icon.className = 'fas fa-eye-slash';
                     }
-                    return response.json().catch(err => { throw new Error('Invalid JSON response'); });
-                })
-                .then(data => {
-                    console.debug('Toggle data:', data);
 
-                    if (data && data.success) {
-                        const newStatus = data.status;
+                    const row = btn.closest('tr');
+                    const statusCell = row.querySelector('td:nth-child(5)');
 
-                        if (newStatus) {
-                            btn.style.backgroundColor = '#16a34a';
-                            btn.setAttribute('data-status', '1');
-                            btn.setAttribute('title', 'Nonaktifkan');
-                            if (icon) icon.className = 'fas fa-eye';
-                        } else {
-                            btn.style.backgroundColor = '#6b7280';
-                            btn.setAttribute('data-status', '0');
-                            btn.setAttribute('title', 'Aktifkan');
-                            if (icon) icon.className = 'fas fa-eye-slash';
-                        }
-
-                        const row = btn.closest('tr');
-                        // Menargetkan kolom ke-5 (Status) di tabel berita
-                        const statusCell = row.querySelector('td:nth-child(5)');
-
+                    if (statusCell) {
                         if (newStatus) {
                             statusCell.innerHTML = '<span class="badge-status status-active">Aktif</span>';
                         } else {
-                            statusCell.innerHTML = '<span class="badge-status status-inactive">Nonaktif</span>';
+                            statusCell.innerHTML = '<span class="badge-status status-inactive">Draft</span>';
                         }
-                    } else {
-                        throw new Error('Struktur respon tidak sesuai');
                     }
-                })
-                .catch(error => {
-                    console.error('Toggle Error:', error);
-                    try { window.alert('Gagal mengubah status: ' + error.message); } catch(e){}
-
-                    if (icon) {
-                        icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
-                    }
-                })
-                .finally(() => {
-                    btn.disabled = false;
-                });
+                }
+            })
+            .catch(error => {
+                console.error('Toggle Error:', error);
+                alert('Gagal mengubah status berita.');
+                if (icon) icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
+            })
+            .finally(() => {
+                btn.disabled = false;
             });
         });
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initBeritaToggleButtons);
-    } else {
-        initBeritaToggleButtons();
-    }
-
-    window.initBeritaToggle = initBeritaToggleButtons;
-})();
+    });
+});
 </script>
 @endsection
