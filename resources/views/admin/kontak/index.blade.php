@@ -1,3 +1,4 @@
+{{-- resources/views/admin/kontak/index.blade.php --}}
 @extends('layouts.admin')
 
 @section('title', 'Manajemen Kontak')
@@ -6,155 +7,267 @@
 <style>
     :root {
         --bi-blue: #002F5F;
+        --bi-blue-dark: #001f3f;
+        --bi-yellow: #f59e0b;
+        --bi-red: #ef4444;
+        --text-heading: #111827;
+        --text-muted: #6b7280;
+        --surface-bg: #ffffff;
+        --border-light: #e5e7eb;
     }
 
-    /* Judul Utama yang sangat besar dan tebal */
+    /* Keselarasan Ukuran Judul: 2.75rem */
     .page-header-title {
-        font-size: 2.5rem; 
+        font-size: 2.75rem;
         font-weight: 800;
-        color: #000;
-        margin-bottom: 10px;
+        color: var(--text-heading);
+        margin-bottom: 1rem;
         margin-top: 0;
     }
 
-    /* Tombol Tambah di bawah judul (Memastikan berbentuk tombol kotak biru solid) */
+    .page-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.75rem;
+        flex-wrap: wrap;
+    }
+
     .btn-bi-tambah {
         background-color: var(--bi-blue) !important;
         color: white !important;
         border: none !important;
-        padding: 8px 18px;
-        border-radius: 6px;
-        font-weight: 600;
-        text-decoration: none !important;
+        padding: 0.95rem 1.4rem;
+        border-radius: 0.85rem;
+        font-weight: 700;
         display: inline-flex;
         align-items: center;
-        margin-bottom: 25px;
-        font-size: 0.95rem;
-        transition: all 0.2s;
+        gap: 0.75rem;
+        text-decoration: none !important;
+        box-shadow: 0 16px 32px rgba(0, 47, 95, 0.12);
+        transition: transform 0.2s ease, background-color 0.2s ease;
     }
 
     .btn-bi-tambah:hover {
-        background-color: #001f3f !important;
+        background-color: var(--bi-blue-dark) !important;
         transform: translateY(-1px);
     }
 
-    /* Style Tabel Header Abu-abu Modern */
-    .table thead th {
-        color: #8A92A6;
-        font-size: 0.85rem;
-        font-weight: 700;
-        border-top: none;
-        border-bottom: 1px solid #EEEEEE;
-        text-transform: uppercase;
-        padding-bottom: 15px;
-        background-color: transparent;
-    }
-
-    .card {
+    /* Transparan tanpa background card putih bawaan bootstrap */
+    .admin-card {
+        background: transparent;
         border: none;
         box-shadow: none;
-        background: transparent;
-    }
-
-    .card-body {
         padding: 0;
     }
 
-    .badge-status {
-        padding: 5px 12px;
-        border-radius: 6px;
+    .table thead th {
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        border-top: none;
+        border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+        text-transform: uppercase;
+        padding: 1rem 0.75rem;
+        background: transparent;
+    }
+
+    .table td {
+        vertical-align: middle;
+        padding: 1rem 0.75rem;
+        border-color: rgba(229, 231, 235, 0.9);
+    }
+
+    .table tbody tr:hover {
+        background: rgba(229, 231, 235, 0.3);
+    }
+
+    .badge-chip {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.55rem 0.9rem;
+        border-radius: 999px;
+        background: #f3f4f6;
+        color: var(--text-heading);
+        font-size: 0.82rem;
         font-weight: 600;
+        border: 1px solid #e5e7eb;
+    }
+
+    .badge-status {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.55rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 700;
+    }
+
+    .status-active {
+        background: rgba(16, 185, 129, 0.12);
+        color: #065f46;
+        border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .status-inactive {
+        background: rgba(239, 68, 68, 0.12);
+        color: #991b1b;
+        border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    /* Kunci Flexbox: Menjaga deretan tombol aksi tetap menyamping */
+    .actions-group {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: nowrap !important;
+    }
+
+    /* Ukuran Tombol Aksi Kotak Presisi 40px x 40px */
+    .action-btn {
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        text-decoration: none;
+        font-size: 0.85rem;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .action-btn:hover {
+        transform: translateY(-1px);
+        opacity: 0.95;
+    }
+
+    .btn-edit {
+        background: #f59e0b;
+        color: #000;
+    }
+
+    .btn-delete {
+        background: #ef4444;
+    }
+
+    .text-secondary {
+        color: var(--text-muted);
     }
 </style>
 
-<div class="container-fluid">
-    {{-- 1. Judul Halaman --}}
-    <h1 class="page-header-title">Data Kontak</h1>
-
-    {{-- 2. Tombol Tambah di Bawah Judul --}}
+{{-- Header Halaman --}}
+<div class="page-actions">
+    <div>
+        <h1 class="page-header-title">Data Kontak</h1>
+    </div>
     <a href="{{ route('admin.kontak.create') }}" class="btn-bi-tambah">
-        <i class="fas fa-plus me-2" style="font-size: 0.8rem;"></i> Tambah Kontak
+        <i class="fas fa-plus"></i>
+        Tambah Kontak
     </a>
+</div>
 
-    {{-- 3. Notifikasi Sukses --}}
-    @if(session('success'))
-        <div class="alert alert-success border-0 shadow-sm mb-4">
-            {{ session('success') }}
-        </div>
-    @endif
+{{-- Alert Success --}}
+@if(session('success'))
+    <div class="alert alert-success border-0 shadow-sm mb-4">
+        <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
+    </div>
+@endif
 
-    {{-- 4. Area Tabel --}}
+{{-- Konten Utama --}}
+<div class="admin-card">
     <div class="table-responsive">
-        <table class="table align-middle">
+        <table class="table align-middle mb-0">
             <thead>
                 <tr>
                     <th width="5%">NO</th>
-                    <th width="30%">JUDUL / EMAIL</th>
-                    <th width="35%">ALAMAT</th>
+                    <th width="28%">JUDUL / EMAIL</th>
+                    <th width="32%">ALAMAT</th>
                     <th width="15%">TELEPON</th>
                     <th width="10%">STATUS</th>
-                    <th width="15%">AKSI</th>
+                    <th width="10%">AKSI</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($kontak as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
+                    
+                    {{-- Judul / Email --}}
                     <td>
-                        <div style="font-weight: 600; color: #111;">{{ $item->judul }}</div>
-                        <small class="text-muted">{{ $item->email1 ?? '-' }}</small>
+                        <div style="font-weight: 700; color: var(--text-heading); font-size: 1rem;">
+                            {{ $item->judul }}
+                        </div>
+                        <small class="text-secondary" style="font-weight: 500;">
+                            {{ $item->email1 ?? '-' }}
+                        </small>
                     </td>
+
+                    {{-- Alamat --}}
                     <td>
-                        <div title="{{ $item->alamat }}">
+                        <div title="{{ $item->alamat }}" style="color: var(--text-heading); font-weight: 500;">
                             {{ \Illuminate\Support\Str::limit($item->alamat, 60) }}
                         </div>
                     </td>
-                    <td>{{ $item->telepon1 ?? '-' }}</td>
+
+                    {{-- Telepon --}}
                     <td>
-                        <span class="badge {{ $item->status ? 'bg-success' : 'bg-danger' }} badge-status">
+                        <span class="badge-chip" style="font-weight: 700;">
+                            {{ $item->telepon1 ?? '-' }}
+                        </span>
+                    </td>
+
+                    {{-- Status --}}
+                    <td>
+                        <span class="badge-status {{ $item->status ? 'status-active' : 'status-inactive' }}">
                             {{ $item->status ? 'Aktif' : 'Tidak' }}
                         </span>
                     </td>
-                    <td>
-                        <div style="display: flex !important; flex-direction: row !important; align-items: center; gap: 8px; justify-content: flex-start;">
-                            
-                            {{-- 1. Tombol Toggle Aktif/Mata --}}
-                            <button type="button" 
-                                    class="btn btn-sm toggle-status-btn" 
+
+                    {{-- Kolom Aksi dengan Proteksi No-Wrap --}}
+                    <td style="white-space: nowrap; width: 1%;">
+                        <div class="actions-group">
+                            {{-- Toggle Status --}}
+                            <button type="button"
+                                    class="action-btn toggle-status-btn"
                                     data-id="{{ $item->id }}"
                                     data-status="{{ $item->status }}"
                                     title="{{ $item->status ? 'Nonaktifkan kontak ini' : 'Aktifkan kontak ini' }}"
-                                    style="font-weight: 600; padding: 6px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; background-color: {{ $item->status ? '#28a745' : '#6c757d' }}; color: white; border: none; cursor: pointer; font-size: 0.85rem; height: 32px; width: 32px; margin: 0;">
+                                    style="background-color: {{ $item->status ? '#16a34a' : '#6b7280' }};">
                                 <i class="fas {{ $item->status ? 'fa-eye' : 'fa-eye-slash' }}"></i>
                             </button>
-
-                            {{-- 2. Tombol Edit Kuning --}}
-                            <a href="{{ route('admin.kontak.edit', $item->id) }}" 
-                            class="btn btn-sm" 
-                            title="Edit kontak ini"
-                            style="font-weight: 600; padding: 6px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; background-color: #ffc107; color: #000; border: none; text-decoration: none; font-size: 0.85rem; height: 32px; width: 32px; margin: 0;">
+                            
+                            {{-- Edit --}}
+                            <a href="{{ route('admin.kontak.edit', $item->id) }}" class="action-btn btn-edit" title="Edit kontak ini">
                                 <i class="fas fa-pen"></i>
                             </a>
-
-                            {{-- 3. Tombol Hapus Merah --}}
-                            <form action="{{ route('admin.kontak.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kontak ini?');" style="display: inline-block; margin: 0; padding: 0;">
+                            
+                            {{-- Delete --}}
+                            <form action="{{ route('admin.kontak.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kontak ini?');" style="display:inline-block; margin: 0; padding: 0;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" 
-                                        class="btn btn-sm" 
-                                        title="Hapus kontak ini"
-                                        style="font-weight: 600; padding: 6px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; background-color: #dc3545; color: white; border: none; cursor: pointer; font-size: 0.85rem; height: 32px; width: 32px; margin: 0;">
+                                <button type="submit" class="action-btn btn-delete" title="Hapus kontak ini">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
-                            
                         </div>
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center py-5 text-muted">
-                        Data masih kosong.
+                    <td colspan="6" class="text-center py-5 text-secondary">
+                        <i class="fas fa-database fa-2x mb-3 d-block" style="color: var(--text-muted); opacity: 0.5;"></i>
+                        Data masih kosong. <a href="{{ route('admin.kontak.create') }}" class="text-decoration-none" style="color: var(--bi-blue);">Tambah sekarang</a>
                     </td>
                 </tr>
                 @endforelse
@@ -163,7 +276,7 @@
     </div>
 
     {{-- Pagination --}}
-    <div class="mt-4">
+    <div class="d-flex justify-content-end mt-4">
         {{ $kontak->links() }}
     </div>
 </div>
@@ -173,16 +286,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const toggleButtons = document.querySelectorAll('.toggle-status-btn');
     
     toggleButtons.forEach(button => {
+        if (button.__toggleBound) return;
+        button.__toggleBound = true;
+
         button.addEventListener('click', function() {
             const itemId = this.getAttribute('data-id');
             const currentStatus = parseInt(this.getAttribute('data-status'));
             const btn = this;
             const icon = btn.querySelector('i');
             
-            icon.className = 'fas fa-spinner fa-spin';
+            if (icon) icon.className = 'fas fa-spinner fa-spin';
             btn.disabled = true;
 
-            const url = '{{ url('admin/kontak/toggle-status') }}' + '/' + itemId;
+            const url = `{{ url('admin/kontak/toggle-status') }}/${itemId}`;
 
             fetch(url, {
                 method: 'POST',
@@ -200,37 +316,39 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                if (data.success) {
+                if (data && data.success) {
                     const newStatus = data.status;
                     
                     if (newStatus) {
-                        btn.style.backgroundColor = '#28a745';
+                        btn.style.backgroundColor = '#16a34a';
                         btn.setAttribute('data-status', '1');
                         btn.setAttribute('title', 'Nonaktifkan kontak ini');
-                        icon.className = 'fas fa-eye';
+                        if (icon) icon.className = 'fas fa-eye';
                     } else {
-                        btn.style.backgroundColor = '#6c757d';
+                        btn.style.backgroundColor = '#6b7280';
                         btn.setAttribute('data-status', '0');
                         btn.setAttribute('title', 'Aktifkan kontak ini');
-                        icon.className = 'fas fa-eye-slash';
+                        if (icon) icon.className = 'fas fa-eye-slash';
                     }
 
                     const row = btn.closest('tr');
                     const statusCell = row.querySelector('td:nth-child(5)');
-                    if (newStatus) {
-                        statusCell.innerHTML = '<span class="badge bg-success badge-status">Aktif</span>';
-                    } else {
-                        statusCell.innerHTML = '<span class="badge bg-danger badge-status">Tidak</span>';
+                    if (statusCell) {
+                        if (newStatus) {
+                            statusCell.innerHTML = '<span class="badge-status status-active">Aktif</span>';
+                        } else {
+                            statusCell.innerHTML = '<span class="badge-status status-inactive">Tidak</span>';
+                        }
                     }
                 } else {
                     alert('Gagal memperbarui status');
-                    icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
+                    if (icon) icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
                 alert('Terjadi kesalahan sistem atau rute tidak ditemukan.');
-                icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
+                if (icon) icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
             })
             .finally(() => {
                 btn.disabled = false;

@@ -7,81 +7,211 @@
 <style>
     :root {
         --bi-blue: #002F5F;
+        --bi-blue-dark: #001f3f;
+        --bi-yellow: #f59e0b;
+        --bi-red: #ef4444;
+        --text-heading: #111827;
+        --text-muted: #6b7280;
+        --surface-bg: #ffffff;
+        --border-light: #e5e7eb;
     }
 
     .page-header-title {
-        font-size: 2.5rem; 
+        font-size: 2.75rem;
         font-weight: 800;
-        color: #000;
-        margin-bottom: 10px;
+        color: var(--text-heading);
+        margin-bottom: 1rem;
         margin-top: 0;
+    }
+
+    .page-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.75rem;
+        flex-wrap: wrap;
     }
 
     .btn-bi-tambah {
         background-color: var(--bi-blue) !important;
         color: white !important;
         border: none !important;
-        padding: 8px 18px;
-        border-radius: 6px;
-        font-weight: 600;
-        text-decoration: none !important;
+        padding: 0.95rem 1.4rem;
+        border-radius: 0.85rem;
+        font-weight: 700;
         display: inline-flex;
         align-items: center;
-        margin-bottom: 25px;
-        font-size: 0.95rem;
-        transition: all 0.2s;
+        gap: 0.75rem;
+        text-decoration: none !important;
+        box-shadow: 0 16px 32px rgba(0, 47, 95, 0.12);
+        transition: transform 0.2s ease, background-color 0.2s ease;
     }
 
     .btn-bi-tambah:hover {
-        background-color: #001f3f !important;
+        background-color: var(--bi-blue-dark) !important;
         transform: translateY(-1px);
     }
 
+    .admin-card {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+
     .table thead th {
-        color: #8A92A6;
-        font-size: 0.85rem;
+        color: var(--text-muted);
+        font-size: 0.78rem;
         font-weight: 700;
         border-top: none;
-        border-bottom: 1px solid #EEEEEE;
+        border-bottom: 1px solid rgba(229, 231, 235, 0.9);
         text-transform: uppercase;
-        padding-bottom: 15px;
-        background-color: transparent !important;
+        padding: 1rem 0.75rem;
+        background: transparent;
+    }
+
+    .table td {
+        vertical-align: middle;
+        padding: 1rem 0.75rem;
+        border-color: rgba(229, 231, 235, 0.9);
+    }
+
+    .table tbody tr:hover {
+        background: rgba(229, 231, 235, 0.3);
+    }
+
+    .thumbnail {
+        width: 90px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 16px;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .placeholder-img {
+        width: 90px;
+        height: 70px;
+        border-radius: 16px;
+        background: #f3f4f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #9ca3af;
+        font-size: 0.9rem;
+    }
+
+    .badge-chip {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.55rem 0.9rem;
+        border-radius: 999px;
+        background: #f3f4f6;
+        color: var(--text-heading);
+        font-size: 0.82rem;
+        font-weight: 600;
+        border: 1px solid #e5e7eb;
     }
 
     .badge-status {
-        padding: 5px 12px;
-        border-radius: 6px;
-        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.55rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 700;
     }
 
-    .table-bordered {
+    .status-active {
+        background: rgba(16, 185, 129, 0.12);
+        color: #065f46;
+        border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .status-inactive {
+        background: rgba(107, 114, 128, 0.12);
+        color: #374151;
+        border: 1px solid rgba(107, 114, 128, 0.25);
+    }
+
+    .actions-group {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: nowrap !important;
+    }
+
+    .action-btn {
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
         border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        text-decoration: none;
+        font-size: 0.85rem;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .action-btn:hover {
+        transform: translateY(-1px);
+        opacity: 0.95;
+    }
+
+    .btn-edit {
+        background: #f59e0b;
+        color: #000;
+    }
+
+    .btn-delete {
+        background: #ef4444;
+    }
+
+    .text-secondary {
+        color: var(--text-muted);
     }
 </style>
 
-<div class="container-fluid">
-    <h1 class="page-header-title">Manajemen Informasi</h1>
-
+{{-- Header Halaman --}}
+<div class="page-actions">
+    <div>
+        <h1 class="page-header-title">Manajemen Informasi</h1>
+    </div>
     <a href="{{ route('admin.informasi.create') }}" class="btn-bi-tambah">
-        <i class="fas fa-plus me-2" style="font-size: 0.8rem;"></i> Tambah Informasi
+        <i class="fas fa-plus"></i>
+        Tambah Informasi
     </a>
+</div>
 
-    @if(session('success'))
-        <div class="alert alert-success border-0 shadow-sm mb-4">
-            <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
-        </div>
-    @endif
+{{-- Alert Success --}}
+@if(session('success'))
+    <div class="alert alert-success border-0 shadow-sm mb-4">
+        <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
+    </div>
+@endif
 
+{{-- Konten Utama --}}
+<div class="admin-card">
     <div class="table-responsive">
-        <table class="table align-middle">
+        <table class="table align-middle mb-0">
             <thead>
                 <tr>
-                    <th width="50">NO</th>
-                    <th width="90">GAMBAR</th>
+                    <th width="5%">NO</th>
+                    <th width="12%">GAMBAR</th>
                     <th>INFORMASI</th>
-                    <th width="100">URUTAN</th>
-                    <th width="120">STATUS</th>
-                    <th width="140">AKSI</th>
+                    <th width="15%">URUTAN</th>
+                    <th width="15%">STATUS</th>
+                    <th width="10%">AKSI</th>
                 </tr>
             </thead>
             <tbody>
@@ -89,59 +219,50 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>
-                        {{-- PERBAIKAN: Menggunakan fungsi asset() karena file disimpan di folder public/uploads bukan storage/ --}}
                         @if($item->gambar && file_exists(public_path($item->gambar)))
-                            <img src="{{ asset($item->gambar) }}" 
-                                 width="50" 
-                                 height="50" 
-                                 style="object-fit: cover; border-radius: 4px;" 
-                                 alt="Gambar Informasi">
+                            <img src="{{ asset($item->gambar) }}" alt="Gambar Informasi" class="thumbnail">
                         @else
-                            <div style="width: 50px; height: 50px; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 4px;">
-                                <i class="fas fa-image text-muted"></i>
+                            <div class="placeholder-img">
+                                <i class="fas fa-image"></i>
                             </div>
                         @endif
                     </td>
                     <td>
-                        <div style="font-weight: 700; color: #111; font-size: 1rem;">{{ $item->judul }}</div>
-                        <small class="text-muted">{{ $item->created_at ? $item->created_at->format('d M Y') : '23 May 2026' }}</small>
+                        <div style="font-weight: 700; color: var(--text-heading); font-size: 1rem;">{{ $item->judul }}</div>
+                        <small class="text-secondary" style="font-weight: 500;">{{ $item->created_at ? $item->created_at->format('d M Y') : '23 May 2026' }}</small>
                     </td>
                     <td>
-                        <span class="badge bg-primary px-3">#{{ $item->urutan }}</span>
-                    </td>
-                    <td>
-                        <span class="badge {{ $item->status ? 'bg-success' : 'bg-danger' }} badge-status">
-                            {{ $item->status ? 'Aktif' : 'Tidak Aktif' }}
+                        <span class="badge-chip" style="font-weight: 700;">
+                            #{{ $item->urutan }}
                         </span>
                     </td>
                     <td>
-                        <div class="d-flex gap-2">
-                            {{-- Tombol Toggle Status --}}
-                            <button type="button" 
-                                    class="btn btn-sm toggle-status-btn" 
+                        <span class="badge-status {{ $item->status ? 'status-active' : 'status-inactive' }}">
+                            {{ $item->status ? 'Aktif' : 'Nonaktif' }}
+                        </span>
+                    </td>
+                    <td style="white-space: nowrap; width: 1%;">
+                        <div class="actions-group">
+                            {{-- Toggle Status --}}
+                            <button type="button"
+                                    class="action-btn toggle-status-btn"
                                     data-id="{{ $item->id }}"
                                     data-status="{{ $item->status }}"
-                                    title="{{ $item->status ? 'Nonaktifkan informasi ini' : 'Aktifkan informasi ini' }}"
-                                    style="padding: 6px 12px; border-radius: 4px; display: inline-flex; align-items: center; background-color: {{ $item->status ? '#28a745' : '#6c757d' }}; color: white; border: none; cursor: pointer;">
+                                    title="{{ $item->status ? 'Nonaktifkan' : 'Aktifkan' }}"
+                                    style="background-color: {{ $item->status ? '#16a34a' : '#6b7280' }};">
                                 <i class="fas {{ $item->status ? 'fa-eye' : 'fa-eye-slash' }}"></i>
                             </button>
-
-                            {{-- Tombol Edit --}}
-                            <a href="{{ route('admin.informasi.edit', $item->id) }}" 
-                               class="btn btn-sm" 
-                               title="Edit informasi ini"
-                               style="padding: 6px 12px; border-radius: 4px; display: inline-flex; align-items: center; background-color: #ffc107; color: black; border: none; text-decoration: none;">
+                            
+                            {{-- Edit --}}
+                            <a href="{{ route('admin.informasi.edit', $item->id) }}" class="action-btn btn-edit" title="Edit">
                                 <i class="fas fa-pen"></i>
                             </a>
-
-                            {{-- Tombol Hapus --}}
-                            <form action="{{ route('admin.informasi.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus informasi ini?');" style="display: inline; margin: 0;">
+                            
+                            {{-- Delete --}}
+                            <form action="{{ route('admin.informasi.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus informasi ini?');" style="display:inline-block; margin: 0; padding: 0;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" 
-                                        class="btn btn-sm" 
-                                        title="Hapus informasi ini"
-                                        style="padding: 6px 12px; border-radius: 4px; display: inline-flex; align-items: center; background-color: #dc3545; color: white; border: none; cursor: pointer;">
+                                <button type="submit" class="action-btn btn-delete" title="Hapus">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
@@ -150,9 +271,9 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center py-5 text-muted">
-                        <i class="fas fa-database fa-2x mb-3 d-block"></i>
-                        Belum ada data informasi.
+                    <td colspan="6" class="text-center py-5 text-secondary">
+                        <i class="fas fa-database fa-2x mb-3 d-block" style="color: var(--text-muted); opacity: 0.5;"></i>
+                        Belum ada data informasi. <a href="{{ route('admin.informasi.create') }}" class="text-decoration-none" style="color: var(--bi-blue);">Tambah sekarang</a>
                     </td>
                 </tr>
                 @endforelse
@@ -166,65 +287,84 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const toggleButtons = document.querySelectorAll('.toggle-status-btn');
-    
-    toggleButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const itemId = this.getAttribute('data-id');
-            const btn = this;
-            const icon = btn.querySelector('i');
-            
-            icon.className = 'fas fa-spinner fa-spin';
-            btn.disabled = true;
+(function() {
+    function initInformasiToggleButtons(){
+        const toggleButtons = document.querySelectorAll('.toggle-status-btn');
 
-            fetch(`{{ url('/admin/informasi/toggle-status') }}/${itemId}`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({})
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const newStatus = data.status;
-                    
-                    btn.setAttribute('data-status', newStatus ? '1' : '0');
+        toggleButtons.forEach(button => {
+            if (button.__toggleBound) return;
+            button.__toggleBound = true;
 
-                    if (newStatus) {
-                        btn.style.backgroundColor = '#28a745';
-                        btn.setAttribute('title', 'Nonaktifkan informasi ini');
-                        icon.className = 'fas fa-eye';
-                    } else {
-                        btn.style.backgroundColor = '#6c757d';
-                        btn.setAttribute('title', 'Aktifkan informasi ini');
-                        icon.className = 'fas fa-eye-slash';
-                    }
+            button.addEventListener('click', function() {
+                const itemId = this.getAttribute('data-id');
+                const currentStatus = parseInt(this.getAttribute('data-status'));
+                const btn = this;
+                const icon = btn.querySelector('i');
 
-                    const row = btn.closest('tr');
-                    const statusCell = row.querySelector('.badge-status');
-                    if (statusCell) {
+                if (icon) {
+                    icon.className = 'fas fa-spinner fa-spin';
+                }
+                btn.disabled = true;
+
+                // PERBAIKAN: Menggunakan endpoint /admin/informasi/toggle-status secara clean murni teks URL
+                const finalUrl = `{{ url('/admin/informasi/toggle-status') }}/${itemId}`;
+
+                fetch(finalUrl, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.success) {
+                        const newStatus = data.status;
+
                         if (newStatus) {
-                            statusCell.className = 'badge bg-success badge-status';
-                            statusCell.textContent = 'Aktif';
+                            btn.style.backgroundColor = '#16a34a';
+                            btn.setAttribute('data-status', '1');
+                            btn.setAttribute('title', 'Nonaktifkan');
+                            if (icon) icon.className = 'fas fa-eye';
                         } else {
-                            statusCell.className = 'badge bg-danger badge-status';
-                            statusCell.textContent = 'Tidak Aktif';
+                            btn.style.backgroundColor = '#6b7280';
+                            btn.setAttribute('data-status', '0');
+                            btn.setAttribute('title', 'Aktifkan');
+                            if (icon) icon.className = 'fas fa-eye-slash';
+                        }
+
+                        const row = btn.closest('tr');
+                        const statusCell = row.querySelector('td:nth-child(5)');
+
+                        if (statusCell) {
+                            if (newStatus) {
+                                statusCell.innerHTML = '<span class="badge-status status-active">Aktif</span>';
+                            } else {
+                                statusCell.innerHTML = '<span class="badge-status status-inactive">Nonaktif</span>';
+                            }
                         }
                     }
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            })
-            .finally(() => {
-                btn.disabled = false;
+                })
+                .catch(error => {
+                    console.error('Toggle Error:', error);
+                    if (icon) {
+                        icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
+                    }
+                })
+                .finally(() => {
+                    btn.disabled = false;
+                });
             });
         });
-    });
-});
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initInformasiToggleButtons);
+    } else {
+        initInformasiToggleButtons();
+    }
+})();
 </script>
 @endsection

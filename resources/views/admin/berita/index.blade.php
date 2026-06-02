@@ -7,94 +7,193 @@
 <style>
     :root {
         --bi-blue: #002F5F;
+        --bi-blue-dark: #001f3f;
+        --bi-yellow: #f59e0b;
+        --bi-red: #ef4444;
+        --text-heading: #111827;
+        --text-muted: #6b7280;
+        --surface-bg: #ffffff;
+        --border-light: #e5e7eb;
     }
 
-    /* Judul Utama yang sangat besar dan tebal */
     .page-header-title {
-        font-size: 2.5rem; 
+        font-size: 2.75rem;
         font-weight: 800;
-        color: #000;
-        margin-bottom: 10px;
+        color: var(--text-heading);
+        margin-bottom: 1rem;
         margin-top: 0;
     }
 
-    /* Tombol Tambah di bawah judul (Memastikan berbentuk tombol kotak biru solid) */
+    .page-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.75rem;
+        flex-wrap: wrap;
+    }
+
     .btn-bi-tambah {
         background-color: var(--bi-blue) !important;
         color: white !important;
         border: none !important;
-        padding: 8px 18px;
-        border-radius: 6px;
-        font-weight: 600;
-        text-decoration: none !important;
+        padding: 0.95rem 1.4rem;
+        border-radius: 0.85rem;
+        font-weight: 700;
         display: inline-flex;
         align-items: center;
-        margin-bottom: 25px;
-        font-size: 0.95rem;
-        transition: all 0.2s;
+        gap: 0.75rem;
+        text-decoration: none !important;
+        box-shadow: 0 16px 32px rgba(0, 47, 95, 0.12);
+        transition: transform 0.2s ease, background-color 0.2s ease;
     }
 
     .btn-bi-tambah:hover {
-        background-color: #001f3f !important;
+        background-color: var(--bi-blue-dark) !important;
         transform: translateY(-1px);
     }
 
-    /* Style Tabel Header Abu-abu Modern */
-    .table thead th {
-        color: #8A92A6;
-        font-size: 0.85rem;
-        font-weight: 700;
-        border-top: none;
-        border-bottom: 1px solid #EEEEEE;
-        text-transform: uppercase;
-        padding-bottom: 15px;
-        background-color: transparent;
-    }
-
-    .card {
+    /* Menyatu dengan background dasar sesuai format referensi */
+    .admin-card {
+        background: transparent;
         border: none;
         box-shadow: none;
-        background: transparent;
-    }
-
-    .card-body {
         padding: 0;
     }
 
+    .table thead th {
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        border-top: none;
+        border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+        text-transform: uppercase;
+        padding: 1rem 0.75rem;
+        background: transparent;
+    }
+
+    .table td {
+        vertical-align: middle;
+        padding: 1rem 0.75rem;
+        border-color: rgba(229, 231, 235, 0.9);
+    }
+
+    .table tbody tr:hover {
+        background: rgba(229, 231, 235, 0.3);
+    }
+
+    .thumbnail {
+        width: 90px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 16px;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .placeholder-img {
+        width: 90px;
+        height: 70px;
+        border-radius: 16px;
+        background: #f3f4f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #9ca3af;
+        font-size: 0.9rem;
+    }
+
     .badge-status {
-        padding: 5px 12px;
-        border-radius: 6px;
-        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.55rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 700;
+    }
+
+    .status-active {
+        background: rgba(16, 185, 129, 0.12);
+        color: #065f46;
+        border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .status-inactive {
+        background: rgba(107, 114, 128, 0.12);
+        color: #374151;
+        border: 1px solid rgba(107, 114, 128, 0.25);
+    }
+
+    .actions-group {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .action-btn {
+        min-width: 40px;
+        min-height: 40px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        text-decoration: none;
+        font-size: 0.85rem;
+    }
+
+    .action-btn:hover {
+        transform: translateY(-1px);
+        opacity: 0.95;
+    }
+
+    .btn-edit {
+        background: #f59e0b;
+        color: #000;
+    }
+
+    .btn-delete {
+        background: #ef4444;
+    }
+
+    .text-secondary {
+        color: var(--text-muted);
     }
 </style>
 
-<div class="container-fluid">
-    {{-- 1. Judul Halaman --}}
-    <h1 class="page-header-title">Manajemen Berita</h1>
-
-    {{-- 2. Tombol Tambah di Bawah Judul --}}
+{{-- Header Halaman --}}
+<div class="page-actions">
+    <div>
+        <h1 class="page-header-title">Manajemen Berita</h1>
+    </div>
     <a href="{{ route('admin.berita.create') }}" class="btn-bi-tambah">
-        <i class="fas fa-plus me-2" style="font-size: 0.8rem;"></i> Tambah Berita
+        <i class="fas fa-plus"></i>
+        Tambah Berita
     </a>
+</div>
 
-    {{-- 3. Notifikasi Sukses --}}
-    @if(session('success'))
-        <div class="alert alert-success border-0 shadow-sm mb-4">
-            {{ session('success') }}
-        </div>
-    @endif
+{{-- Alert Success --}}
+@if(session('success'))
+    <div class="alert alert-success border-0 shadow-sm mb-4">
+        {{ session('success') }}
+    </div>
+@endif
 
-    {{-- 4. Area Tabel --}}
+{{-- Konten Utama --}}
+<div class="admin-card">
     <div class="table-responsive">
-        <table class="table align-middle">
+        <table class="table align-middle mb-0">
             <thead>
                 <tr>
                     <th width="5%">NO</th>
-                    <th width="10%">GAMBAR</th>
-                    <th width="40%">JUDUL</th>
+                    <th width="12%">GAMBAR</th>
+                    <th width="43%">JUDUL</th>
                     <th width="15%">PENULIS</th>
                     <th width="15%">STATUS</th>
-                    <th width="15%">AKSI</th>
+                    <th width="10%">AKSI</th>
                 </tr>
             </thead>
             <tbody>
@@ -102,56 +201,45 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>
-                        {{-- Langsung panggil string Base64 tanpa embel-embel asset atau storage --}}
                         @if($item->gambar)
-                            <img src="{{ $item->gambar }}" 
-                                width="50" 
-                                height="50" 
-                                style="object-fit: cover; border-radius: 4px;" 
-                                alt="Gambar Berita">
+                            <img src="{{ $item->gambar }}" alt="Gambar Berita" class="thumbnail">
                         @else
-                            <div style="width: 50px; height: 50px; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 4px;">
-                                <i class="fas fa-image text-muted"></i>
+                            <div class="placeholder-img">
+                                <i class="fas fa-image"></i>
                             </div>
                         @endif
                     </td>
                     <td>
-                        <div style="font-weight: 600; color: #111;">{{ $item->judul }}</div>
+                        <div style="font-weight: 700; color: var(--text-heading);">{{ $item->judul }}</div>
                     </td>
-                    <td>{{ $item->penulis ?? '-' }}</td>
+                    <td class="text-secondary" style="font-weight: 600;">{{ $item->penulis ?? '-' }}</td>
                     <td>
-                        <span class="badge {{ $item->status ? 'bg-success' : 'bg-danger' }} badge-status">
-                            {{ $item->status ? 'Aktif' : 'Tidak' }}
+                        <span class="badge-status {{ $item->status ? 'status-active' : 'status-inactive' }}">
+                            {{ $item->status ? 'Aktif' : 'Nonaktif' }}
                         </span>
                     </td>
                     <td>
-                        <div class="d-flex gap-2">
-                            {{-- Tombol Toggle Aktif/Mata Berfungsi Kembali --}}
-                            <button type="button" 
-                                    class="btn btn-sm toggle-status-btn" 
+                        <div class="actions-group">
+                            {{-- Toggle Status --}}
+                            <button type="button"
+                                    class="action-btn toggle-status-btn"
                                     data-id="{{ $item->id }}"
                                     data-status="{{ $item->status }}"
-                                    title="{{ $item->status ? 'Nonaktifkan berita ini' : 'Aktifkan berita ini' }}"
-                                    style="font-weight: 600; padding: 6px 12px; border-radius: 6px; display: inline-flex; align-items: center; background-color: {{ $item->status ? '#28a745' : '#6c757d' }}; color: white; border: none; cursor: pointer; font-size: 0.85rem;">
+                                    title="{{ $item->status ? 'Nonaktifkan' : 'Aktifkan' }}"
+                                    style="background-color: {{ $item->status ? '#16a34a' : '#6b7280' }};">
                                 <i class="fas {{ $item->status ? 'fa-eye' : 'fa-eye-slash' }}"></i>
                             </button>
-
-                            {{-- Tombol Edit Kuning --}}
-                            <a href="{{ route('admin.berita.edit', $item->id) }}" 
-                               class="btn btn-sm" 
-                               title="Edit berita ini"
-                               style="font-weight: 600; padding: 6px 12px; border-radius: 6px; display: inline-flex; align-items: center; background-color: #ffc107; color: #000; border: none; text-decoration: none; font-size: 0.85rem;">
-                                 <i class="fas fa-pen"></i>
+                            
+                            {{-- Edit --}}
+                            <a href="{{ route('admin.berita.edit', $item->id) }}" class="action-btn btn-edit" title="Edit">
+                                <i class="fas fa-pen"></i>
                             </a>
-
-                            {{-- Tombol Hapus Merah Berbentuk Rapi --}}
-                            <form action="{{ route('admin.berita.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus berita ini?');" style="display: inline; margin: 0;">
+                            
+                            {{-- Delete --}}
+                            <form action="{{ route('admin.berita.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus berita ini?');" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" 
-                                        class="btn btn-sm" 
-                                        title="Hapus berita ini"
-                                        style="font-weight: 600; padding: 6px 12px; border-radius: 6px; display: inline-flex; align-items: center; background-color: #dc3545; color: white; border: none; cursor: pointer; font-size: 0.85rem;">
+                                <button type="submit" class="action-btn btn-delete" title="Hapus">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
@@ -160,8 +248,8 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center py-5 text-muted">
-                        Data masih kosong.
+                    <td colspan="6" class="text-center py-5 text-secondary">
+                        Data masih kosong. <a href="{{ route('admin.berita.create') }}" class="text-decoration-none" style="color: var(--bi-blue);">Tambah sekarang</a>
                     </td>
                 </tr>
                 @endforelse
@@ -169,70 +257,108 @@
         </table>
     </div>
 
-    {{-- Pagination --}}
     <div class="mt-4">
         {{ $berita->links() }}
     </div>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const toggleButtons = document.querySelectorAll('.toggle-status-btn');
-    
-    toggleButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const itemId = this.getAttribute('data-id');
-            const currentStatus = parseInt(this.getAttribute('data-status'));
-            const btn = this;
-            const icon = btn.querySelector('i');
-            
-            icon.className = 'fas fa-spinner fa-spin';
-            btn.disabled = true;
+(function() {
+    function initBeritaToggleButtons(){
+        const toggleButtons = document.querySelectorAll('.toggle-status-btn');
 
-            fetch(`{{ url('/admin/berita/toggle-status') }}/${itemId}`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({})
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const newStatus = data.status;
-                    
-                    if (newStatus) {
-                        btn.style.backgroundColor = '#28a745';
-                        btn.setAttribute('data-status', '1');
-                        btn.setAttribute('title', 'Nonaktifkan berita ini');
-                        icon.className = 'fas fa-eye';
-                    } else {
-                        btn.style.backgroundColor = '#6c757d';
-                        btn.setAttribute('data-status', '0');
-                        btn.setAttribute('title', 'Aktifkan berita ini');
-                        icon.className = 'fas fa-eye-slash';
-                    }
+        toggleButtons.forEach(button => {
+            if (button.__toggleBound) return;
+            button.__toggleBound = true;
 
-                    const row = btn.closest('tr');
-                    const statusCell = row.querySelector('td:nth-child(5)');
-                    if (newStatus) {
-                        statusCell.innerHTML = '<span class="badge bg-success badge-status">Aktif</span>';
-                    } else {
-                        statusCell.innerHTML = '<span class="badge bg-danger badge-status">Tidak</span>';
-                    }
+            button.addEventListener('click', function() {
+                const itemId = this.getAttribute('data-id');
+                const currentStatus = parseInt(this.getAttribute('data-status'));
+                const btn = this;
+                const icon = btn.querySelector('i');
+
+                console.debug('Toggle click:', { id: itemId, status: currentStatus });
+
+                if (icon) {
+                    icon.className = 'fas fa-spinner fa-spin';
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
-            })
-            .finally(() => {
-                btn.disabled = false;
+                btn.disabled = true;
+
+                // URL Ajax menyesuaikan endpoint berita Anda
+                const finalUrl = `{{ url('/admin/berita/toggle-status') }}/${itemId}`;
+
+                fetch(finalUrl, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                })
+                .then(response => {
+                    console.debug('Toggle response status:', response.status);
+                    if (!response.ok) {
+                        if (response.status === 419) {
+                            throw new Error('CSRF token mismatch (419). Silakan refresh halaman dan coba lagi.');
+                        }
+                        return response.text().then(txt => { throw new Error('HTTP ' + response.status + ': ' + txt); });
+                    }
+                    return response.json().catch(err => { throw new Error('Invalid JSON response'); });
+                })
+                .then(data => {
+                    console.debug('Toggle data:', data);
+
+                    if (data && data.success) {
+                        const newStatus = data.status;
+
+                        if (newStatus) {
+                            btn.style.backgroundColor = '#16a34a';
+                            btn.setAttribute('data-status', '1');
+                            btn.setAttribute('title', 'Nonaktifkan');
+                            if (icon) icon.className = 'fas fa-eye';
+                        } else {
+                            btn.style.backgroundColor = '#6b7280';
+                            btn.setAttribute('data-status', '0');
+                            btn.setAttribute('title', 'Aktifkan');
+                            if (icon) icon.className = 'fas fa-eye-slash';
+                        }
+
+                        const row = btn.closest('tr');
+                        // Menargetkan kolom ke-5 (Status) di tabel berita
+                        const statusCell = row.querySelector('td:nth-child(5)');
+
+                        if (newStatus) {
+                            statusCell.innerHTML = '<span class="badge-status status-active">Aktif</span>';
+                        } else {
+                            statusCell.innerHTML = '<span class="badge-status status-inactive">Nonaktif</span>';
+                        }
+                    } else {
+                        throw new Error('Struktur respon tidak sesuai');
+                    }
+                })
+                .catch(error => {
+                    console.error('Toggle Error:', error);
+                    try { window.alert('Gagal mengubah status: ' + error.message); } catch(e){}
+
+                    if (icon) {
+                        icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
+                    }
+                })
+                .finally(() => {
+                    btn.disabled = false;
+                });
             });
         });
-    });
-});
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initBeritaToggleButtons);
+    } else {
+        initBeritaToggleButtons();
+    }
+
+    window.initBeritaToggle = initBeritaToggleButtons;
+})();
 </script>
 @endsection
