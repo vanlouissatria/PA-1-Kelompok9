@@ -32,7 +32,7 @@
                 
                 <div class="mb-3">
                     <label>Isi Konten <span class="text-danger">*</span></label>
-                    <textarea name="isi" class="form-control" rows="10" required>{{ old('isi', $informasi->isi) }}</textarea>
+                    <textarea name="isi" class="form-control" rows="10" required>{{ old('isi', $informasi->konten) }}</textarea>
                 </div>
                 
                 <div class="mb-3">
