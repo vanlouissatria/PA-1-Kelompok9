@@ -1097,8 +1097,8 @@
     
     <div class="hero-content">
         <div>
-            <div class="hero-subtitle">Global Geopark</div>
-            <h1 class="hero-title">TELE · EFRATA · SIHOTANG</h1>
+                <div class="hero-subtitle">Global Geopark</div>
+                <h1 class="hero-title">TELE · EFRATA · SIHOTANG</h1>
             <div class="hero-divider"></div>
             <a href="#destinasi" class="hero-btn">Jelajahi Sekarang ya</a>
         </div>
@@ -1255,7 +1255,7 @@
 <!-- ==================== PETA LOKASI 3 DESA ==================== -->
 <section class="section section-light">
     <div class="container">
-        <div class="section-title" data-aos="fade-up" data-aos-duration="800">
+            <div class="section-title" data-aos="fade-up" data-aos-duration="800">
             <h2>Lokasi 5 Geosite</h2>
             <div class="divider"></div>
             <p>Tele, Efrata, Sihotang, Sibeabea, Holbung</p>
@@ -1270,9 +1270,9 @@
             </iframe>
             <div class="map-info">
                 <div class="maps-locations">
-                    <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Tele+Tower+Samosir', '_blank')">
-                        <i class="fas fa-location-dot"></i>
-                        <span>Menara Pandang Tele</span>
+                        <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Tele+Tower+Samosir', '_blank')">
+                            <i class="fas fa-location-dot"></i>
+                                <span>Menara Pandang Tele</span>
                     </div>
                     <div class="maps-location-item" onclick="window.open('https://www.google.com/maps?q=Efrata+Waterfall+Samosir', '_blank')">
                         <i class="fas fa-location-dot"></i>
