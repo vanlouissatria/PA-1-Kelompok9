@@ -73,9 +73,8 @@ class TeleController extends Controller
     public function umkmStore(Request $request, $geosite)
     {
         $geosite = $this->ensureGeosite($geosite);
-        $selectedGeosite = $this->ensureGeosite($request->input('geosite', $geosite));
+        
         $request->validate([
-            'geosite' => 'required|string|in:tele,efrata,sihotang,sibea-bea,holbung',
             'nama_usaha' => 'required|string|max:255',
             'pemilik' => 'required|string|max:255',
             'kategori' => 'required|string',
@@ -96,18 +95,18 @@ class TeleController extends Controller
         }
 
         UMKM::create([
-            'nama_usaha' => $request->nama_usaha, // Disesuaikan, duplikasi kolom 'nama' dihapus
+            'nama_usaha' => $request->nama_usaha,
             'pemilik' => $request->pemilik,
             'no_telepon' => $request->no_telepon,
             'kategori' => $request->kategori,
-            'geosite' => $selectedGeosite,
+            'geosite' => $geosite,
             'alamat' => $request->alamat,
             'deskripsi' => $request->deskripsi,
             'foto_utama' => $fotoPath,
             'status' => 1,
         ]);
 
-        return redirect()->to('/admin/geosite/' . $selectedGeosite . '/umkm')->with('success', 'Data UMKM berhasil ditambahkan');
+        return redirect()->to('/admin/geosite/' . $geosite . '/umkm')->with('success', 'Data UMKM berhasil ditambahkan');
     }
 
     public function umkmEdit($geosite, $id)
@@ -193,9 +192,8 @@ class TeleController extends Controller
     public function fasilitasStore(Request $request, $geosite)
     {
         $geosite = $this->ensureGeosite($geosite);
-        $selectedGeosite = $this->ensureGeosite($request->input('geosite', $geosite));
+        
         $request->validate([
-            'geosite' => 'required|string|in:tele,efrata,sihotang,sibea-bea,holbung',
             'nama' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
@@ -205,7 +203,7 @@ class TeleController extends Controller
         $data = [
             'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
-            'geosite' => $selectedGeosite,
+            'geosite' => $geosite,
             'harga' => $request->harga,
             'status' => 1
         ];
@@ -223,7 +221,7 @@ class TeleController extends Controller
         }
 
         Fasilitas::create($data);
-        return redirect()->to('/admin/geosite/' . $selectedGeosite . '/fasilitas')->with('success', 'Fasilitas berhasil ditambahkan');
+        return redirect()->to('/admin/geosite/' . $geosite . '/fasilitas')->with('success', 'Fasilitas berhasil ditambahkan');
     }
 
     public function fasilitasEdit($geosite, $id)
@@ -304,9 +302,8 @@ class TeleController extends Controller
     public function penginapanStore(Request $request, $geosite)
     {
         $geosite = $this->ensureGeosite($geosite);
-        $selectedGeosite = $this->ensureGeosite($request->input('geosite', $geosite));
+        
         $request->validate([
-            'geosite' => 'required|string|in:tele,efrata,sihotang,sibea-bea,holbung',
             'nama' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'alamat' => 'nullable|string',
@@ -321,7 +318,7 @@ class TeleController extends Controller
             'alamat' => $request->alamat,
             'no_telepon' => $request->no_telepon,
             'harga' => $request->harga,
-            'geosite' => $selectedGeosite
+            'geosite' => $geosite
         ];
 
         if ($request->hasFile('gambar')) {
@@ -337,7 +334,7 @@ class TeleController extends Controller
         }
 
         Penginapan::create($data);
-        return redirect()->to('/admin/geosite/' . $selectedGeosite . '/penginapan')->with('success', 'Penginapan berhasil ditambahkan');
+        return redirect()->to('/admin/geosite/' . $geosite . '/penginapan')->with('success', 'Penginapan berhasil ditambahkan');
     }
 
     public function penginapanEdit($geosite, $id)
@@ -422,7 +419,7 @@ class TeleController extends Controller
     public function galeriStore(Request $request, $geosite)
     {
         $geosite = $this->ensureGeosite($geosite);
-        $selectedGeosite = $this->ensureGeosite($request->input('geosite', $geosite));
+        
         $request->validate([
             'judul' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
@@ -449,11 +446,11 @@ class TeleController extends Controller
             'deskripsi' => $request->deskripsi,
             'gambar' => $gambarPath,
             'slug' => $slug,
-            'kategori' => $selectedGeosite,
+            'kategori' => $geosite,
             'status' => 1
         ]);
 
-        return redirect()->to('/admin/geosite/' . $selectedGeosite . '/galeri')->with('success', 'Galeri berhasil ditambahkan');
+        return redirect()->to('/admin/geosite/' . $geosite . '/galeri')->with('success', 'Galeri berhasil ditambahkan');
     }
 
     public function galeriEdit($geosite, $id)
@@ -532,9 +529,8 @@ class TeleController extends Controller
     public function informasiStore(Request $request, $geosite)
     {
         $geosite = $this->ensureGeosite($geosite);
-        $selectedGeosite = $this->ensureGeosite($request->input('geosite', $geosite));
+        
         $request->validate([
-            'geosite' => 'required|string|in:tele,efrata,sihotang,sibea-bea,holbung',
             'judul' => 'required|string|max:255',
             'isi' => 'required|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
@@ -544,7 +540,7 @@ class TeleController extends Controller
         $data = [
             'judul' => $request->judul,
             'konten' => $request->isi,
-            'kategori' => $selectedGeosite,
+            'kategori' => $geosite,
             'status' => 1,
             'slug' => $slug
         ];
@@ -562,7 +558,7 @@ class TeleController extends Controller
         }
 
         Informasi::create($data);
-        return redirect()->to('/admin/geosite/' . $selectedGeosite . '/informasi')->with('success', 'Informasi berhasil ditambahkan');
+        return redirect()->to('/admin/geosite/' . $geosite . '/informasi')->with('success', 'Informasi berhasil ditambahkan');
     }
 
     public function informasiShow($geosite, $id)
