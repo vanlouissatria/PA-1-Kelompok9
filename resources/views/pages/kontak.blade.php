@@ -364,18 +364,18 @@
                         <i class="fas fa-phone-alt"></i>
                     </div>
                     <h4>Telepon</h4>
-                    @if($kontak->telepon1)
-                        <p>{{ $kontak->telepon1 }}</p>
-                    @endif
-                    @if($kontak->telepon2)
-                        <p>{{ $kontak->telepon2 }}</p>
-                    @endif
-                    @if($kontak->telepon3)
-                        <p>{{ $kontak->telepon3 }}</p>
-                    @endif
-                    @if(!$kontak->telepon1 && !$kontak->telepon2 && !$kontak->telepon3)
-                        <p>Nomor telepon belum diisi</p>
-                    @endif
+                @if($kontak?->telepon1)
+                    <p>{{ $kontak->telepon1 }}</p>
+                @endif
+                @if($kontak?->telepon2)
+                    <p>{{ $kontak->telepon2 }}</p>
+                @endif
+                @if($kontak?->telepon3)
+                    <p>{{ $kontak->telepon3 }}</p>
+                @endif
+                @if(!$kontak || (!$kontak->telepon1 && !$kontak->telepon2 && !$kontak->telepon3))
+                    <p>Nomor telepon belum diisi</p>
+                @endif
                 </div>
             </div>
             
@@ -386,18 +386,18 @@
                         <i class="fas fa-envelope"></i>
                     </div>
                     <h4>Email</h4>
-                    @if($kontak->email1)
-                        <p>{{ $kontak->email1 }}</p>
-                    @endif
-                    @if($kontak->email2)
-                        <p>{{ $kontak->email2 }}</p>
-                    @endif
-                    @if($kontak->email3)
-                        <p>{{ $kontak->email3 }}</p>
-                    @endif
-                    @if(!$kontak->email1 && !$kontak->email2 && !$kontak->email3)
-                        <p>Email belum diisi</p>
-                    @endif
+                @if($kontak?->email1)
+                    <p>{{ $kontak->email1 }}</p>
+                @endif
+                @if($kontak?->email2)
+                    <p>{{ $kontak->email2 }}</p>
+                @endif
+                @if($kontak?->email3)
+                    <p>{{ $kontak->email3 }}</p>
+                @endif
+                @if(!$kontak || (!$kontak->email1 && !$kontak->email2 && !$kontak->email3))
+                    <p>Email belum diisi</p>
+                @endif
                 </div>
             </div>
         </div>
