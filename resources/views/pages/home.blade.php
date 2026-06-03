@@ -1260,11 +1260,10 @@ h1, h2, h3, h4, h5, h6 {
                 <div class="destinasi-number">05 — GEOSITE</div>
                     <h3>Holbung</h3>
                 <div class="destinasi-location">
-                    Pulau Samosir, Sumatera Utara
+                    Desa Dolok Raja, Kecamatan Harian, Kabupaten Samosir, Sumatera Utara
                 </div>
                     <p class="destinasi-desc">
-                        Bukit Holbung terkenal dengan hamparan bukit hijau yang sering disebut
-                        sebagai “Bukit Teletubbies”-nya Danau Toba.
+                        Bukit Holbung merupakan salah satu destinasi wisata alam populer di kawasan Geopark Kaldera Toba yang terkenal dengan perbukitan hijau yang membentang indah di tepi Danau Toba. Tempat ini menawarkan panorama alam yang memukau, suasana yang tenang, serta menjadi lokasi favorit wisatawan untuk menikmati pemandangan dan mengabadikan momen.
                     </p>
                     <a href="{{ url('/geosite/holbung') }}" class="destinasi-link">
                         Jelajahi Lebih Lanjut →
