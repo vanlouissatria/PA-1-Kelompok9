@@ -175,15 +175,6 @@
                         <input type="file" name="gambar" accept="image/jpeg,image/png,image/jpg"
                                class="form-control">
                     </div>
-
-                    <div class="col-md-6 mb-4">
-                        <label class="form-label required">Urutan Tampil</label>
-                        <input type="number" name="urutan" value="{{ old('urutan', $warisan->urutan) }}" min="1"
-                               class="form-control @error('urutan') is-invalid @enderror" required>
-                        @error('urutan')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                        @enderror
-                    </div>
                 </div>
 
                 <div class="d-flex gap-3">

@@ -83,29 +83,6 @@
         width: 100%;
     }
 
-    .status-row {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        flex-wrap: wrap;
-    }
-
-    .status-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.75rem;
-        background: #16a34a;
-        color: white;
-        border-radius: 12px;
-        padding: 0.8rem 1rem;
-        font-weight: 700;
-        font-size: 0.92rem;
-    }
-
-    .status-pill i {
-        font-size: 0.95rem;
-    }
-
     .btn-primary-bi {
         background: var(--bi-blue);
         border: none;
@@ -222,17 +199,6 @@
                         @error('gambar')
                             <div class="text-danger mt-2">{{ $message }}</div>
                         @enderror
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">Status Tampilkan Destinasi</label>
-                        <div class="status-row">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="status" name="status" value="1" checked>
-                                <label class="form-check-label" for="status">Aktifkan tampilan</label>
-                            </div>
-                            <span class="status-pill"><i class="fas fa-eye"></i> Aktif</span>
-                        </div>
                     </div>
                 </div>
 

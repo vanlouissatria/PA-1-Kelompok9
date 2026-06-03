@@ -158,21 +158,6 @@
                         <input type="file" name="gambar" accept="image/jpeg,image/png,image/jpg"
                                class="form-control">
                     </div>
-
-                    <div class="col-md-6 mb-4">
-                        <label class="form-label required">Urutan Tampil</label>
-                        <input type="number" name="urutan" value="{{ old('urutan', 1) }}" min="1"
-                               class="form-control @error('urutan') is-invalid @enderror" required>
-                        @error('urutan')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                        @enderror
-                        <small class="text-muted">Angka lebih kecil tampil lebih dulu.</small>
-                    </div>
-                </div>
-
-                <div class="form-check form-switch mb-4">
-                    <input class="form-check-input" type="checkbox" id="status" name="status" value="1" checked>
-                    <label class="form-check-label" for="status">Tampilkan di website</label>
                 </div>
 
                 <div class="d-flex gap-3">

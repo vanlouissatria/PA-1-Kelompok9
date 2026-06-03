@@ -241,13 +241,6 @@
                         </div>
                     </td>
 
-                    {{-- Status --}}
-                    <td>
-                        <span class="badge-status {{ $item->status ? 'status-active' : 'status-inactive' }}">
-                            {{ $item->status ? 'Aktif' : 'Draft' }}
-                        </span>
-                    </td>
-
                     {{-- Kolom Aksi Terproteksi No-Wrap --}}
                     <td style="white-space: nowrap; width: 1%;">
                         <div class="actions-group">

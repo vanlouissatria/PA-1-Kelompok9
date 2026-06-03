@@ -114,28 +114,6 @@
         border: 1px solid #e5e7eb;
     }
 
-    .badge-status {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.55rem 0.9rem;
-        border-radius: 999px;
-        font-size: 0.82rem;
-        font-weight: 700;
-    }
-
-    .status-active {
-        background: rgba(16, 185, 129, 0.12);
-        color: #065f46;
-        border: 1px solid rgba(16, 185, 129, 0.25);
-    }
-
-    .status-inactive {
-        background: rgba(107, 114, 128, 0.12);
-        color: #374151;
-        border: 1px solid rgba(107, 114, 128, 0.25);
-    }
-
     .actions-group {
         display: flex;
         gap: 0.5rem;
@@ -204,8 +182,6 @@
                     <th width="12%">GAMBAR</th>
                     <th>NAMA WARISAN</th>
                     <th>JENIS</th>
-                    <th>URUTAN</th>
-                    <th>STATUS</th>
                     <th>AKSI</th>
                 </tr>
             </thead>
@@ -238,12 +214,6 @@
                             @else
                                 Cultural Diversity
                             @endif
-                        </span>
-                    </td>
-                    <td class="text-secondary">{{ $item->urutan }}</td>
-                    <td>
-                        <span class="badge-status {{ $item->status ? 'status-active' : 'status-inactive' }}">
-                            {{ $item->status ? 'Aktif' : 'Nonaktif' }}
                         </span>
                     </td>
                     <td>

@@ -82,23 +82,6 @@
         background: var(--bi-blue);
         color: white;
     }
-
-    .btn-toggle-status {
-        background-color: #28a745;
-        color: white;
-        padding: 0.6rem 2rem;
-        border-radius: 8px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        border: none;
-        transition: .2s;
-    }
-
-    .form-check-input:not(:checked) + .btn-toggle-status {
-        background-color: #6c757d;
-    }
 </style>
 
 <div class="card">
@@ -109,7 +92,6 @@
         </h5>
     </div>
 
-```
 <div class="card-body">
 
     <form action="{{ route('admin.kontak.update', $kontak->id) }}"
@@ -252,33 +234,6 @@
                           rows="3"
                           class="form-control" placeholder="Masukkan URL embed Google Maps, misal https://www.google.com/maps/embed?...">{{ old('maps', $kontak->maps) }}</textarea>
             </div>
-
-            <div class="col-md-6 mb-3">
-                <label class="form-label">
-                    Status Tampilkan Kontak
-                </label>
-
-                <input type="hidden" name="status" value="0">
-
-                <div class="form-check p-0 m-0">
-                    <input
-                        class="form-check-input d-none"
-                        type="checkbox"
-                        name="status"
-                        id="statusSwitch"
-                        value="1"
-                        {{ $kontak->status ? 'checked' : '' }}>
-
-                    <label class="btn-toggle-status"
-                           for="statusSwitch">
-
-                        <i class="fas {{ $kontak->status ? 'fa-eye' : 'fa-eye-slash' }}"
-                           id="statusIcon"></i>
-
-                    </label>
-                </div>
-            </div>
-
         </div>
 
         <hr>
@@ -300,21 +255,20 @@
     </form>
 
 </div>
-```
-
-</div>
 
 <script>
-document.getElementById('statusSwitch').addEventListener('change', function() {
-
-    const icon = document.getElementById('statusIcon');
-
-    if(this.checked){
-        icon.className = 'fas fa-eye';
-    }else{
-        icon.className = 'fas fa-eye-slash';
+// Preview Gambar
+document.getElementById('inputGambar').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = e => {
+            const img = document.getElementById('previewImage');
+            img.src = e.target.result;
+            img.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
     }
-
 });
 </script>
 

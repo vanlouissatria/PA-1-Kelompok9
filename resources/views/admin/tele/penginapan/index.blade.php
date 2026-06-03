@@ -103,28 +103,6 @@
         font-size: 0.9rem;
     }
 
-    .badge-status {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.55rem 0.9rem;
-        border-radius: 999px;
-        font-size: 0.82rem;
-        font-weight: 700;
-    }
-
-    .status-active {
-        background: rgba(16, 185, 129, 0.12);
-        color: #065f46;
-        border: 1px solid rgba(16, 185, 129, 0.25);
-    }
-
-    .status-inactive {
-        background: rgba(107, 114, 128, 0.12);
-        color: #374151;
-        border: 1px solid rgba(107, 114, 128, 0.25);
-    }
-
     .actions-group {
         display: flex !important;
         flex-direction: row !important;
@@ -196,7 +174,6 @@
                     <th width="23%">ALAMAT</th>
                     <th width="12%">NO TELEPON</th>
                     <th width="10%">HARGA</th>
-                    <th width="10%">STATUS</th>
                     <th width="8%">AKSI</th>
                 </tr>
             </thead>
@@ -233,13 +210,6 @@
                     {{-- Harga --}}
                     <td style="font-weight: 700; color: #16a34a; font-size: 0.95rem; white-space: nowrap;">
                         Rp {{ number_format($item->harga ?? 0, 0, ',', '.') }}
-                    </td>
-
-                    {{-- Status --}}
-                    <td>
-                        <span class="badge-status {{ $item->status ? 'status-active' : 'status-inactive' }}">
-                            {{ $item->status ? 'Aktif' : 'Nonaktif' }}
-                        </span>
                     </td>
 
                     {{-- Aksi Sejajar Mendatar Persis Galeri --}}
