@@ -241,26 +241,6 @@
                         </div>
                     @enderror
                 </div>
-
-                {{-- Status --}}
-                <div class="col-md-6 mb-4">
-                    <label class="form-label">
-                        Status Tampilkan Galeri
-                    </label>
-
-                    <input type="hidden" name="status" value="0">
-
-                    <div class="form-check p-0 m-0">
-
-                        <input class="form-check-input d-none"
-                            type="checkbox"
-                            name="status"
-                            id="statusSwitch"
-                            value="1"
-                            checked>
-                    </div>
-                </div>
-
             <hr>
 
             <div class="d-flex gap-3">

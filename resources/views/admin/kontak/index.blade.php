@@ -96,28 +96,6 @@
         border: 1px solid #e5e7eb;
     }
 
-    .badge-status {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.55rem 0.9rem;
-        border-radius: 999px;
-        font-size: 0.82rem;
-        font-weight: 700;
-    }
-
-    .status-active {
-        background: rgba(16, 185, 129, 0.12);
-        color: #065f46;
-        border: 1px solid rgba(16, 185, 129, 0.25);
-    }
-
-    .status-inactive {
-        background: rgba(239, 68, 68, 0.12);
-        color: #991b1b;
-        border: 1px solid rgba(239, 68, 68, 0.25);
-    }
-
     /* Kunci Flexbox: Menjaga deretan tombol aksi tetap menyamping */
     .actions-group {
         display: flex !important;
@@ -194,7 +172,6 @@
                     <th width="28%">JUDUL / EMAIL</th>
                     <th width="32%">ALAMAT</th>
                     <th width="15%">TELEPON</th>
-                    <th width="10%">STATUS</th>
                     <th width="10%">AKSI</th>
                 </tr>
             </thead>
@@ -227,26 +204,9 @@
                         </span>
                     </td>
 
-                    {{-- Status --}}
-                    <td>
-                        <span class="badge-status {{ $item->status ? 'status-active' : 'status-inactive' }}">
-                            {{ $item->status ? 'Aktif' : 'Tidak' }}
-                        </span>
-                    </td>
-
                     {{-- Kolom Aksi dengan Proteksi No-Wrap --}}
                     <td style="white-space: nowrap; width: 1%;">
                         <div class="actions-group">
-                            {{-- Toggle Status --}}
-                            <button type="button"
-                                    class="action-btn toggle-status-btn"
-                                    data-id="{{ $item->id }}"
-                                    data-status="{{ $item->status }}"
-                                    title="{{ $item->status ? 'Nonaktifkan kontak ini' : 'Aktifkan kontak ini' }}"
-                                    style="background-color: {{ $item->status ? '#16a34a' : '#6b7280' }};">
-                                <i class="fas {{ $item->status ? 'fa-eye' : 'fa-eye-slash' }}"></i>
-                            </button>
-                            
                             {{-- Edit --}}
                             <a href="{{ route('admin.kontak.edit', $item->id) }}" class="action-btn btn-edit" title="Edit kontak ini">
                                 <i class="fas fa-pen"></i>
@@ -280,81 +240,4 @@
         {{ $kontak->links() }}
     </div>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const toggleButtons = document.querySelectorAll('.toggle-status-btn');
-    
-    toggleButtons.forEach(button => {
-        if (button.__toggleBound) return;
-        button.__toggleBound = true;
-
-        button.addEventListener('click', function() {
-            const itemId = this.getAttribute('data-id');
-            const currentStatus = parseInt(this.getAttribute('data-status'));
-            const btn = this;
-            const icon = btn.querySelector('i');
-            
-            if (icon) icon.className = 'fas fa-spinner fa-spin';
-            btn.disabled = true;
-
-            const url = `{{ url('admin/kontak/toggle-status') }}/${itemId}`;
-
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({})
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('HTTP error! status: ' + response.status);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data && data.success) {
-                    const newStatus = data.status;
-                    
-                    if (newStatus) {
-                        btn.style.backgroundColor = '#16a34a';
-                        btn.setAttribute('data-status', '1');
-                        btn.setAttribute('title', 'Nonaktifkan kontak ini');
-                        if (icon) icon.className = 'fas fa-eye';
-                    } else {
-                        btn.style.backgroundColor = '#6b7280';
-                        btn.setAttribute('data-status', '0');
-                        btn.setAttribute('title', 'Aktifkan kontak ini');
-                        if (icon) icon.className = 'fas fa-eye-slash';
-                    }
-
-                    const row = btn.closest('tr');
-                    const statusCell = row.querySelector('td:nth-child(5)');
-                    if (statusCell) {
-                        if (newStatus) {
-                            statusCell.innerHTML = '<span class="badge-status status-active">Aktif</span>';
-                        } else {
-                            statusCell.innerHTML = '<span class="badge-status status-inactive">Tidak</span>';
-                        }
-                    }
-                } else {
-                    alert('Gagal memperbarui status');
-                    if (icon) icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan sistem atau rute tidak ditemukan.');
-                if (icon) icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
-            })
-            .finally(() => {
-                btn.disabled = false;
-            });
-        });
-    });
-});
-</script>
 @endsection

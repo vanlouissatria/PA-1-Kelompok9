@@ -151,14 +151,6 @@
                     </div>
                     @error('gambar') <div class="invalid-feedback text-danger">{{ $message }}</div> @enderror
                 </div>
-
-                {{-- Status --}}
-                <div class="col-md-6 mb-4 d-flex align-items-center">
-                    <div class="form-check form-switch mt-3">
-                        <input class="form-check-input" type="checkbox" name="status" id="statusSwitch" value="1" checked>
-                        <label class="form-check-label fw-bold ms-2" for="statusSwitch" style="color: var(--bi-blue);">Tampilkan Berita di Publik</label>
-                    </div>
-                </div>
             </div>
 
             <hr class="my-4">

@@ -151,16 +151,6 @@
                     <textarea name="konten" class="form-control @error('konten') is-invalid @enderror" 
                               rows="10" placeholder="Tuliskan informasi detail di sini..." required>{{ old('konten') }}</textarea>
                 </div>
-
-                {{-- Status --}}
-                <div class="col-md-6 mb-4">
-                    <label class="form-label">
-                        Status Tampilkan Galeri
-                    </label>
-
-                    <input type="hidden" name="status" value="0">
-                </div>
-
             <hr class="my-4">
 
             <div class="d-flex gap-3">
