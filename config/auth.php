@@ -96,7 +96,7 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
-            'expire' => 60,
+            'expire' => 1, // Diubah menjadi 1 agar tautan kedaluwarsa dalam 60 detik (1 menit)
             'throttle' => 60,
         ],
     ],
