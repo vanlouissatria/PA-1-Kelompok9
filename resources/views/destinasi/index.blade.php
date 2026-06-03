@@ -298,62 +298,57 @@
     </div>
 </section>
 
-<!-- CATEGORY SECTION -->
+<!-- SEMUA DESTINASI -->
 <section class="category-section">
     <div class="container">
+
         <div class="section-header" data-aos="fade-up">
-            <span class="subtitle">PILIH KATEGORI</span>
-            <h2>Temukan Destinasi Favoritmu</h2>
+            <span class="subtitle">SEMUA DESTINASI</span>
+            <h2>Jelajahi Destinasi GeoToba</h2>
             <div class="divider"></div>
-            <p>Nikmati pengalaman wisata yang berbeda di setiap kategorinya</p>
+            <p>Temukan berbagai destinasi alam, budaya, dan buatan di kawasan Geopark Kaldera Toba.</p>
         </div>
-        
+
         <div class="category-grid">
-            <!-- Destinasi Alam -->
-            <a href="{{ url('/destinasi/alam') }}" class="category-card" data-aos="fade-up" data-aos-delay="0">
-                <div class="card-image">
-                    <img src="{{ $kategoriImages['alam'] ?? asset('image/home/efrata1.jpg') }}" alt="Destinasi Alam">
-                    <div class="card-overlay"></div>
-                </div>
-                <div class="card-content">
-                    <div class="card-icon">
-                        <i class="fas fa-mountain"></i>
+
+            @foreach($destinasi as $item)
+
+                @php
+                    $gambar = $item->gambar;
+
+                    if ($gambar &&
+                        !str_starts_with($gambar, 'http') &&
+                        !str_starts_with($gambar, 'data:')) {
+                        $gambar = asset('storage/' . $gambar);
+                    }
+                @endphp
+
+                <div class="category-card" data-aos="fade-up">
+
+                    <div class="card-image">
+                        <img src="{{ $gambar }}" alt="{{ $item->nama_destinasi }}">
+                        <div class="card-overlay"></div>
                     </div>
-                    <h3>Destinasi Alam</h3>
-                    <p>Goa alami, formasi batuan unik, air terjun, dan keindahan alam Danau Toba</p>
-                </div>
-            </a>
-            
-            <!-- Destinasi Buatan -->
-            <a href="{{ url('/destinasi/buatan') }}" class="category-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="card-image">
-                    <img src="{{ $kategoriImages['buatan'] ?? asset('image/home/tele1.jpg') }}" alt="Destinasi Buatan">
-                    <div class="card-overlay"></div>
-                </div>
-                <div class="card-content">
-                    <div class="card-icon">
-                        <i class="fas fa-building"></i>
+
+                    <div class="card-content">
+                        <h3>{{ $item->nama_destinasi }}</h3>
+
+                        <p>
+                            {{ \Illuminate\Support\Str::limit($item->deskripsi, 120) }}
+                        </p>
+
+                        <small>
+                            <strong>Kategori:</strong>
+                            {{ ucfirst($item->kategori) }}
+                        </small>
                     </div>
-                    <h3>Destinasi Buatan</h3>
-                    <p>Patung ikonik, taman kota, jembatan dengan pemandangan spektakuler</p>
+
                 </div>
-            </a>
-            
-            <!-- Destinasi Budaya -->
-            <a href="{{ url('/destinasi/budaya') }}" class="category-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="card-image">
-                    <img src="{{ $kategoriImages['budaya'] ?? asset('image/home/sihotang.jpg') }}" alt="Destinasi Budaya">
-                    <div class="card-overlay"></div>
-                </div>
-                <div class="card-content">
-                    <div class="card-icon">
-                        <i class="fas fa-landmark"></i>
-                    </div>
-                    <h3>Destinasi Budaya</h3>
-                    <p>Desa adat, museum sejarah, kerajinan ulos, dan kearifan lokal Batak</p>
-                </div>
-            </a>
+
+            @endforeach
+
         </div>
+
     </div>
 </section>
 
