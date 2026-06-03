@@ -172,6 +172,54 @@
 
             <div class="col-md-6 mb-3">
                 <label class="form-label">
+                    Facebook
+                </label>
+
+                <input type="text"
+                       name="facebook"
+                       class="form-control"
+                       value="{{ old('facebook', $kontak->facebook) }}"
+                       placeholder="Masukkan URL atau username Facebook">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">
+                    TikTok
+                </label>
+
+                <input type="text"
+                       name="tiktok"
+                       class="form-control"
+                       value="{{ old('tiktok', $kontak->tiktok) }}"
+                       placeholder="Masukkan URL atau username TikTok">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">
+                    Twitter
+                </label>
+
+                <input type="text"
+                       name="twitter"
+                       class="form-control"
+                       value="{{ old('twitter', $kontak->twitter) }}"
+                       placeholder="Masukkan URL atau username Twitter">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">
+                    YouTube
+                </label>
+
+                <input type="text"
+                       name="youtube"
+                       class="form-control"
+                       value="{{ old('youtube', $kontak->youtube) }}"
+                       placeholder="Masukkan URL atau nama channel YouTube">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">
                     Telepon 2
                 </label>
 

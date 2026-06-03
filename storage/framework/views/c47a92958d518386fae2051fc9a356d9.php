@@ -1,8 +1,8 @@
-﻿@extends('layouts.app')
+﻿
 
-@section('title', 'Kontak - Geosite Danau Toba')
+<?php $__env->startSection('title', 'Kontak - Geosite Danau Toba'); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <style>
     :root {
         --primary: #003366;
@@ -245,153 +245,155 @@
 <section class="kontak-section">
     <div class="container">
         <div class="kontak-grid" data-aos="fade-up">
-            @forelse($kontaks as $kontak)
-                @php
+            <?php $__empty_1 = true; $__currentLoopData = $kontaks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kontak): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                <?php
                     $fbUrl = $kontak->facebook ? (!preg_match('/^https?:\/\//i', $kontak->facebook) ? 'https://facebook.com/'.trim($kontak->facebook) : $kontak->facebook) : '';
                     $igUrl = $kontak->instagram ? (!preg_match('/^https?:\/\//i', $kontak->instagram) ? 'https://instagram.com/'.ltrim(trim($kontak->instagram), '@') : $kontak->instagram) : '';
                     $twUrl = $kontak->twitter ? (!preg_match('/^https?:\/\//i', $kontak->twitter) ? 'https://x.com/'.ltrim(trim($kontak->twitter), '@') : $kontak->twitter) : '';
                     $ytUrl = $kontak->youtube ? (!preg_match('/^https?:\/\//i', $kontak->youtube) ? 'https://youtube.com/'.trim($kontak->youtube) : $kontak->youtube) : '';
                     $ttUrl = $kontak->tiktok ? (!preg_match('/^https?:\/\//i', $kontak->tiktok) ? 'https://tiktok.com/@'.ltrim(trim($kontak->tiktok), '@') : $kontak->tiktok) : '';
-                @endphp
+                ?>
 
                 <div class="kontak-person-card">
                     <div>
-                        <h4>{{ $kontak->judul }}</h4>
-                        @if($kontak->subjudul)
-                            <p class="card-subtitle">{{ $kontak->subjudul }}</p>
-                        @endif
+                        <h4><?php echo e($kontak->judul); ?></h4>
+                        <?php if($kontak->subjudul): ?>
+                            <p class="card-subtitle"><?php echo e($kontak->subjudul); ?></p>
+                        <?php endif; ?>
                     </div>
 
                     <div class="kontak-details">
-                        @if($kontak->alamat || $kontak->kode_pos)
+                        <?php if($kontak->alamat || $kontak->kode_pos): ?>
                             <div class="kontak-row">
-                                @if($kontak->alamat)
+                                <?php if($kontak->alamat): ?>
                                     <div class="detail-group">
                                         <strong><i class="fas fa-map-marker-alt"></i> Alamat</strong>
-                                        <p>{!! nl2br(e($kontak->alamat)) !!}</p>
+                                        <p><?php echo nl2br(e($kontak->alamat)); ?></p>
                                     </div>
-                                @endif
-                                @if($kontak->kode_pos)
+                                <?php endif; ?>
+                                <?php if($kontak->kode_pos): ?>
                                     <div class="detail-group">
                                         <strong><i class="fas fa-mail-bulk"></i> Kode Pos</strong>
-                                        <p>{{ $kontak->kode_pos }}</p>
+                                        <p><?php echo e($kontak->kode_pos); ?></p>
                                     </div>
-                                @endif
+                                <?php endif; ?>
                             </div>
-                        @endif
+                        <?php endif; ?>
 
-                        @if($kontak->facebook || $kontak->instagram || $kontak->twitter)
+                        <?php if($kontak->facebook || $kontak->instagram || $kontak->twitter): ?>
                             <div class="kontak-row">
-                                @if($kontak->facebook)
+                                <?php if($kontak->facebook): ?>
                                     <div class="detail-group">
                                         <strong><i class="fab fa-facebook-f"></i> Facebook</strong>
-                                        <a href="{{ $fbUrl }}" target="_blank" rel="noopener noreferrer">{{ $kontak->facebook }}</a>
+                                        <a href="<?php echo e($fbUrl); ?>" target="_blank" rel="noopener noreferrer"><?php echo e($kontak->facebook); ?></a>
                                     </div>
-                                @endif
-                                @if($kontak->instagram)
+                                <?php endif; ?>
+                                <?php if($kontak->instagram): ?>
                                     <div class="detail-group">
                                         <strong><i class="fab fa-instagram"></i> Instagram</strong>
-                                        <a href="{{ $igUrl }}" target="_blank" rel="noopener noreferrer">{{ $kontak->instagram }}</a>
+                                        <a href="<?php echo e($igUrl); ?>" target="_blank" rel="noopener noreferrer"><?php echo e($kontak->instagram); ?></a>
                                     </div>
-                                @endif
-                                @if($kontak->twitter)
+                                <?php endif; ?>
+                                <?php if($kontak->twitter): ?>
                                     <div class="detail-group">
                                         <strong><i class="fab fa-twitter"></i> Twitter</strong>
-                                        <a href="{{ $twUrl }}" target="_blank" rel="noopener noreferrer">{{ $kontak->twitter }}</a>
+                                        <a href="<?php echo e($twUrl); ?>" target="_blank" rel="noopener noreferrer"><?php echo e($kontak->twitter); ?></a>
                                     </div>
-                                @endif
+                                <?php endif; ?>
                             </div>
-                        @endif
+                        <?php endif; ?>
 
-                        @if($kontak->youtube || $kontak->tiktok)
+                        <?php if($kontak->youtube || $kontak->tiktok): ?>
                             <div class="kontak-row">
-                                @if($kontak->youtube)
+                                <?php if($kontak->youtube): ?>
                                     <div class="detail-group">
                                         <strong><i class="fab fa-youtube"></i> YouTube</strong>
-                                        <a href="{{ $ytUrl }}" target="_blank" rel="noopener noreferrer">{{ $kontak->youtube }}</a>
+                                        <a href="<?php echo e($ytUrl); ?>" target="_blank" rel="noopener noreferrer"><?php echo e($kontak->youtube); ?></a>
                                     </div>
-                                @endif
-                                @if($kontak->tiktok)
+                                <?php endif; ?>
+                                <?php if($kontak->tiktok): ?>
                                     <div class="detail-group">
                                         <strong><i class="fab fa-tiktok"></i> TikTok</strong>
-                                        <a href="{{ $ttUrl }}" target="_blank" rel="noopener noreferrer">{{ $kontak->tiktok }}</a>
+                                        <a href="<?php echo e($ttUrl); ?>" target="_blank" rel="noopener noreferrer"><?php echo e($kontak->tiktok); ?></a>
                                     </div>
-                                @endif
+                                <?php endif; ?>
                             </div>
-                        @endif
+                        <?php endif; ?>
 
-                        @if($kontak->telepon1 || $kontak->telepon2 || $kontak->telepon3)
+                        <?php if($kontak->telepon1 || $kontak->telepon2 || $kontak->telepon3): ?>
                             <div class="kontak-row">
                                 <div class="detail-group">
                                     <strong><i class="fas fa-phone"></i> Telepon</strong>
-                                    @if($kontak->telepon1)
-                                        <p><a href="tel:{{ preg_replace('/[^0-9+]/', '', $kontak->telepon1) }}">{{ $kontak->telepon1 }}</a></p>
-                                    @endif
-                                    @if($kontak->telepon2)
-                                        <p><a href="tel:{{ preg_replace('/[^0-9+]/', '', $kontak->telepon2) }}">{{ $kontak->telepon2 }}</a></p>
-                                    @endif
-                                    @if($kontak->telepon3)
-                                        <p><a href="tel:{{ preg_replace('/[^0-9+]/', '', $kontak->telepon3) }}">{{ $kontak->telepon3 }}</a></p>
-                                    @endif
+                                    <?php if($kontak->telepon1): ?>
+                                        <p><a href="tel:<?php echo e(preg_replace('/[^0-9+]/', '', $kontak->telepon1)); ?>"><?php echo e($kontak->telepon1); ?></a></p>
+                                    <?php endif; ?>
+                                    <?php if($kontak->telepon2): ?>
+                                        <p><a href="tel:<?php echo e(preg_replace('/[^0-9+]/', '', $kontak->telepon2)); ?>"><?php echo e($kontak->telepon2); ?></a></p>
+                                    <?php endif; ?>
+                                    <?php if($kontak->telepon3): ?>
+                                        <p><a href="tel:<?php echo e(preg_replace('/[^0-9+]/', '', $kontak->telepon3)); ?>"><?php echo e($kontak->telepon3); ?></a></p>
+                                    <?php endif; ?>
                                 </div>
                             </div>
-                        @endif
+                        <?php endif; ?>
 
-                        @if($kontak->email1 || $kontak->email2 || $kontak->email3)
+                        <?php if($kontak->email1 || $kontak->email2 || $kontak->email3): ?>
                             <div class="kontak-row">
                                 <div class="detail-group">
                                     <strong><i class="fas fa-envelope"></i> Email</strong>
-                                    @if($kontak->email1)
-                                        <p><a href="mailto:{{ $kontak->email1 }}">{{ $kontak->email1 }}</a></p>
-                                    @endif
-                                    @if($kontak->email2)
-                                        <p><a href="mailto:{{ $kontak->email2 }}">{{ $kontak->email2 }}</a></p>
-                                    @endif
-                                    @if($kontak->email3)
-                                        <p><a href="mailto:{{ $kontak->email3 }}">{{ $kontak->email3 }}</a></p>
-                                    @endif
+                                    <?php if($kontak->email1): ?>
+                                        <p><a href="mailto:<?php echo e($kontak->email1); ?>"><?php echo e($kontak->email1); ?></a></p>
+                                    <?php endif; ?>
+                                    <?php if($kontak->email2): ?>
+                                        <p><a href="mailto:<?php echo e($kontak->email2); ?>"><?php echo e($kontak->email2); ?></a></p>
+                                    <?php endif; ?>
+                                    <?php if($kontak->email3): ?>
+                                        <p><a href="mailto:<?php echo e($kontak->email3); ?>"><?php echo e($kontak->email3); ?></a></p>
+                                    <?php endif; ?>
                                 </div>
                             </div>
-                        @endif
+                        <?php endif; ?>
 
-                        @if($fbUrl || $igUrl || $twUrl || $ytUrl || $ttUrl)
+                        <?php if($fbUrl || $igUrl || $twUrl || $ytUrl || $ttUrl): ?>
                             <div class="shortcut-row">
                                 <span class="shortcut-label">✨ Media Sosial</span>
                                 <div class="shortcut-buttons">
-                                    @if($fbUrl)
-                                        <a href="{{ $fbUrl }}" target="_blank" rel="noopener noreferrer" class="shortcut-btn facebook">
+                                    <?php if($fbUrl): ?>
+                                        <a href="<?php echo e($fbUrl); ?>" target="_blank" rel="noopener noreferrer" class="shortcut-btn facebook">
                                             <i class="fab fa-facebook-f"></i> Facebook
                                         </a>
-                                    @endif
-                                    @if($igUrl)
-                                        <a href="{{ $igUrl }}" target="_blank" rel="noopener noreferrer" class="shortcut-btn instagram">
+                                    <?php endif; ?>
+                                    <?php if($igUrl): ?>
+                                        <a href="<?php echo e($igUrl); ?>" target="_blank" rel="noopener noreferrer" class="shortcut-btn instagram">
                                             <i class="fab fa-instagram"></i> Instagram
                                         </a>
-                                    @endif
-                                    @if($twUrl)
-                                        <a href="{{ $twUrl }}" target="_blank" rel="noopener noreferrer" class="shortcut-btn twitter">
+                                    <?php endif; ?>
+                                    <?php if($twUrl): ?>
+                                        <a href="<?php echo e($twUrl); ?>" target="_blank" rel="noopener noreferrer" class="shortcut-btn twitter">
                                             <i class="fab fa-twitter"></i> Twitter
                                         </a>
-                                    @endif
-                                    @if($ytUrl)
-                                        <a href="{{ $ytUrl }}" target="_blank" rel="noopener noreferrer" class="shortcut-btn youtube">
+                                    <?php endif; ?>
+                                    <?php if($ytUrl): ?>
+                                        <a href="<?php echo e($ytUrl); ?>" target="_blank" rel="noopener noreferrer" class="shortcut-btn youtube">
                                             <i class="fab fa-youtube"></i> YouTube
                                         </a>
-                                    @endif
-                                    @if($ttUrl)
-                                        <a href="{{ $ttUrl }}" target="_blank" rel="noopener noreferrer" class="shortcut-btn tiktok">
+                                    <?php endif; ?>
+                                    <?php if($ttUrl): ?>
+                                        <a href="<?php echo e($ttUrl); ?>" target="_blank" rel="noopener noreferrer" class="shortcut-btn tiktok">
                                             <i class="fab fa-tiktok"></i> TikTok
                                         </a>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
                             </div>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
-            @empty
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                 <p class="text-center text-muted">Belum ada data kontak.</p>
-            @endforelse
+            <?php endif; ?>
         </div>
     </div>
 </section>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Geosite Tele-Efrata-Sihotang\resources\views/pages/kontak.blade.php ENDPATH**/ ?>
