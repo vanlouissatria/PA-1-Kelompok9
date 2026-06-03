@@ -10,30 +10,11 @@ class DestinasiController extends Controller
     // Halaman utama destinasi (semua kategori)
     public function index()
     {
-        $kategoriImages = [];
-        foreach (['alam', 'buatan', 'budaya'] as $kategori) {
-            $item = Destinasi::where('kategori', $kategori)
-                ->where('status', true)
-                ->latest()
-                ->first();
+        $destinasi = Destinasi::where('status', true)
+            ->latest()
+            ->get();
 
-            $gambar = null;
-            if ($item && $item->gambar) {
-                if (str_starts_with($item->gambar, 'http') || str_starts_with($item->gambar, 'data:')) {
-                    $gambar = $item->gambar;
-                } else {
-                    $gambar = asset('storage/' . ltrim($item->gambar, '/'));
-                }
-            }
-
-            $kategoriImages[$kategori] = $gambar;
-        }
-
-        // Hitung jumlah geosite yang tersedia (sesuaikan jika menambah geosite baru)
-        $geositeList = ['tele', 'efrata', 'sihotang', 'sibea', 'holbung'];
-        $jumlahGeosite = count($geositeList);
-
-        return view('destinasi.index', compact('kategoriImages', 'jumlahGeosite'));
+        return view('destinasi.index', compact('destinasi'));
     }
     
     // Destinasi Alam
