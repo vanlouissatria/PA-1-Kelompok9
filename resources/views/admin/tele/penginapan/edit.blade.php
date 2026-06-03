@@ -1,80 +1,103 @@
 @extends('layouts.admin')
 
-@section('title')
-    Edit Penginapan - {{ $geositeTitle }}
-@endsection
+@section('title', 'Edit Penginapan')
 
 @section('content')
-<div class="container-fluid">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Edit Penginapan</h3>
-        </div>
-        <div class="card-body">
-            @if($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+<style>
+    :root {
+        --bi-blue: #002F5F;
+        --bi-gold: #D4AF37;
+        --bi-gold-light: #E5C56B;
+        --bi-gray: #F5F7FA;
+    }
 
-            <form action="{{ url('/admin/geosite/'.$geosite.'/penginapan/'.$penginapan->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label>Nama Penginapan <span class="text-danger">*</span></label>
-                        <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama', $penginapan->nama) }}" required>
-                        @error('nama')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
-                    
-                    <div class="col-md-6 mb-3">
-                        <label>No Telepon</label>
-                        <input type="text" name="no_telepon" class="form-control @error('no_telepon') is-invalid @enderror" value="{{ old('no_telepon', $penginapan->no_telepon) }}">
-                        @error('no_telepon')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
-                    
-                    <div class="col-md-12 mb-3">
-                        <label>Alamat</label>
-                        <textarea name="alamat" class="form-control @error('alamat') is-invalid @enderror" rows="2">{{ old('alamat', $penginapan->alamat) }}</textarea>
-                        @error('alamat')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
-                    
-                    <div class="col-md-12 mb-3">
-                        <label>Deskripsi</label>
-                        <textarea name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" rows="3">{{ old('deskripsi', $penginapan->deskripsi) }}</textarea>
-                        @error('deskripsi')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
-                    
-                    <div class="col-md-6 mb-3">
-                        <label>Harga per Malam</label>
-                        <input type="number" name="harga" class="form-control @error('harga') is-invalid @enderror" value="{{ old('harga', $penginapan->harga) }}" placeholder="0">
-                        @error('harga')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
-                    
-                    <div class="col-md-6 mb-3">
-                        <label>Gambar Saat Ini</label><br>
-                        @if($penginapan->gambar && file_exists(public_path($penginapan->gambar)))
-                            <img src="{{ asset($penginapan->gambar) }}" width="100" class="mb-2" style="border-radius: 8px;">
-                            <br>
-                        @endif
-                        <label>Ganti Foto (Opsional)</label>
-                        <input type="file" name="gambar" class="form-control @error('gambar') is-invalid @enderror" accept="image/*">
-                        <small class="text-muted">Kosongkan jika tidak ingin mengganti foto</small>
-                        @error('gambar')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
+    .preview-container { margin-top: 10px; }
+    .preview-image { max-width: 220px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); object-fit: cover; }
+    .required:after { content: " *"; color: var(--bi-gold); font-weight: bold; }
+    
+    .card { border: none; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .card-header { background: linear-gradient(135deg, var(--bi-blue) 0%, #003f77 100%); color: white; border-radius: 12px 12px 0 0 !important; padding: 1rem 1.5rem; border-bottom: 3px solid var(--bi-gold); }
+    .card-header h5 { color: white; font-weight: 700; margin-bottom: 0; }
+    .card-header h5 i { color: var(--bi-gold); }
+
+    .form-label { font-weight: 600; color: var(--bi-blue); margin-bottom: 0.5rem; }
+    .form-control { border-radius: 8px; border: 1px solid #dee2e6; padding: 0.7rem 1rem; }
+    .form-control:focus { border-color: var(--bi-gold); box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.2); }
+
+    .btn-primary-bi { background: var(--bi-blue); border: none; color: white; padding: 0.7rem 1.8rem; border-radius: 8px; font-weight: 600; transition: all 0.3s; }
+    .btn-primary-bi:hover { background: #001f3f; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
+    .btn-outline-bi { background: white; border: 1px solid var(--bi-blue); color: var(--bi-blue); padding: 0.7rem 1.8rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s; }
+    .btn-outline-bi:hover { background: var(--bi-blue); color: white; }
+</style>
+
+<div class="card">
+    <div class="card-header">
+        <h5><i class="fas fa-bed me-2"></i> Edit Penginapan: {{ $penginapan->nama }}</h5>
+    </div>
+
+    <div class="card-body p-4">
+        <form action="{{ url('/admin/geosite/'.$geosite.'/penginapan/'.$penginapan->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label class="form-label required">Nama Penginapan</label>
+                    <input type="text" name="nama" class="form-control" value="{{ old('nama', $penginapan->nama) }}" required>
                 </div>
                 
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="{{ url('/admin/geosite/'.$geosite.'/penginapan') }}" class="btn btn-secondary">Batal</a>
+                <div class="col-md-6 mb-4">
+                    <label class="form-label">No Telepon</label>
+                    <input type="text" name="no_telepon" class="form-control" value="{{ old('no_telepon', $penginapan->no_telepon) }}">
                 </div>
-            </form>
-        </div>
+                
+                <div class="col-md-12 mb-4">
+                    <label class="form-label">Alamat</label>
+                    <textarea name="alamat" class="form-control" rows="2">{{ old('alamat', $penginapan->alamat) }}</textarea>
+                </div>
+                
+                <div class="col-md-12 mb-4">
+                    <label class="form-label">Deskripsi</label>
+                    <textarea name="deskripsi" class="form-control" rows="3">{{ old('deskripsi', $penginapan->deskripsi) }}</textarea>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <label class="form-label">Harga per Malam</label>
+                    <input type="number" name="harga" class="form-control" value="{{ old('harga', $penginapan->harga) }}" placeholder="0">
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <label class="form-label">Foto Penginapan</label>
+                    <input type="file" name="gambar" class="form-control" accept="image/*" id="imgInput">
+                    <div class="preview-container">
+                        <small class="text-muted d-block mb-2">Gambar Saat Ini:</small>
+                        <img src="{{ asset($penginapan->gambar) }}" id="imgPreview" class="preview-image" alt="Preview">
+                    </div>
+                </div>
+            </div>
+            
+            <hr>
+            <div class="d-flex gap-3">
+                <button type="submit" class="btn-primary-bi"><i class="fas fa-save me-2"></i> Update Penginapan</button>
+                <a href="{{ url('/admin/geosite/'.$geosite.'/penginapan') }}" class="btn-outline-bi"><i class="fas fa-arrow-left me-2"></i> Batal</a>
+            </div>
+        </form>
     </div>
 </div>
+
+<script>
+    // Preview Gambar
+    document.getElementById('inputGambar').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                const img = document.getElementById('previewImage');
+                img.src = e.target.result;
+                img.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 @endsection

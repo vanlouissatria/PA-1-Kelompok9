@@ -242,17 +242,7 @@
                         </span>
                     </td>
                     <td style="white-space: nowrap; width: 1%;">
-                        <div class="actions-group">
-                            {{-- Toggle Status --}}
-                            <button type="button"
-                                    class="action-btn toggle-status-btn"
-                                    data-id="{{ $item->id }}"
-                                    data-status="{{ $item->status }}"
-                                    title="{{ $item->status ? 'Nonaktifkan' : 'Aktifkan' }}"
-                                    style="background-color: {{ $item->status ? '#16a34a' : '#6b7280' }};">
-                                <i class="fas {{ $item->status ? 'fa-eye' : 'fa-eye-slash' }}"></i>
-                            </button>
-                            
+                        <div class="actions-group">                         
                             {{-- Edit --}}
                             <a href="{{ route('admin.informasi.edit', $item->id) }}" class="action-btn btn-edit" title="Edit">
                                 <i class="fas fa-pen"></i>
@@ -285,86 +275,4 @@
         {{ $informasi->links() }}
     </div>
 </div>
-
-<script>
-(function() {
-    function initInformasiToggleButtons(){
-        const toggleButtons = document.querySelectorAll('.toggle-status-btn');
-
-        toggleButtons.forEach(button => {
-            if (button.__toggleBound) return;
-            button.__toggleBound = true;
-
-            button.addEventListener('click', function() {
-                const itemId = this.getAttribute('data-id');
-                const currentStatus = parseInt(this.getAttribute('data-status'));
-                const btn = this;
-                const icon = btn.querySelector('i');
-
-                if (icon) {
-                    icon.className = 'fas fa-spinner fa-spin';
-                }
-                btn.disabled = true;
-
-                // PERBAIKAN: Menggunakan endpoint /admin/informasi/toggle-status secara clean murni teks URL
-                const finalUrl = `{{ url('/admin/informasi/toggle-status') }}/${itemId}`;
-
-                fetch(finalUrl, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({})
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data && data.success) {
-                        const newStatus = data.status;
-
-                        if (newStatus) {
-                            btn.style.backgroundColor = '#16a34a';
-                            btn.setAttribute('data-status', '1');
-                            btn.setAttribute('title', 'Nonaktifkan');
-                            if (icon) icon.className = 'fas fa-eye';
-                        } else {
-                            btn.style.backgroundColor = '#6b7280';
-                            btn.setAttribute('data-status', '0');
-                            btn.setAttribute('title', 'Aktifkan');
-                            if (icon) icon.className = 'fas fa-eye-slash';
-                        }
-
-                        const row = btn.closest('tr');
-                        const statusCell = row.querySelector('td:nth-child(5)');
-
-                        if (statusCell) {
-                            if (newStatus) {
-                                statusCell.innerHTML = '<span class="badge-status status-active">Aktif</span>';
-                            } else {
-                                statusCell.innerHTML = '<span class="badge-status status-inactive">Nonaktif</span>';
-                            }
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.error('Toggle Error:', error);
-                    if (icon) {
-                        icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
-                    }
-                })
-                .finally(() => {
-                    btn.disabled = false;
-                });
-            });
-        });
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initInformasiToggleButtons);
-    } else {
-        initInformasiToggleButtons();
-    }
-})();
-</script>
 @endsection

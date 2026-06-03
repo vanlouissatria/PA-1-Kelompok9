@@ -93,17 +93,4 @@ class WarisanController extends Controller
         return redirect()->route('admin.warisan.index')
             ->with('success', 'Item berhasil dihapus!');
     }
-
-    // Toggle status via AJAX
-    public function toggleStatus($id)
-    {
-        $warisan = Warisan::findOrFail($id);
-        $warisan->status = !($warisan->status ?? false);
-        $warisan->save();
-
-        return response()->json([
-            'success' => true,
-            'status' => (bool) $warisan->status,
-        ]);
-    }
 }

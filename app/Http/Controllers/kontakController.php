@@ -8,7 +8,10 @@ class KontakController extends Controller
 {
     public function index()
     {
-        $kontak = Kontak::first();  // kembali ke first(), bukan latest()
-        return view('pages.kontak', compact('kontak'));
+        $kontaks = Kontak::where('status', true)
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        return view('pages.kontak', compact('kontaks'));
     }
 }

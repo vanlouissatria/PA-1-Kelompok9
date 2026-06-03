@@ -180,17 +180,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         ));
     })->name('admin.dashboard');
     
-    // Toggle Status Routes (must be before resource routes)
-    Route::post('galeri/toggle-status/{id}', [AdminGaleriController::class, 'toggleStatus'])->name('admin.galeri.toggle-status');
-    Route::post('berita/toggle-status/{id}', [AdminBeritaController::class, 'toggleStatus'])->name('admin.berita.toggle-status');
-    Route::post('informasi/toggle-status/{id}', [AdminInformasiController::class, 'toggleStatus'])->name('admin.informasi.toggle-status');
-    Route::post('destinasi/toggle-status/{id}', [AdminDestinasiController::class, 'toggleStatus'])->name('admin.destinasi.toggle-status');
-    Route::post('fasilitas/toggle-status/{id}', [AdminFasilitasController::class, 'toggleStatus'])->name('admin.fasilitas.toggle-status');
-    Route::post('warisan/toggle-status/{id}', [AdminWarisanController::class, 'toggleStatus'])->name('admin.warisan.toggle-status');
-    
-    // RUTE TOGGLE STATUS KONTAK (Wajib ditaruh sebelum resource)
-    Route::post('kontak/toggle-status/{id}', [AdminKontakController::class, 'toggleStatus'])->name('admin.kontak.toggle-status');
-    
     // KONTEN GLOBAL UTAMA
     Route::resource('galeri', AdminGaleriController::class)->names('admin.galeri');
     Route::resource('berita', AdminBeritaController::class)->names('admin.berita');
@@ -247,5 +236,3 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     });
 });
 
-// Temporary test route (remove after debugging) - allows GET toggle without auth/CSRF
-Route::get('debug/kontak/toggle-status/{id}', [AdminKontakController::class, 'toggleStatus']);

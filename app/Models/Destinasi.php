@@ -16,7 +16,6 @@ class Destinasi extends Model
         'kategori', 
         'lokasi', 
         'deskripsi', 
-        'gambar',
-        'status'
+        'gambar'
     ];
 }

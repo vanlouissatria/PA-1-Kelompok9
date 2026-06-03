@@ -17,7 +17,6 @@ class Galeri extends Model
         'gambar',
         'slug',
         'kategori',
-        'status',
         'views'
     ];
 }

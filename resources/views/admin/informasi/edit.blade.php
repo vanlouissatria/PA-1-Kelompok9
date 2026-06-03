@@ -103,22 +103,6 @@
         border: 0;
         height: 1px;
     }
-
-    .btn-toggle-status {
-        background-color: #28a745;
-        color: white;
-        padding: 0.6rem 2rem;
-        border-radius: 8px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        border: none;
-        transition: background-color 0.2s;
-    }
-    .form-check-input:not(:checked) + .btn-toggle-status {
-        background-color: #6c757d;
-    }
 </style>
 
 <div class="card">
@@ -182,17 +166,6 @@
                         <div class="invalid-feedback text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Status Tampilkan Informasi</label>
-                    <input type="hidden" name="status" value="0">
-                    <div class="form-check p-0 m-0">
-                        <input class="form-check-input d-none" type="checkbox" name="status" id="statusSwitch" value="1" {{ $informasi->status ? 'checked' : '' }}>
-                        <label class="btn-toggle-status" for="statusSwitch">
-                            <i class="fas {{ $informasi->status ? 'fa-eye' : 'fa-eye-slash' }}" id="statusIcon" style="font-size: 1.1rem;"></i>
-                        </label>
-                    </div>
-                </div>
             </div>
             
             <hr>
@@ -210,30 +183,17 @@
 </div>
 
 <script>
+    // Preview Gambar
     document.getElementById('inputGambar').addEventListener('change', function(e) {
         const file = e.target.files[0];
-        const previewImage = document.getElementById('previewImage');
-        const labelPreview = document.getElementById('labelPreview');
-        const noImageText = document.getElementById('noImageText');
-        
         if (file) {
             const reader = new FileReader();
-            reader.onload = function(event) {
-                previewImage.src = event.target.result;
-                previewImage.style.display = 'block';
-                labelPreview.textContent = "Pratinjau Gambar Baru:";
-                if(noImageText) noImageText.style.display = 'none';
+            reader.onload = e => {
+                const img = document.getElementById('previewImage');
+                img.src = e.target.result;
+                img.style.display = 'block';
             }
             reader.readAsDataURL(file);
-        }
-    });
-
-    document.getElementById('statusSwitch').addEventListener('change', function() {
-        const icon = document.getElementById('statusIcon');
-        if (this.checked) {
-            icon.className = 'fas fa-eye';
-        } else {
-            icon.className = 'fas fa-eye-slash';
         }
     });
 </script>

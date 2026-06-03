@@ -28,12 +28,6 @@
     
     .btn-primary-bi { background: var(--bi-blue); color: white; padding: 0.6rem 1.5rem; border-radius: 8px; border: none; transition: 0.2s; }
     .btn-primary-bi:hover { background: #001f3f; color: white; }
-    
-    .btn-toggle-status {
-        background-color: #28a745; color: white; padding: 0.6rem 2rem; border-radius: 8px;
-        display: inline-flex; align-items: center; cursor: pointer; border: none;
-    }
-    .form-check-input:not(:checked) + .btn-toggle-status { background-color: #6c757d; }
 </style>
 
 <div class="card">
@@ -75,13 +69,6 @@
                              style="{{ $destinasi->gambar ? '' : 'display:none;' }}">
                     </div>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label d-block">Status Tampilan</label>
-                    <input type="checkbox" name="status" id="statusSwitch" class="d-none" value="1" {{ $destinasi->status ? 'checked' : '' }}>
-                    <label class="btn-toggle-status" for="statusSwitch">
-                        <i class="fas {{ $destinasi->status ? 'fa-eye' : 'fa-eye-slash' }}" id="statusIcon"></i>
-                    </label>
-                </div>
             </div>
 
             <div class="mt-3">
@@ -91,7 +78,6 @@
         </form>
     </div>
 </div>
-
 <script>
     // Preview Gambar
     document.getElementById('inputGambar').addEventListener('change', function(e) {
@@ -105,11 +91,6 @@
             }
             reader.readAsDataURL(file);
         }
-    });
-
-    // Toggle Status
-    document.getElementById('statusSwitch').addEventListener('change', function() {
-        document.getElementById('statusIcon').className = this.checked ? 'fas fa-eye' : 'fas fa-eye-slash';
     });
 </script>
 @endsection

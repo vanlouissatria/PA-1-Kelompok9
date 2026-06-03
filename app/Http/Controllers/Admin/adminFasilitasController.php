@@ -99,13 +99,4 @@ class adminFasilitasController extends Controller
         return redirect()->route('admin.fasilitas.index')
             ->with('success', 'Fasilitas berhasil dihapus!');
     }
-
-    public function toggleStatus($id)
-    {
-        $fasilitas = Fasilitas::findOrFail($id);
-        $fasilitas->status = !$fasilitas->status;
-        $fasilitas->save();
-
-        return response()->json(['success' => true, 'status' => $fasilitas->status]);
-    }
 }

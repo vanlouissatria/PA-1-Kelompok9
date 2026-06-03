@@ -152,20 +152,4 @@ class UMKMController extends Controller
         return redirect()->route('admin.umkm.index')
             ->with('success', 'UMKM berhasil dihapus');
     }
-
-    /**
-     * Toggle status UMKM
-     */
-    public function toggleStatus($id)
-    {
-        $umkm = UMKM::findOrFail($id);
-        $umkm->status = !$umkm->status;
-        $umkm->save();
-        
-        return response()->json([
-            'success' => true,
-            'status' => $umkm->status,
-            'message' => 'Status UMKM berhasil diubah'
-        ]);
-    }
 }

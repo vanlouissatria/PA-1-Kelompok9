@@ -136,29 +136,4 @@ class adminInformasiController extends Controller
                 ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
-    
-    /**
-     * PERBAIKAN UTAMA: Mengubah fungsi toggleStatus agar merespon AJAX JSON secara real-time
-     */
-    public function toggleStatus($id)
-    {
-        try {
-            $informasi = Informasi::findOrFail($id);
-            
-            // Balik nilai status (0 jadi 1, 1 jadi 0)
-            $informasi->status = $informasi->status ? 0 : 1;
-            $informasi->save();
-            
-            // Mengembalikan response berupa JSON, bukan redirect back
-            return response()->json([
-                'success' => true,
-                'status' => $informasi->status
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal mengubah status.'
-            ], 500);
-        }
-    }
 }
