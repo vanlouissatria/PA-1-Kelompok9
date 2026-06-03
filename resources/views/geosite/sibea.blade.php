@@ -1827,7 +1827,6 @@ h1, h2, h3, h4, h5, h6 {
             <h4><i class="fas fa-location-dot"></i> Rute Menuju Sibea Bea</h4>
             <p><strong>Dari Pangururan:</strong> Perjalanan darat sekitar 40 menit menuju Sibea Bea melalui Jalan Lintas Samosir.</p>
             <p><strong>Dari Tomok:</strong> Sekitar 50 menit perjalanan darat menuju kawasan budaya dan alam Sibea Bea.</p>
-            <p><strong>Jam Operasional:</strong> 08.00 - 18.00 WIB setiap hari.</p>
         </div>
     </div>
 </section>
@@ -1846,7 +1845,7 @@ h1, h2, h3, h4, h5, h6 {
             </div>
             <div class="footer-info">
                 <p><i class="fas fa-map-marker-alt"></i> Pulau Sibea Bea, Kabupaten Samosir</p>
-                <p><i class="fas fa-clock"></i> Buka Setiap Hari: 08.00 - 18.00 WIB</p>
+     
             </div>
         </div>
         <div class="footer-bottom">&copy; 2026 Geopark Danau Toba. All rights reserved.</div>

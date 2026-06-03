@@ -1846,8 +1846,6 @@ h1, h2, h3, h4, h5, h6 {
             <h4><i class="fas fa-location-dot"></i> Rute Menuju Air Terjun Efrata</h4>
             <p><strong>Dari Pangururan:</strong> Berjarak sekitar 20 km dengan waktu tempuh kurang lebih 30-40 menit berkendara melewati jalan Lintas Tele-Pangururan menuju Desa Sosor Dolok.</p>
             <p><strong>Dari Menara Pandang Tele:</strong> Jaraknya cukup dekat, hanya sekitar 15 km dengan waktu tempuh 25 menit menuruni perbukitan menuju arah Harian.</p>
-            <p><strong>Jam Operasional:</strong> 06.00 - 19.00 WIB (Setiap Hari)</p>
-            <p><strong>Tiket Masuk:</strong> Rp 10.000 - Rp 15.000 per orang.</p>
         </div>
     </div>
 </section>
@@ -1867,7 +1865,6 @@ h1, h2, h3, h4, h5, h6 {
             </div>
             <div class="footer-info">
                 <p><i class="fas fa-map-marker-alt"></i> Air Terjun Efrata, Desa Sosor Dolok, Harian, Samosir</p>
-                <p><i class="fas fa-clock"></i> Buka Setiap Hari: 06.00 - 19.00 WIB</p>
             </div>
         </div>
         <div class="footer-bottom">

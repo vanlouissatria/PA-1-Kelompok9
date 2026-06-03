@@ -1847,7 +1847,6 @@ h1, h2, h3, h4, h5, h6 {
             </div>
             <div class="footer-info">
                 <p><i class="fas fa-map-marker-alt"></i> Pulau Sihotang, Kabupaten Samosir</p>
-                <p><i class="fas fa-clock"></i> Buka Setiap Hari: 08.00 - 18.00 WIB</p>
             </div>
         </div>
         <div class="footer-bottom">&copy; 2026 Geopark Danau Toba. All rights reserved.</div>

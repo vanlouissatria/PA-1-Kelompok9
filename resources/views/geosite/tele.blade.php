@@ -1884,8 +1884,6 @@ h1, h2, h3, h4, h5, h6 {
             <p><strong>Dari Medan:</strong> Perjalanan darat sekitar 5-6 jam melalui Parapat, kemudian menyeberang dengan feri ke Pulau Samosir (sekitar 45 menit). Setelah sampai di Pulau Samosir, perjalanan ke Menara Pandang Tele sekitar 1 jam dari Pelabuhan Tomok.</p>
             <p><strong>Dari Pangururan:</strong> Hanya 22 km dengan waktu tempuh sekitar 40 menit melalui Jalan Lintas Tele–Pangururan.</p>
             <p><strong>Dari Pelabuhan Tomok:</strong> Jarak sekitar 50 km dengan waktu tempuh 1.5 jam.</p>
-            <p><strong>Jam Operasional:</strong> 08.00 - 18.00 WIB (Setiap Hari)</p>
-            <p><strong>Tiket Masuk:</strong> Rp 15.000 - Rp 25.000 per orang</p>
         </div>
     </div>
 </section>
@@ -1906,8 +1904,7 @@ h1, h2, h3, h4, h5, h6 {
             </div>
             <div class="footer-info">
                 <p><i class="fas fa-map-marker-alt"></i> Desa Turpuk Limbong, Kec. Harian, Kab. Samosir</p>
-                <p><i class="fas fa-clock"></i> Buka Setiap Hari: 08.00 - 18.00 WIB</p>
-                <p><i class="fas fa-ticket-alt"></i> Tiket Masuk: Rp 15.000 - Rp 25.000</p>
+        
             </div>
         </div>
         <div class="footer-bottom">

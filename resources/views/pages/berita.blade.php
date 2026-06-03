@@ -5,24 +5,44 @@
 @section('content')
 
 <style>
-    /* ========== STACKED SLIP CARDS STYLE - SAME AS GALERI ========== */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    /* ============================================
+       ROOT VARIABLES - PREMIUM DESIGN SYSTEM
+       ============================================ */
+    :root {
+        --primary: #003366;
+        --primary-dark: #002244;
+        --gold: #c6a43b;
+        --gold-light: #e8c96a;
+        --gold-dark: #a58a36;
+        --white: #ffffff;
+        --white-soft: #fefefe;
+        --gray: #64748b;
+        --gray-light: #f1f5f9;
+        
+        /* Gradients */
+        --gradient-gold: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+        --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        --gradient-hero: linear-gradient(135deg, #003366 0%, #1a4a7a 50%, #002244 100%);
+        
+        /* Shadows */
+        --shadow-sm: 0 8px 20px rgba(0,0,0,0.03);
+        --shadow-md: 0 12px 30px rgba(0,0,0,0.05);
+        --shadow-lg: 0 20px 40px rgba(0,0,0,0.08);
+        --shadow-xl: 0 30px 60px rgba(0,0,0,0.12);
+        --shadow-gold: 0 20px 40px rgba(198,164,59,0.2);
+        
+        /* Transitions */
+        --transition-bounce: cubic-bezier(0.34, 1.2, 0.64, 1);
+        --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        --transition-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
-    body {
-        font-family: 'Inter', sans-serif;
-        background: #f0f2f5;
-    }
-
-    /* HERO SECTION - SAME AS GALERI */
+    /* ============================================
+       HERO SECTION - CLEAN & ELEGANT
+       ============================================ */
     .news-hero {
-        background: linear-gradient(135deg, #003366 0%, #1a4a7a 100%);
-        padding: 80px 0 50px;
+        background: var(--gradient-hero);
+        padding: 100px 0 70px;
         margin-top: 70px;
         text-align: center;
         position: relative;
@@ -36,7 +56,7 @@
         left: -50%;
         width: 200%;
         height: 200%;
-        background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
         animation: slowRotate 20s linear infinite;
     }
 
@@ -48,106 +68,177 @@
     .news-hero-content {
         position: relative;
         z-index: 2;
+        animation: heroReveal 0.8s var(--transition-bounce);
+    }
+
+    @keyframes heroReveal {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
     }
 
     .news-hero h1 {
-        font-size: 2.8rem;
-        font-weight: 700;
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #ffffff 0%, var(--gold-light) 40%, #ffffff 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 16px;
         font-family: 'Playfair Display', serif;
-        color: white;
-        margin-bottom: 10px;
         letter-spacing: 2px;
+        position: relative;
+        display: inline-block;
     }
 
     .news-hero p {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         letter-spacing: 3px;
         text-transform: uppercase;
-        color: rgba(255,255,255,0.8);
+        color: rgba(255,255,255,0.88);
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(8px);
+        display: inline-block;
+        padding: 8px 28px;
+        border-radius: 50px;
+        font-weight: 500;
     }
 
-    /* NEWS SECTION */
+    @media (max-width: 768px) {
+        .news-hero h1 { font-size: 2.2rem; }
+        .news-hero { padding: 80px 0 50px; }
+    }
+
+    /* ============================================
+       NEWS SECTION - CLEAN WHITE
+       ============================================ */
     .news-section {
-        padding: 60px 0 100px;
-        background: linear-gradient(135deg, #f8fafc 0%, #eef2f8 100%);
-        min-height: 100vh;
+        padding: 80px 0 120px;
+        background: var(--white-soft);
+        position: relative;
+    }
+
+    .news-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: radial-gradient(rgba(198,164,59,0.03) 1px, transparent 1px);
+        background-size: 24px 24px;
+        pointer-events: none;
     }
 
     .container {
-        max-width: 1400px;
+        max-width: 1280px;
         margin: 0 auto;
         padding: 0 24px;
+        position: relative;
+        z-index: 2;
     }
 
-    /* STACK CONTAINER - SAME AS GALERI */
+    /* ============================================
+       STACK CONTAINER - CENTERED GRID
+       ============================================ */
     .stack-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
-        justify-content: center;
-        gap: 24px;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 32px;
         padding: 40px 0;
-        position: relative;
+        justify-content: center;
+        align-items: stretch;
     }
 
-    /* SLIP CARD - SAME EXACT STYLE AS GALERI */
+    @media (max-width: 768px) {
+        .stack-container {
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            padding: 20px 0;
+        }
+    }
+
+    @media (max-width: 560px) {
+        .stack-container {
+            grid-template-columns: 1fr;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+    }
+
+    /* ============================================
+       SLIP CARD - PURE WHITE
+       ============================================ */
     .slip-card {
         position: relative;
-        width: 100%;
-        max-width: 320px;
-        background: white;
-        border-radius: 14px;
+        background: var(--white);
+        border-radius: 28px;
         overflow: hidden;
         cursor: pointer;
-        transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.35s;
-        box-shadow: 0 8px 20px rgba(2,6,23,0.06);
-        margin: 0;
+        transition: all 0.4s var(--transition-bounce);
+        box-shadow: var(--shadow-md);
+        border: 1px solid rgba(0,0,0,0.04);
         display: flex;
         flex-direction: column;
     }
 
-    .slip-card:first-child {
-        margin-left: 0;
+    .slip-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 28px;
+        padding: 2px;
+        background: var(--gradient-gold);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        pointer-events: none;
+        z-index: 3;
     }
 
-    /* Efek hover - card naik ke atas seperti slip */
+    .slip-card:hover::before {
+        opacity: 1;
+    }
+
     .slip-card:hover {
-        transform: translateY(-20px) scale(1.02);
-        z-index: 100;
-        box-shadow: 0 25px 40px -10px rgba(0,0,0,0.25);
+        transform: translateY(-12px);
+        box-shadow: var(--shadow-xl);
+        border-color: rgba(198,164,59,0.2);
     }
 
-    /* Remove overlapping transform on adjacent cards for grid layout */
-
-    /* Container gambar - SAME AS GALERI */
+    /* ============================================
+       SLIP IMAGE
+       ============================================ */
     .slip-image {
         position: relative;
         width: 100%;
-        height: 220px;
+        height: 240px;
         overflow: hidden;
-        background: linear-gradient(135deg, #1e293b, #0f172a);
+        background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
     }
 
     .slip-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.5s ease;
+        transition: transform 0.6s var(--transition-elastic);
     }
 
     .slip-card:hover .slip-image img {
-        transform: scale(1.05);
+        transform: scale(1.08);
     }
 
-    /* Overlay - SAME AS GALERI */
     .slip-overlay {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-        padding: 30px 16px 16px;
+        background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+        padding: 30px 20px 20px;
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.35s ease;
     }
 
     .slip-card:hover .slip-overlay {
@@ -156,11 +247,11 @@
 
     .slip-category {
         display: inline-block;
-        background: #c6a43b;
-        color: #003366;
-        padding: 3px 10px;
-        border-radius: 20px;
-        font-size: 0.6rem;
+        background: var(--gradient-gold);
+        color: var(--primary-dark);
+        padding: 4px 14px;
+        border-radius: 30px;
+        font-size: 0.65rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 1px;
@@ -171,51 +262,31 @@
         font-size: 0.85rem;
         font-weight: 600;
         margin-top: 8px;
-        line-height: 1.3;
+        line-height: 1.4;
     }
 
-    /* Info Card - SAME AS GALERI */
+    /* ============================================
+       SLIP INFO - PURE WHITE
+       ============================================ */
     .slip-info {
-        padding: 16px;
-        background: white;
+        padding: 20px;
+        background: var(--white);
         position: relative;
-        border-top: 1px solid #f0f0f0;
-    }
-
-    .slip-actions {
-        margin-top: 12px;
+        flex: 1;
         display: flex;
-        justify-content: flex-end;
-        gap: 8px;
+        flex-direction: column;
     }
 
-    .btn-read {
-        background: #003366;
-        color: white;
-        border: none;
-        padding: 8px 12px;
-        border-radius: 8px;
-        font-size: 0.8rem;
-        cursor: pointer;
-        transition: background 0.2s ease, transform 0.12s ease;
-    }
-
-    .btn-read:hover {
-        background: #c6a43b;
-        color: #003366;
-        transform: translateY(-2px);
-    }
-
-    /* Decorative line seperti slip */
     .slip-line {
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         height: 3px;
-        background: linear-gradient(90deg, #c6a43b, #e8c45a, #c6a43b);
+        background: var(--gradient-gold);
         transform: scaleX(0);
-        transition: transform 0.3s ease;
+        transition: transform 0.4s var(--transition-bounce);
+        transform-origin: left;
     }
 
     .slip-card:hover .slip-line {
@@ -223,23 +294,27 @@
     }
 
     .slip-title {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: #1e293b;
-        margin-bottom: 6px;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 8px;
         line-height: 1.4;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
+        transition: color 0.3s ease;
     }
 
-    /* News specific - excerpt preview */
+    .slip-card:hover .slip-title {
+        color: var(--gold-dark);
+    }
+
     .slip-excerpt {
-        font-size: 0.7rem;
-        color: #64748b;
-        line-height: 1.4;
-        margin-bottom: 8px;
+        font-size: 0.8rem;
+        color: var(--gray);
+        line-height: 1.55;
+        margin-bottom: 12px;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -251,50 +326,127 @@
         color: #94a3b8;
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 6px;
+        margin-bottom: 8px;
     }
 
     .slip-date i {
-        font-size: 0.65rem;
-        color: #c6a43b;
+        font-size: 0.7rem;
+        color: var(--gold);
     }
 
-    /* Nomor slip seperti antrian - SAME AS GALERI */
-    .slip-number {
-        position: absolute;
-        bottom: 12px;
-        right: 16px;
-        font-size: 0.6rem;
-        color: #cbd5e1;
-        font-family: monospace;
-        letter-spacing: 1px;
+    .slip-stats {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid #f0f0f0;
     }
 
-    /* Views counter */
     .slip-views {
-        position: absolute;
-        bottom: 12px;
-        left: 16px;
-        font-size: 0.6rem;
-        color: #cbd5e1;
+        font-size: 0.7rem;
+        color: #94a3b8;
         display: flex;
         align-items: center;
-        gap: 4px;
+        gap: 5px;
     }
 
     .slip-views i {
-        font-size: 0.55rem;
-        color: #c6a43b;
+        font-size: 0.65rem;
+        color: var(--gold);
     }
 
-    /* MODAL READER - TETAP SAMA (FUNGSI BERITA) */
+    .slip-number {
+        font-size: 0.7rem;
+        color: #cbd5e1;
+        font-family: monospace;
+        font-weight: 600;
+    }
+
+    .slip-actions {
+        margin-top: 16px;
+    }
+
+    .btn-read {
+        width: 100%;
+        background: transparent;
+        border: 2px solid var(--gold);
+        color: var(--primary);
+        padding: 10px 16px;
+        border-radius: 40px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s var(--transition-bounce);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn-read i {
+        transition: transform 0.25s ease;
+    }
+
+    .btn-read:hover {
+        background: var(--gradient-gold);
+        color: var(--primary-dark);
+        border-color: transparent;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-gold);
+        gap: 12px;
+    }
+
+    .btn-read:hover i {
+        transform: translateX(4px);
+    }
+
+    /* ============================================
+       EMPTY STATE
+       ============================================ */
+    .empty-news {
+        text-align: center;
+        padding: 80px 40px;
+        background: var(--white);
+        border-radius: 32px;
+        box-shadow: var(--shadow-md);
+        border: 1px solid rgba(0,0,0,0.04);
+        max-width: 500px;
+        margin: 40px auto;
+    }
+
+    .empty-news i {
+        font-size: 3.5rem;
+        background: var(--gradient-gold);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 20px;
+    }
+
+    .empty-news h3 {
+        font-size: 1.3rem;
+        color: var(--primary);
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+
+    .empty-news p {
+        color: var(--gray);
+        font-size: 0.85rem;
+    }
+
+    /* ============================================
+       MODAL READER
+       ============================================ */
     #fullReader {
         position: fixed;
         top: 100%;
         left: 0;
         width: 100%;
         height: 100%;
-        background: white;
+        background: var(--white);
         z-index: 99999;
         transition: top 0.7s cubic-bezier(0.86, 0, 0.07, 1);
         overflow-y: auto;
@@ -312,13 +464,13 @@
         left: 0;
         width: 100%;
         height: 4px;
-        background: #eee;
+        background: #e2e8f0;
         z-index: 100;
     }
 
     .progress-bar {
         height: 4px;
-        background: #c6a43b;
+        background: var(--gradient-gold);
         width: 0%;
         transition: width 0.1s ease;
     }
@@ -338,33 +490,40 @@
 
     .reader-logo {
         font-family: 'Playfair Display', serif;
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: #003366;
+        font-size: 1.3rem;
+        font-weight: 800;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
     }
 
     .reader-logo span {
-        color: #c6a43b;
+        background: var(--gradient-gold);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
     }
 
     .btn-close-circle {
-        width: 42px;
-        height: 42px;
+        width: 45px;
+        height: 45px;
         border-radius: 50%;
-        background: #f0f0f0;
+        background: #f1f5f9;
         border: none;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        transition: all 0.3s ease;
-        color: #1a1a1a;
+        transition: all 0.3s var(--transition-bounce);
+        color: var(--primary);
+        font-size: 1.2rem;
     }
 
     .btn-close-circle:hover {
-        background: #c6a43b;
-        color: #003366;
-        transform: rotate(90deg);
+        background: var(--gradient-gold);
+        color: var(--primary-dark);
+        transform: rotate(90deg) scale(1.05);
     }
 
     .reader-content-wrap {
@@ -387,37 +546,43 @@
     }
 
     .reader-date {
-        font-size: 12px;
+        font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 3px;
-        color: #c6a43b;
+        color: var(--gold);
         display: inline-block;
         margin-bottom: 15px;
+        font-weight: 600;
     }
 
     .reader-title-display {
         font-family: 'Playfair Display', serif;
         font-size: 2.5rem;
         line-height: 1.25;
-        color: #1a1a1a;
+        color: var(--primary);
         margin: 20px 0;
-        font-weight: 700;
+        font-weight: 800;
     }
 
     .reader-divider {
-        width: 50px;
-        height: 2px;
-        background: #c6a43b;
+        width: 60px;
+        height: 3px;
+        background: var(--gradient-gold);
         margin: 20px auto;
+        border-radius: 3px;
     }
 
     .reader-author {
-        font-size: 13px;
-        color: #999;
+        font-size: 0.8rem;
+        color: var(--gray);
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
+    }
+
+    .reader-author i {
+        color: var(--gold);
     }
 
     .reader-hero-img {
@@ -425,15 +590,20 @@
         height: auto;
         max-height: 500px;
         object-fit: cover;
-        border-radius: 16px;
+        border-radius: 24px;
         margin: 30px 0 40px;
-        box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+        box-shadow: var(--shadow-xl);
+        transition: transform 0.3s ease;
+    }
+
+    .reader-hero-img:hover {
+        transform: scale(1.02);
     }
 
     .reader-article-body {
-        font-size: 16px;
+        font-size: 1rem;
         line-height: 1.9;
-        color: #2c3e50;
+        color: #334155;
         text-align: left;
         font-family: 'Inter', sans-serif;
     }
@@ -442,96 +612,212 @@
         margin-bottom: 25px;
     }
 
+    .reader-article-body h2, 
+    .reader-article-body h3 {
+        color: var(--primary);
+        margin-top: 30px;
+        margin-bottom: 15px;
+    }
+
     .reader-footer {
         margin: 60px 0 0;
         text-align: center;
-        border-top: 1px solid #eee;
+        border-top: 1px solid #e2e8f0;
         padding-top: 40px;
     }
 
     .btn-back {
-        background: #003366;
+        background: var(--gradient-primary);
         color: white;
-        padding: 12px 32px;
-        border-radius: 40px;
+        padding: 12px 36px;
+        border-radius: 60px;
         border: none;
-        font-size: 12px;
+        font-size: 0.85rem;
+        font-weight: 600;
         letter-spacing: 1px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.3s var(--transition-bounce);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn-back i {
+        transition: transform 0.3s ease;
     }
 
     .btn-back:hover {
-        background: #c6a43b;
-        color: #003366;
+        background: var(--gradient-gold);
+        color: var(--primary-dark);
         transform: translateY(-3px);
+        box-shadow: var(--shadow-gold);
+        gap: 14px;
     }
 
-    .empty-news {
-        text-align: center;
-        padding: 80px;
-        background: white;
-        border-radius: 16px;
+    .btn-back:hover i {
+        transform: translateX(-4px);
     }
 
-    .empty-news i {
-        font-size: 3rem;
-        color: #cbd5e1;
-        margin-bottom: 15px;
+    /* ============================================
+       ANIMATIONS
+       ============================================ */
+    .slip-card {
+        animation: fadeInUp 0.5s var(--transition-smooth) backwards;
     }
 
-    /* RESPONSIVE - SAME AS GALERI */
-    @media (max-width: 1200px) {
-        .slip-card {
-            width: 240px;
+    .slip-card:nth-child(1) { animation-delay: 0.05s; }
+    .slip-card:nth-child(2) { animation-delay: 0.1s; }
+    .slip-card:nth-child(3) { animation-delay: 0.15s; }
+    .slip-card:nth-child(4) { animation-delay: 0.2s; }
+    .slip-card:nth-child(5) { animation-delay: 0.25s; }
+    .slip-card:nth-child(6) { animation-delay: 0.3s; }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
         }
-        .slip-image {
-            height: 280px;
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
     }
 
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
     @media (max-width: 992px) {
-        .stack-container {
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .slip-card {
-            margin-left: 0 !important;
-            width: 260px;
-        }
-        .slip-card:hover ~ .slip-card {
-            transform: none;
-        }
         .slip-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
         }
     }
 
     @media (max-width: 768px) {
-        .slip-card {
-            width: calc(50% - 8px);
+        .news-section {
+            padding: 50px 0 80px;
         }
+        
         .slip-image {
-            height: 260px;
+            height: 200px;
         }
-        .news-hero h1 {
-            font-size: 2rem;
+        
+        .slip-info {
+            padding: 16px;
         }
+        
         .reader-title-display {
             font-size: 1.6rem;
         }
+        
         .reader-content-wrap {
             padding: 20px;
         }
     }
 
-    @media (max-width: 560px) {
-        .slip-card {
-            width: 100%;
+    @media (max-width: 480px) {
+        .container {
+            padding: 0 16px;
         }
+        
         .slip-image {
-            height: 280px;
+            height: 220px;
+        }
+        
+        .news-hero h1 {
+            font-size: 1.8rem;
+        }
+    }
+
+    /* ============================================
+       SCROLLBAR
+       ============================================ */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--gold) 100%);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, var(--gold) 0%, var(--primary-dark) 100%);
+    }
+
+    /* ============================================
+       DARK MODE - TETAP PUTIH BERSIH
+       ============================================ */
+    @media (prefers-color-scheme: dark) {
+        .news-section {
+            background: var(--white-soft);
+        }
+        
+        .slip-card {
+            background: var(--white);
+        }
+        
+        .slip-info {
+            background: var(--white);
+        }
+        
+        .slip-title {
+            color: var(--primary);
+        }
+        
+        .slip-excerpt {
+            color: var(--gray);
+        }
+        
+        .empty-news {
+            background: var(--white);
+        }
+        
+        #fullReader {
+            background: var(--white);
+        }
+        
+        .reader-nav {
+            background: rgba(255,255,255,0.98);
+        }
+        
+        .reader-title-display {
+            color: var(--primary);
+        }
+        
+        .reader-article-body {
+            color: #334155;
+        }
+        
+        .reader-date {
+            color: var(--gold);
+        }
+        
+        .reader-author {
+            color: var(--gray);
+        }
+        
+        .progress-container {
+            background: #e2e8f0;
+        }
+        
+        .btn-close-circle {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+        
+        .btn-back {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .btn-back:hover {
+            background: var(--gradient-gold);
+            color: var(--primary-dark);
         }
     }
 </style>
@@ -540,7 +826,6 @@
 <div class="news-hero">
     <div class="news-hero-content">
         <h1>BERITA TERKINI</h1>
-        <p>Discover Geosite Toba</p>
     </div>
 </div>
 
