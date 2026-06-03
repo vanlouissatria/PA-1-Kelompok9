@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\AdminInformasiController;
 use App\Http\Controllers\Admin\AdminDestinasiController;
 use App\Http\Controllers\Admin\AdminFasilitasController;
 use App\Http\Controllers\Admin\AdminKontakController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\TeleController;
 use App\Http\Controllers\Admin\WarisanController as AdminWarisanController;
 
@@ -187,6 +188,13 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('destinasi', AdminDestinasiController::class)->names('admin.destinasi');
     Route::resource('warisan', AdminWarisanController::class)->names('admin.warisan');
     Route::resource('kontak', AdminKontakController::class)->names('admin.kontak');
+
+    // Kelola Admin - hanya superadmin
+    Route::middleware(['is_superadmin'])->group(function () {
+        Route::resource('users', AdminUserController::class)
+             ->names('admin.users')
+             ->except(['show']);
+    });
     
     // ==================== SUBMENU GEOSITE ADMIN GENERAL ====================
     Route::prefix('geosite')->name('admin.geosite.')->group(function () {
@@ -235,4 +243,3 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::delete('/{geosite}/informasi/{id}', [TeleController::class, 'informasiDestroy'])->name('informasi.destroy');
     });
 });
-

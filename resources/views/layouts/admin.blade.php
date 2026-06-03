@@ -666,6 +666,13 @@
             <i class="fas fa-chart-pie"></i> Dashboard
         </a>
         
+        @if(Auth::user()->isSuperAdmin())
+        <div class="menu-title">Manajemen</div>
+        <a href="{{ route('admin.users.index') }}" class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+            <i class="fas fa-users-gear"></i> Kelola Admin
+        </a>
+        @endif
+
         <div class="menu-title">Konten</div>
         <a href="{{ route('admin.galeri.index') }}" class="{{ request()->routeIs('admin.galeri.*') ? 'active' : '' }}">
             <i class="fas fa-images"></i> Galeri
@@ -720,7 +727,13 @@
             <div class="page-title">@yield('title', 'Dashboard')</div>
         </div>
         <div class="user-menu">
-            <span class="user-name"><i class="fas fa-user-circle"></i> {{ Auth::user()->name ?? 'Admin' }}</span>
+            <span class="user-name">
+                <i class="fas fa-user-circle"></i>
+                {{ Auth::user()->name ?? 'Admin' }}
+                @if(Auth::user()->isSuperAdmin())
+                    <span style="font-size:0.65rem;background:#fef3c7;color:#92400e;padding:1px 8px;border-radius:99px;margin-left:4px;font-weight:700;vertical-align:middle;">SUPER</span>
+                @endif
+            </span>
             <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                 @csrf
                 <button type="submit" class="logout-btn">
