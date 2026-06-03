@@ -122,7 +122,7 @@
 
             <div class="col-md-6 mb-3">
                 <label class="form-label required">
-                    Judul
+                    Nama Kontak Person
                 </label>
 
                 <input type="text"
@@ -133,26 +133,59 @@
             </div>
 
             <div class="col-md-6 mb-3">
-                <label class="form-label required">
+                <label class="form-label">
+                    Subjudul
+                </label>
+
+                <input type="text"
+                       name="subjudul"
+                       class="form-control"
+                       value="{{ old('subjudul', $kontak->subjudul) }}"
+                       placeholder="Posisi, jabatan, atau deskripsi singkat">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">
                     Telepon 1
                 </label>
 
                 <input type="text"
                        name="telepon1"
                        class="form-control"
-                       value="{{ old('telepon1', $kontak->telepon1) }}"
-                       required>
+                       value="{{ old('telepon1', $kontak->telepon1) }}">
             </div>
 
             <div class="col-md-12 mb-3">
-                <label class="form-label required">
+                <label class="form-label">
                     Alamat
                 </label>
 
                 <textarea name="alamat"
                           rows="4"
-                          class="form-control"
-                          required>{{ old('alamat', $kontak->alamat) }}</textarea>
+                          class="form-control">{{ old('alamat', $kontak->alamat) }}</textarea>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">
+                    Kode Pos
+                </label>
+
+                <input type="text"
+                       name="kode_pos"
+                       class="form-control"
+                       value="{{ old('kode_pos', $kontak->kode_pos) }}">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">
+                    Instagram
+                </label>
+
+                <input type="text"
+                       name="instagram"
+                       class="form-control"
+                       value="{{ old('instagram', $kontak->instagram) }}"
+                       placeholder="contoh: @username atau link profil">
             </div>
 
             <div class="col-md-6 mb-3">
@@ -167,15 +200,25 @@
             </div>
 
             <div class="col-md-6 mb-3">
-                <label class="form-label required">
+                <label class="form-label">
+                    Telepon 3
+                </label>
+
+                <input type="text"
+                       name="telepon3"
+                       class="form-control"
+                       value="{{ old('telepon3', $kontak->telepon3) }}">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">
                     Email 1
                 </label>
 
                 <input type="email"
                        name="email1"
                        class="form-control"
-                       value="{{ old('email1', $kontak->email1) }}"
-                       required>
+                       value="{{ old('email1', $kontak->email1) }}">
             </div>
 
             <div class="col-md-6 mb-3">
@@ -191,12 +234,23 @@
 
             <div class="col-md-6 mb-3">
                 <label class="form-label">
-                    Google Maps
+                    Email 3
+                </label>
+
+                <input type="email"
+                       name="email3"
+                       class="form-control"
+                       value="{{ old('email3', $kontak->email3) }}">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">
+                    Google Maps Embed URL
                 </label>
 
                 <textarea name="maps"
                           rows="3"
-                          class="form-control">{{ old('maps', $kontak->maps) }}</textarea>
+                          class="form-control" placeholder="Masukkan URL embed Google Maps, misal https://www.google.com/maps/embed?...">{{ old('maps', $kontak->maps) }}</textarea>
             </div>
 
             <div class="col-md-6 mb-3">

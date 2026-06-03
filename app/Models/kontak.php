@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class kontak extends Model
 {
-        protected $fillable = [
+    protected $fillable = [
         'judul',
         'subjudul',
         'alamat',
+        'kode_pos',
+        'instagram',
+        'maps',
         'telepon1',
         'telepon2',
         'telepon3',
