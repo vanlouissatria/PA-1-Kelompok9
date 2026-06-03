@@ -34,17 +34,19 @@
                         <form method="POST" action="{{ route('password.update') }}">
                             @csrf
                             <input type="hidden" name="token" value="{{ $token }}">
+                            
                             <div class="mb-3">
                                 <label class="form-label">Email</label>
-                                <input type="email" name="email" class="form-control" required value="{{ $email }}" readonly>
+                                <input type="email" name="email" class="form-control" required value="{{ $email ?? request()->email ?? old('email') }}" placeholder="Masukkan email akun Anda">
                             </div>
+                            
                             <div class="mb-3">
                                 <label class="form-label">Password Baru</label>
-                                <input type="password" name="password" class="form-control" required placeholder="Minimal 6 karakter">
+                                <input type="password" name="password" class="form-control" required placeholder="Minimal 8 karakter">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Konfirmasi Password Baru</label>
-                                <input type="password" name="password_confirmation" class="form-control" required>
+                                <input type="password" name="password_confirmation" class="form-control" required placeholder="Ulangi password baru">
                             </div>
                             <button type="submit" class="btn btn-gold w-100">Simpan Password Baru</button>
                             <div class="text-center mt-3">

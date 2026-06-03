@@ -129,8 +129,12 @@ Route::post('/forgot-password', function (Request $request) {
                 : back()->withErrors(['email' => __($status)]);
 })->name('password.email');
 
-Route::get('/reset-password/{token}', function ($token) {
-    return view('auth.reset-password', ['token' => $token]);
+// PERBAIKAN DI SINI: Menambahkan Request $request dan membaca query 'email' dari URL
+Route::get('/reset-password/{token}', function (Request $request, $token) {
+    return view('auth.reset-password', [
+        'token' => $token,
+        'email' => $request->query('email')
+    ]);
 })->name('password.reset');
 
 Route::post('/reset-password', function (Request $request) {
