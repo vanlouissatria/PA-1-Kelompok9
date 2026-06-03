@@ -164,4 +164,20 @@
 
     </div>
 </section>
+
+<audio id="galleryAudio" autoplay>
+    <source src="{{ asset('audio/audio.mp4') }}" type="audio/mp4">
+</audio>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const audio = document.getElementById('galleryAudio');
+
+    audio.play().catch(function(error) {
+        console.log('Autoplay diblokir browser:', error);
+    });
+
+});
+</script>
 @endsection
