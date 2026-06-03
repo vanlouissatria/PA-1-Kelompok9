@@ -4,26 +4,30 @@
 
 @section('content')
 <!-- STATISTIK -->
-<div class="stats-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; width: calc(100% + 30px); margin-left: -15px; margin-right: -15px;">
-    <div class="stat-card" style="margin: 0 15px;">
-        <div class="stat-number">{{ $totalGaleri ?? 0 }}</div>
-        <div class="stat-label">Galeri</div>
+<div class="stats-grid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; width: 100%;">
+    <div class="stat-card" style="padding: 15px 10px; background: #fff; border: 1px solid #ddd; border-radius: 8px; text-align: center;">
+        <div class="stat-number" style="font-size: 20px; font-weight: bold;">{{ $totalGaleri ?? 0 }}</div>
+        <div class="stat-label" style="font-size: 11px; color: #666; text-transform: uppercase;">Galeri</div>
     </div>
-    <div class="stat-card" style="margin: 0 15px;">
-        <div class="stat-number">{{ $totalBerita ?? 0 }}</div>
-        <div class="stat-label">Berita</div>
+    <div class="stat-card" style="padding: 15px 10px; background: #fff; border: 1px solid #ddd; border-radius: 8px; text-align: center;">
+        <div class="stat-number" style="font-size: 20px; font-weight: bold;">{{ $totalBerita ?? 0 }}</div>
+        <div class="stat-label" style="font-size: 11px; color: #666; text-transform: uppercase;">Berita</div>
     </div>
-    <div class="stat-card" style="margin: 0 15px;">
-        <div class="stat-number">{{ $totalInformasi ?? 0 }}</div>
-        <div class="stat-label">Informasi</div>
+    <div class="stat-card" style="padding: 15px 10px; background: #fff; border: 1px solid #ddd; border-radius: 8px; text-align: center;">
+        <div class="stat-number" style="font-size: 20px; font-weight: bold;">{{ $totalInformasi ?? 0 }}</div>
+        <div class="stat-label" style="font-size: 11px; color: #666; text-transform: uppercase;">Informasi</div>
     </div>
-    <div class="stat-card" style="margin: 0 15px;">
-        <div class="stat-number">{{ $totalFasilitas ?? 0 }}</div>
-        <div class="stat-label">Fasilitas</div>
+    <div class="stat-card" style="padding: 15px 10px; background: #fff; border: 1px solid #ddd; border-radius: 8px; text-align: center;">
+        <div class="stat-number" style="font-size: 20px; font-weight: bold;">{{ $totalDestinasi ?? 0 }}</div>
+        <div class="stat-label" style="font-size: 11px; color: #666; text-transform: uppercase;">Destinasi</div>
     </div>
-    <div class="stat-card" style="margin: 0 15px;">
-        <div class="stat-number">{{ $totalPenginapan ?? 0 }}</div>
-        <div class="stat-label">Penginapan</div>
+    <div class="stat-card" style="padding: 15px 10px; background: #fff; border: 1px solid #ddd; border-radius: 8px; text-align: center;">
+        <div class="stat-number" style="font-size: 20px; font-weight: bold;">{{ $totalWarisanAlam ?? 0 }}</div>
+        <div class="stat-label" style="font-size: 11px; color: #666; text-transform: uppercase;">Warisan Alam & Budaya</div>
+    </div>
+    <div class="stat-card" style="padding: 15px 10px; background: #fff; border: 1px solid #ddd; border-radius: 8px; text-align: center;">
+        <div class="stat-number" style="font-size: 20px; font-weight: bold;">{{ $totalKontak ?? 0 }}</div>
+        <div class="stat-label" style="font-size: 11px; color: #666; text-transform: uppercase;">Kontak</div>
     </div>
 </div>
 

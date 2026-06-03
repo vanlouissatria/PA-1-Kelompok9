@@ -166,21 +166,22 @@ Route::post('/reset-password', function (Request $request) {
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
 
+    
     // DASHBOARD MAIN
     Route::get('/', function () {
-        $totalGaleri = DB::table('galeri')->count();
-        $totalBerita = DB::table('berita')->count();
-        $totalInformasi = DB::table('informasi')->count();
-        $totalUmkm = DB::table('umkms')->count();
-        $totalFasilitas = DB::table('fasilitas')->count();
-        $totalPenginapan = DB::table('penginapan')->count();
+        $totalGaleri      = DB::table('galeri')->count();
+        $totalBerita      = DB::table('berita')->count();
+        $totalInformasi   = DB::table('informasi')->count();
+        $totalDestinasi   = DB::table('destinasis')->count(); // Mengambil dari tabel destinasis
+        $totalWarisanAlam = DB::table('warisans')->count();   // Mengambil dari tabel warisans
+        $totalKontak      = DB::table('kontaks')->count();    // Mengambil dari tabel kontaks
 
         return view('admin.dashboard', compact(
             'totalGaleri', 'totalBerita', 'totalInformasi',
-            'totalUmkm', 'totalFasilitas', 'totalPenginapan'
+            'totalDestinasi', 'totalWarisanAlam', 'totalKontak'
         ));
     })->name('admin.dashboard');
-    
+        
     // KONTEN GLOBAL UTAMA
     Route::resource('galeri', AdminGaleriController::class)->names('admin.galeri');
     Route::resource('berita', AdminBeritaController::class)->names('admin.berita');
