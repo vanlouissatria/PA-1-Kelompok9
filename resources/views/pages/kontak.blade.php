@@ -4,215 +4,433 @@
 
 @section('content')
 <style>
-    .kontak-hero {
-        height: 45vh;
-        background: linear-gradient(135deg, #003366 0%, #1a4a7a 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: white;
-        margin-top: 76px;
-        position: relative;
-        padding: 40px 0;
+    /* ============================================
+       ROOT VARIABLES - WORLD CLASS DESIGN SYSTEM
+       ============================================ */
+    :root {
+        --primary: #003366;
+        --primary-dark: #002244;
+        --primary-light: #1a4a7a;
+        --gold: #c6a43b;
+        --gold-light: #e8c96a;
+        --gold-dark: #a58a36;
+        --white: #ffffff;
+        --gray: #64748b;
+        --gray-light: #f8fafc;
+        --dark: #0f172a;
+        
+        /* Gradients */
+        --gradient-gold: linear-gradient(135deg, #f5e6b8 0%, #c6a43b 50%, #a58a36 100%);
+        --gradient-primary: linear-gradient(135deg, #003366 0%, #002244 100%);
+        --gradient-hero: linear-gradient(135deg, #003366 0%, #1a4a7a 40%, #002244 100%);
+        --gradient-card: linear-gradient(145deg, #ffffff 0%, #fefefe 100%);
+        
+        /* Shadows */
+        --shadow-sm: 0 4px 12px rgba(0,0,0,0.03);
+        --shadow-md: 0 8px 24px rgba(0,0,0,0.06);
+        --shadow-lg: 0 16px 36px rgba(0,0,0,0.1);
+        --shadow-xl: 0 24px 48px rgba(0,0,0,0.12);
+        --shadow-gold: 0 12px 28px rgba(198,164,59,0.2);
+        
+        /* Transitions */
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-bounce: all 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
     }
+
+    /* ============================================
+       HERO SECTION - STUNNING
+       ============================================ */
+    .kontak-hero {
+        background: var(--gradient-hero);
+        padding: 100px 0 70px;
+        margin-top: 76px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
     .kontak-hero::before {
         content: '';
         position: absolute;
-        top: -40%;
-        left: -40%;
-        width: 180%;
-        height: 180%;
-        background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
-        z-index: 1;
+        inset: 0;
+        background: radial-gradient(circle at 20% 40%, rgba(255,255,255,0.08) 0%, transparent 60%);
+        animation: pulseGlow 4s ease-in-out infinite;
     }
-    .kontak-hero .container { position: relative; z-index: 2; }
+
+    @keyframes pulseGlow {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 1; }
+    }
+
+    .kontak-hero .container {
+        position: relative;
+        z-index: 2;
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
     .kontak-hero h1 {
-        font-size: 2.8rem;
-        font-weight: 700;
+        font-size: 3.2rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #ffffff, var(--gold-light), #ffffff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 12px;
         font-family: 'Playfair Display', serif;
-        letter-spacing: 1px;
-        margin-bottom: 6px;
+        letter-spacing: 2px;
     }
+
     .kontak-hero p {
-        font-size: 0.95rem;
-        color: rgba(255,255,255,0.9);
+        font-size: 0.9rem;
+        letter-spacing: 3px;
         text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin: 0;
+        color: rgba(255,255,255,0.85);
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(8px);
+        display: inline-block;
+        padding: 6px 24px;
+        border-radius: 40px;
     }
+
+    @media (max-width: 768px) {
+        .kontak-hero h1 { font-size: 2.2rem; }
+        .kontak-hero { padding: 80px 0 50px; }
+    }
+
+    /* ============================================
+       SECTION UTAMA
+       ============================================ */
     .kontak-section {
-        padding: 60px 0;
+        padding: 70px 0 100px;
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
     }
+
+    .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* ============================================
+       GRID KONTAK
+       ============================================ */
     .kontak-grid {
         display: grid;
-        gap: 20px;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        margin-bottom: 40px;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 28px;
+        margin-bottom: 48px;
     }
+
+    @media (max-width: 768px) {
+        .kontak-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+    }
+
+    /* ============================================
+       KARTU KONTAK - PREMIUM
+       ============================================ */
     .kontak-person-card {
-        background: white;
-        border-radius: 16px;
-        box-shadow: 0 8px 24px rgba(15, 44, 69, 0.06);
-        border: 2px solid #edf2f7;
-        padding: 20px;
-        display: grid;
-        gap: 12px;
-        align-items: start;
+        background: var(--white);
+        border-radius: 24px;
+        padding: 24px;
         cursor: pointer;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        transition: var(--transition-bounce);
+        border: 1px solid #eef2f6;
+        box-shadow: var(--shadow-sm);
+        position: relative;
+        overflow: hidden;
     }
+
+    .kontak-person-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-gold);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+        transform-origin: left;
+    }
+
+    .kontak-person-card:hover::before {
+        transform: scaleX(1);
+    }
+
     .kontak-person-card:hover {
-        border-color: #c6a43b;
-        box-shadow: 0 12px 32px rgba(15, 44, 69, 0.12);
-        transform: translateY(-2px);
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(198,164,59,0.3);
     }
+
     .kontak-person-card.active {
-        border-color: #c6a43b;
-        box-shadow: 0 12px 32px rgba(198, 164, 59, 0.2);
+        border-color: var(--gold);
+        box-shadow: var(--shadow-gold);
+        background: linear-gradient(145deg, #ffffff, #fffdf5);
     }
+
+    /* Header Card */
     .kontak-person-card h4 {
-        margin: 0 0 8px;
-        font-size: 1.75rem;
-        color: #09212f;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 6px;
+        letter-spacing: -0.3px;
     }
+
     .kontak-person-card .card-subtitle {
-        margin: 0;
-        color: #64748b;
-        font-size: 0.98rem;
-        line-height: 1.8;
+        font-size: 0.8rem;
+        color: var(--gray);
+        margin-bottom: 18px;
+        padding-bottom: 12px;
+        border-bottom: 1px dashed #eef2f6;
     }
+
+    /* Detail Group */
     .kontak-details {
-        display: grid;
-        gap: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
     }
+
     .kontak-row {
         display: grid;
-        gap: 18px;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
     }
+
+    @media (max-width: 480px) {
+        .kontak-row {
+            grid-template-columns: 1fr;
+        }
+    }
+
     .detail-group {
-        display: grid;
-        gap: 10px;
+        background: #fafbfc;
+        padding: 10px 12px;
+        border-radius: 14px;
+        transition: var(--transition);
     }
+
+    .kontak-person-card:hover .detail-group {
+        background: #fef8e8;
+    }
+
     .detail-group strong {
-        display: block;
-        font-size: 0.95rem;
-        color: #0f3b2c;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
     }
+
+    .detail-group strong i {
+        color: var(--gold);
+        font-size: 0.75rem;
+        width: 20px;
+    }
+
     .detail-group p,
     .detail-group a {
         margin: 0;
-        color: #475569;
-        font-size: 0.95rem;
-        line-height: 1.7;
+        font-size: 0.85rem;
+        color: var(--gray);
+        line-height: 1.5;
         word-break: break-word;
     }
+
     .detail-group a {
-        color: #1d4e89;
+        color: var(--primary);
         text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
     }
+
     .detail-group a:hover {
-        text-decoration: underline;
+        color: var(--gold);
     }
+
+    /* ============================================
+       MAP CARD - PREMIUM
+       ============================================ */
     .kontak-map-card {
-        border-radius: 24px;
+        background: var(--white);
+        border-radius: 28px;
         overflow: hidden;
-        background: white;
-        border: 1px solid #e8edf2;
-        box-shadow: 0 16px 40px rgba(15, 44, 69, 0.08);
+        box-shadow: var(--shadow-md);
+        transition: var(--transition-bounce);
+        border: 1px solid #eef2f6;
     }
+
+    .kontak-map-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+        border-color: rgba(198,164,59,0.2);
+    }
+
     .map-wrapper {
         position: relative;
         width: 100%;
-        height: 420px;
+        height: 400px;
+        overflow: hidden;
+        background: #eef2f6;
     }
+
     .map-wrapper iframe {
         width: 100%;
         height: 100%;
         border: 0;
-        display: block;
+        transition: transform 0.5s ease;
     }
-    /* Overlay "tidak tersedia" */
+
+    .kontak-map-card:hover .map-wrapper iframe {
+        transform: scale(1.02);
+    }
+
     .map-unavailable {
         display: none;
         position: absolute;
         inset: 0;
         background: #f8fafc;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        flex-direction: column;
         gap: 12px;
-        color: #64748b;
-        font-size: 0.95rem;
+        color: var(--gray);
     }
+
     .map-unavailable i {
         font-size: 2.5rem;
-        color: #cbd5e1;
+        color: var(--gold);
+        opacity: 0.5;
     }
+
+    /* Map Footer */
     .map-footer {
-        padding: 26px 32px;
-        display: grid;
-        gap: 16px;
+        padding: 24px 28px;
+        border-top: 1px solid #eef2f6;
     }
+
     .map-footer h4 {
-        margin: 0;
-        font-size: 1.3rem;
-        color: #09212f;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 8px;
     }
+
+    .map-footer h4 span {
+        color: var(--gold);
+        border-bottom: 2px solid var(--gold);
+        padding-bottom: 2px;
+    }
+
     .map-footer p {
-        margin: 0;
-        color: #475569;
-        line-height: 1.75;
+        font-size: 0.85rem;
+        color: var(--gray);
+        margin-bottom: 20px;
+        line-height: 1.6;
     }
-    #map-active-label {
-        font-weight: 600;
-        color: #c6a43b;
-    }
+
+    /* ============================================
+       SOCIAL ICONS
+       ============================================ */
     .social-icons {
         display: flex;
-        gap: 12px;
+        gap: 14px;
         flex-wrap: wrap;
     }
+
     .social-icons a {
-        display: inline-flex;
-        width: 42px;
-        height: 42px;
+        display: flex;
         align-items: center;
         justify-content: center;
-        background: #f5f4f0;
+        width: 40px;
+        height: 40px;
+        background: #f1f5f9;
         border-radius: 50%;
-        color: #1a1a1a;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-    .social-icons a:hover {
-        background: #c6a43b;
-        color: white;
-        transform: translateY(-2px);
-    }
-    .jam-operasional h5 {
-        margin: 0 0 8px;
+        color: var(--primary);
         font-size: 1rem;
-        color: #09212f;
+        transition: var(--transition-bounce);
+        text-decoration: none;
     }
-    .jam-operasional p {
-        margin: 0;
-        color: #475569;
-        line-height: 1.75;
-        font-size: 0.95rem;
+
+    .social-icons a:hover {
+        background: var(--gradient-gold);
+        color: var(--primary-dark);
+        transform: translateY(-4px);
     }
+
+    /* ============================================
+       ANIMATIONS
+       ============================================ */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .kontak-person-card {
+        animation: fadeInUp 0.5s ease backwards;
+    }
+    .kontak-person-card:nth-child(1) { animation-delay: 0.05s; }
+    .kontak-person-card:nth-child(2) { animation-delay: 0.1s; }
+    .kontak-person-card:nth-child(3) { animation-delay: 0.15s; }
+    .kontak-person-card:nth-child(4) { animation-delay: 0.2s; }
+    .kontak-person-card:nth-child(5) { animation-delay: 0.25s; }
+    .kontak-person-card:nth-child(6) { animation-delay: 0.3s; }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
     @media (max-width: 992px) {
-        .kontak-row { grid-template-columns: 1fr; }
+        .kontak-section { padding: 50px 0 80px; }
+        .map-wrapper { height: 360px; }
     }
+
     @media (max-width: 768px) {
-        .kontak-hero h1 { font-size: 2.2rem; }
-        .kontak-section { padding: 40px 0; }
+        .kontak-section { padding: 40px 0 60px; }
+        .kontak-person-card { padding: 20px; }
+        .kontak-person-card h4 { font-size: 1.3rem; }
+        .map-wrapper { height: 300px; }
+        .map-footer { padding: 18px 20px; }
     }
-    @media (max-width: 576px) {
-        .kontak-hero h1 { font-size: 1.8rem; }
-        .kontak-person-card { padding: 24px; }
-        .map-wrapper { height: 320px; }
+
+    @media (max-width: 480px) {
+        .container { padding: 0 16px; }
+        .kontak-person-card { padding: 18px; }
+        .map-wrapper { height: 260px; }
+        .social-icons a { width: 36px; height: 36px; font-size: 0.9rem; }
+    }
+
+    /* ============================================
+       SCROLLBAR
+       ============================================ */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #eef2f6; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, var(--primary), var(--gold)); border-radius: 10px; }
+
+    /* ============================================
+       DARK MODE - TETAP CANTIK
+       ============================================ */
+    @media (prefers-color-scheme: dark) {
+        .kontak-section { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); }
+        .kontak-person-card { background: var(--white); }
+        .kontak-person-card.active { background: var(--white); }
+        .map-footer { background: var(--white); }
+        .detail-group { background: #fafbfc; }
+        .social-icons a { background: #f1f5f9; }
     }
 </style>
 
@@ -388,11 +606,7 @@
                     <a href="#"><i class="fab fa-youtube"></i></a>
                     <a href="#"><i class="fab fa-tiktok"></i></a>
                 </div>
-                <div class="jam-operasional">
-                    <h5>Jam Operasional</h5>
-                    <p>Senin - Jumat: 08:00 - 17:00</p>
-                    <p>Sabtu - Minggu: 08:00 - 18:00</p>
-                </div>
+            
             </div>
         </div>
 
