@@ -118,6 +118,40 @@
             font-size: 1.8rem;
         }
     }
+
+    .audio-player{
+        position: fixed;
+        right: 25px;
+        bottom: 90px; /* di atas tombol scroll-up */
+        z-index: 9999;
+    }
+
+    .audio-btn{
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        border: none;
+        background: #c9a227; /* warna emas GeoToba */
+        color: white;
+        cursor: pointer;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        font-size: 20px;
+
+        box-shadow: 0 4px 15px rgba(0,0,0,.2);
+        transition: all .3s ease;
+    }
+
+    .audio-btn:hover{
+        transform: scale(1.08);
+    }
+
+    .audio-btn.muted{
+        background: #777;
+    }
 </style>
 
 <section class="detail-gallery-section">
@@ -165,17 +199,44 @@
     </div>
 </section>
 
-<audio id="galleryAudio" autoplay>
-    <source src="{{ asset('audio/audio.mp4') }}" type="audio/mp4">
-</audio>
+<div class="audio-player">
+    <button id="toggleAudio" class="audio-btn">
+        <i class="fas fa-volume-up"></i>
+    </button>
+
+    <audio id="galleryAudio" autoplay>
+        <source src="{{ asset('audio/audio.mp4') }}" type="audio/mp4">
+    </audio>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
     const audio = document.getElementById('galleryAudio');
+    const button = document.getElementById('toggleAudio');
 
-    audio.play().catch(function(error) {
-        console.log('Autoplay diblokir browser:', error);
+    button.addEventListener('click', function () {
+
+        if(audio.paused){
+
+            audio.play();
+
+            button.innerHTML =
+                '<i class="fas fa-volume-up"></i>';
+
+            button.classList.remove('muted');
+
+        } else {
+
+            audio.pause();
+
+            button.innerHTML =
+                '<i class="fas fa-volume-mute"></i>';
+
+            button.classList.add('muted');
+
+        }
+
     });
 
 });
