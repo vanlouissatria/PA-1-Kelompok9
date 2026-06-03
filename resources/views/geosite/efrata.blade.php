@@ -252,6 +252,28 @@ h1, h2, h3, h4, h5, h6 {
     text-shadow: 0 0 5px rgba(212,175,55,0.3);
 }
 
+.footer-top {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.footer-home-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    color: white;
+    transition: var(--transition-fast);
+    text-decoration: none;
+}
+
+.footer-home-btn:hover {
+    background: rgba(255,255,255,0.16);
+}
+
 /* ==================== HAMBURGER MENU ANIMATED ==================== */
 .hamburger {
     display: none;
@@ -1848,15 +1870,11 @@ h1, h2, h3, h4, h5, h6 {
     </div>
 </section>
 
-<section class="section" style="padding: 30px 0 20px; background: #f8fafc;">
-    <div class="container" data-aos="fade-up">
-        <div style="text-align:center;">
-            <a href="{{ url('/') }}" class="card-btn" style="border-color: transparent; background: var(--primary); color: white;">Kembali ke Home</a>
-        </div>
-    </div>
-</section>
-
 <footer class="footer">
+    <div class="footer-top" data-aos="fade-up">
+        <a href="{{ url('/') }}" class="nav-link footer-home-btn">Kembali ke Home</a>
+    </div>
+    <div class="footer-container">
     <div class="footer-container">
         <div class="footer-content">
             <div class="footer-logo">
