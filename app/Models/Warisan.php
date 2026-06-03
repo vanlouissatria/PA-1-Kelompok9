@@ -13,8 +13,7 @@ class Warisan extends Model
         'jenis',
         'deskripsi',
         'gambar',
-        'urutan',
-        'status',
+        'urutan'
     ];
 
     public function getLabelJenisAttribute(): string

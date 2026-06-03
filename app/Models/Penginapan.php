@@ -18,7 +18,6 @@ class Penginapan extends Model
         'no_telepon',
         'harga',
         'gambar',
-        'geosite',
-        'status'
+        'geosite'
     ];
 }

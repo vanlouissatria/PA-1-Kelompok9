@@ -186,11 +186,6 @@
                     </div>
                 </div>
 
-                <div class="form-check form-switch mb-4">
-                    <input class="form-check-input" type="checkbox" id="status" name="status" value="1" {{ $warisan->status ? 'checked' : '' }}>
-                    <label class="form-check-label" for="status">Tampilkan di website</label>
-                </div>
-
                 <div class="d-flex gap-3">
                     <button type="submit" class="btn-primary-bi">Update</button>
                     <a href="{{ route('admin.warisan.index') }}" class="btn-outline-bi">Batal</a>
@@ -199,4 +194,19 @@
         </div>
     </div>
 </div>
+<script>
+    // Preview Gambar
+    document.getElementById('inputGambar').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                const img = document.getElementById('previewImage');
+                img.src = e.target.result;
+                img.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 @endsection

@@ -98,13 +98,4 @@ class adminBeritaController extends Controller
         return redirect()->route('admin.berita.index')
             ->with('success', 'Berita berhasil dihapus!');
     }
-
-    public function toggleStatus($id)
-    {
-        $berita = Berita::findOrFail($id);
-        $berita->status = !$berita->status;
-        $berita->save();
-
-        return response()->json(['success' => true, 'status' => $berita->status]);
-    }
 }

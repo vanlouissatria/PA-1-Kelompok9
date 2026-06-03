@@ -57,18 +57,6 @@
                                 <span class="badge bg-danger">Tidak</span>
                             @endif
                         </td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <button type="button" 
-                                        class="btn btn-sm toggle-status-btn" 
-                                        data-id="{{ $item->id }}"
-                                        data-status="{{ $item->status }}"
-                                        title="{{ $item->status ? 'Nonaktifkan' : 'Aktifkan' }}"
-                                        style="font-weight: 600; background-color: {{ $item->status ? '#28a745' : '#6c757d' }}; color: white; border: none;">
-                                    <i class="fas {{ $item->status ? 'fa-eye' : 'fa-eye-slash' }}"></i>
-                                </button>
-                            </div>
-                        </td>
                     </tr>
                     @empty
                         <tr>
@@ -87,65 +75,4 @@
         </div>
     </div>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const toggleButtons = document.querySelectorAll('.toggle-status-btn');
-    
-    toggleButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const itemId = this.getAttribute('data-id');
-            const currentStatus = parseInt(this.getAttribute('data-status'));
-            const button = this;
-            const icon = button.querySelector('i');
-            
-            icon.className = 'fas fa-spinner fa-spin';
-            button.disabled = true;
-
-            fetch(`{{ url('/admin/penginapan/toggle-status') }}/${itemId}`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({})
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const newStatus = data.status;
-                    
-                    if (newStatus) {
-                        button.style.backgroundColor = '#28a745';
-                        button.setAttribute('data-status', '1');
-                        button.setAttribute('title', 'Nonaktifkan');
-                        icon.className = 'fas fa-eye';
-                    } else {
-                        button.style.backgroundColor = '#6c757d';
-                        button.setAttribute('data-status', '0');
-                        button.setAttribute('title', 'Aktifkan');
-                        icon.className = 'fas fa-eye-slash';
-                    }
-
-                    const row = button.closest('tr');
-                    const statusCell = row.querySelector('td:nth-child(7)');
-                    if (newStatus) {
-                        statusCell.innerHTML = '<span class="badge bg-success">Aktif</span>';
-                    } else {
-                        statusCell.innerHTML = '<span class="badge bg-danger">Tidak</span>';
-                    }
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
-            })
-            .finally(() => {
-                button.disabled = false;
-            });
-        });
-    });
-});
-</script>
 @endsection

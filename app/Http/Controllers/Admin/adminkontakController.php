@@ -121,31 +121,6 @@ class AdminKontakController extends Controller
     }
 
     /**
-     * Ubah status aktif/nonaktif via AJAX Fetch
-     */
-    public function toggleStatus($id)
-    {
-        try {
-            $kontak = Kontak::findOrFail($id);
-            
-            // Membalikkan nilai boolean status (1 menjadi 0, atau 0 menjadi 1)
-            $kontak->status = !$kontak->status;
-            $kontak->save();
-
-            return response()->json([
-                'success' => true,
-                'status' => $kontak->status
-            ]);
-            
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal mengubah status kontak.'
-            ], 500);
-        }
-    }
-
-    /**
      * Hapus kontak
      */
     public function destroy($id)

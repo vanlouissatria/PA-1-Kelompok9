@@ -244,17 +244,7 @@
 
                     {{-- Aksi Sejajar Mendatar Persis Galeri --}}
                     <td style="white-space: nowrap; width: 1%;">
-                        <div class="actions-group">
-                            {{-- Toggle Status --}}
-                            <button type="button"
-                                    class="action-btn toggle-status-btn"
-                                    data-id="{{ $item->id }}"
-                                    data-status="{{ $item->status }}"
-                                    title="{{ $item->status ? 'Nonaktifkan' : 'Aktifkan' }}"
-                                    style="background-color: {{ $item->status ? '#16a34a' : '#6b7280' }}; margin: 0;">
-                                <i class="fas {{ $item->status ? 'fa-eye' : 'fa-eye-slash' }}"></i>
-                            </button>
-                            
+                        <div class="actions-group">                            
                             {{-- Edit --}}
                             <a href="{{ url('/admin/geosite/'.$geosite.'/penginapan/'.$item->id.'/edit') }}" class="action-btn btn-edit" title="Edit" style="margin: 0;">
                                 <i class="fas fa-pen"></i>
@@ -289,70 +279,4 @@
     </div>
     @endif
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const toggleButtons = document.querySelectorAll('.toggle-status-btn');
-
-    toggleButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const itemId = this.getAttribute('data-id');
-            const currentStatus = parseInt(this.getAttribute('data-status'));
-            const btn = this;
-            const icon = btn.querySelector('i');
-
-            if (icon) {
-                icon.className = 'fas fa-spinner fa-spin';
-            }
-            btn.disabled = true;
-
-            fetch(`{{ url('/admin/geosite/'.$geosite.'/penginapan/toggle-status') }}/${itemId}`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({})
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const newStatus = data.status;
-
-                    if (newStatus) {
-                        btn.style.backgroundColor = '#16a34a';
-                        btn.setAttribute('data-status', '1');
-                        btn.setAttribute('title', 'Nonaktifkan');
-                        if (icon) icon.className = 'fas fa-eye';
-                    } else {
-                        btn.style.backgroundColor = '#6b7280';
-                        btn.setAttribute('data-status', '0');
-                        btn.setAttribute('title', 'Aktifkan');
-                        if (icon) icon.className = 'fas fa-eye-slash';
-                    }
-
-                    const row = btn.closest('tr');
-                    const statusCell = row.querySelector('td:nth-child(7)'); // Kolom STATUS urutan ke-7
-
-                    if (newStatus) {
-                        statusCell.innerHTML = '<span class="badge-status status-active">Aktif</span>';
-                    } else {
-                        statusCell.innerHTML = '<span class="badge-status status-inactive">Nonaktif</span>';
-                    }
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                if (icon) {
-                    icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
-                }
-            })
-            .finally(() => {
-                btn.disabled = false;
-            });
-        });
-    });
-});
-</script>
 @endsection

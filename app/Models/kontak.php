@@ -18,7 +18,6 @@ class kontak extends Model
         'telepon3',
         'email1',
         'email2',
-        'email3',
-        'status',
+        'email3'
     ];
 }
