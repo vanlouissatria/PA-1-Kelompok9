@@ -4,28 +4,24 @@
 
 @section('content')
 <!-- STATISTIK -->
-<div class="stats-grid">
-    <div class="stat-card">
+<div class="stats-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; width: calc(100% + 30px); margin-left: -15px; margin-right: -15px;">
+    <div class="stat-card" style="margin: 0 15px;">
         <div class="stat-number">{{ $totalGaleri ?? 0 }}</div>
         <div class="stat-label">Galeri</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-card" style="margin: 0 15px;">
         <div class="stat-number">{{ $totalBerita ?? 0 }}</div>
         <div class="stat-label">Berita</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-card" style="margin: 0 15px;">
         <div class="stat-number">{{ $totalInformasi ?? 0 }}</div>
         <div class="stat-label">Informasi</div>
     </div>
-    <div class="stat-card">
-        <div class="stat-number">{{ $totalUmkm ?? 0 }}</div>
-        <div class="stat-label">UMKM</div>
-    </div>
-    <div class="stat-card">
+    <div class="stat-card" style="margin: 0 15px;">
         <div class="stat-number">{{ $totalFasilitas ?? 0 }}</div>
         <div class="stat-label">Fasilitas</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-card" style="margin: 0 15px;">
         <div class="stat-number">{{ $totalPenginapan ?? 0 }}</div>
         <div class="stat-label">Penginapan</div>
     </div>
@@ -50,53 +46,3 @@
 </div>
 @endsection@extends('layouts.admin')
 
-@section('title', 'Dashboard')
-
-@section('content')
-<!-- STATISTIK -->
-<div class="stats-grid">
-    <div class="stat-card">
-        <div class="stat-number">{{ $totalGaleri ?? 0 }}</div>
-        <div class="stat-label">Galeri</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number">{{ $totalBerita ?? 0 }}</div>
-        <div class="stat-label">Berita</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number">{{ $totalInformasi ?? 0 }}</div>
-        <div class="stat-label">Informasi</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number">{{ $totalUmkm ?? 0 }}</div>
-        <div class="stat-label">UMKM</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number">{{ $totalFasilitas ?? 0 }}</div>
-        <div class="stat-label">Fasilitas</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number">{{ $totalPenginapan ?? 0 }}</div>
-        <div class="stat-label">Penginapan</div>
-    </div>
-</div>
-
-<!-- QUICK ACTIONS - HANYA YANG ROUTE NYA PASTI ADA -->
-<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px;">
-    <a href="{{ url('/admin/galeri/create') }}" class="btn-primary"><i class="fas fa-plus-circle"></i> Galeri</a>
-    <a href="{{ url('/admin/berita/create') }}" class="btn-primary"><i class="fas fa-plus-circle"></i> Berita</a>
-    <a href="{{ url('/admin/informasi/create') }}" class="btn-primary"><i class="fas fa-plus-circle"></i> Informasi</a>
-    <a href="{{ url('/admin/destinasi/create') }}" class="btn-primary"><i class="fas fa-plus-circle"></i> Destinasi</a>
-    <a href="{{ url('/admin/geosite/tele') }}" class="btn-primary"><i class="fas fa-tower-cell"></i> Kelola Tele</a>
-</div>
-
-<!-- PENGUMUMAN -->
-<div style="margin-top: 30px; padding: 15px; background: #e8f4f8; border-radius: 8px; border-left: 4px solid #0099ff;">
-    <h5 style="margin: 0 0 10px 0; color: #003366;">
-        <i class="fas fa-info-circle"></i> Informasi
-    </h5>
-    <p style="margin: 0; color: #005599;">
-        Gunakan menu <strong>Tele</strong> di sidebar untuk mengelola UMKM, Fasilitas, Penginapan, Galeri, dan Informasi khusus halaman Tele.
-    </p>
-</div>
-@endsection
