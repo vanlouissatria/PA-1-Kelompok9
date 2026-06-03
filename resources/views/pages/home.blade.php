@@ -1198,7 +1198,7 @@ h1, h2, h3, h4, h5, h6 {
                     <div class="destinasi-number">01 — GEOSITE</div>
                     <h3>Tele</h3>
                     <div class="destinasi-location">Desa Turpuk Limbong, Kecamatan Harian, Kabupaten Samosir, Sumatera Utara</div>
-                    <p class="destinasi-desc">Menara Pandang Tele terletak di Tele, Kecamatan Harian, Kabupaten Samosir, Sumatera Utara. Meskipun masih berada di daratan Sumatera, namun Tele sudah masuk ke dalam Kabupaten Samosir. Tele sendiri merupakan kawasan tertinggi di sekitar Danau Toba.</p>
+                    <p class="destinasi-desc">Tele merupakan salah satu geosite unggulan di kawasan Geopark Kaldera Toba yang terkenal dengan Menara Pandang Tele, sebuah titik terbaik untuk menikmati panorama Danau Toba, Pulau Samosir, dan perbukitan kaldera yang memukau. Tele menawarkan perpaduan keindahan alam, nilai geologi, dan pengalaman wisata yang menjadi daya tarik utama bagi pengunjung.</p>
                     <a href="{{ url('/geosite/tele') }}" class="destinasi-link">Jelajahi Lebih Lanjut →</a>
                 </div>
             </div>
@@ -1212,7 +1212,7 @@ h1, h2, h3, h4, h5, h6 {
                     <div class="destinasi-number">02 — GEOSITE</div>
                     <h3>Efrata</h3>
                     <div class="destinasi-location">Desa Sosor Dolok, Kecamatan Harian, Kabupaten Samosir, Provinsi Sumatera Utara.</div>
-                    <p class="destinasi-desc">Air Terjun Efrata adalah obyek wisata alam yang terletak di Sosor Dolok, Kecamatan Harian, Samosir. Tempat ini dibuka untuk khalayak dari pagi sampai sore. Meskipun banyak difavoritkan oleh orang yang berkunjung, biaya masuknya serba murah meriah.</p>
+                    <p class="destinasi-desc">Air Terjun Efrata adalah salah satu geosite menarik di kawasan Geopark Kaldera Toba yang dikenal karena bentuk air terjunnya yang melebar menyerupai tirai alami. Air Terjun Efrata menawarkan panorama alam yang menenangkan dan menjadi tujuan favorit wisatawan yang ingin menikmati keindahan alam Danau Toba dari sudut yang berbeda.</p>
                     <a href="{{ url('/geosite/efrata') }}" class="destinasi-link">Jelajahi Lebih Lanjut →</a>
                 </div>
             </div>
@@ -1226,7 +1226,7 @@ h1, h2, h3, h4, h5, h6 {
                     <div class="destinasi-number">03 — GEOSITE</div>
                     <h3>Sihotang</h3>
                     <div class="destinasi-location">Sihotang, kecamatan Harian Kabupaten Samosir, Sumatera utara</div>
-                    <p class="destinasi-desc">Desa Sihotang terletak di kecamatan Harian Kabupaten Samosir, Sumatera utara. Sesuai dengan namanaya Rura Sihotang berada di kaki gunung Uruk Taduhan, setengah desanya di kelilingi pengunungan yang tinggi dan indah yg di tumbuhi pepohonan kecik nan hijau, setengahnya lagi berada di tepian pantai Danau Toba.</p>
+                    <p class="destinasi-desc">Sihotang merupakan salah satu geosite di kawasan Geopark Kaldera Toba yang menawarkan panorama perbukitan hijau dan pemandangan Danau Toba yang memukau. Kawasan ini dikenal dengan bentang alamnya yang unik serta menjadi lokasi yang ideal untuk menikmati keindahan kaldera dan suasana alam yang masih asri.</p>
                     <a href="{{ url('/geosite/sihotang') }}" class="destinasi-link">Jelajahi Lebih Lanjut →</a>
                 </div>
             </div>
@@ -1243,8 +1243,7 @@ h1, h2, h3, h4, h5, h6 {
                     Kecamatan Harian, Kabupaten Samosir, Sumatera Utara
                 </div>
                     <p class="destinasi-desc">
-                        Sibeabea merupakan salah satu destinasi wisata unggulan di kawasan Danau Toba
-                        dengan pemandangan perbukitan dan panorama danau yang sangat indah.
+                        Sibea-Bea merupakan salah satu destinasi unggulan di kawasan Geopark Kaldera Toba yang dikenal dengan panorama Danau Toba yang memukau serta keberadaan Patung Yesus Kristus yang menjadi ikon wisata religi. Kawasan ini menawarkan perpaduan keindahan alam, nilai spiritual, dan bentang geologi khas Kaldera Toba yang menarik bagi wisatawan dari berbagai daerah.
                     </p>
                     <a href="{{ url('/geosite/sibeabea') }}" class="destinasi-link">
                         Jelajahi Lebih Lanjut →
@@ -1261,11 +1260,10 @@ h1, h2, h3, h4, h5, h6 {
                 <div class="destinasi-number">05 — GEOSITE</div>
                     <h3>Holbung</h3>
                 <div class="destinasi-location">
-                    Pulau Samosir, Sumatera Utara
+                    Desa Dolok Raja, Kecamatan Harian, Kabupaten Samosir, Sumatera Utara
                 </div>
                     <p class="destinasi-desc">
-                        Bukit Holbung terkenal dengan hamparan bukit hijau yang sering disebut
-                        sebagai “Bukit Teletubbies”-nya Danau Toba.
+                        Bukit Holbung merupakan salah satu destinasi wisata alam populer di kawasan Geopark Kaldera Toba yang terkenal dengan perbukitan hijau yang membentang indah di tepi Danau Toba. Tempat ini menawarkan panorama alam yang memukau, suasana yang tenang, serta menjadi lokasi favorit wisatawan untuk menikmati pemandangan dan mengabadikan momen.
                     </p>
                     <a href="{{ url('/geosite/holbung') }}" class="destinasi-link">
                         Jelajahi Lebih Lanjut →
