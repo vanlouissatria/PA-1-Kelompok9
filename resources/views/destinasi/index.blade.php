@@ -357,30 +357,6 @@
     </div>
 </section>
 
-<!-- STATS SECTION -->
-<section class="stats-section">
-    <div class="container">
-        <div class="stats-grid">
-            <div class="stat-item" data-aos="fade-up" data-aos-delay="0">
-                <div class="stat-number">74.000+</div>
-                <div class="stat-label">TAHUN SEJARAH</div>
-            </div>
-            <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
-                <div class="stat-number">{{ $jumlahGeosite ?? 0 }}</div>
-                <div class="stat-label">GEOSITE UNGGULAN</div>
-            </div>
-            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-                <div class="stat-number">15+</div>
-                <div class="stat-label">WARISAN BUDAYA</div>
-            </div>
-            <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
-                <div class="stat-number">100+</div>
-                <div class="stat-label">UMKM LOKAL</div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- AOS -->
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
