@@ -133,18 +133,4 @@ class adminGaleriController extends Controller
         return redirect()->route('admin.galeri.index')
             ->with('success', 'Galeri berhasil dihapus!');
     }
-
-    public function toggleStatus($id)
-    {
-        $galeri = Galeri::findOrFail($id);
-
-        $galeri->status = !$galeri->status;
-
-        $galeri->save();
-
-        return response()->json([
-            'success' => true,
-            'status' => $galeri->status
-        ]);
-    }
 }

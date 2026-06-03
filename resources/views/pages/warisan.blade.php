@@ -770,9 +770,9 @@
 
         @php
             $categories = [
-                'geodiversity' => ['icon' => 'fas fa-mountain', 'label' => 'Geodiversity', 'items' => $geodiversity ?? []],
-                'biodiversity' => ['icon' => 'fas fa-leaf', 'label' => 'Biodiversity', 'items' => $biodiversity ?? []],
-                'cultural_diversity' => ['icon' => 'fas fa-landmark', 'label' => 'Cultural Diversity', 'items' => $cultural_diversity ?? []],
+                'geodiversity'       => ['icon' => 'fas fa-mountain',  'label' => 'Geodiversity',       'items' => $geodiversity ?? []],
+                'biodiversity'       => ['icon' => 'fas fa-leaf',       'label' => 'Biodiversity',       'items' => $biodiversity ?? []],
+                'cultural_diversity' => ['icon' => 'fas fa-landmark',   'label' => 'Cultural Diversity', 'items' => $cultural_diversity ?? []],
             ];
         @endphp
 
@@ -828,15 +828,14 @@
     function toggleCategory(categoryKey, button) {
         const container = document.getElementById('heritage-items-' + categoryKey);
         if (!container) return;
-        
+
         const isCollapsed = container.classList.contains('collapsed');
-        
+
         if (isCollapsed) {
             container.classList.remove('collapsed');
             button.textContent = 'Sembunyikan';
         } else {
             container.classList.add('collapsed');
-            // Hitung jumlah item yang tersembunyi
             const itemCount = container.querySelectorAll('.heritage-item').length;
             button.textContent = 'Baca Selengkapnya (' + (itemCount - 1) + ' data lainnya)';
         }

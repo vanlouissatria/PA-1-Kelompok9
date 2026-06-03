@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Fasilitas extends Model
 {
     protected $table = 'fasilitas';
-    protected $fillable = ['nama', 'deskripsi', 'gambar', 'harga', 'urutan', 'status', 'geosite'];
+    protected $fillable = ['nama', 'deskripsi', 'gambar', 'harga', 'urutan', 'geosite'];
 
     // Default attributes to ensure a geosite and status when creating models
     protected $attributes = [

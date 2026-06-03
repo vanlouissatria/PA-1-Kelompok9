@@ -110,24 +110,6 @@
         background: #e9ecef;
         margin: 1.5rem 0;
     }
-
-    /* Toggle status */
-    .btn-toggle-status {
-        background-color: #28a745;
-        color: white;
-        padding: 0.6rem 2rem;
-        border-radius: 8px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        border: none;
-        transition: background-color 0.2s;
-    }
-
-    .form-check-input:not(:checked) + .btn-toggle-status {
-        background-color: #6c757d;
-    }
 </style>
 
 <div class="card">
@@ -245,34 +227,6 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div>
-
-                {{-- Status --}}
-                <div class="col-md-6 mb-4">
-                    <label class="form-label">
-                        Status Tampilkan Galeri
-                    </label>
-
-                    <input type="hidden" name="status" value="0">
-
-                    <div class="form-check p-0 m-0">
-
-                        <input class="form-check-input d-none"
-                               type="checkbox"
-                               name="status"
-                               id="statusSwitch"
-                               value="1"
-                               {{ $galeri->status ? 'checked' : '' }}>
-
-                        <label class="btn-toggle-status" for="statusSwitch">
-                            <i class="fas {{ $galeri->status ? 'fa-eye' : 'fa-eye-slash' }}"
-                               id="statusIcon"
-                               style="font-size: 1.1rem;"></i>
-                        </label>
-
-                    </div>
-                </div>
-
             </div>
 
             <hr>
@@ -296,34 +250,17 @@
 </div>
 
 <script>
-    // Preview gambar
-    document.getElementById('imgInput').addEventListener('change', function(e) {
-
+    // Preview Gambar
+    document.getElementById('inputGambar').addEventListener('change', function(e) {
         const file = e.target.files[0];
-        const imgPreview = document.getElementById('imgPreview');
-
         if (file) {
-
             const reader = new FileReader();
-
-            reader.onload = function(event) {
-                imgPreview.src = event.target.result;
-                imgPreview.style.display = 'block';
+            reader.onload = e => {
+                const img = document.getElementById('previewImage');
+                img.src = e.target.result;
+                img.style.display = 'block';
             }
-
             reader.readAsDataURL(file);
-        }
-    });
-
-    // Toggle icon mata
-    document.getElementById('statusSwitch').addEventListener('change', function() {
-
-        const icon = document.getElementById('statusIcon');
-
-        if (this.checked) {
-            icon.className = 'fas fa-eye';
-        } else {
-            icon.className = 'fas fa-eye-slash';
         }
     });
 </script>

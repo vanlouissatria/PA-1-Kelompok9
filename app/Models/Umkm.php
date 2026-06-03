@@ -21,8 +21,7 @@ protected $fillable = [
     'geosite',
     'alamat',
     'deskripsi',
-    'foto_utama',
-    'status',
+    'foto_utama'
 ];
 
 // Tambahkan default value di model

@@ -247,17 +247,7 @@
                         </span>
                     </td>
                     <td>
-                        <div class="actions-group">
-                            {{-- Toggle Status --}}
-                            <button type="button"
-                                    class="action-btn toggle-status-btn"
-                                    data-id="{{ $item->id }}"
-                                    data-status="{{ $item->status }}"
-                                    title="{{ $item->status ? 'Nonaktifkan' : 'Aktifkan' }}"
-                                    style="background-color: {{ $item->status ? '#16a34a' : '#6b7280' }};">
-                                <i class="fas {{ $item->status ? 'fa-eye' : 'fa-eye-slash' }}"></i>
-                            </button>
-                            
+                        <div class="actions-group">        
                             {{-- Edit --}}
                             <a href="{{ route('admin.warisan.edit', $item->id) }}" class="action-btn btn-edit" title="Edit">
                                 <i class="fas fa-pen"></i>
@@ -289,104 +279,4 @@
         {{ $data->links() }}
     </div>
 </div>
-
-<script>
-(function() {
-    function initWarisanToggleButtons(){
-        const toggleButtons = document.querySelectorAll('.toggle-status-btn');
-
-        toggleButtons.forEach(button => {
-            if (button.__toggleBound) return;
-            button.__toggleBound = true;
-
-            button.addEventListener('click', function() {
-                const itemId = this.getAttribute('data-id');
-                const currentStatus = parseInt(this.getAttribute('data-status'));
-                const btn = this;
-                const icon = btn.querySelector('i');
-
-                console.debug('Toggle click:', { id: itemId, status: currentStatus });
-
-                if (icon) {
-                    icon.className = 'fas fa-spinner fa-spin';
-                }
-                btn.disabled = true;
-
-                // Menggunakan route named Laravel dengan format dash (toggle-status)
-                const baseUrl = "{{ route('admin.warisan.toggle-status', ':id') }}";
-                const finalUrl = baseUrl.replace(':id', itemId);
-
-                fetch(finalUrl, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({})
-                })
-                .then(response => {
-                    console.debug('Toggle response status:', response.status);
-                    if (!response.ok) {
-                        if (response.status === 419) {
-                            throw new Error('CSRF token mismatch (419). Silakan refresh halaman dan coba lagi.');
-                        }
-                        return response.text().then(txt => { throw new Error('HTTP ' + response.status + ': ' + txt); });
-                    }
-                    return response.json().catch(err => { throw new Error('Invalid JSON response'); });
-                })
-                .then(data => {
-                    console.debug('Toggle data:', data);
-
-                    if (data && data.success) {
-                        const newStatus = data.status;
-
-                        if (newStatus) {
-                            btn.style.backgroundColor = '#16a34a';
-                            btn.setAttribute('data-status', '1');
-                            btn.setAttribute('title', 'Nonaktifkan');
-                            if (icon) icon.className = 'fas fa-eye';
-                        } else {
-                            btn.style.backgroundColor = '#6b7280';
-                            btn.setAttribute('data-status', '0');
-                            btn.setAttribute('title', 'Aktifkan');
-                            if (icon) icon.className = 'fas fa-eye-slash';
-                        }
-
-                        const row = btn.closest('tr');
-                        const statusCell = row.querySelector('td:nth-child(6)');
-
-                        if (newStatus) {
-                            statusCell.innerHTML = '<span class="badge-status status-active">Aktif</span>';
-                        } else {
-                            statusCell.innerHTML = '<span class="badge-status status-inactive">Nonaktif</span>';
-                        }
-                    } else {
-                        throw new Error('Struktur respon tidak sesuai');
-                    }
-                })
-                .catch(error => {
-                    console.error('Toggle Error:', error);
-                    try { window.alert('Gagal mengubah status: ' + error.message); } catch(e){}
-
-                    if (icon) {
-                        icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
-                    }
-                })
-                .finally(() => {
-                    btn.disabled = false;
-                });
-            });
-        });
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initWarisanToggleButtons);
-    } else {
-        initWarisanToggleButtons();
-    }
-
-    window.initWarisanToggle = initWarisanToggleButtons;
-})();
-</script>
 @endsection

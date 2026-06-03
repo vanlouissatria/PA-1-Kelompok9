@@ -15,7 +15,6 @@ class Informasi extends Model
         'konten',
         'gambar',
         'urutan',
-        'status',
         'kategori'
     ];
 

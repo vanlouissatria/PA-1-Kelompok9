@@ -263,17 +263,7 @@
 
                     {{-- Kolom Aksi dengan Proteksi No-Wrap --}}
                     <td style="white-space: nowrap; width: 1%;">
-                        <div class="actions-group">
-                            {{-- Toggle Status --}}
-                            <button type="button"
-                                    class="action-btn toggle-status-btn"
-                                    data-id="{{ $item->id }}"
-                                    data-status="{{ $item->status }}"
-                                    title="{{ $item->status ? 'Nonaktifkan destinasi ini' : 'Aktifkan destinasi ini' }}"
-                                    style="background-color: {{ $item->status ? '#16a34a' : '#6b7280' }};">
-                                <i class="fas {{ $item->status ? 'fa-eye' : 'fa-eye-slash' }}"></i>
-                            </button>
-                            
+                        <div class="actions-group">                 
                             {{-- Edit --}}
                             <a href="{{ route('admin.destinasi.edit', $item->id) }}" class="action-btn btn-edit" title="Edit destinasi">
                                 <i class="fas fa-pen"></i>
@@ -307,92 +297,4 @@
         {{ $destinasi->links() }}
     </div>
 </div>
-
-<script>
-(function() {
-    function initToggleButtons(){
-        const toggleButtons = document.querySelectorAll('.toggle-status-btn');
-
-        toggleButtons.forEach(button => {
-            if (button.__toggleBound) return;
-            button.__toggleBound = true;
-
-            button.addEventListener('click', function() {
-                const itemId = this.getAttribute('data-id');
-                const currentStatus = parseInt(this.getAttribute('data-status'));
-                const btn = this;
-                const icon = btn.querySelector('i');
-
-                if(icon){
-                    icon.className = 'fas fa-spinner fa-spin';
-                }
-                btn.disabled = true;
-
-                fetch(`{{ url('/admin/destinasi/toggle-status') }}/${itemId}`, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({})
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        if (response.status === 419) {
-                            throw new Error('CSRF token mismatch (419). Silakan refresh halaman.');
-                        }
-                        return response.text().then(txt => { throw new Error('HTTP ' + response.status); });
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data && data.success) {
-                        const newStatus = data.status;
-
-                        if (newStatus) {
-                            btn.style.backgroundColor = '#16a34a';
-                            btn.setAttribute('data-status', '1');
-                            btn.setAttribute('title', 'Nonaktifkan destinasi ini');
-                            if(icon) icon.className = 'fas fa-eye';
-                        } else {
-                            btn.style.backgroundColor = '#6b7280';
-                            btn.setAttribute('data-status', '0');
-                            btn.setAttribute('title', 'Aktifkan destinasi ini');
-                            if(icon) icon.className = 'fas fa-eye-slash';
-                        }
-
-                        const row = btn.closest('tr');
-                        const statusCell = row.querySelector('td:nth-child(5)');
-
-                        if (statusCell) {
-                            if (newStatus) {
-                                statusCell.innerHTML = '<span class="badge-status status-active">Aktif</span>';
-                            } else {
-                                statusCell.innerHTML = '<span class="badge-status status-inactive">Draft</span>';
-                            }
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.error('Toggle Error:', error);
-                    try { window.alert('Gagal mengubah status: ' + error.message); } catch(e){}
-                    if(icon) icon.className = currentStatus ? 'fas fa-eye' : 'fas fa-eye-slash';
-                })
-                .finally(() => {
-                    btn.disabled = false;
-                });
-            });
-        });
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initToggleButtons);
-    } else {
-        initToggleButtons();
-    }
-
-    window.initDestinasiToggle = initToggleButtons;
-})();
-</script>
 @endsection
