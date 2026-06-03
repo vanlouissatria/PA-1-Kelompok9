@@ -392,7 +392,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('/image/sihotang/sihotang1.jpeg');
+    background: url('/image/tele/tele1.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1230,7 +1230,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-..info-rute {
+.info-rute {
     background: var(--white);
     padding: 40px;
     border-radius: 32px;
@@ -1579,7 +1579,7 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 3.5rem;
     }
 }
-    </style>
+</style>
 </head>
 <body>
 
@@ -1823,7 +1823,7 @@ h1, h2, h3, h4, h5, h6 {
             </iframe>
         </div>
         
-        <div class="info-rute" data-aos="fade-up" style="max-width: 1000px; margin: 0 auto;">
+        <div class="info-rute" data-aos="fade-up">
             <h4><i class="fas fa-location-dot"></i> Rute Menuju Rura Sihotang</h4>
             <p><strong>Jalur Darat (Via Harian):</strong> Dapat diakses dari simpang Tele menuruni perbukitan ke arah Kecamatan Harian Boho, lalu melanjutkan perjalanan menyusuri kaki gunung Uruk Tatuhan menuju Kenegerian Sihotang.</p>
             <p><strong>Jalur Danau (Via Kapal Tradisional):</strong> Anda dapat menyeberang menggunakan kapal motor/boat tradisional dari Pelabuhan Pintu Batu (Pangururan) langsung menuju Dermaga Sihotang dengan waktu penyeberangan yang sangat singkat.</p>

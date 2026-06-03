@@ -171,7 +171,6 @@
                     <th width="5%">NO</th>
                     <th width="12%">GAMBAR</th>
                     <th width="22%">NAMA FASILITAS</th>
-                    <th width="28%">DESKRIPSI</th>
                     <th width="15%">HARGA</th>
                     <th width="8%">AKSI</th>
                 </tr>
@@ -194,11 +193,6 @@
                     {{-- Nama Fasilitas --}}
                     <td>
                         <div style="font-weight: 700; color: var(--text-heading);">{{ $item->nama }}</div>
-                    </td>
-
-                    {{-- Deskripsi --}}
-                    <td class="text-secondary" style="font-size: 0.9rem;">
-                        {{ Str::limit($item->deskripsi, 50) ?? '-' }}
                     </td>
 
                     {{-- Harga --}}

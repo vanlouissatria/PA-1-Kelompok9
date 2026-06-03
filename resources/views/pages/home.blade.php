@@ -1252,7 +1252,7 @@ h1, h2, h3, h4, h5, h6 {
             </div>
 
             <!-- HOLBUNG -->
-            <div class="destinasi-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
+            <div class="destinasi-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                 <div class="destinasi-image">
                     <img src="/image/holbung/Holbung.jpg" alt="Holbung">
                 </div>
@@ -1274,7 +1274,6 @@ h1, h2, h3, h4, h5, h6 {
     </div>
 </section>
 
-<!-- ==================== PETA LOKASI 3 DESA ==================== -->
 <section class="section section-light">
     <div class="container">
             <div class="section-title" data-aos="fade-up" data-aos-duration="800">

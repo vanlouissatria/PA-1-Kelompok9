@@ -187,7 +187,6 @@
                     <th width="5%">NO</th>
                     <th width="12%">GAMBAR</th>
                     <th>INFORMASI</th>
-                    <th width="15%">URUTAN</th>
                     <th width="10%">AKSI</th>
                 </tr>
             </thead>
@@ -207,11 +206,6 @@
                     <td>
                         <div style="font-weight: 700; color: var(--text-heading); font-size: 1rem;">{{ $item->judul }}</div>
                         <small class="text-secondary" style="font-weight: 500;">{{ $item->created_at ? $item->created_at->format('d M Y') : '23 May 2026' }}</small>
-                    </td>
-                    <td>
-                        <span class="badge-chip" style="font-weight: 700;">
-                            #{{ $item->urutan }}
-                        </span>
                     </td>
                     
                     <td style="white-space: nowrap; width: 1%;">

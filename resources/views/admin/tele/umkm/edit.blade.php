@@ -70,6 +70,16 @@
                 </div>
                 
                 <div class="col-md-12 mb-4">
+                    <label class="form-label-bi">Alamat *</label>
+                    <textarea name="alamat" class="form-control form-control-bi" rows="2" required>{{ old('alamat', $umkm->alamat) }}</textarea>
+                </div>
+                
+                <div class="col-md-12 mb-4">
+                    <label class="form-label-bi">Deskripsi *</label>
+                    <textarea name="deskripsi" class="form-control form-control-bi" rows="3" required>{{ old('deskripsi', $umkm->deskripsi) }}</textarea>
+                </div>
+                
+                <div class="col-md-12 mb-4">
                     <label class="form-label-bi">Foto Utama</label>
                     <input type="file" name="foto_utama" class="form-control form-control-bi" accept="image/*" id="imgInput">
                     <small class="text-muted d-block mt-1">Format: JPG, PNG, JPEG. Maksimal 2MB</small>
@@ -90,15 +100,14 @@
 </div>
 
 <script>
-    // Preview Gambar
-    document.getElementById('inputGambar').addEventListener('change', function(e) {
+    // Perbaikan ID: disesuaikan dengan id="imgInput" pada input file
+    document.getElementById('imgInput').addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
+            const imgPreview = document.getElementById('imgPreview');
             reader.onload = e => {
-                const img = document.getElementById('previewImage');
-                img.src = e.target.result;
-                img.style.display = 'block';
+                imgPreview.src = e.target.result;
             }
             reader.readAsDataURL(file);
         }
