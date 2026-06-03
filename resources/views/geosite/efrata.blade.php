@@ -1596,7 +1596,6 @@ h1, h2, h3, h4, h5, h6 {
             </div>
         </div>
         <div class="nav-menu">
-            <a href="{{ url('/') }}" class="nav-link">Home</a>
             <a href="#informasi" class="nav-link">Informasi</a>
             <a href="#galeri" class="nav-link">Galeri</a>
             <a href="#umkm" class="nav-link">UMKM</a>
@@ -1610,7 +1609,6 @@ h1, h2, h3, h4, h5, h6 {
 
 <div class="mobile-overlay" id="mobileOverlay">
     <div class="mobile-close" id="mobileClose">×</div>
-    <a href="{{ url('/') }}" class="mobile-link">Home</a>
     <a href="#informasi" class="mobile-link">Informasi</a>
     <a href="#galeri" class="mobile-link">Galeri</a>
     <a href="#umkm" class="mobile-link">UMKM</a>
@@ -1846,6 +1844,14 @@ h1, h2, h3, h4, h5, h6 {
             <h4><i class="fas fa-location-dot"></i> Rute Menuju Air Terjun Efrata</h4>
             <p><strong>Dari Pangururan:</strong> Berjarak sekitar 20 km dengan waktu tempuh kurang lebih 30-40 menit berkendara melewati jalan Lintas Tele-Pangururan menuju Desa Sosor Dolok.</p>
             <p><strong>Dari Menara Pandang Tele:</strong> Jaraknya cukup dekat, hanya sekitar 15 km dengan waktu tempuh 25 menit menuruni perbukitan menuju arah Harian.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="padding: 30px 0 20px; background: #f8fafc;">
+    <div class="container" data-aos="fade-up">
+        <div style="text-align:center;">
+            <a href="{{ url('/') }}" class="card-btn" style="border-color: transparent; background: var(--primary); color: white;">Kembali ke Home</a>
         </div>
     </div>
 </section>

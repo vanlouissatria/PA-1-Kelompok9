@@ -1595,7 +1595,6 @@ h1, h2, h3, h4, h5, h6 {
             </div>
         </div>
         <div class="nav-menu">
-            <a href="{{ url('/') }}" class="nav-link">Home</a>
             <a href="#informasi" class="nav-link">Informasi</a>
             <a href="#galeri" class="nav-link">Galeri</a>
             <a href="#umkm" class="nav-link">UMKM</a>
@@ -1609,7 +1608,6 @@ h1, h2, h3, h4, h5, h6 {
 
 <div class="mobile-overlay" id="mobileOverlay">
     <div class="mobile-close" id="mobileClose">&times;</div>
-    <a href="{{ url('/') }}" class="mobile-link">Home</a>
     <a href="#informasi" class="mobile-link">Informasi</a>
     <a href="#galeri" class="mobile-link">Galeri</a>
     <a href="#umkm" class="mobile-link">UMKM</a>
@@ -1831,6 +1829,15 @@ h1, h2, h3, h4, h5, h6 {
 </section>
 
 
+
+
+<section class="section" style="padding: 30px 0 20px; background: #f8fafc;">
+    <div class="container" data-aos="fade-up">
+        <div style="text-align:center;">
+            <a href="{{ url('/') }}" class="card-btn" style="border-color: transparent; background: var(--primary); color: white;">Kembali ke Home</a>
+        </div>
+    </div>
+</section>
 
 <footer class="footer">
     <div class="footer-container">

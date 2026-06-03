@@ -1596,7 +1596,6 @@ h1, h2, h3, h4, h5, h6 {
             </div>
         </div>
         <div class="nav-menu">
-            <a href="{{ url('/') }}" class="nav-link">Home</a>
             <a href="#informasi" class="nav-link">Informasi</a>
             <a href="#galeri" class="nav-link">Galeri</a>
             <a href="#umkm" class="nav-link">UMKM</a>
@@ -1610,7 +1609,6 @@ h1, h2, h3, h4, h5, h6 {
 
 <div class="mobile-overlay" id="mobileOverlay">
     <div class="mobile-close" id="mobileClose">&times;</div>
-    <a href="{{ url('/') }}" class="mobile-link">Home</a>
     <a href="#informasi" class="mobile-link">Informasi</a>
     <a href="#galeri" class="mobile-link">Galeri</a>
     <a href="#umkm" class="mobile-link">UMKM</a>
@@ -1828,6 +1826,14 @@ h1, h2, h3, h4, h5, h6 {
             <p><strong>Jalur Darat (Via Harian):</strong> Dapat diakses dari simpang Tele menuruni perbukitan ke arah Kecamatan Harian Boho, lalu melanjutkan perjalanan menyusuri kaki gunung Uruk Tatuhan menuju Kenegerian Sihotang.</p>
             <p><strong>Jalur Danau (Via Kapal Tradisional):</strong> Anda dapat menyeberang menggunakan kapal motor/boat tradisional dari Pelabuhan Pintu Batu (Pangururan) langsung menuju Dermaga Sihotang dengan waktu penyeberangan yang sangat singkat.</p>
             <p><strong>Karakteristik Tempat:</strong> Daerah lembah eksotis yang dikelilingi pegunungan tinggi di satu sisi dan langsung berbatasan dengan tepian pantai Danau Toba di sisi lainnya.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="padding: 30px 0 20px; background: #f8fafc;">
+    <div class="container" data-aos="fade-up">
+        <div style="text-align:center;">
+            <a href="{{ url('/') }}" class="card-btn" style="border-color: transparent; background: var(--primary); color: white;">Kembali ke Home</a>
         </div>
     </div>
 </section>
