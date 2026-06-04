@@ -1,8 +1,6 @@
-@extends('layouts.app')
+<?php $__env->startSection('title', $galeri->judul . ' - GeoToba'); ?>
 
-@section('title', $galeri->judul . ' - GeoToba')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <style>
     /* DETAIL GALLERY SECTION */
     .detail-gallery-section {
@@ -158,16 +156,17 @@
     <div class="detail-gallery-container">
         
         <div class="detail-date">
-            {{ $galeri->created_at ? $galeri->created_at->translatedFormat('d F Y') : \Carbon\Carbon::now()->translatedFormat('d F Y') }}
+            <?php echo e($galeri->created_at ? $galeri->created_at->translatedFormat('d F Y') : \Carbon\Carbon::now()->translatedFormat('d F Y')); ?>
+
         </div>
 
-        <h1 class="detail-title">{{ $galeri->judul }}</h1>
+        <h1 class="detail-title"><?php echo e($galeri->judul); ?></h1>
 
         <div class="detail-author">
             <i class="fas fa-user"></i> Admin
         </div>
 
-        @php
+        <?php
             $imgSrc = '';
             if ($galeri->gambar) {
                 if (file_exists(public_path($galeri->gambar))) {
@@ -180,18 +179,19 @@
             } else {
                 $imgSrc = asset('image/default.jpg');
             }
-        @endphp
+        ?>
 
         <div class="detail-image-wrapper">
-            <img src="{{ $imgSrc }}" alt="{{ $galeri->judul }}">
+            <img src="<?php echo e($imgSrc); ?>" alt="<?php echo e($galeri->judul); ?>">
         </div>
 
         <div class="detail-description">
-            {{ $galeri->deskripsi ?? 'Tidak ada deskripsi untuk galeri ini.' }}
+            <?php echo e($galeri->deskripsi ?? 'Tidak ada deskripsi untuk galeri ini.'); ?>
+
         </div>
 
         <div class="btn-back-wrapper">
-            <a href="{{ url('/galeri') }}" class="btn-geotoba-back">
+            <a href="<?php echo e(url('/galeri')); ?>" class="btn-geotoba-back">
                 <i class="fas fa-arrow-left"></i> Kembali ke Galeri
             </a>
         </div>
@@ -205,7 +205,7 @@
     </button>
 
     <audio id="galleryAudio" autoplay>
-        <source src="{{ asset('audio/sound.mp4') }}" type="audio/mp4">
+        <source src="<?php echo e(asset('audio/sound.mp4')); ?>" type="audio/mp4">
     </audio>
 </div>
 
@@ -241,4 +241,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\PA 1\Geosite-Tele-Efrata-Sihotang\resources\views/pages/galeri-detail.blade.php ENDPATH**/ ?>

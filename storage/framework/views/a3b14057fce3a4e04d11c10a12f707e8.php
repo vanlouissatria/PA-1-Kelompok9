@@ -1,8 +1,6 @@
-@extends('layouts.app')
+<?php $__env->startSection('title', 'Warisan Alam & Budaya - GeoToba'); ?>
 
-@section('title', 'Warisan Alam & Budaya - GeoToba')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <style>
     /* ============================================
        ROOT VARIABLES - PREMIUM DESIGN SYSTEM
@@ -759,60 +757,60 @@
 <section class="heritage-section">
     <div class="heritage-container">
 
-        @php
+        <?php
             $categories = [
                 'geodiversity'       => ['icon' => 'fas fa-mountain',  'label' => 'Geodiversity',       'items' => $geodiversity ?? []],
                 'biodiversity'       => ['icon' => 'fas fa-leaf',       'label' => 'Biodiversity',       'items' => $biodiversity ?? []],
                 'cultural_diversity' => ['icon' => 'fas fa-landmark',   'label' => 'Cultural Diversity', 'items' => $cultural_diversity ?? []],
             ];
-        @endphp
+        ?>
 
-        @foreach($categories as $key => $category)
+        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="heritage-category-block">
                 <div class="heritage-title-wrapper">
-                    <i class="{{ $category['icon'] }}"></i>
-                    <h2>{{ $category['label'] }}</h2>
+                    <i class="<?php echo e($category['icon']); ?>"></i>
+                    <h2><?php echo e($category['label']); ?></h2>
                 </div>
                 <p class="heritage-description">
-                    Data di bawah ini adalah hasil input melalui panel admin untuk jenis {{ strtolower($category['label']) }}. Setiap item ditampilkan dalam satu baris yang bergantian penempatan gambar dan teks.
+                    Data di bawah ini adalah hasil input melalui panel admin untuk jenis <?php echo e(strtolower($category['label'])); ?>. Setiap item ditampilkan dalam satu baris yang bergantian penempatan gambar dan teks.
                 </p>
 
-                @if(count($category['items']) > 0)
-                    <div class="heritage-items collapsed" id="heritage-items-{{ $key }}">
-                        @foreach($category['items'] as $item)
-                            @php
+                <?php if(count($category['items']) > 0): ?>
+                    <div class="heritage-items collapsed" id="heritage-items-<?php echo e($key); ?>">
+                        <?php $__currentLoopData = $category['items']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php
                                 $warisanImage = $item->gambar;
                                 // Cek apakah gambar ada dan bukan URL eksternal
                                 if ($warisanImage && !\Illuminate\Support\Str::startsWith($warisanImage, ['http://', 'https://', 'data:'])) {
                                     // Perbaikan: gunakan $warisanImage, bukan warisanImage (tanpa $)
                                     $warisanImage = image_url($warisanImage);
                                 }
-                            @endphp
-                            <div class="heritage-item" id="warisan-item-{{ $item->id }}">
+                            ?>
+                            <div class="heritage-item" id="warisan-item-<?php echo e($item->id); ?>">
                                 <div class="heritage-item-image">
-                                    <img src="{{ $warisanImage ?: asset('image/default.jpg') }}" alt="{{ $item->judul }}">
+                                    <img src="<?php echo e($warisanImage ?: asset('image/default.jpg')); ?>" alt="<?php echo e($item->judul); ?>">
                                 </div>
                                 <div class="heritage-item-content">
-                                    <h3 class="heritage-item-title">{{ $item->judul }}</h3>
+                                    <h3 class="heritage-item-title"><?php echo e($item->judul); ?></h3>
                                     <div class="heritage-item-meta">
-                                        <span><i class="fas fa-layer-group"></i> {{ $item->label_jenis }}</span>
-                                        <span><i class="fas fa-sort-numeric-down"></i> Urutan {{ $item->urutan }}</span>
+                                        <span><i class="fas fa-layer-group"></i> <?php echo e($item->label_jenis); ?></span>
+                                        <span><i class="fas fa-sort-numeric-down"></i> Urutan <?php echo e($item->urutan); ?></span>
                                     </div>
-                                    <p class="heritage-item-text">{!! nl2br(e($item->deskripsi)) !!}</p>
+                                    <p class="heritage-item-text"><?php echo nl2br(e($item->deskripsi)); ?></p>
                                 </div>
                             </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
-                    @if(count($category['items']) > 1)
-                        <button type="button" class="read-more-btn" onclick="toggleCategory('{{ $key }}', this)">
-                            Baca Selengkapnya ({{ count($category['items']) - 1 }} data lainnya)
+                    <?php if(count($category['items']) > 1): ?>
+                        <button type="button" class="read-more-btn" onclick="toggleCategory('<?php echo e($key); ?>', this)">
+                            Baca Selengkapnya (<?php echo e(count($category['items']) - 1); ?> data lainnya)
                         </button>
-                    @endif
-                @else
-                    <p class="empty-text"><i class="fas fa-info-circle"></i> Belum ada data {{ strtolower($category['label']) }}.</p>
-                @endif
+                    <?php endif; ?>
+                <?php else: ?>
+                    <p class="empty-text"><i class="fas fa-info-circle"></i> Belum ada data <?php echo e(strtolower($category['label'])); ?>.</p>
+                <?php endif; ?>
             </div>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
     </div>
 </section>
@@ -834,4 +832,5 @@
         }
     }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\PA 1\Geosite-Tele-Efrata-Sihotang\resources\views/pages/warisan.blade.php ENDPATH**/ ?>
