@@ -170,9 +170,11 @@
                             }
                         @endphp
                         @if($warisan->gambar)
-                            <img src="{{ $warisanImage }}" alt="{{ $warisan->judul }}" class="preview-image">
+                            <img id="previewImage" src="{{ $warisanImage }}" alt="{{ $warisan->judul }}" class="preview-image" style="display: block;">
+                        @else
+                            <img id="previewImage" src="#" alt="Preview Gambar" class="preview-image" style="display: none;">
                         @endif
-                        <input type="file" name="gambar" accept="image/jpeg,image/png,image/jpg"
+                        <input id="inputGambar" type="file" name="gambar" accept="image/jpeg,image/png,image/jpg"
                                class="form-control">
                     </div>
                 </div>
@@ -187,17 +189,21 @@
 </div>
 <script>
     // Preview Gambar
-    document.getElementById('inputGambar').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = e => {
-                const img = document.getElementById('previewImage');
-                img.src = e.target.result;
-                img.style.display = 'block';
+    const inputGambar = document.getElementById('inputGambar');
+    const previewImage = document.getElementById('previewImage');
+
+    if (inputGambar && previewImage) {
+        inputGambar.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    previewImage.src = event.target.result;
+                    previewImage.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
             }
-            reader.readAsDataURL(file);
-        }
-    });
+        });
+    }
 </script>
 @endsection
