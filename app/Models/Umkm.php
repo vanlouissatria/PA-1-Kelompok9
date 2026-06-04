@@ -10,26 +10,33 @@ class Umkm extends Model
     use HasFactory;
 
     protected $table = 'umkm';
-    
-// app/Models/Umkm.php
-protected $fillable = [
-    'nama',
-    'nama_usaha',
-    'pemilik',
-    'no_telepon',
-    'kategori',
-    'geosite',
-    'alamat',
-    'deskripsi',
-    'foto_utama'
-];
 
-// Tambahkan default value di model
-protected $attributes = [
-    'geosite' => 'tele',
-    'status' => 1,
-];
-    // Accessor untuk mendapatkan URL foto lengkap
+    protected $fillable = [
+        'created_by',
+        'nama',
+        'nama_usaha',
+        'pemilik',
+        'no_telepon',
+        'kategori',
+        'geosite',
+        'alamat',
+        'deskripsi',
+        'foto_utama',
+        'status',
+        'urutan',
+    ];
+
+    protected $attributes = [
+        'geosite' => 'tele',
+        'status'  => 1,
+    ];
+
+    // Relasi: umkm dibuat oleh satu admin
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
     public function getFotoUrlAttribute()
     {
         if ($this->foto_utama) {
@@ -38,27 +45,25 @@ protected $attributes = [
         return null;
     }
 
-    // Accessor untuk label halaman (menggunakan geosite)
     public function getHalamanLabelAttribute()
     {
         $labels = [
-            'tele' => '📍 Tele',
-            'efrata' => '📍 Efrata',
-            'sihotang' => '📍 Sihotang'
+            'tele'      => '📍 Tele',
+            'efrata'    => '📍 Efrata',
+            'sihotang'  => '📍 Sihotang',
         ];
         return $labels[$this->geosite] ?? $this->geosite;
     }
 
-    // Accessor untuk icon kategori
     public function getKategoriIconAttribute()
     {
         $icons = [
-            'Kuliner' => '🍔',
-            'Fashion' => '👕',
+            'Kuliner'   => '🍔',
+            'Fashion'   => '👕',
             'Kerajinan' => '🎨',
             'Pertanian' => '🌾',
-            'Jasa' => '📋',
-            'Lainnya' => '📌'
+            'Jasa'      => '📋',
+            'Lainnya'   => '📌',
         ];
         return $icons[$this->kategori] ?? '🏪';
     }

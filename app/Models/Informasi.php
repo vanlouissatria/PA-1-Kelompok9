@@ -10,17 +10,25 @@ class Informasi extends Model
     protected $table = 'informasi';
 
     protected $fillable = [
+        'created_by',
         'judul',
         'slug',
         'konten',
         'gambar',
         'urutan',
-        'kategori'
+        'kategori',
+        'status',
     ];
 
     protected $casts = [
-        'status' => 'boolean'
+        'status' => 'boolean',
     ];
+
+    // Relasi: informasi dibuat oleh satu admin
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 
     protected static function boot()
     {

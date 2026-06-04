@@ -14,7 +14,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',          // tambahan
+        'role',
     ];
 
     protected $hidden = [
@@ -30,15 +30,49 @@ class User extends Authenticatable
         ];
     }
 
-    // Helper: cek apakah user adalah superadmin
     public function isSuperAdmin(): bool
     {
         return $this->role === 'superadmin';
     }
 
-    // Helper: cek apakah user adalah admin biasa
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
+    }
+
+    // Relasi balik: satu admin bisa membuat banyak konten
+    public function galeris()
+    {
+        return $this->hasMany(Galeri::class, 'created_by');
+    }
+
+    public function umkms()
+    {
+        return $this->hasMany(Umkm::class, 'created_by');
+    }
+
+    public function fasilitas()
+    {
+        return $this->hasMany(Fasilitas::class, 'created_by');
+    }
+
+    public function penginapans()
+    {
+        return $this->hasMany(Penginapan::class, 'created_by');
+    }
+
+    public function destinasis()
+    {
+        return $this->hasMany(Destinasi::class, 'created_by');
+    }
+
+    public function warisans()
+    {
+        return $this->hasMany(Warisan::class, 'created_by');
+    }
+
+    public function informasis()
+    {
+        return $this->hasMany(Informasi::class, 'created_by');
     }
 }

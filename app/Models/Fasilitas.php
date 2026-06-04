@@ -7,11 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 class Fasilitas extends Model
 {
     protected $table = 'fasilitas';
-    protected $fillable = ['nama', 'deskripsi', 'gambar', 'harga', 'urutan', 'geosite'];
 
-    // Default attributes to ensure a geosite and status when creating models
+    protected $fillable = [
+        'created_by',
+        'nama',
+        'deskripsi',
+        'gambar',
+        'harga',
+        'urutan',
+        'geosite',
+        'status',
+    ];
+
     protected $attributes = [
         'geosite' => 'tele',
-        'status' => 1,
+        'status'  => 1,
     ];
+
+    // Relasi: fasilitas dibuat oleh satu admin
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

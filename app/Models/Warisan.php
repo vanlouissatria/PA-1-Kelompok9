@@ -9,12 +9,20 @@ class Warisan extends Model
     protected $table = 'warisans';
 
     protected $fillable = [
+        'created_by',
         'judul',
         'jenis',
         'deskripsi',
         'gambar',
-        'urutan'
+        'urutan',
+        'status',
     ];
+
+    // Relasi: warisan dibuat oleh satu admin
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 
     public function getLabelJenisAttribute(): string
     {
