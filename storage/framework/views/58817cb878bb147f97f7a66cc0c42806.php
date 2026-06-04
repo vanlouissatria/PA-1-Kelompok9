@@ -180,6 +180,7 @@
                     <th width="5%">NO</th>
                     <th width="12%">GAMBAR</th>
                     <th width="40%">JUDUL</th>
+                    <th width="15%">KATEGORI</th>
                     <th width="10%">AKSI</th>
                 </tr>
             </thead>
@@ -201,6 +202,15 @@
                     
                     <td>
                         <div style="font-weight: 700; color: var(--text-heading);"><?php echo e($galeri->judul); ?></div>
+                    </td>
+
+                    
+                    <td>
+                        <?php if($galeri->kategori): ?>
+                            <span class="badge-chip"><?php echo e($galeri->kategori); ?></span>
+                        <?php else: ?>
+                            <span class="text-secondary">Tidak ada kategori</span>
+                        <?php endif; ?>
                     </td>
 
                     

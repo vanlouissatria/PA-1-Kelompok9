@@ -156,6 +156,20 @@
                     @enderror
                 </div>
 
+                {{-- Kategori --}}
+                <div class="col-md-6 mb-4">
+                    <label class="form-label required">
+                        Kategori Galeri
+                    </label>
+
+                    <select name="kategori" class="form-select @error('kategori') is-invalid @enderror" required>
+                        <option value="">-- Pilih Kategori --</option>
+                        <option value="alam" {{ old('kategori') == 'alam' ? 'selected' : '' }}>Alam</option>
+                        <option value="budaya" {{ old('kategori') == 'budaya' ? 'selected' : '' }}>Budaya</option>
+                        <option value="wisata" {{ old('kategori') == 'wisata' ? 'selected' : '' }}>Wisata</option>
+                    </select>
+                </div>
+
                 {{-- Deskripsi --}}
                 <div class="col-md-12 mb-4">
                     <label class="form-label">

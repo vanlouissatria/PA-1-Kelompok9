@@ -1,9 +1,6 @@
-{{-- resources/views/admin/kontak/edit.blade.php --}}
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Edit Kontak'); ?>
 
-@section('title', 'Edit Kontak')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <style>
     :root {
@@ -94,11 +91,11 @@
 
 <div class="card-body">
 
-    <form action="{{ route('admin.kontak.update', $kontak->id) }}"
+    <form action="<?php echo e(route('admin.kontak.update', $kontak->id)); ?>"
           method="POST">
 
-        @csrf
-        @method('PUT')
+        <?php echo csrf_field(); ?>
+        <?php echo method_field('PUT'); ?>
 
         <div class="row">
 
@@ -110,7 +107,7 @@
                 <input type="text"
                        name="judul"
                        class="form-control"
-                       value="{{ old('judul', $kontak->judul) }}"
+                       value="<?php echo e(old('judul', $kontak->judul)); ?>"
                        required>
             </div>
 
@@ -122,7 +119,7 @@
                 <input type="text"
                        name="subjudul"
                        class="form-control"
-                       value="{{ old('subjudul', $kontak->subjudul) }}"
+                       value="<?php echo e(old('subjudul', $kontak->subjudul)); ?>"
                        placeholder="Posisi, jabatan, atau deskripsi singkat">
             </div>
 
@@ -134,7 +131,7 @@
                 <input type="text"
                        name="telepon1"
                        class="form-control"
-                       value="{{ old('telepon1', $kontak->telepon1) }}">
+                       value="<?php echo e(old('telepon1', $kontak->telepon1)); ?>">
             </div>
 
             <div class="col-md-12 mb-3">
@@ -144,7 +141,7 @@
 
                 <textarea name="alamat"
                           rows="4"
-                          class="form-control">{{ old('alamat', $kontak->alamat) }}</textarea>
+                          class="form-control"><?php echo e(old('alamat', $kontak->alamat)); ?></textarea>
             </div>
 
             <div class="col-md-6 mb-3">
@@ -155,7 +152,7 @@
                 <input type="text"
                        name="kode_pos"
                        class="form-control"
-                       value="{{ old('kode_pos', $kontak->kode_pos) }}">
+                       value="<?php echo e(old('kode_pos', $kontak->kode_pos)); ?>">
             </div>
 
             <div class="col-md-6 mb-3">
@@ -166,7 +163,7 @@
                 <input type="text"
                        name="instagram"
                        class="form-control"
-                       value="{{ old('instagram', $kontak->instagram) }}"
+                       value="<?php echo e(old('instagram', $kontak->instagram)); ?>"
                        placeholder="contoh: @username atau link profil">
             </div>
 
@@ -178,7 +175,7 @@
                 <input type="text"
                        name="telepon2"
                        class="form-control"
-                       value="{{ old('telepon2', $kontak->telepon2) }}">
+                       value="<?php echo e(old('telepon2', $kontak->telepon2)); ?>">
             </div>
 
             <div class="col-md-6 mb-3">
@@ -189,7 +186,7 @@
                 <input type="text"
                        name="telepon3"
                        class="form-control"
-                       value="{{ old('telepon3', $kontak->telepon3) }}">
+                       value="<?php echo e(old('telepon3', $kontak->telepon3)); ?>">
             </div>
 
             <div class="col-md-6 mb-3">
@@ -200,7 +197,7 @@
                 <input type="email"
                        name="email1"
                        class="form-control"
-                       value="{{ old('email1', $kontak->email1) }}">
+                       value="<?php echo e(old('email1', $kontak->email1)); ?>">
             </div>
 
             <div class="col-md-6 mb-3">
@@ -211,7 +208,7 @@
                 <input type="email"
                        name="email2"
                        class="form-control"
-                       value="{{ old('email2', $kontak->email2) }}">
+                       value="<?php echo e(old('email2', $kontak->email2)); ?>">
             </div>
 
             <div class="col-md-6 mb-3">
@@ -222,7 +219,7 @@
                 <input type="email"
                        name="email3"
                        class="form-control"
-                       value="{{ old('email3', $kontak->email3) }}">
+                       value="<?php echo e(old('email3', $kontak->email3)); ?>">
             </div>
 
             <div class="col-md-6 mb-3">
@@ -232,7 +229,7 @@
 
                 <textarea name="maps"
                           rows="3"
-                          class="form-control" placeholder="Masukkan URL embed Google Maps, misal https://www.google.com/maps/embed?...">{{ old('maps', $kontak->maps) }}</textarea>
+                          class="form-control" placeholder="Masukkan URL embed Google Maps, misal https://www.google.com/maps/embed?..."><?php echo e(old('maps', $kontak->maps)); ?></textarea>
             </div>
         </div>
 
@@ -245,7 +242,7 @@
                 Simpan Kontak
             </button>
 
-            <a href="{{ route('admin.kontak.index') }}"
+            <a href="<?php echo e(route('admin.kontak.index')); ?>"
                class="btn-outline-bi">
                 <i class="fas fa-arrow-left me-2"></i>
                 Batal
@@ -272,4 +269,6 @@ document.getElementById('inputGambar').addEventListener('change', function(e) {
 });
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Geosite-Tele-Efrata-Sihotang\resources\views/admin/kontak/edit.blade.php ENDPATH**/ ?>
