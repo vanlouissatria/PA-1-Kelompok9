@@ -928,6 +928,7 @@
 <script>
     // Data berita dari server
     const newsData = @json($berita->items());
+    const storageBase = '{{ asset("storage") }}';
 
     function openReader(id) {
         const item = newsData.find(x => x.id === id);
@@ -937,12 +938,15 @@
         let imgSrc = '{{ asset("image/default.jpg") }}';
         
         if (item.gambar && item.gambar.trim() !== '') {
-            if (item.gambar.length > 500 && !item.gambar.startsWith('http')) {
-                imgSrc = item.gambar;
-            } else if (item.gambar.startsWith('http')) {
-                imgSrc = item.gambar;
-            } else if (item.gambar) {
-                imgSrc = '{{ asset("storage") }}/' + item.gambar;
+            const rawPath = item.gambar.trim();
+
+            if (/^(https?:\/\/|data:)/i.test(rawPath)) {
+                imgSrc = rawPath;
+            } else {
+                let normalizedPath = rawPath.replace(/^\/+/, '');
+                normalizedPath = normalizedPath.replace(/^storage\//i, '');
+                normalizedPath = normalizedPath.replace(/^public\//i, '');
+                imgSrc = `${storageBase}/${normalizedPath}`;
             }
         }
 

@@ -74,9 +74,30 @@ Route::prefix('berita')->name('berita.')->group(function () {
     })->name('index');
     Route::get('/{slug}', function ($slug) {
         $berita = \App\Models\Berita::where('slug', $slug)->where('status', true)->firstOrFail();
-        $berita->increment('views');
+        $sessionKey = 'berita_viewed_' . $berita->id;
+
+        if (!session()->has($sessionKey)) {
+            $berita->increment('views');
+            session()->put($sessionKey, true);
+        }
+
         return view('pages.berita-detail', compact('berita'));
     })->name('detail');
+});
+
+Route::post('/api/berita/{id}/view', function ($id) {
+    $berita = \App\Models\Berita::where('id', $id)->where('status', true)->first();
+    if (!$berita) {
+        return response()->json(['message' => 'Berita tidak ditemukan'], 404);
+    }
+
+    $sessionKey = 'berita_viewed_' . $berita->id;
+    if (!session()->has($sessionKey)) {
+        $berita->increment('views');
+        session()->put($sessionKey, true);
+    }
+
+    return response()->json(['success' => true, 'views' => $berita->views]);
 });
 
 // UMKM PUBLIC
