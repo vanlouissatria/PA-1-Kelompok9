@@ -84,58 +84,6 @@
                 <div class="mb-3">
 
                     <label class="form-label">
-                        Facebook
-                    </label>
-
-                    <input type="text"
-                           name="facebook"
-                           class="form-control"
-                           placeholder="Masukkan URL atau username Facebook">
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        TikTok
-                    </label>
-
-                    <input type="text"
-                           name="tiktok"
-                           class="form-control"
-                           placeholder="Masukkan URL atau username TikTok">
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        Twitter
-                    </label>
-
-                    <input type="text"
-                           name="twitter"
-                           class="form-control"
-                           placeholder="Masukkan URL atau username Twitter">
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        YouTube
-                    </label>
-
-                    <input type="text"
-                           name="youtube"
-                           class="form-control"
-                           placeholder="Masukkan URL atau nama channel YouTube">
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label class="form-label">
                         Telepon 1
                     </label>
 
