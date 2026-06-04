@@ -182,6 +182,7 @@
                     <th width="5%">NO</th>
                     <th width="12%">GAMBAR</th>
                     <th width="40%">JUDUL</th>
+                    <th width="15%">KATEGORI</th>
                     <th width="10%">AKSI</th>
                 </tr>
             </thead>
@@ -203,6 +204,15 @@
                     {{-- Judul --}}
                     <td>
                         <div style="font-weight: 700; color: var(--text-heading);">{{ $galeri->judul }}</div>
+                    </td>
+
+                    {{-- Kategori --}}
+                    <td>
+                        @if($galeri->kategori)
+                            <span class="badge-chip">{{ $galeri->kategori }}</span>
+                        @else
+                            <span class="text-secondary">Tidak ada kategori</span>
+                        @endif
                     </td>
 
                     {{-- Aksi --}}
