@@ -1,9 +1,6 @@
-{{-- resources/views/admin/galeri/create.blade.php --}}
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Tambah Galeri'); ?>
 
-@section('title', 'Tambah Galeri')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <style>
     :root {
         --bi-blue: #002F5F;
@@ -128,15 +125,15 @@
 
     <div class="card-body p-4">
 
-        <form action="{{ route('admin.galeri.store') }}"
+        <form action="<?php echo e(route('admin.galeri.store')); ?>"
               method="POST"
               enctype="multipart/form-data">
 
-            @csrf
+            <?php echo csrf_field(); ?>
 
             <div class="row">
 
-                {{-- Judul --}}
+                
                 <div class="col-md-6 mb-4">
                     <label class="form-label required">
                         Judul Galeri
@@ -144,19 +141,34 @@
 
                     <input type="text"
                            name="judul"
-                           class="form-control @error('judul') is-invalid @enderror"
-                           value="{{ old('judul') }}"
+                           class="form-control <?php $__errorArgs = ['judul'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                           value="<?php echo e(old('judul')); ?>"
                            placeholder="Masukkan judul galeri"
                            required>
 
-                    @error('judul')
+                    <?php $__errorArgs = ['judul'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                         <div class="invalid-feedback">
-                            {{ $message }}
+                            <?php echo e($message); ?>
+
                         </div>
-                    @enderror
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </div>
 
-                {{-- Deskripsi --}}
+                
                 <div class="col-md-12 mb-4">
                     <label class="form-label">
                         Deskripsi
@@ -164,17 +176,32 @@
 
                     <textarea name="deskripsi"
                               rows="5"
-                              class="form-control @error('deskripsi') is-invalid @enderror"
-                              placeholder="Masukkan deskripsi galeri">{{ old('deskripsi') }}</textarea>
+                              class="form-control <?php $__errorArgs = ['deskripsi'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                              placeholder="Masukkan deskripsi galeri"><?php echo e(old('deskripsi')); ?></textarea>
 
-                    @error('deskripsi')
+                    <?php $__errorArgs = ['deskripsi'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                         <div class="invalid-feedback">
-                            {{ $message }}
+                            <?php echo e($message); ?>
+
                         </div>
-                    @enderror
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </div>
 
-                {{-- Upload Gambar --}}
+                
                 <div class="col-md-6 mb-4">
                     <label class="form-label required">
                         Gambar Galeri
@@ -182,7 +209,14 @@
 
                     <input type="file"
                            name="gambar"
-                           class="form-control @error('gambar') is-invalid @enderror"
+                           class="form-control <?php $__errorArgs = ['gambar'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
                            accept="image/*"
                            id="imgInput"
                            required>
@@ -197,11 +231,19 @@
                              alt="Preview Gambar">
                     </div>
 
-                    @error('gambar')
+                    <?php $__errorArgs = ['gambar'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                         <div class="invalid-feedback d-block">
-                            {{ $message }}
+                            <?php echo e($message); ?>
+
                         </div>
-                    @enderror
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </div>
             <hr>
 
@@ -212,7 +254,7 @@
                     Simpan Galeri
                 </button>
 
-                <a href="{{ route('admin.galeri.index') }}"
+                <a href="<?php echo e(route('admin.galeri.index')); ?>"
                    class="btn-outline-bi">
                     <i class="fas fa-arrow-left me-2"></i>
                     Batal
@@ -248,4 +290,5 @@
         }
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Geosite-Tele-Efrata-Sihotang\resources\views/admin/galeri/create.blade.php ENDPATH**/ ?>
