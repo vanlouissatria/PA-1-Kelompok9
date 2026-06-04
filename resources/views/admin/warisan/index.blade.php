@@ -193,7 +193,7 @@
                         @php
                             $warisanImage = $item->gambar;
                             if ($warisanImage && !\Illuminate\Support\Str::startsWith($warisanImage, ['http://', 'https://', 'data:'])) {
-                                $warisanImage = asset('storage/' . ltrim($warisanImage, '/'));
+                                $warisanImage = image_url($warisanImage);
                             }
                         @endphp
                         @if($item->gambar)

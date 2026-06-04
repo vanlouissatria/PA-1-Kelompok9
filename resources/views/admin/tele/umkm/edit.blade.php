@@ -85,7 +85,7 @@
                     <small class="text-muted d-block mt-1">Format: JPG, PNG, JPEG. Maksimal 2MB</small>
                     <div class="mt-2">
                         <small class="text-muted">Gambar Saat Ini:</small><br>
-                        <img src="{{ asset($umkm->foto_utama) }}" id="imgPreview" class="preview-image" alt="Preview">
+                        <img src="{{ image_url($umkm->foto_utama) }}" id="imgPreview" class="preview-image" alt="Preview">
                     </div>
                 </div>
             </div>

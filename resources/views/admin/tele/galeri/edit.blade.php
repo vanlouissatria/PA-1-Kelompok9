@@ -49,14 +49,7 @@
                 
                 <div class="mt-3">
                     <small class="text-muted">Gambar Saat Ini:</small><br>
-                    <img src="{{ asset($galeri->gambar) }}" id="imgPreview" class="preview-image" alt="Preview">
-                </div>
-            </div>
-            
-            <hr>
-            <div class="d-flex gap-3">
-                <button type="submit" class="btn btn-bi-primary"><i class="fas fa-save me-2"></i> Update Galeri</button>
-                <a href="{{ url('/admin/geosite/'.$geosite.'/galeri') }}" class="btn btn-bi-outline"><i class="fas fa-arrow-left me-2"></i> Batal</a>
+                        <img src="{{ image_url($galeri->gambar) }}" id="imgPreview" class="preview-image" alt="Preview">
             </div>
         </form>
     </div>

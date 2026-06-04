@@ -1656,7 +1656,7 @@ h1, h2, h3, h4, h5, h6 {
             @foreach($informasi as $info)
                 <div class="informasi-card" data-aos="fade-up">
                     @if($info->gambar && file_exists(public_path($info->gambar)))
-                        <div class="informasi-image"><img src="{{ asset($info->gambar) }}" alt="{{ $info->judul }}"></div>
+                        <div class="informasi-image"><img src="{{ image_url($info->gambar) }}" alt="{{ $info->judul }}"></div>
                     @endif
                     <div class="informasi-content"><h3>{{ $info->judul }}</h3><div class="informasi-text">{!! nl2br(e($info->konten)) !!}</div></div>
                 </div>
@@ -1685,9 +1685,9 @@ h1, h2, h3, h4, h5, h6 {
                     $gambarUrl = asset('image/default.jpg');
                     if($item->gambar) {
                         if(file_exists(public_path($item->gambar))) {
-                            $gambarUrl = asset($item->gambar);
+                            $gambarUrl = image_url($item->gambar);
                         } elseif(file_exists(storage_path('app/public/' . $item->gambar))) {
-                            $gambarUrl = asset('storage/' . $item->gambar);
+                            $gambarUrl = image_url($item->gambar);
                         }
                     }
                 @endphp
@@ -1717,9 +1717,9 @@ h1, h2, h3, h4, h5, h6 {
                             $fotoUrl = asset('image/default-umkm.jpg');
                             if($item->foto_utama) {
                                 if(file_exists(public_path($item->foto_utama))) {
-                                    $fotoUrl = asset($item->foto_utama);
+                                    $fotoUrl = image_url($item->foto_utama);
                                 } elseif(file_exists(storage_path('app/public/' . $item->foto_utama))) {
-                                    $fotoUrl = asset('storage/' . $item->foto_utama);
+                                    $fotoUrl = image_url($item->foto_utama);
                                 }
                             }
                         @endphp
@@ -1758,9 +1758,9 @@ h1, h2, h3, h4, h5, h6 {
                             $gambarUrl = asset('image/default-hotel.jpg');
                             if($item->gambar) {
                                 if(file_exists(public_path($item->gambar))) {
-                                    $gambarUrl = asset($item->gambar);
+                                    $gambarUrl = image_url($item->gambar);
                                 } elseif(file_exists(storage_path('app/public/' . $item->gambar))) {
-                                    $gambarUrl = asset('storage/' . $item->gambar);
+                                    $gambarUrl = image_url($item->gambar);
                                 }
                             }
                         @endphp
@@ -1800,9 +1800,9 @@ h1, h2, h3, h4, h5, h6 {
                             $gambarUrl = asset('image/default-fasilitas.jpg');
                             if($item->gambar) {
                                 if(file_exists(public_path($item->gambar))) {
-                                    $gambarUrl = asset($item->gambar);
+                                    $gambarUrl = image_url($item->gambar);
                                 } elseif(file_exists(storage_path('app/public/' . $item->gambar))) {
-                                    $gambarUrl = asset('storage/' . $item->gambar);
+                                    $gambarUrl = image_url($item->gambar);
                                 }
                             }
                         @endphp

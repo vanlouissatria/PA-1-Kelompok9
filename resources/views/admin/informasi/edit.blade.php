@@ -156,7 +156,7 @@
                         <small class="text-muted d-block mb-1" id="labelPreview">Gambar Saat Ini:</small>
                         {{-- PERBAIKAN: Menggunakan fungsi asset() karena file disimpan di folder public/uploads/informasi --}}
                         @if($informasi->gambar && file_exists(public_path($informasi->gambar)))
-                            <img id="previewImage" class="preview-image" src="{{ asset($informasi->gambar) }}" alt="Preview Gambar">
+                            <img id="previewImage" class="preview-image" src="{{ image_url($informasi->gambar) }}" alt="Preview Gambar">
                         @else
                             <img id="previewImage" class="preview-image" style="display:none;" alt="Preview Gambar">
                             <span id="noImageText" class="text-muted italic">Tidak ada gambar sebelumnya</span>

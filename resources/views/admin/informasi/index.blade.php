@@ -196,7 +196,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>
                         @if($item->gambar && file_exists(public_path($item->gambar)))
-                            <img src="{{ asset($item->gambar) }}" alt="Gambar Informasi" class="thumbnail">
+                            <img src="{{ image_url($item->gambar) }}" alt="Gambar Informasi" class="thumbnail">
                         @else
                             <div class="placeholder-img">
                                 <i class="fas fa-image"></i>

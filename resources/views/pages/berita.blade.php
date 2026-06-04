@@ -838,13 +838,7 @@
                 @php
                     // Handle gambar sama seperti galeri
                     if (!empty($item->gambar)) {
-                        if (strlen($item->gambar) > 500 && !filter_var($item->gambar, FILTER_VALIDATE_URL)) {
-                            $imageSrc = $item->gambar;
-                        } elseif (filter_var($item->gambar, FILTER_VALIDATE_URL)) {
-                            $imageSrc = $item->gambar;
-                        } else {
-                            $imageSrc = asset('storage/' . $item->gambar);
-                        }
+                        $imageSrc = image_url($item->gambar);
                     } else {
                         $imageSrc = asset('image/default.jpg');
                     }

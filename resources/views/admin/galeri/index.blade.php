@@ -195,7 +195,7 @@
                     {{-- Gambar --}}
                     <td>
                         @if($galeri->gambar)
-                            <img src="{{ asset($galeri->gambar) }}" alt="Galeri" class="thumbnail">
+                            <img src="{{ image_url($galeri->gambar) }}" alt="Galeri" class="thumbnail">
                         @else
                             <div class="placeholder-img">No Image</div>
                         @endif

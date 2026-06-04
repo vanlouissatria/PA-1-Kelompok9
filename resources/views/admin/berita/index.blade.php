@@ -190,13 +190,7 @@
                     {{-- Gambar --}}
                     <td>
                         @if($item->gambar)
-                            @php
-                                $gambarPath = $item->gambar;
-                                if (!\Illuminate\Support\Str::startsWith($gambarPath, ['http://', 'https://', 'data:'])) {
-                                    $gambarPath = asset('storage/' . ltrim($gambarPath, '/'));
-                                }
-                            @endphp
-                            <img src="{{ $gambarPath }}" alt="Gambar Berita" class="thumbnail">
+                            <img src="{{ image_url($item->gambar) }}" alt="Gambar Berita" class="thumbnail">
                         @else
                             <div class="placeholder-img">
                                 <i class="fas fa-image"></i>

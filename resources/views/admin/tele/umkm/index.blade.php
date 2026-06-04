@@ -199,7 +199,7 @@
                     {{-- Foto/Gambar dengan Smart Fallback --}}
                     <td>
                         @if($item->foto_utama)
-                            <img src="{{ asset($item->foto_utama) }}" alt="UMKM" class="thumbnail" onerror="this.onerror=null; this.src='{{ asset('storage/' . $item->foto_utama) }}';">
+                            <img src="{{ image_url($item->foto_utama) }}" alt="UMKM" class="thumbnail">
                         @else
                             <div class="placeholder-img">No Image</div>
                         @endif

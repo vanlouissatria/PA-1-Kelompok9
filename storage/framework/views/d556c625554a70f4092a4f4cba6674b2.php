@@ -53,12 +53,7 @@
                 <input type="file" name="gambar" class="form-control" accept="image/*" id="imgInput">
                 <div class="preview-container">
                     <small class="text-muted d-block mb-2">Gambar Saat Ini:</small>
-                    <img src="<?php echo e(asset($informasi->gambar)); ?>" id="imgPreview" class="preview-image" alt="Preview">
-                </div>
-            </div>
-            
-            <hr>
-            <div class="d-flex gap-3">
+                        <img src="<?php echo e(image_url($informasi->gambar)); ?>" id="imgPreview" class="preview-image" alt="Preview">
                 <button type="submit" class="btn-primary-bi"><i class="fas fa-save me-2"></i> Update Informasi</button>
                 <a href="<?php echo e(url('/admin/geosite/'.$geosite.'/informasi')); ?>" class="btn-outline-bi"><i class="fas fa-arrow-left me-2"></i> Batal</a>
             </div>

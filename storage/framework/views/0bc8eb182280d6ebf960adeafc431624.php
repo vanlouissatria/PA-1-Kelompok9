@@ -69,7 +69,7 @@
                     <input type="file" name="gambar" class="form-control" accept="image/*" id="imgInput">
                     <div class="preview-container">
                         <small class="text-muted d-block mb-2">Gambar Saat Ini:</small>
-                        <img src="<?php echo e(asset($penginapan->gambar)); ?>" id="imgPreview" class="preview-image" alt="Preview">
+                        <img src="<?php echo e(image_url($penginapan->gambar)); ?>" id="imgPreview" class="preview-image" alt="Preview">
                     </div>
                 </div>
             </div>

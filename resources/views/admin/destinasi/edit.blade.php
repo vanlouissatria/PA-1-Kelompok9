@@ -65,7 +65,7 @@
                     <input type="file" name="gambar" class="form-control" id="inputGambar" accept="image/*">
                     <small class="text-muted">Maksimal 2MB</small>
                     <div class="preview-container">
-                        <img id="previewImage" class="preview-image" src="{{ $destinasi->gambar ? asset('storage/'.$destinasi->gambar) : '#' }}" 
+                        <img id="previewImage" class="preview-image" src="{{ $destinasi->gambar ? image_url($destinasi->gambar) : '#' }}" 
                              style="{{ $destinasi->gambar ? '' : 'display:none;' }}">
                     </div>
                 </div>

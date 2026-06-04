@@ -185,7 +185,7 @@
                     
                     <td>
                         <?php if($item->gambar): ?>
-                            <img src="<?php echo e(asset($item->gambar)); ?>" alt="Penginapan" class="thumbnail" onerror="this.onerror=null; this.src='<?php echo e(asset('storage/' . $item->gambar)); ?>';">
+                            <img src="<?php echo e(image_url($item->gambar)); ?>" alt="Penginapan" class="thumbnail">
                         <?php else: ?>
                             <div class="placeholder-img">No Image</div>
                         <?php endif; ?>

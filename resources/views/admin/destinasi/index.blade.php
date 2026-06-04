@@ -206,7 +206,7 @@
                             @php
                                 $gambarPath = $item->gambar;
                                 if (!\Illuminate\Support\Str::startsWith($gambarPath, ['http://', 'https://', 'data:'])) {
-                                    $gambarPath = asset('storage/' . ltrim($gambarPath, '/'));
+                                    $gambarPath = image_url($gambarPath);
                                 }
                             @endphp
                             <img src="{{ $gambarPath }}" alt="Gambar Destinasi" class="thumbnail">

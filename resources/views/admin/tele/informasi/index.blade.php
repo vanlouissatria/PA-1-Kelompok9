@@ -177,7 +177,7 @@
                     <td>{{ $informasi->firstItem() + $index }}</td>
                     <td>
                         @if($item->gambar)
-                            <img src="{{ asset($item->gambar) }}" alt="Informasi" class="thumbnail" onerror="this.onerror=null; this.src='{{ asset('storage/' . $item->gambar) }}';">
+                            <img src="{{ image_url($item->gambar) }}" alt="Informasi" class="thumbnail">
                         @else
                             <div class="placeholder-img">No Image</div>
                         @endif

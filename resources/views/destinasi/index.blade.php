@@ -319,7 +319,7 @@
                     if ($gambar &&
                         !str_starts_with($gambar, 'http') &&
                         !str_starts_with($gambar, 'data:')) {
-                        $gambar = asset('storage/' . $gambar);
+                        $gambar = image_url($gambar);
                     }
                 @endphp
 

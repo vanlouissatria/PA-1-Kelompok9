@@ -184,7 +184,7 @@
                     {{-- Gambar dengan Smart Fallback --}}
                     <td>
                         @if($item->gambar)
-                            <img src="{{ asset($item->gambar) }}" alt="Fasilitas" class="thumbnail" onerror="this.onerror=null; this.src='{{ asset('storage/' . $item->gambar) }}';">
+                            <img src="{{ image_url($item->gambar) }}" alt="Fasilitas" class="thumbnail">
                         @else
                             <div class="placeholder-img">No Image</div>
                         @endif

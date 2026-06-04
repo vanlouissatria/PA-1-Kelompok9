@@ -42,16 +42,20 @@ class PenginapanController extends Controller
         ];
 
         if ($request->hasFile('gambar')) {
-            $image = $request->file('gambar');
-            $imageData = file_get_contents($image->getRealPath());
-            $base64 = base64_encode($imageData);
-            $mimeType = $image->getMimeType();
-            $data['gambar'] = 'data:' . $mimeType . ';base64,' . $base64;
+            $file = $request->file('gambar');
+            $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
+
+            if (!file_exists(public_path('image/penginapan'))) {
+                mkdir(public_path('image/penginapan'), 0777, true);
+            }
+
+            $file->move(public_path('image/penginapan'), $filename);
+            $data['gambar'] = 'image/penginapan/' . $filename;
         }
 
         Penginapan::create($data);
         return redirect()->route('admin.penginapan.index')
-            ->with('success', 'Penginapan berhasil ditambahkan! (Gambar max 4MB)');
+            ->with('success', 'Penginapan berhasil ditambahkan!');
     }
 
     public function edit($id)
@@ -84,11 +88,19 @@ class PenginapanController extends Controller
         ];
 
         if ($request->hasFile('gambar')) {
-            $image = $request->file('gambar');
-            $imageData = file_get_contents($image->getRealPath());
-            $base64 = base64_encode($imageData);
-            $mimeType = $image->getMimeType();
-            $input['gambar'] = 'data:' . $mimeType . ';base64,' . $base64;
+            if ($data->gambar && is_file(public_path($data->gambar))) {
+                unlink(public_path($data->gambar));
+            }
+
+            $file = $request->file('gambar');
+            $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
+
+            if (!file_exists(public_path('image/penginapan'))) {
+                mkdir(public_path('image/penginapan'), 0777, true);
+            }
+
+            $file->move(public_path('image/penginapan'), $filename);
+            $input['gambar'] = 'image/penginapan/' . $filename;
         }
 
         $data->update($input);

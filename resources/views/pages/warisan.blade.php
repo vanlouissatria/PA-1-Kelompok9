@@ -792,7 +792,7 @@
                             @php
                                 $warisanImage = $item->gambar;
                                 if ($warisanImage && !\Illuminate\Support\Str::startsWith($warisanImage, ['http://', 'https://', 'data:'])) {
-                                    $warisanImage = asset('storage/' . ltrim($warisanImage, '/'));
+                                    $warisanImage = image_url(warisanImage);
                                 }
                             @endphp
                             <div class="heritage-item" id="warisan-item-{{ $item->id }}">

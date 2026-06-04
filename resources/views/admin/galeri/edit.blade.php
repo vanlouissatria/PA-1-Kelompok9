@@ -194,7 +194,7 @@
                         </small>
 
                         @if($galeri->gambar)
-                            <img src="{{ asset($galeri->gambar) }}"
+                            <img src="{{ image_url($galeri->gambar) }}"
                                  id="imgPreview"
                                  class="preview-image"
                                  alt="Preview Gambar">

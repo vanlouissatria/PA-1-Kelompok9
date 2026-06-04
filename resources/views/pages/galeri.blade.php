@@ -311,10 +311,10 @@
                     if ($item->gambar) {
 
                         if (file_exists(public_path($item->gambar))) {
-                            $imgSrc = asset($item->gambar);
+                            $imgSrc = image_url($item->gambar);
 
                         } elseif (file_exists(public_path('storage/' . $item->gambar))) {
-                            $imgSrc = asset('storage/' . $item->gambar);
+                            $imgSrc = image_url($item->gambar);
 
                         } else {
                             $imgSrc = asset('image/default.jpg');

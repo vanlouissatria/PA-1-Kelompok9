@@ -54,7 +54,7 @@
                 <div class="mt-3">
                     <small class="text-muted">Gambar Saat Ini:</small><br>
                     @if($fasilitas->gambar)
-                        <img src="{{ \Illuminate\Support\Str::startsWith($fasilitas->gambar, 'data:') ? $fasilitas->gambar : asset($fasilitas->gambar) }}" id="imgPreview" class="preview-image" alt="Preview">
+                        <img src="{{ image_url($fasilitas->gambar) }}" id="imgPreview" class="preview-image" alt="Preview">
                     @else
                         <img id="imgPreview" class="preview-image" style="display:none;" alt="Preview">
                     @endif

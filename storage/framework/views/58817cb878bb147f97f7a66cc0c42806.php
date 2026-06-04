@@ -1,3 +1,6 @@
+
+
+
 <?php $__env->startSection('title', 'Manajemen Galeri'); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -193,7 +196,7 @@
                     
                     <td>
                         <?php if($galeri->gambar): ?>
-                            <img src="<?php echo e(asset($galeri->gambar)); ?>" alt="Galeri" class="thumbnail">
+                            <img src="<?php echo e(image_url($galeri->gambar)); ?>" alt="Galeri" class="thumbnail">
                         <?php else: ?>
                             <div class="placeholder-img">No Image</div>
                         <?php endif; ?>

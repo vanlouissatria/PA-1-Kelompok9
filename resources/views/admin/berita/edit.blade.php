@@ -160,7 +160,7 @@
                     <div class="preview-container mt-3">
                         <small class="text-muted d-block mb-1" id="labelPreview">Gambar Saat Ini:</small>
                         @if($berita->gambar)
-                            <img id="previewImage" class="preview-image" src="{{ Storage::url($berita->gambar) }}" alt="Preview Gambar">
+                            <img id="previewImage" class="preview-image" src="{{ image_url($berita->gambar) }}" alt="Preview Gambar">
                         @else
                             <img id="previewImage" class="preview-image" style="display:none;" alt="Preview Gambar">
                             <span id="noImageText" class="text-muted italic">Tidak ada gambar sebelumnya</span>

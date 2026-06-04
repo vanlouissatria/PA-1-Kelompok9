@@ -194,8 +194,8 @@
                     {{-- Gambar --}}
                     <td>
                         @if($item->gambar)
-                            {{-- Menggunakan asset($item->gambar) agar sama dengan halaman utama --}}
-                            <img src="{{ asset($item->gambar) }}" alt="Galeri" class="thumbnail" onerror="this.onerror=null; this.src='{{ asset('storage/' . $item->gambar) }}';">
+                            {{-- Menggunakan helper image_url untuk path yang fleksibel --}}
+                            <img src="{{ image_url($item->gambar) }}" alt="Galeri" class="thumbnail">
                         @else
                             <div class="placeholder-img">No Image</div>
                         @endif
