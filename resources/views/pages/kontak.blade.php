@@ -493,7 +493,15 @@
                                     <strong><i class="fas fa-phone"></i> Telepon</strong>
                                     @foreach([$kontak->telepon1, $kontak->telepon2, $kontak->telepon3] as $tel)
                                         @if($tel)
-                                            <p><a href="tel:{{ preg_replace('/[^0-9+]/', '', $tel) }}">{{ $tel }}</a></p>
+                                            @php
+                                                $whatsappNumber = preg_replace('/[^0-9+]/', '', $tel);
+                                                if (str_starts_with($whatsappNumber, '+')) {
+                                                    $whatsappNumber = ltrim($whatsappNumber, '+');
+                                                } elseif (str_starts_with($whatsappNumber, '0')) {
+                                                    $whatsappNumber = '62'.ltrim($whatsappNumber, '0');
+                                                }
+                                            @endphp
+                                            <p><a href="https://wa.me/{{ $whatsappNumber }}" target="_blank" rel="noopener noreferrer">{{ $tel }}</a></p>
                                         @endif
                                     @endforeach
                                 </div>

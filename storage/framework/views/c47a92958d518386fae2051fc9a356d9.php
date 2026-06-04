@@ -491,7 +491,15 @@
                                     <strong><i class="fas fa-phone"></i> Telepon</strong>
                                     <?php $__currentLoopData = [$kontak->telepon1, $kontak->telepon2, $kontak->telepon3]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tel): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <?php if($tel): ?>
-                                            <p><a href="tel:<?php echo e(preg_replace('/[^0-9+]/', '', $tel)); ?>"><?php echo e($tel); ?></a></p>
+                                            <?php
+                                                $whatsappNumber = preg_replace('/[^0-9+]/', '', $tel);
+                                                if (str_starts_with($whatsappNumber, '+')) {
+                                                    $whatsappNumber = ltrim($whatsappNumber, '+');
+                                                } elseif (str_starts_with($whatsappNumber, '0')) {
+                                                    $whatsappNumber = '62'.ltrim($whatsappNumber, '0');
+                                                }
+                                            ?>
+                                            <p><a href="https://wa.me/<?php echo e($whatsappNumber); ?>" target="_blank" rel="noopener noreferrer"><?php echo e($tel); ?></a></p>
                                         <?php endif; ?>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
