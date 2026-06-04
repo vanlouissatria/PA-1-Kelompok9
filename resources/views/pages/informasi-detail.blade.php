@@ -198,7 +198,7 @@
         <!-- GAMBAR -->
         @if($informasi->gambar && file_exists(public_path($informasi->gambar)))
             <div class="detail-image-wrapper">
-                <img src="{{ image_url(informasi->gambar) }}" alt="{{ $informasi->judul }}" loading="lazy">
+                <img src="{{ image_url($informasi->gambar) }}" alt="{{ $informasi->judul }}" loading="lazy">
             </div>
         @endif
 

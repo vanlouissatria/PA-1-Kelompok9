@@ -52,7 +52,7 @@ class adminInformasiController extends Controller
                 'urutan' => $request->urutan ?? 0, // Mengakomodasi field urutan
                 'kategori' => 'informasi',
                 'gambar' => $gambarPath,
-                'status' => $request->has('status') ? 1 : 0
+                'status' => 1
             ]);
             
             return redirect()->route('admin.informasi.index')
@@ -89,7 +89,7 @@ class adminInformasiController extends Controller
                 'konten' => $request->konten,
                 'urutan' => $request->urutan ?? 0, // Mengakomodasi field urutan
                 'kategori' => 'informasi',
-                'status' => $request->has('status') ? 1 : 0
+                'status' => $request->has('status') ? 1 : $informasi->status
             ];
             
             if ($request->hasFile('gambar')) {

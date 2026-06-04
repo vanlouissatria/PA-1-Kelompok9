@@ -117,6 +117,7 @@
         <form action="{{ route('admin.informasi.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="kategori" value="informasi">
+            <input type="hidden" name="status" value="1">
             
             <div class="row">
                 {{-- Judul Informasi --}}
