@@ -114,6 +114,7 @@
         <form action="<?php echo e(route('admin.informasi.store')); ?>" method="POST" enctype="multipart/form-data">
             <?php echo csrf_field(); ?>
             <input type="hidden" name="kategori" value="informasi">
+            <input type="hidden" name="status" value="1">
             
             <div class="row">
                 

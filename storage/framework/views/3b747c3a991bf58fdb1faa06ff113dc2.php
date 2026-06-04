@@ -208,7 +208,7 @@
                     <div class="info-image-block">
                         <div class="info-image-wrapper">
                             <?php if($info->gambar && file_exists(public_path($info->gambar))): ?>
-                                <img src="<?php echo e(image_url(info->gambar)); ?>" alt="<?php echo e($info->judul); ?>" loading="lazy">
+                                <img src="<?php echo e(image_url($info->gambar)); ?>" alt="<?php echo e($info->judul); ?>" loading="lazy">
                             <?php else: ?>
                                 <img src="https://placehold.co/800x600?text=GeoToba+Informasi" alt="Placeholder">
                             <?php endif; ?>
