@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', 'Warisan Alam & Budaya - GeoToba'); ?>
 
 <?php $__env->startSection('content'); ?>
