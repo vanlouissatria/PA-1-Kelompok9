@@ -1,9 +1,9 @@
-{{-- resources/views/admin/galeri/index.blade.php --}}
-@extends('layouts.admin')
+<?php $__env->startSection('title'); ?>
+    Kelola UMKM - <?php echo e($geositeTitle); ?>
 
-@section('title', 'Manajemen Galeri')
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <style>
     :root {
         --bi-blue: #002F5F;
@@ -155,119 +155,117 @@
     }
 </style>
 
-{{-- Header Halaman --}}
+
 <div class="page-actions">
     <div>
-        <h1 class="page-header-title">Manajemen Galeri</h1>
+        <h1 class="page-header-title">Data UMKM <?php echo e(ucfirst($geosite)); ?></h1>
     </div>
-    <a href="{{ route('admin.galeri.create') }}" class="btn-bi-tambah">
+    <a href="<?php echo e(url('/admin/geosite/'.$geosite.'/umkm/create')); ?>" class="btn-bi-tambah">
         <i class="fas fa-plus"></i>
-        Tambah Galeri
+        Tambah UMKM
     </a>
 </div>
 
-{{-- Alert Success --}}
-@if(session('success'))
-    <div class="alert alert-success border-0 shadow-sm mb-4">
-        {{ session('success') }}
-    </div>
-@endif
 
-{{-- Konten Utama --}}
+<?php if(session('success')): ?>
+    <div class="alert alert-success border-0 shadow-sm mb-4">
+        <?php echo e(session('success')); ?>
+
+    </div>
+<?php endif; ?>
+
+
 <div class="admin-card">
     <div class="table-responsive">
         <table class="table align-middle mb-0">
             <thead>
                 <tr>
                     <th width="5%">NO</th>
-                    <th width="12%">GAMBAR</th>
-                    <th width="40%">JUDUL</th>
+                    <th width="12%">FOTO</th>
+                    <th width="22%">NAMA USAHA</th>
+                    <th width="15%">PEMILIK</th>
                     <th width="15%">KATEGORI</th>
-                    <th width="10%">AKSI</th>
+                    <th width="13%">NO TELEPON</th>
+                    <th width="8%">AKSI</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($galeris as $index => $galeri)
+                <?php $__empty_1 = true; $__currentLoopData = $umkm; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                 <tr>
-                    {{-- Nomor --}}
-                    <td>{{ $galeris->firstItem() + $index }}</td>
                     
-                    {{-- Gambar --}}
+                    <td><?php echo e($umkm->firstItem() + $key); ?></td>
+                    
+                    
                     <td>
-                        @if($galeri->gambar)
-                            <img src="{{ asset($galeri->gambar) }}" alt="Galeri" class="thumbnail">
-                        @else
+                        <?php if($item->foto_utama): ?>
+                            <img src="<?php echo e(asset($item->foto_utama)); ?>" alt="UMKM" class="thumbnail" onerror="this.onerror=null; this.src='<?php echo e(asset('storage/' . $item->foto_utama)); ?>';">
+                        <?php else: ?>
                             <div class="placeholder-img">No Image</div>
-                        @endif
+                        <?php endif; ?>
                     </td>
 
-                    {{-- Judul --}}
+                    
                     <td>
-                        <div style="font-weight: 700; color: var(--text-heading);">{{ $galeri->judul }}</div>
+                        <div style="font-weight: 700; color: var(--text-heading);"><?php echo e($item->nama_usaha); ?></div>
                     </td>
 
-                    {{-- Kategori --}}
+                    
+                    <td class="text-secondary" style="font-weight: 600;">
+                        <?php echo e($item->pemilik); ?>
+
+                    </td>
+
+                    
                     <td>
-                        @if($galeri->kategori)
-                            <span class="badge-chip">{{ $galeri->kategori }}</span>
-                        @else
-                            <span class="text-secondary">Tidak ada kategori</span>
-                        @endif
+                        <span class="badge-chip">
+                            <?php echo e(ucfirst($item->kategori)); ?>
+
+                        </span>
                     </td>
 
-                    {{-- Aksi --}}
+                    
+                    <td style="font-size: 0.9rem; font-weight: 600;">
+                        <?php echo e($item->no_telepon ?? '-'); ?>
+
+                    </td>
+
+                    
                     <td style="white-space: nowrap; width: 1%;">
                         <div class="actions-group">
-                            {{-- Edit --}}
-                            <a href="{{ route('admin.galeri.edit', $galeri->id) }}" 
-                               class="action-btn btn-edit" 
-                               title="Edit"
-                               style="margin: 0;">
+                            
+                            <a href="<?php echo e(url('/admin/geosite/'.$geosite.'/umkm/'.$item->id.'/edit')); ?>" class="action-btn btn-edit" title="Edit" style="margin: 0;">
                                 <i class="fas fa-pen"></i>
                             </a>
                             
-                            {{-- Hapus --}}
-                            <form action="{{ route('admin.galeri.destroy', $galeri->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus galeri ini?');" class="d-inline-block" style="margin: 0; padding: 0;">
-                                @csrf
-                                @method('DELETE')
+                            
+                            <form action="<?php echo e(url('/admin/geosite/'.$geosite.'/umkm/'.$item->id)); ?>" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus UMKM ini?');" class="d-inline-block" style="margin: 0; padding: 0;">
+                                <?php echo csrf_field(); ?>
+                                <?php echo method_field('DELETE'); ?>
                                 <button type="submit" class="action-btn btn-delete" title="Hapus" style="margin: 0;">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
-
                         </div>
                     </td>
                 </tr>
-                @empty
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                 <tr>
-                    <td colspan="6" class="text-center py-5 text-secondary">
-                        Data galeri masih kosong. <a href="{{ route('admin.galeri.create') }}" class="text-decoration-none" style="color: var(--bi-blue);">Tambah sekarang</a>
+                    <td colspan="8" class="text-center py-5 text-secondary">
+                        Data UMKM masih kosong. <a href="<?php echo e(url('/admin/geosite/'.$geosite.'/umkm/create')); ?>" class="text-decoration-none" style="color: var(--bi-blue);">Tambah sekarang</a>
                     </td>
                 </tr>
-                @endforelse
+                <?php endif; ?>
             </tbody>
         </table>
     </div>
 
-    {{-- Pagination --}}
+    
+    <?php if($umkm->hasPages()): ?>
     <div class="mt-4">
-        {{ $galeris->links() }}
-    </div>
-</div>
+        <?php echo e($umkm->links()); ?>
 
-<script>
-    // Preview Gambar
-    document.getElementById('inputGambar').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = e => {
-                const img = document.getElementById('previewImage');
-                img.src = e.target.result;
-                img.style.display = 'block';
-            }
-            reader.readAsDataURL(file);
-        }
-    });
-</script>
-@endsection
+    </div>
+    <?php endif; ?>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Geosite-Tele-Efrata-Sihotang\resources\views/admin/tele/umkm/index.blade.php ENDPATH**/ ?>

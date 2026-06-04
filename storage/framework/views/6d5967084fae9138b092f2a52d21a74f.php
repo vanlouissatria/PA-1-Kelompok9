@@ -169,6 +169,27 @@ unset($__errorArgs, $__bag); ?>
                 </div>
 
                 
+                <div class="col-md-6 mb-4">
+                    <label class="form-label required">
+                        Kategori Galeri
+                    </label>
+
+                    <select name="kategori" class="form-select <?php $__errorArgs = ['kategori'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" required>
+                        <option value="">-- Pilih Kategori --</option>
+                        <option value="alam" <?php echo e(old('kategori') == 'alam' ? 'selected' : ''); ?>>Alam</option>
+                        <option value="budaya" <?php echo e(old('kategori') == 'budaya' ? 'selected' : ''); ?>>Budaya</option>
+                        <option value="wisata" <?php echo e(old('kategori') == 'wisata' ? 'selected' : ''); ?>>Wisata</option>
+                    </select>
+                </div>
+
+                
                 <div class="col-md-12 mb-4">
                     <label class="form-label">
                         Deskripsi

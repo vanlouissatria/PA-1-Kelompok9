@@ -145,6 +145,20 @@
                     @enderror
                 </div>
 
+                {{-- Kategori --}}
+                <div class="col-md-6 mb-4">
+                    <label class="form-label required">
+                        Kategori Galeri
+                    </label>
+
+                    <select name="kategori" class="form-select @error('kategori') is-invalid @enderror" required>
+                        <option value="">-- Pilih Kategori --</option>
+                        <option value="alam" {{ old('kategori') == 'alam' ? 'selected' : '' }}>Alam</option>
+                        <option value="budaya" {{ old('kategori') == 'budaya' ? 'selected' : '' }}>Budaya</option>
+                        <option value="wisata" {{ old('kategori') == 'wisata' ? 'selected' : '' }}>Wisata</option>
+                    </select>
+                </div>
+
                 {{-- Deskripsi --}}
                 <div class="col-md-12 mb-4">
                     <label class="form-label">Deskripsi</label>
@@ -220,12 +234,12 @@
 
 <script>
     // Preview Gambar
-    document.getElementById('inputGambar').addEventListener('change', function(e) {
+    document.getElementById('imgInput').addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = e => {
-                const img = document.getElementById('previewImage');
+                const img = document.getElementById('imgPreview');
                 img.src = e.target.result;
                 img.style.display = 'block';
             }
