@@ -53,7 +53,7 @@
                 
                 <div class="col-md-6 mb-4">
                     <label class="form-label-bi">No Telepon *</label>
-                    <input type="text" name="no_telepon" class="form-control form-control-bi" value="{{ old('no_telepon') }}" required>
+                    <input type="tel" name="no_telepon" class="form-control form-control-bi" value="{{ old('no_telepon') }}" required inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/\D/g, '')">
                 </div>
                 
                 <div class="col-md-6 mb-4">

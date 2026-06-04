@@ -49,7 +49,13 @@
                 
                 <div class="mt-3">
                     <small class="text-muted">Gambar Saat Ini:</small><br>
-                        <img src="{{ image_url($galeri->gambar) }}" id="imgPreview" class="preview-image" alt="Preview">
+                    <img src="{{ image_url($galeri->gambar) }}" id="imgPreview" class="preview-image" alt="Preview">
+                </div>
+
+            <hr>
+            <div class="d-flex gap-3 mt-4">
+                <button type="submit" class="btn-bi-primary"><i class="fas fa-save me-2"></i> Update Galeri</button>
+                <a href="{{ url('/admin/geosite/'.$geosite.'/galeri') }}" class="btn-bi-outline"><i class="fas fa-arrow-left me-2"></i> Batal</a>
             </div>
         </form>
     </div>
@@ -57,12 +63,12 @@
 
 <script>
     // Preview Gambar
-    document.getElementById('inputGambar').addEventListener('change', function(e) {
+    document.getElementById('imgInput').addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = e => {
-                const img = document.getElementById('previewImage');
+                const img = document.getElementById('imgPreview');
                 img.src = e.target.result;
                 img.style.display = 'block';
             }

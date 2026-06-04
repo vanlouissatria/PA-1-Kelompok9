@@ -131,9 +131,12 @@
                     Telepon 1
                 </label>
 
-                <input type="text"
+                <input type="tel"
                        name="telepon1"
                        class="form-control"
+                       inputmode="numeric"
+                       pattern="[0-9]*"
+                       oninput="this.value = this.value.replace(/\D/g, '')"
                        value="{{ old('telepon1', $kontak->telepon1) }}">
             </div>
 
@@ -175,9 +178,12 @@
                     Telepon 2
                 </label>
 
-                <input type="text"
+                <input type="tel"
                        name="telepon2"
                        class="form-control"
+                       inputmode="numeric"
+                       pattern="[0-9]*"
+                       oninput="this.value = this.value.replace(/\D/g, '')"
                        value="{{ old('telepon2', $kontak->telepon2) }}">
             </div>
 
@@ -186,9 +192,12 @@
                     Telepon 3
                 </label>
 
-                <input type="text"
+                <input type="tel"
                        name="telepon3"
                        class="form-control"
+                       inputmode="numeric"
+                       pattern="[0-9]*"
+                       oninput="this.value = this.value.replace(/\D/g, '')"
                        value="{{ old('telepon3', $kontak->telepon3) }}">
             </div>
 

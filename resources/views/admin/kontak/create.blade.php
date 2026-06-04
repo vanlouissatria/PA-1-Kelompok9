@@ -89,9 +89,12 @@
                         Telepon 1
                     </label>
 
-                    <input type="text"
+                    <input type="tel"
                            name="telepon1"
-                           class="form-control">
+                           class="form-control"
+                           inputmode="numeric"
+                           pattern="[0-9]*"
+                           oninput="this.value = this.value.replace(/\D/g, '')">
 
                 </div>
 
@@ -101,9 +104,12 @@
                         Telepon 2
                     </label>
 
-                    <input type="text"
+                    <input type="tel"
                            name="telepon2"
-                           class="form-control">
+                           class="form-control"
+                           inputmode="numeric"
+                           pattern="[0-9]*"
+                           oninput="this.value = this.value.replace(/\D/g, '')">
 
                 </div>
 
@@ -137,9 +143,12 @@
                         Telepon 3
                     </label>
 
-                    <input type="text"
+                    <input type="tel"
                            name="telepon3"
-                           class="form-control">
+                           class="form-control"
+                           inputmode="numeric"
+                           pattern="[0-9]*"
+                           oninput="this.value = this.value.replace(/\D/g, '')">
 
                 </div>
 

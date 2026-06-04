@@ -77,6 +77,7 @@ class TeleController extends Controller
         $request->validate([
             'nama_usaha' => 'required|string|max:255',
             'pemilik' => 'required|string|max:255',
+            'no_telepon' => ['required', 'string', 'max:20', 'regex:/^[0-9]+$/'],
             'kategori' => 'required|string',
             'foto_utama' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
@@ -123,7 +124,7 @@ class TeleController extends Controller
         $request->validate([
             'nama_usaha' => 'required|string|max:255',
             'pemilik' => 'required|string|max:255',
-            'no_telepon' => 'required|string|max:20',
+            'no_telepon' => ['required', 'string', 'max:20', 'regex:/^[0-9]+$/'],
             'kategori' => 'required|string',
             'foto_utama' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'alamat' => 'nullable|string',
@@ -307,7 +308,7 @@ class TeleController extends Controller
             'nama' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'alamat' => 'nullable|string',
-            'no_telepon' => 'nullable|string',
+            'no_telepon' => ['nullable', 'string', 'max:20', 'regex:/^[0-9]+$/'],
             'harga' => 'nullable|numeric',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
@@ -354,7 +355,7 @@ class TeleController extends Controller
             'nama' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'alamat' => 'nullable|string',
-            'no_telepon' => 'nullable|string',
+            'no_telepon' => ['nullable', 'string', 'max:20', 'regex:/^[0-9]+$/'],
             'harga' => 'nullable|numeric',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
