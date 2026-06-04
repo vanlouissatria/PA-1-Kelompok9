@@ -1,9 +1,6 @@
-{{-- resources/views/admin/galeri/edit.blade.php --}}
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Edit Galeri'); ?>
 
-@section('title', 'Edit Galeri')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <style>
     :root {
         --bi-blue: #002F5F;
@@ -121,51 +118,86 @@
     </div>
 
     <div class="card-body p-4">
-        <form action="{{ route('admin.galeri.update', $galeri->id) }}"
+        <form action="<?php echo e(route('admin.galeri.update', $galeri->id)); ?>"
               method="POST"
               enctype="multipart/form-data">
 
-            @csrf
-            @method('PUT')
+            <?php echo csrf_field(); ?>
+            <?php echo method_field('PUT'); ?>
 
             <div class="row">
 
-                {{-- Judul --}}
+                
                 <div class="col-md-6 mb-4">
                     <label class="form-label required">Judul Galeri</label>
 
                     <input type="text"
                            name="judul"
-                           class="form-control @error('judul') is-invalid @enderror"
-                           value="{{ old('judul', $galeri->judul) }}"
+                           class="form-control <?php $__errorArgs = ['judul'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                           value="<?php echo e(old('judul', $galeri->judul)); ?>"
                            required>
 
-                    @error('judul')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <?php $__errorArgs = ['judul'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div class="invalid-feedback"><?php echo e($message); ?></div>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </div>
 
-                {{-- Deskripsi --}}
+                
                 <div class="col-md-12 mb-4">
                     <label class="form-label">Deskripsi</label>
 
                     <textarea name="deskripsi"
                               rows="5"
-                              class="form-control @error('deskripsi') is-invalid @enderror"
-                              placeholder="Masukkan deskripsi galeri">{{ old('deskripsi', $galeri->deskripsi) }}</textarea>
+                              class="form-control <?php $__errorArgs = ['deskripsi'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                              placeholder="Masukkan deskripsi galeri"><?php echo e(old('deskripsi', $galeri->deskripsi)); ?></textarea>
 
-                    @error('deskripsi')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <?php $__errorArgs = ['deskripsi'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div class="invalid-feedback"><?php echo e($message); ?></div>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </div>
 
-                {{-- Upload Gambar --}}
+                
                 <div class="col-md-6 mb-4">
                     <label class="form-label">Gambar Galeri</label>
 
                     <input type="file"
                            name="gambar"
-                           class="form-control @error('gambar') is-invalid @enderror"
+                           class="form-control <?php $__errorArgs = ['gambar'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
                            accept="image/*"
                            id="imgInput">
 
@@ -179,23 +211,31 @@
                             Gambar Saat Ini:
                         </small>
 
-                        @if($galeri->gambar)
-                            <img src="{{ asset($galeri->gambar) }}"
+                        <?php if($galeri->gambar): ?>
+                            <img src="<?php echo e(asset($galeri->gambar)); ?>"
                                  id="imgPreview"
                                  class="preview-image"
                                  alt="Preview Gambar">
-                        @else
+                        <?php else: ?>
                             <img id="imgPreview"
                                  class="preview-image"
                                  style="display:none;">
-                        @endif
+                        <?php endif; ?>
                     </div>
 
-                    @error('gambar')
+                    <?php $__errorArgs = ['gambar'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                         <div class="invalid-feedback d-block">
-                            {{ $message }}
+                            <?php echo e($message); ?>
+
                         </div>
-                    @enderror
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
             </div>
 
             <hr>
@@ -207,7 +247,7 @@
                     Update Galeri
                 </button>
 
-                <a href="{{ route('admin.galeri.index') }}"
+                <a href="<?php echo e(route('admin.galeri.index')); ?>"
                    class="btn-outline-bi">
                     <i class="fas fa-arrow-left me-2"></i>
                     Batal
@@ -233,4 +273,5 @@
         }
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Geosite-Tele-Efrata-Sihotang\resources\views/admin/galeri/edit.blade.php ENDPATH**/ ?>

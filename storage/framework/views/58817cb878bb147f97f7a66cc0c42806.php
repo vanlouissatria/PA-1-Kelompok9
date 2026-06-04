@@ -1,9 +1,6 @@
-{{-- resources/views/admin/galeri/index.blade.php --}}
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Manajemen Galeri'); ?>
 
-@section('title', 'Manajemen Galeri')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <style>
     :root {
         --bi-blue: #002F5F;
@@ -155,25 +152,26 @@
     }
 </style>
 
-{{-- Header Halaman --}}
+
 <div class="page-actions">
     <div>
         <h1 class="page-header-title">Manajemen Galeri</h1>
     </div>
-    <a href="{{ route('admin.galeri.create') }}" class="btn-bi-tambah">
+    <a href="<?php echo e(route('admin.galeri.create')); ?>" class="btn-bi-tambah">
         <i class="fas fa-plus"></i>
         Tambah Galeri
     </a>
 </div>
 
-{{-- Alert Success --}}
-@if(session('success'))
-    <div class="alert alert-success border-0 shadow-sm mb-4">
-        {{ session('success') }}
-    </div>
-@endif
 
-{{-- Konten Utama --}}
+<?php if(session('success')): ?>
+    <div class="alert alert-success border-0 shadow-sm mb-4">
+        <?php echo e(session('success')); ?>
+
+    </div>
+<?php endif; ?>
+
+
 <div class="admin-card">
     <div class="table-responsive">
         <table class="table align-middle mb-0">
@@ -186,40 +184,40 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($galeris as $index => $galeri)
+                <?php $__empty_1 = true; $__currentLoopData = $galeris; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $galeri): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                 <tr>
-                    {{-- Nomor --}}
-                    <td>{{ $galeris->firstItem() + $index }}</td>
                     
-                    {{-- Gambar --}}
+                    <td><?php echo e($galeris->firstItem() + $index); ?></td>
+                    
+                    
                     <td>
-                        @if($galeri->gambar)
-                            <img src="{{ asset($galeri->gambar) }}" alt="Galeri" class="thumbnail">
-                        @else
+                        <?php if($galeri->gambar): ?>
+                            <img src="<?php echo e(asset($galeri->gambar)); ?>" alt="Galeri" class="thumbnail">
+                        <?php else: ?>
                             <div class="placeholder-img">No Image</div>
-                        @endif
+                        <?php endif; ?>
                     </td>
 
-                    {{-- Judul --}}
+                    
                     <td>
-                        <div style="font-weight: 700; color: var(--text-heading);">{{ $galeri->judul }}</div>
+                        <div style="font-weight: 700; color: var(--text-heading);"><?php echo e($galeri->judul); ?></div>
                     </td>
 
-                    {{-- Aksi --}}
+                    
                     <td style="white-space: nowrap; width: 1%;">
                         <div class="actions-group">
-                            {{-- Edit --}}
-                            <a href="{{ route('admin.galeri.edit', $galeri->id) }}" 
+                            
+                            <a href="<?php echo e(route('admin.galeri.edit', $galeri->id)); ?>" 
                                class="action-btn btn-edit" 
                                title="Edit"
                                style="margin: 0;">
                                 <i class="fas fa-pen"></i>
                             </a>
                             
-                            {{-- Hapus --}}
-                            <form action="{{ route('admin.galeri.destroy', $galeri->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus galeri ini?');" class="d-inline-block" style="margin: 0; padding: 0;">
-                                @csrf
-                                @method('DELETE')
+                            
+                            <form action="<?php echo e(route('admin.galeri.destroy', $galeri->id)); ?>" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus galeri ini?');" class="d-inline-block" style="margin: 0; padding: 0;">
+                                <?php echo csrf_field(); ?>
+                                <?php echo method_field('DELETE'); ?>
                                 <button type="submit" class="action-btn btn-delete" title="Hapus" style="margin: 0;">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -228,20 +226,21 @@
                         </div>
                     </td>
                 </tr>
-                @empty
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                 <tr>
                     <td colspan="6" class="text-center py-5 text-secondary">
-                        Data galeri masih kosong. <a href="{{ route('admin.galeri.create') }}" class="text-decoration-none" style="color: var(--bi-blue);">Tambah sekarang</a>
+                        Data galeri masih kosong. <a href="<?php echo e(route('admin.galeri.create')); ?>" class="text-decoration-none" style="color: var(--bi-blue);">Tambah sekarang</a>
                     </td>
                 </tr>
-                @endforelse
+                <?php endif; ?>
             </tbody>
         </table>
     </div>
 
-    {{-- Pagination --}}
+    
     <div class="mt-4">
-        {{ $galeris->links() }}
+        <?php echo e($galeris->links()); ?>
+
     </div>
 </div>
 
@@ -260,4 +259,5 @@
         }
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Geosite-Tele-Efrata-Sihotang\resources\views/admin/galeri/index.blade.php ENDPATH**/ ?>
