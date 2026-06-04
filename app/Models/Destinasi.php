@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,17 +9,25 @@ class Destinasi extends Model
 {
     use HasFactory;
 
-    protected $table = 'destinasis'; 
+    protected $table = 'destinasis';
 
-    // Sesuaikan dengan input yang ada di Controller & Migration
     protected $fillable = [
-        'nama_destinasi', 
-        'kategori', 
-        'lokasi', 
-        'deskripsi', 
-        'gambar'
+        'created_by',
+        'nama_destinasi',
+        'kategori',
+        'lokasi',
+        'deskripsi',
+        'gambar',
+        'status',
     ];
+
     protected $attributes = [
         'status' => 1,
     ];
+
+    // Relasi: destinasi dibuat oleh satu admin
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

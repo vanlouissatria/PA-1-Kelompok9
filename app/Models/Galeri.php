@@ -12,11 +12,21 @@ class Galeri extends Model
     protected $table = 'galeri';
 
     protected $fillable = [
+        'created_by',
         'judul',
+        'slug',
         'deskripsi',
         'gambar',
-        'slug',
         'kategori',
-        'views'
+        'lokasi',
+        'tanggal_foto',
+        'status',
+        'views',
     ];
+
+    // Relasi: galeri dibuat oleh satu admin
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }
