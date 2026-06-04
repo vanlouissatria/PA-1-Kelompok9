@@ -18,4 +18,7 @@ class Destinasi extends Model
         'deskripsi', 
         'gambar'
     ];
+    protected $attributes = [
+        'status' => 1,
+    ];
 }
