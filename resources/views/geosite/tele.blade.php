@@ -1700,9 +1700,10 @@ h1, h2, h3, h4, h5, h6 {
             @forelse($galeriTele as $item)
             <div class="galeri-item" data-aos="fade-up" data-aos-delay="{{ $loop->index * 50 }}">
                 @php
-                    $imgSrc = image_url($item->gambar);
-                    if(!file_exists(public_path($item->gambar))) {
-                        $imgSrc = asset('image/default.jpg');
+                 if ($item->gambar) {
+                    $imgSrc = asset('storage/' . $item->gambar);
+                    } else {
+                    $imgSrc = asset('image/default.jpg');
                     }
                 @endphp
                 <img src="{{ $imgSrc }}" alt="{{ $item->judul }}">
