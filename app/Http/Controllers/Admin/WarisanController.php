@@ -26,22 +26,21 @@ class WarisanController extends Controller
             'jenis'     => 'required|in:geodiversity,biodiversity,cultural_diversity',
             'deskripsi' => 'required|string',
             'gambar'    => 'nullable|image|mimes:jpeg,png,jpg|max:4096',
-            'urutan'    => 'required|integer',
+            'urutan'    => 'nullable|integer',
         ]);
 
         $data = [
             'judul'     => $request->judul,
             'jenis'     => $request->jenis,
             'deskripsi' => $request->deskripsi,
-            'urutan'    => $request->urutan,
+            'urutan'    => $request->urutan ?? 1,
             'status'    => $request->has('status') ? 1 : 0,
         ];
 
         if ($request->hasFile('gambar')) {
-            $image  = $request->file('gambar');
-            $base64 = base64_encode(file_get_contents($image->getRealPath()));
-            $data['gambar'] = 'data:' . $image->getMimeType() . ';base64,' . $base64;
-        }
+            $path = $request->file('gambar')->store('warisan', 'public');
+            $data['gambar'] = $path;
+}
 
         Warisan::create($data);
 
@@ -64,14 +63,14 @@ class WarisanController extends Controller
             'jenis'     => 'required|in:geodiversity,biodiversity,cultural_diversity',
             'deskripsi' => 'required|string',
             'gambar'    => 'nullable|image|mimes:jpeg,png,jpg|max:4096',
-            'urutan'    => 'required|integer',
+            'urutan'    => 'nullable|integer',
         ]);
 
         $data = [
             'judul'     => $request->judul,
             'jenis'     => $request->jenis,
             'deskripsi' => $request->deskripsi,
-            'urutan'    => $request->urutan,
+            'urutan'    => $request->urutan ?? 1,
             'status'    => $request->has('status') ? 1 : 0,
         ];
 

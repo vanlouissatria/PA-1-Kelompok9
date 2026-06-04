@@ -195,7 +195,7 @@
             @forelse($destinasi as $item)
             <div class="dest-card" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                 <div class="card-image">
-                    <img src="{{ $item->gambar }}" alt="{{ $item->nama }}">
+                    <img src="{{ asset('storage/'.$item->gambar) }}">
                 </div>
                 <div class="card-content">
                     <h3 class="card-title">{{ $item->nama }}</h3>
