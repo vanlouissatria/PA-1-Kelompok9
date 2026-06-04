@@ -1099,6 +1099,195 @@ h1, h2, h3, h4, h5, h6 {
     .maps-location-item { padding: 6px 16px; }
     .maps-location-item span { font-size: 0.7rem; }
 }
+
+/* ========== TAMBAHAN CSS RESPONSIF UNTUK HP (TIDAK MENGUBAH YANG LAIN) ========== */
+/* Safe area untuk iPhone dengan notch */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    .hero-content {
+        bottom: max(20%, env(safe-area-inset-bottom));
+    }
+    .slider-dots {
+        bottom: max(40px, env(safe-area-inset-bottom));
+    }
+    .scroll-indicator {
+        bottom: max(40px, env(safe-area-inset-bottom));
+    }
+}
+
+/* Detail responsif untuk semua HP (Android & iOS) */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+    .hero-title {
+        font-size: 2rem !important;
+        margin-bottom: 15px;
+    }
+    .hero-subtitle {
+        font-size: 0.7rem !important;
+        letter-spacing: 0.2em;
+    }
+    .hero-divider {
+        width: 60px;
+        margin-bottom: 20px;
+    }
+    .hero-btn {
+        padding: 12px 28px;
+        font-size: 0.65rem;
+    }
+    .section {
+        padding: 60px 0 !important;
+    }
+    .section-title {
+        margin-bottom: 40px;
+    }
+    .section-title h2 {
+        font-size: 1.8rem !important;
+    }
+    .destinasi-item, .destinasi-item.reverse {
+        gap: 30px !important;
+    }
+    .destinasi-content h3 {
+        font-size: 1.5rem !important;
+    }
+    .destinasi-desc {
+        font-size: 0.9rem !important;
+    }
+    .destinasi-link {
+        width: 100%;
+        text-align: center;
+        padding: 10px 20px;
+    }
+    .map-card iframe {
+        height: 280px !important;
+    }
+    .map-info {
+        padding: 25px 20px;
+    }
+    .maps-locations {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    .maps-location-item {
+        justify-content: center;
+        padding: 8px 16px;
+    }
+    .cta-content h3 {
+        font-size: 1.6rem !important;
+    }
+    .cta-btn {
+        padding: 12px 28px;
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content {
+        bottom: 12% !important;
+    }
+    .hero-title {
+        font-size: 1.6rem !important;
+    }
+    .hero-subtitle {
+        font-size: 0.6rem !important;
+    }
+    .hero-btn {
+        padding: 10px 20px;
+        font-size: 0.6rem;
+    }
+    .stat-item {
+        width: 100% !important;
+        padding: 20px 15px;
+    }
+    .stat-number {
+        font-size: 2rem;
+    }
+    .about-image img {
+        max-height: 200px;
+        object-fit: cover;
+    }
+    .destinasi-image img {
+        max-height: 200px;
+        object-fit: cover;
+    }
+    .maps-location-item span {
+        font-size: 0.7rem;
+    }
+    .maps-note {
+        font-size: 0.65rem;
+    }
+}
+
+/* ========== PERBAIKAN KHUSUS ABOUT SECTION AGAR RESPONSIF SEPERTI GAMBAR ========== */
+@media (max-width: 768px) {
+    .about-grid {
+        flex-direction: column !important;
+        gap: 30px !important;
+        text-align: left;
+    }
+    .about-content {
+        order: 2;
+        width: 100%;
+    }
+    .about-image {
+        order: 1;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .about-content h3 {
+        font-size: 1.8rem !important;
+        text-align: left;
+        margin-bottom: 15px;
+    }
+    .about-content h3::after {
+        left: 0;
+        width: 60px;
+        margin: 0;
+    }
+    .about-content p {
+        font-size: 0.95rem !important;
+        line-height: 1.6;
+        text-align: justify;
+    }
+    .about-image img {
+        max-height: 220px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-content h3 {
+        font-size: 1.5rem !important;
+    }
+    .about-content p {
+        font-size: 0.85rem !important;
+    }
+    .about-image img {
+        max-height: 180px;
+    }
+}
+
+/* Perbaikan sentuhan untuk HP (minimal ukuran tap 44px) */
+@media (hover: none) and (pointer: coarse) {
+    .hero-btn, .destinasi-link, .cta-btn, .maps-location-item, .dot {
+        min-height: 44px;
+        cursor: default;
+    }
+    .hero-btn:active, .destinasi-link:active, .cta-btn:active {
+        transform: scale(0.97);
+        opacity: 0.9;
+    }
+}
 </style>
 
 <!-- ==================== HERO SLIDER ==================== -->
