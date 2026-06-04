@@ -160,7 +160,7 @@
     <div>
         <h1 class="page-header-title">Manajemen Galeri</h1>
     </div>
-    <a href="{{ route('admin.geosite.galeri.create', ['geosite' => 'tele']) }}" class="btn-bi-tambah">
+    <a href="{{ route('admin.geosite.galeri.create', ['geosite' => $geosite]) }}" class="btn-bi-tambah">
         <i class="fas fa-plus"></i>
         Tambah Galeri
     </a>
@@ -210,7 +210,7 @@
                     <td style="white-space: nowrap; width: 1%;">
                         <div class="actions-group">
                             {{-- Edit --}}
-                            <a href="{{ route('admin.geosite.galeri.edit', ['geosite' => 'tele', 'id' => $item->id]) }}" 
+                            <a href="{{ route('admin.geosite.galeri.edit', ['geosite' => $geosite, 'id' => $item->id]) }}" 
                                class="action-btn btn-edit" 
                                title="Edit"
                                style="margin: 0;">
@@ -218,7 +218,7 @@
                             </a>
                             
                             {{-- Hapus --}}
-                            <form action="{{ route('admin.geosite.galeri.destroy', ['geosite' => 'tele', 'id' => $item->id]) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus galeri ini?');" class="d-inline-block" style="margin: 0; padding: 0;">
+                            <form action="{{ route('admin.geosite.galeri.destroy', ['geosite' => $geosite, 'id' => $item->id]) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus galeri ini?');" class="d-inline-block" style="margin: 0; padding: 0;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="action-btn btn-delete" title="Hapus" style="margin: 0;">
@@ -232,7 +232,7 @@
                 @empty
                 <tr>
                     <td colspan="6" class="text-center py-5 text-secondary">
-                        Data galeri untuk Tele masih kosong. <a href="{{ route('admin.geosite.galeri.create', ['geosite' => 'tele']) }}" class="text-decoration-none" style="color: var(--bi-blue);">Tambah sekarang</a>
+                        Data galeri untuk {{ ucfirst($geosite) }} masih kosong. <a href="{{ route('admin.geosite.galeri.create', ['geosite' => $geosite]) }}" class="text-decoration-none" style="color: var(--bi-blue);">Tambah sekarang</a>
                     </td>
                 </tr>
                 @endforelse

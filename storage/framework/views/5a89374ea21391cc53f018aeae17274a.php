@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title', 'Manajemen Warisan Alam dan Budaya'); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -192,7 +194,7 @@
                         <?php
                             $warisanImage = $item->gambar;
                             if ($warisanImage && !\Illuminate\Support\Str::startsWith($warisanImage, ['http://', 'https://', 'data:'])) {
-                                $warisanImage = asset('storage/' . ltrim($warisanImage, '/'));
+                                $warisanImage = image_url($warisanImage);
                             }
                         ?>
                         <?php if($item->gambar): ?>
