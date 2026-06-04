@@ -34,13 +34,13 @@ class WarisanController extends Controller
             'jenis'     => $request->jenis,
             'deskripsi' => $request->deskripsi,
             'urutan'    => $request->urutan ?? 1,
-            'status'    => $request->has('status') ? 1 : 0,
+            'status' => 1,
         ];
 
         if ($request->hasFile('gambar')) {
             $path = $request->file('gambar')->store('warisan', 'public');
             $data['gambar'] = $path;
-}
+        }
 
         Warisan::create($data);
 
@@ -71,13 +71,12 @@ class WarisanController extends Controller
             'jenis'     => $request->jenis,
             'deskripsi' => $request->deskripsi,
             'urutan'    => $request->urutan ?? 1,
-            'status'    => $request->has('status') ? 1 : 0,
+            'status' => 1,
         ];
 
         if ($request->hasFile('gambar')) {
-            $image  = $request->file('gambar');
-            $base64 = base64_encode(file_get_contents($image->getRealPath()));
-            $data['gambar'] = 'data:' . $image->getMimeType() . ';base64,' . $base64;
+            $path = $request->file('gambar')->store('warisan', 'public');
+            $data['gambar'] = $path;
         }
 
         $warisan->update($data);
