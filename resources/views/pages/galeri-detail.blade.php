@@ -205,7 +205,7 @@
     </button>
 
     <audio id="galleryAudio" autoplay>
-        <source src="{{ asset('audio/audio.mp4') }}" type="audio/mp4">
+        <source src="{{ asset('audio/sound.mp4') }}" type="audio/mp4">
     </audio>
 </div>
 
