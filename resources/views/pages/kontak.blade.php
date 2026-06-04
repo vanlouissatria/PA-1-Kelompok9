@@ -19,27 +19,23 @@
         --gray-light: #f8fafc;
         --dark: #0f172a;
         
-        /* Gradients */
         --gradient-gold: linear-gradient(135deg, #f5e6b8 0%, #c6a43b 50%, #a58a36 100%);
         --gradient-primary: linear-gradient(135deg, #003366 0%, #002244 100%);
         --gradient-hero: linear-gradient(135deg, #003366 0%, #1a4a7a 40%, #002244 100%);
         --gradient-card: linear-gradient(145deg, #ffffff 0%, #fefefe 100%);
         --gradient-text-gold: linear-gradient(135deg, #f5e6b8, #c6a43b, #e8c96a);
         
-        /* Shadows */
         --shadow-sm: 0 4px 12px rgba(0,0,0,0.03);
         --shadow-md: 0 8px 24px rgba(0,0,0,0.06);
         --shadow-lg: 0 16px 36px rgba(0,0,0,0.1);
         --shadow-xl: 0 24px 48px rgba(0,0,0,0.12);
-        --shadow-gold: 0 12px 28px rgba(198,164,59,0.2);
         
-        /* Transitions */
         --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         --transition-bounce: all 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
     }
 
     /* ============================================
-       HERO SECTION - STUNNING WITH GOLD TEXT
+       HERO SECTION
        ============================================ */
     .kontak-hero {
         background: var(--gradient-hero);
@@ -50,7 +46,6 @@
         overflow: hidden;
     }
     
-    /* Efek ornamen emas di hero */
     .kontak-hero::before {
         content: '';
         position: absolute;
@@ -98,14 +93,8 @@
     }
 
     @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 768px) {
@@ -128,29 +117,24 @@
     }
 
     /* ============================================
-       GRID KONTAK
+       GRID KONTAK - FLEX TERPUSAT & RINGKAS
        ============================================ */
     .kontak-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 28px;
         margin-bottom: 48px;
     }
 
-    @media (max-width: 768px) {
-        .kontak-grid {
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
-    }
-
-    /* ============================================
-       KARTU KONTAK - PREMIUM
-       ============================================ */
+    /* KARTU KONTAK - LEBAR TETAP & TIDAK MEMANJANG */
     .kontak-person-card {
+        flex: 0 0 auto;
+        width: 400px;
+        max-width: 100%;
         background: var(--white);
         border-radius: 24px;
-        padding: 24px;
+        padding: 20px;
         transition: var(--transition-bounce);
         border: 1px solid #eef2f6;
         box-shadow: var(--shadow-sm);
@@ -181,9 +165,8 @@
         border-color: rgba(198,164,59,0.3);
     }
 
-    /* Header Card */
     .kontak-person-card h4 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         font-weight: 700;
         background: linear-gradient(135deg, var(--primary), var(--primary-light));
         -webkit-background-clip: text;
@@ -196,28 +179,27 @@
     .kontak-person-card .card-subtitle {
         font-size: 0.8rem;
         color: var(--gold-dark);
-        margin-bottom: 18px;
-        padding-bottom: 12px;
+        margin-bottom: 16px;
+        padding-bottom: 10px;
         border-bottom: 1px dashed #eef2f6;
         font-weight: 500;
     }
 
-    /* Detail Group Layout */
     .kontak-details {
         display: flex;
         flex-direction: column;
-        gap: 14px;
+        gap: 12px;
     }
 
     .kontak-row {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 12px;
+        gap: 10px;
     }
 
     .detail-group {
         background: #fafbfc;
-        padding: 10px 12px;
+        padding: 8px 12px;
         border-radius: 14px;
         transition: var(--transition);
         display: flex;
@@ -252,7 +234,7 @@
         margin: 0;
         font-size: 0.85rem;
         color: var(--gray);
-        line-height: 1.5;
+        line-height: 1.4;
         word-break: break-word;
     }
 
@@ -270,6 +252,7 @@
         transform: translateX(2px);
     }
 
+    /* MAP CARD */
     .kontak-map-card {
         background: var(--white);
         border-radius: 28px;
@@ -344,28 +327,33 @@
         line-height: 1.6;
     }
 
+    /* ============================================
+       SOCIAL ICONS - UKURAN SEDANG (TIDAK TERLALU BESAR)
+       ============================================ */
     .social-icons {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 12px;
+        gap: 16px;
+        margin-top: 16px;
+        justify-content: flex-start;
     }
 
-    .social-icons a {
+    .social-icon {
         display: inline-flex;
-        width: 44px;
-        height: 44px;
+        width: 50px;
+        height: 50px;
         align-items: center;
         justify-content: center;
-        border-radius: 14px;
+        border-radius: 16px;
         background: #f8fafc;
         color: var(--primary);
         border: 1px solid #e2e8f0;
-        text-decoration: none;
         transition: var(--transition);
+        cursor: default;
+        font-size: 1.5rem;
     }
 
-    .social-icons a:hover {
+    .social-icon:hover {
         background: var(--gradient-gold);
         color: #fff;
         border-color: var(--gold);
@@ -373,32 +361,33 @@
     }
 
     /* ============================================
-       ANIMATIONS & RESPONSIVE
+       RESPONSIVE
        ============================================ */
-    .kontak-person-card {
-        animation: fadeInUp 0.5s ease backwards;
-    }
-    .kontak-person-card:nth-child(1) { animation-delay: 0.05s; }
-    .kontak-person-card:nth-child(2) { animation-delay: 0.1s; }
-    .kontak-person-card:nth-child(3) { animation-delay: 0.15s; }
-
     @media (max-width: 992px) {
         .kontak-section { padding: 50px 0 80px; }
     }
 
     @media (max-width: 768px) {
         .kontak-section { padding: 40px 0 60px; }
-        .kontak-person-card { padding: 20px; }
+        .kontak-person-card { padding: 18px; width: 100%; max-width: 480px; margin: 0 auto; }
         .kontak-person-card h4 { font-size: 1.3rem; }
+        .kontak-row { grid-template-columns: 1fr; }
+        .social-icon {
+            width: 44px;
+            height: 44px;
+            font-size: 1.3rem;
+        }
+        .social-icons {
+            gap: 12px;
+        }
     }
 
     @media (max-width: 480px) {
         .container { padding: 0 16px; }
-        .kontak-person-card { padding: 18px; }
-        .kontak-row { grid-template-columns: 1fr; }
+        .kontak-person-card { padding: 16px; }
+        .detail-group p, .detail-group a { font-size: 0.8rem; }
     }
 
-    /* Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #eef2f6; border-radius: 10px; }
     ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, var(--primary), var(--gold)); border-radius: 10px; }
@@ -421,7 +410,6 @@
         <div class="kontak-grid" data-aos="fade-up">
             @forelse($kontaks as $kontak)
                 @php
-                    // Helper untuk normalisasi link sosial media
                     $fbUrl = $kontak->facebook ? (!preg_match('/^https?:\/\//i', $kontak->facebook) ? "https://facebook.com/".trim($kontak->facebook) : $kontak->facebook) : "";
                     $igUrl = $kontak->instagram ? (!preg_match('/^https?:\/\//i', $kontak->instagram) ? "https://instagram.com/".ltrim(trim($kontak->instagram), "@") : $kontak->instagram) : "";
                     $twUrl = $kontak->twitter ? (!preg_match('/^https?:\/\//i', $kontak->twitter) ? "https://x.com/".ltrim(trim($kontak->twitter), "@") : $kontak->twitter) : "";
@@ -462,25 +450,19 @@
                                 @if(!empty($kontak->facebook))
                                     <div class="detail-group">
                                         <strong><i class="fab fa-facebook-f"></i> Facebook</strong>
-                                        <a href="{{ $fbUrl }}" target="_blank" rel="noopener noreferrer">
-                                            {{ $kontak->facebook }}
-                                        </a>
+                                        <a href="{{ $fbUrl }}" target="_blank" rel="noopener noreferrer">{{ $kontak->facebook }}</a>
                                     </div>
                                 @endif
                                 @if(!empty($kontak->instagram))
                                     <div class="detail-group">
                                         <strong><i class="fab fa-instagram"></i> Instagram</strong>
-                                        <a href="{{ $igUrl }}" target="_blank" rel="noopener noreferrer">
-                                            {{ $kontak->instagram }}
-                                        </a>
+                                        <a href="{{ $igUrl }}" target="_blank" rel="noopener noreferrer">{{ $kontak->instagram }}</a>
                                     </div>
                                 @endif
                                 @if(!empty($kontak->twitter))
                                     <div class="detail-group">
                                         <strong><i class="fab fa-twitter"></i> Twitter</strong>
-                                        <a href="{{ $twUrl }}" target="_blank" rel="noopener noreferrer">
-                                            {{ $kontak->twitter }}
-                                        </a>
+                                        <a href="{{ $twUrl }}" target="_blank" rel="noopener noreferrer">{{ $kontak->twitter }}</a>
                                     </div>
                                 @endif
                             </div>
@@ -492,17 +474,13 @@
                                 @if(!empty($kontak->youtube))
                                     <div class="detail-group">
                                         <strong><i class="fab fa-youtube"></i> YouTube</strong>
-                                        <a href="{{ $ytUrl }}" target="_blank" rel="noopener noreferrer">
-                                            {{ $kontak->youtube }}
-                                        </a>
+                                        <a href="{{ $ytUrl }}" target="_blank" rel="noopener noreferrer">{{ $kontak->youtube }}</a>
                                     </div>
                                 @endif
                                 @if(!empty($kontak->tiktok))
                                     <div class="detail-group">
                                         <strong><i class="fab fa-tiktok"></i> TikTok</strong>
-                                        <a href="{{ $ttUrl }}" target="_blank" rel="noopener noreferrer">
-                                            {{ $kontak->tiktok }}
-                                        </a>
+                                        <a href="{{ $ttUrl }}" target="_blank" rel="noopener noreferrer">{{ $kontak->tiktok }}</a>
                                     </div>
                                 @endif
                             </div>
@@ -568,12 +546,11 @@
                 <h4>Lokasi: <span id="map-active-label">{{ $initialName ?? 'Pilih kontak' }}</span></h4>
                 <p>Klik kartu kontak di atas untuk melihat lokasinya di peta.</p>
                 <div class="social-icons">
-                    <!-- Ganti URL berikut dengan akun resmi Anda -->
-                    <a href="" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-                    <a href="" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
-                    <a href="" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
-                    <a href="" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
-                    <a href="" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <span class="social-icon"><i class="fab fa-facebook-f"></i></span>
+                    <span class="social-icon"><i class="fab fa-twitter"></i></span>
+                    <span class="social-icon"><i class="fab fa-youtube"></i></span>
+                    <span class="social-icon"><i class="fab fa-tiktok"></i></span>
+                    <span class="social-icon"><i class="fab fa-instagram"></i></span>
                 </div>
             </div>
         </div>
