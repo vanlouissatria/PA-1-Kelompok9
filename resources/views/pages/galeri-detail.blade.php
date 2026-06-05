@@ -167,17 +167,8 @@
             <i class="fas fa-user"></i> Admin
         </div>
 
-        @php
-            $imgSrc = asset('image/default.jpg');
-            if ($galeri->gambar) {
-                if (file_exists(public_path($galeri->gambar)) || file_exists(public_path('storage/' . $galeri->gambar))) {
-                    $imgSrc = route('galeri.gambar', ['id' => $galeri->id]);
-                }
-            }
-        @endphp
-
         <div class="detail-image-wrapper">
-            <img src="{{ $imgSrc }}" alt="{{ $galeri->judul }}">
+            <img src="{{ image_url($galeri->gambar, 'image/default.jpg') }}" alt="{{ $galeri->judul }}">
         </div>
 
         <div class="detail-description">

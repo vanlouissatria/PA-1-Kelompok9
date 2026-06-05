@@ -294,22 +294,12 @@
 
             @forelse($galeri as $item)
 
-                @php
-                    $imgSrc = asset('image/default.jpg');
-
-                    if ($item->gambar) {
-                        if (file_exists(public_path($item->gambar)) || file_exists(public_path('storage/' . $item->gambar))) {
-                            $imgSrc = route('galeri.gambar', ['id' => $item->id]);
-                        }
-                    }
-                @endphp
-
                 <a href="{{ url('/galeri/' . $item->slug) }}"
                    class="slip-card">
 
                     <div class="slip-image">
 
-                        <img src="{{ $imgSrc }}"
+                        <img src="{{ image_url($item->gambar, 'image/default.jpg') }}"
                              alt="{{ $item->judul }}">
 
                         <div class="slip-overlay">

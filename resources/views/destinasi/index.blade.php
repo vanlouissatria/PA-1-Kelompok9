@@ -314,13 +314,7 @@
             @foreach($destinasi as $item)
 
                 @php
-                    $gambar = $item->gambar;
-
-                    if ($gambar &&
-                        !str_starts_with($gambar, 'http') &&
-                        !str_starts_with($gambar, 'data:')) {
-                        $gambar = image_url($gambar);
-                    }
+                    $gambar = image_url($item->gambar, 'image/default.jpg');
                 @endphp
 
                 <div class="category-card" data-aos="fade-up">

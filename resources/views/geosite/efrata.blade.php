@@ -1655,7 +1655,7 @@ h1, h2, h3, h4, h5, h6 {
         @if(isset($informasi) && $informasi->count())
             @foreach($informasi as $info)
                 <div class="informasi-card" data-aos="fade-up">
-                    @if($info->gambar && file_exists(public_path($info->gambar)))
+                    @if($info->gambar)
                         <div class="informasi-image"><img src="{{ image_url($info->gambar) }}" alt="{{ $info->judul }}"></div>
                     @endif
                     <div class="informasi-content">
@@ -1685,14 +1685,7 @@ h1, h2, h3, h4, h5, h6 {
         <div class="galeri-grid">
             @forelse($galeri as $item)
                 @php
-                    $gambarUrl = asset('image/default.jpg');
-                    if($item->gambar) {
-                        if(file_exists(public_path($item->gambar))) {
-                            $gambarUrl = image_url($item->gambar);
-                        } elseif(file_exists(storage_path('app/public/' . $item->gambar))) {
-                            $gambarUrl = image_url($item->gambar);
-                        }
-                    }
+                    $gambarUrl = $item->gambar ? image_url($item->gambar, 'image/default.jpg') : asset('image/default.jpg');
                 @endphp
                 <div class="galeri-item" data-aos="fade-up" data-aos-delay="{{ $loop->index * 50 }}">
                     <img src="{{ $gambarUrl }}" alt="{{ $item->judul }}">
@@ -1720,14 +1713,7 @@ h1, h2, h3, h4, h5, h6 {
                 <div class="card-item" data-aos="fade-up" data-aos-delay="{{ $loop->index * 50 }}">
                     <div class="image-wrapper">
                         @php
-                            $fotoUrl = asset('image/default-umkm.jpg');
-                            if($item->foto_utama) {
-                                if(file_exists(public_path($item->foto_utama))) {
-                                    $fotoUrl = image_url($item->foto_utama);
-                                } elseif(file_exists(storage_path('app/public/' . $item->foto_utama))) {
-                                    $fotoUrl = image_url($item->foto_utama);
-                                }
-                            }
+                            $fotoUrl = $item->foto_utama ? image_url($item->foto_utama, 'image/default-umkm.jpg') : asset('image/default-umkm.jpg');
                         @endphp
                         <img src="{{ $fotoUrl }}" alt="{{ $item->nama_usaha }}">
                         <span class="category-badge">{{ $item->kategori ?? 'UMKM' }}</span>
@@ -1764,14 +1750,7 @@ h1, h2, h3, h4, h5, h6 {
                 <div class="card-item" data-aos="fade-up" data-aos-delay="{{ $loop->index * 50 }}">
                     <div class="image-wrapper">
                         @php
-                            $gambarUrl = asset('image/default-hotel.jpg');
-                            if($item->gambar) {
-                                if(file_exists(public_path($item->gambar))) {
-                                    $gambarUrl = image_url($item->gambar);
-                                } elseif(file_exists(storage_path('app/public/' . $item->gambar))) {
-                                    $gambarUrl = image_url($item->gambar);
-                                }
-                            }
+                            $gambarUrl = $item->gambar ? image_url($item->gambar, 'image/default-hotel.jpg') : asset('image/default-hotel.jpg');
                         @endphp
                         <img src="{{ $gambarUrl }}" alt="{{ $item->nama }}">
                     </div>
@@ -1809,14 +1788,7 @@ h1, h2, h3, h4, h5, h6 {
                 <div class="card-item" data-aos="fade-up" data-aos-delay="{{ $loop->index * 50 }}">
                     <div class="image-wrapper">
                         @php
-                            $gambarUrl = asset('image/default-fasilitas.jpg');
-                            if($item->gambar) {
-                                if(file_exists(public_path($item->gambar))) {
-                                    $gambarUrl = image_url($item->gambar);
-                                } elseif(file_exists(storage_path('app/public/' . $item->gambar))) {
-                                    $gambarUrl = image_url($item->gambar);
-                                }
-                            }
+                            $gambarUrl = $item->gambar ? image_url($item->gambar, 'image/default-fasilitas.jpg') : asset('image/default-fasilitas.jpg');
                         @endphp
                         <img src="{{ $gambarUrl }}" alt="{{ $item->nama }}">
                     </div>
