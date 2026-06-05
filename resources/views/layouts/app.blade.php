@@ -370,7 +370,6 @@
                         <li class="mb-2"><a href="{{ url('/galeri') }}">Galeri</a></li>
                         <li class="mb-2"><a href="{{ url('/berita') }}">Berita</a></li>
                         <li class="mb-2"><a href="{{ url('/kontak') }}">Kontak</a></li>
-                        <li class="mb-2"><a href="{{ route('umkm.index') }}">UMKM</a></li>
                         <!-- [TAMBAHAN] Menu Warisan di Footer -->
                         <li class="mb-2"><a href="{{ route('warisan.index') }}">Warisan Alam & Budaya</a></li>
                     </ul>
