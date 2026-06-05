@@ -114,6 +114,20 @@
             color: var(--gold) !important;
             background: rgba(198, 164, 59, 0.2);
         }
+
+        .btn-login {
+            background: rgba(198, 164, 59, 0.95);
+            color: #1a1a1a !important;
+            font-weight: 700;
+            padding: 0.45rem 1rem;
+            border-radius: 50px;
+            margin-left: 0.5rem;
+        }
+
+        .btn-login:hover {
+            background: #f2d16f;
+            color: #1a1a1a !important;
+        }
         
         .dropdown-menu {
             background: rgba(0, 51, 102, 0.96);
@@ -325,6 +339,9 @@
                     <!-- [TAMBAHAN] Menu Warisan Alam dan Budaya -->
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('warisan.index') ? 'active' : '' }}" href="{{ route('warisan.index') }}">Warisan Alam & Budaya</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('kontak') ? 'active' : '' }}" href="{{ url('/kontak') }}">Kontak</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-login" href="{{ route('login') }}">Login</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -353,7 +370,6 @@
                         <li class="mb-2"><a href="{{ url('/galeri') }}">Galeri</a></li>
                         <li class="mb-2"><a href="{{ url('/berita') }}">Berita</a></li>
                         <li class="mb-2"><a href="{{ url('/kontak') }}">Kontak</a></li>
-                        <li class="mb-2"><a href="{{ route('umkm.index') }}">UMKM</a></li>
                         <!-- [TAMBAHAN] Menu Warisan di Footer -->
                         <li class="mb-2"><a href="{{ route('warisan.index') }}">Warisan Alam & Budaya</a></li>
                     </ul>

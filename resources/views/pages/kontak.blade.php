@@ -328,39 +328,6 @@
     }
 
     /* ============================================
-       SOCIAL ICONS - UKURAN SEDANG (TIDAK TERLALU BESAR)
-       ============================================ */
-    .social-icons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        margin-top: 16px;
-        justify-content: flex-start;
-    }
-
-    .social-icon {
-        display: inline-flex;
-        width: 50px;
-        height: 50px;
-        align-items: center;
-        justify-content: center;
-        border-radius: 16px;
-        background: #f8fafc;
-        color: var(--primary);
-        border: 1px solid #e2e8f0;
-        transition: var(--transition);
-        cursor: default;
-        font-size: 1.5rem;
-    }
-
-    .social-icon:hover {
-        background: var(--gradient-gold);
-        color: #fff;
-        border-color: var(--gold);
-        transform: translateY(-3px);
-    }
-
-    /* ============================================
        RESPONSIVE
        ============================================ */
     @media (max-width: 992px) {
@@ -545,13 +512,6 @@
             <div class="map-footer">
                 <h4>Lokasi: <span id="map-active-label">{{ $initialName ?? 'Pilih kontak' }}</span></h4>
                 <p>Klik kartu kontak di atas untuk melihat lokasinya di peta.</p>
-                <div class="social-icons">
-                    <span class="social-icon"><i class="fab fa-facebook-f"></i></span>
-                    <span class="social-icon"><i class="fab fa-twitter"></i></span>
-                    <span class="social-icon"><i class="fab fa-youtube"></i></span>
-                    <span class="social-icon"><i class="fab fa-tiktok"></i></span>
-                    <span class="social-icon"><i class="fab fa-instagram"></i></span>
-                </div>
             </div>
         </div>
 

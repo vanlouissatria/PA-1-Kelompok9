@@ -837,11 +837,7 @@
             @forelse($berita as $item)
                 @php
                     // Handle gambar sama seperti galeri
-                    if (!empty($item->gambar)) {
-                        $imageSrc = image_url($item->gambar);
-                    } else {
-                        $imageSrc = asset('image/default.jpg');
-                    }
+                    $imageSrc = image_url($item->gambar, 'image/default.jpg');
                     
                     // Excerpt untuk preview
                     $excerpt = strip_tags($item->konten);

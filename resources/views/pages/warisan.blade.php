@@ -790,14 +790,11 @@
                     <div class="heritage-items collapsed" id="heritage-items-{{ $key }}">
                         @foreach($category['items'] as $item)
                             @php
-                                $warisanImage = $item->gambar;
-                                if ($warisanImage && !\Illuminate\Support\Str::startsWith($warisanImage, ['http://', 'https://', 'data:'])) {
-                                    $warisanImage = image_url($warisanImage);
-                                }
+                                $warisanImage = image_url($item->gambar, 'image/default.jpg');
                             @endphp
                             <div class="heritage-item" id="warisan-item-{{ $item->id }}">
                                 <div class="heritage-item-image">
-                                    <img src="{{ $warisanImage ?: asset('image/default.jpg') }}" alt="{{ $item->judul }}">
+                                    <img src="{{ $warisanImage }}" alt="{{ $item->judul }}">
                                 </div>
                                 <div class="heritage-item-content">
                                     <h3 class="heritage-item-title">{{ $item->judul }}</h3>

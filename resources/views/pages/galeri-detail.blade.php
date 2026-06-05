@@ -167,23 +167,8 @@
             <i class="fas fa-user"></i> Admin
         </div>
 
-        @php
-            $imgSrc = '';
-            if ($galeri->gambar) {
-                if (file_exists(public_path($galeri->gambar))) {
-                    $imgSrc = image_url($galeri->gambar);
-                } elseif (file_exists(public_path('storage/' . $galeri->gambar))) {
-                    $imgSrc = image_url($galeri->gambar);
-                } else {
-                    $imgSrc = asset('image/default.jpg');
-                }
-            } else {
-                $imgSrc = asset('image/default.jpg');
-            }
-        @endphp
-
         <div class="detail-image-wrapper">
-            <img src="{{ $imgSrc }}" alt="{{ $galeri->judul }}">
+            <img src="{{ image_url($galeri->gambar, 'image/default.jpg') }}" alt="{{ $galeri->judul }}">
         </div>
 
         <div class="detail-description">
