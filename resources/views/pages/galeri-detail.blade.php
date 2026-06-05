@@ -168,17 +168,11 @@
         </div>
 
         @php
-            $imgSrc = '';
+            $imgSrc = asset('image/default.jpg');
             if ($galeri->gambar) {
-                if (file_exists(public_path($galeri->gambar))) {
-                    $imgSrc = image_url($galeri->gambar);
-                } elseif (file_exists(public_path('storage/' . $galeri->gambar))) {
-                    $imgSrc = image_url($galeri->gambar);
-                } else {
-                    $imgSrc = asset('image/default.jpg');
+                if (file_exists(public_path($galeri->gambar)) || file_exists(public_path('storage/' . $galeri->gambar))) {
+                    $imgSrc = route('galeri.gambar', ['id' => $galeri->id]);
                 }
-            } else {
-                $imgSrc = asset('image/default.jpg');
             }
         @endphp
 

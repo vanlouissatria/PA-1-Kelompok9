@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-// 1. Import facade Paginator di bagian atas
 use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
@@ -36,26 +35,32 @@ class AppServiceProvider extends ServiceProvider
                     return $value;
                 }
 
-                $relativePath = ltrim($value, '/');
+                $relativePath = str_replace('\\', '/', ltrim($value, '/'));
                 $publicPath = public_path($relativePath);
 
                 if (file_exists($publicPath)) {
-                    return asset(str_replace('\\', '/', $relativePath));
+                    return Str::startsWith($relativePath, ['uploads/', 'image/'])
+                        ? url('/' . $relativePath)
+                        : asset($relativePath);
                 }
 
                 if ($found = resolve_case_insensitive_path($publicPath)) {
                     $publicAsset = ltrim(str_replace(['\\', public_path()], ['/', ''], $found), '/');
-                    return asset($publicAsset);
+                    return Str::startsWith($publicAsset, ['uploads/', 'image/'])
+                        ? url('/' . $publicAsset)
+                        : asset($publicAsset);
                 }
 
-                $storagePath = storage_path('app/public/' . $relativePath);
+                $storageRelative = Str::startsWith($relativePath, 'storage/') ? substr($relativePath, 8) : $relativePath;
+                $storagePath = storage_path('app/public/' . $storageRelative);
+
                 if (file_exists($storagePath)) {
-                    return asset('storage/' . str_replace('\\', '/', $relativePath));
+                    return url('/storage/' . str_replace('\\', '/', $storageRelative));
                 }
 
                 if ($found = resolve_case_insensitive_path($storagePath)) {
                     $storageAsset = ltrim(str_replace(['\\', storage_path('app/public/')], ['/', ''], $found), '/');
-                    return asset('storage/' . str_replace('\\', '/', $storageAsset));
+                    return url('/storage/' . str_replace('\\', '/', $storageAsset));
                 }
 
                 return $default ? asset($default) : asset(str_replace('\\', '/', $relativePath));
@@ -86,4 +91,4 @@ class AppServiceProvider extends ServiceProvider
             }
         }
     }
-}
+} 

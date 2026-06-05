@@ -40,6 +40,33 @@ use App\Http\Controllers\Admin\WarisanController as AdminWarisanController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// Fallback route for storage assets when symlink or direct public access is unavailable
+Route::get('/storage/{path}', function ($path) {
+    $storagePath = storage_path('app/public/' . $path);
+    if (! file_exists($storagePath)) {
+        abort(404);
+    }
+    return response()->file($storagePath);
+})->where('path', '.*')->name('storage.fallback');
+
+// Fallback route for uploads assets when direct public access fails
+Route::get('/uploads/{path}', function ($path) {
+    $publicPath = public_path('uploads/' . $path);
+    if (! file_exists($publicPath)) {
+        abort(404);
+    }
+    return response()->file($publicPath);
+})->where('path', '.*')->name('uploads.fallback');
+
+// Fallback route for public images when direct static access fails
+Route::get('/image/{path}', function ($path) {
+    $publicPath = public_path('image/' . $path);
+    if (! file_exists($publicPath)) {
+        abort(404);
+    }
+    return response()->file($publicPath);
+})->where('path', '.*')->name('public.image.fallback');
+
 // DESTINASI
 Route::prefix('destinasi')->name('destinasi.')->group(function () {
     Route::get('/', [DestinasiController::class, 'index'])->name('index');

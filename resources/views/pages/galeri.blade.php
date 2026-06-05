@@ -295,22 +295,12 @@
             @forelse($galeri as $item)
 
                 @php
-                    $imgSrc = '';
+                    $imgSrc = asset('image/default.jpg');
 
                     if ($item->gambar) {
-
-                        if (file_exists(public_path($item->gambar))) {
-                            $imgSrc = image_url($item->gambar);
-
-                        } elseif (file_exists(public_path('storage/' . $item->gambar))) {
-                            $imgSrc = image_url($item->gambar);
-
-                        } else {
-                            $imgSrc = asset('image/default.jpg');
+                        if (file_exists(public_path($item->gambar)) || file_exists(public_path('storage/' . $item->gambar))) {
+                            $imgSrc = route('galeri.gambar', ['id' => $item->id]);
                         }
-
-                    } else {
-                        $imgSrc = asset('image/default.jpg');
                     }
                 @endphp
 
