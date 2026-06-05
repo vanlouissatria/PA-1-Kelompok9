@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Umkm;
+use App\Models\Fasilitas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class adminUmkmController extends Controller
+class AdminFasilitasController extends Controller
 {
     public function index()
     {
-        $data = Umkm::orderBy('urutan')->paginate(10);
-        return view('admin.umkm.index', compact('data'));
+        $data = Fasilitas::orderBy('urutan')->paginate(10);
+        return view('admin.fasilitas.index', compact('data'));
     }
 
     public function create()
     {
-        return view('admin.umkm.create');
+        return view('admin.fasilitas.create');
     }
 
     public function store(Request $request)
@@ -27,16 +27,14 @@ class adminUmkmController extends Controller
             'deskripsi' => 'required|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:4096', // 4MB
             'urutan' => 'required|integer',
-            'lokasi' => 'nullable|string',
-            'kontak' => 'nullable|string',
+            'harga' => 'nullable|string',
             'status' => 'nullable|boolean'
         ]);
 
         $data = [
             'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
-            'lokasi' => $request->lokasi,
-            'kontak' => $request->kontak,
+            'harga' => $request->harga,
             'urutan' => $request->urutan,
             'status' => $request->has('status') ? 1 : 0
         ];
@@ -45,44 +43,42 @@ class adminUmkmController extends Controller
             $file = $request->file('gambar');
             $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
 
-            if (!file_exists(public_path('image/umkm'))) {
-                mkdir(public_path('image/umkm'), 0777, true);
+            if (!file_exists(public_path('image/fasilitas'))) {
+                mkdir(public_path('image/fasilitas'), 0777, true);
             }
 
-            $file->move(public_path('image/umkm'), $filename);
-            $data['gambar'] = 'image/umkm/' . $filename;
+            $file->move(public_path('image/fasilitas'), $filename);
+            $data['gambar'] = 'image/fasilitas/' . $filename;
         }
 
-        Umkm::create($data);
-        return redirect()->route('admin.umkm.index')
-            ->with('success', 'UMKM berhasil ditambahkan!');
+        Fasilitas::create($data);
+        return redirect()->route('admin.fasilitas.index')
+            ->with('success', 'Fasilitas berhasil ditambahkan!');
     }
 
     public function edit($id)
     {
-        $data = Umkm::findOrFail($id);
-        return view('admin.umkm.edit', compact('data'));
+        $data = Fasilitas::findOrFail($id);
+        return view('admin.fasilitas.edit', compact('data'));
     }
 
     public function update(Request $request, $id)
     {
-        $data = Umkm::findOrFail($id);
+        $data = Fasilitas::findOrFail($id);
         
         $request->validate([
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:4096', // 4MB
             'urutan' => 'required|integer',
-            'lokasi' => 'nullable|string',
-            'kontak' => 'nullable|string',
+            'harga' => 'nullable|string',
             'status' => 'nullable|boolean'
         ]);
 
         $input = [
             'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
-            'lokasi' => $request->lokasi,
-            'kontak' => $request->kontak,
+            'harga' => $request->harga,
             'urutan' => $request->urutan,
             'status' => $request->has('status') ? 1 : 0
         ];
@@ -95,24 +91,24 @@ class adminUmkmController extends Controller
             $file = $request->file('gambar');
             $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
 
-            if (!file_exists(public_path('image/umkm'))) {
-                mkdir(public_path('image/umkm'), 0777, true);
+            if (!file_exists(public_path('image/fasilitas'))) {
+                mkdir(public_path('image/fasilitas'), 0777, true);
             }
 
-            $file->move(public_path('image/umkm'), $filename);
-            $input['gambar'] = 'image/umkm/' . $filename;
+            $file->move(public_path('image/fasilitas'), $filename);
+            $input['gambar'] = 'image/fasilitas/' . $filename;
         }
 
         $data->update($input);
-        return redirect()->route('admin.umkm.index')
-            ->with('success', 'UMKM berhasil diupdate!');
+        return redirect()->route('admin.fasilitas.index')
+            ->with('success', 'Fasilitas berhasil diupdate!');
     }
 
     public function destroy($id)
     {
-        $data = Umkm::findOrFail($id);
+        $data = Fasilitas::findOrFail($id);
         $data->delete();
-        return redirect()->route('admin.umkm.index')
-            ->with('success', 'UMKM berhasil dihapus!');
+        return redirect()->route('admin.fasilitas.index')
+            ->with('success', 'Fasilitas berhasil dihapus!');
     }
 }

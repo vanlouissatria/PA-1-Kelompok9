@@ -7,7 +7,7 @@ use App\Models\Berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class BeritaController extends Controller
+class AdminBeritaController extends Controller
 {
     public function index()
     {
@@ -25,7 +25,7 @@ class BeritaController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'konten' => 'required|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:4096', // 4MB
             'penulis' => 'nullable|string|max:100',
             'status' => 'nullable|boolean'
         ]);
@@ -68,7 +68,7 @@ class BeritaController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'konten' => 'required|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:4096', // 4MB
             'penulis' => 'nullable|string|max:100',
             'status' => 'nullable|boolean'
         ]);

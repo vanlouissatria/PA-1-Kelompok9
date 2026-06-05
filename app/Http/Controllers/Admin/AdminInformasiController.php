@@ -7,7 +7,7 @@ use App\Models\Informasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class adminInformasiController extends Controller
+class AdminInformasiController extends Controller
 {
     public function index()
     {
