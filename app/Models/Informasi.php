@@ -36,6 +36,10 @@ class Informasi extends Model
 
         static::creating(function ($informasi) {
             $informasi->slug = Str::slug($informasi->judul);
+
+            if (auth()->check() && empty($informasi->created_by)) {
+                $informasi->created_by = auth()->id();
+            }
         });
 
         static::updating(function ($informasi) {

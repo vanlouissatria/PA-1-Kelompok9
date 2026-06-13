@@ -29,4 +29,15 @@ class Fasilitas extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($fasilitas) {
+            if (auth()->check() && empty($fasilitas->created_by)) {
+                $fasilitas->created_by = auth()->id();
+            }
+        });
+    }
 }

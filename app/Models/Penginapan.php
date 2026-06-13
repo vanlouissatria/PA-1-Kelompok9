@@ -29,4 +29,15 @@ class Penginapan extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($penginapan) {
+            if (auth()->check() && empty($penginapan->created_by)) {
+                $penginapan->created_by = auth()->id();
+            }
+        });
+    }
 }

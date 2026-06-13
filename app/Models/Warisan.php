@@ -33,4 +33,15 @@ class Warisan extends Model
             default              => $this->jenis,
         };
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($warisan) {
+            if (auth()->check() && empty($warisan->created_by)) {
+                $warisan->created_by = auth()->id();
+            }
+        });
+    }
 }

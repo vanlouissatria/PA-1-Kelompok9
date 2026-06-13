@@ -67,4 +67,15 @@ class Umkm extends Model
         ];
         return $icons[$this->kategori] ?? '🏪';
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($umkm) {
+            if (auth()->check() && empty($umkm->created_by)) {
+                $umkm->created_by = auth()->id();
+            }
+        });
+    }
 }

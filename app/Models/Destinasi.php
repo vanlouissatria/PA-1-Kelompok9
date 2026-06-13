@@ -30,4 +30,15 @@ class Destinasi extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($destinasi) {
+            if (auth()->check() && empty($destinasi->created_by)) {
+                $destinasi->created_by = auth()->id();
+            }
+        });
+    }
 }

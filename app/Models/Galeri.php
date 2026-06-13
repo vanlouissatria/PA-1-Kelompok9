@@ -17,6 +17,24 @@ class Galeri extends Model
         'gambar',
         'slug',
         'kategori',
-        'views'
+        'views',
+        'created_by'
     ];
+
+    // Relasi: galeri dibuat oleh satu admin
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($galeri) {
+            if (auth()->check() && empty($galeri->created_by)) {
+                $galeri->created_by = auth()->id();
+            }
+        });
+    }
 }
